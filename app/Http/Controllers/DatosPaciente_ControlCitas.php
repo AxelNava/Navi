@@ -10,13 +10,6 @@ use Illuminate\Support\Facades\DB;
 
 class DatosPaciente_ControlCitas extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -52,11 +45,11 @@ class DatosPaciente_ControlCitas extends Controller
                 'fecha_prox_cita','control_musculo','control_grasa','expediente','fecha_nacimiento','nombre','edad','genero')
                 ->get();
                 // return ApiDatosPaciente::where('id_dato_paciente', $id)->get();
-                return $data;
+                return response()->json(compact('data'),200);
             }
-            return 'Paciente no encontrado';
+            return response()->json(['data'=> 'No se ha encontrado el paciente'],200);
         }
-        return [];
+        return response()->json(['data'=> 'Identificador incorrecto'],200);
     }
 
     /**
