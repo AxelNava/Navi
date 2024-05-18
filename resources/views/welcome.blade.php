@@ -16,6 +16,6 @@
         </style>
     </head>
     <body class="font-sans antialiased dark:bg-black dark:text-white/50 flex justify-center items-center">
-        <h3>Bienvenidos</h3>
+        <h3>Bienvenidos :)</h3>
     </body>
 </html>
