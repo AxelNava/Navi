@@ -9,12 +9,13 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <h2>Bienvenido</h2>
                     @role('director')
-                    <h3>Vista de director</h3>
+                    <script>window.location.href = "{{route('director.inicio')}}"</script>
                     @endrole
                     @role('alumno')
-                    <h3>Vista de alumno</h3>
+                    <script>
+                        window.location.href = "{{route('alumno.inicio')}}"
+                    </script>
                     @endrole
                 </div>
             </div>
