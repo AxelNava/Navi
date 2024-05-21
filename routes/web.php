@@ -20,11 +20,11 @@ Route::get('director/inicio', function () {
     return view('director.inicio');
 })->name('director.inicio');
 
-Route::get("alumno/{id}/ListadoPacientes", [ListadoPacientes_VistaAlumno::class, 'enlistar']);
+Route::get("alumno/{id}/ListadoPacientes", [ListadoPacientes_VistaAlumno::class, 'enlistar'])->name('listado_pacientes_Alumnos');
 
-Route::get('director/ListadoAlumnos', [ListadoAlumnos_VistaDirector::class, 'enlistar']);
+Route::get('director/ListadoAlumnos', [ListadoAlumnos_VistaDirector::class, 'enlistar'])->name('listado_alumnos_Director');
 
-Route::get('director/ListadoAlumnos/{id}', [ListadoPacientes_VistaDirector::class, 'enlistar']);
+Route::get('director/ListadoAlumnos/{id}', [ListadoPacientes_VistaDirector::class, 'enlistar'])->name('listado_pacientes_Director');
 
 Route::get('alumno/inicio', function () {
     return view('alumno.inicio');
