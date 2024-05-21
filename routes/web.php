@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\ListadoPacientes_VistaAlumno;
+use App\Http\Controllers\ListadoPacientes_VistaDirector;
+use App\Http\Controllers\ListadoAlumnos_VistaDirector;
 use App\Http\Controllers\NotaNutricionController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -17,9 +20,16 @@ Route::get('director/inicio', function () {
     return view('director.inicio');
 })->name('director.inicio');
 
+Route::get("alumno/{id}/ListadoPacientes", [ListadoPacientes_VistaAlumno::class, 'enlistar']);
+
+Route::get('director/ListadoAlumnos', [ListadoAlumnos_VistaDirector::class, 'enlistar']);
+
+Route::get('director/ListadoAlumnos/{id}', [ListadoPacientes_VistaDirector::class, 'enlistar']);
+
 Route::get('alumno/inicio', function () {
     return view('alumno.inicio');
 })->name('alumno.inicio');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
