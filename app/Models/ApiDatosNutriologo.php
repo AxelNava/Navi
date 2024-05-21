@@ -38,4 +38,7 @@ class ApiDatosNutriologo extends Model
 	{
 		return $this->belongsTo(ApiPersona::class, 'id_persona');
 	}
+	public function api_nutriologo_paciente(){
+		return $this->hasMany(ApiNutriologoPaciente::class, 'id_nutriologo');
+	}
 }

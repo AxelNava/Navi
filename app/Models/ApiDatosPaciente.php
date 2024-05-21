@@ -56,4 +56,8 @@ class ApiDatosPaciente extends Model
 	{
 		return $this->hasMany(ApiRegistroConsultum::class, 'id_paciente');
 	}
+	public function api_nutriologo_paciente()
+	{
+		return $this->belongsTo(ApiNutriologoPaciente::class, 'id_paciente');
+	}
 }
