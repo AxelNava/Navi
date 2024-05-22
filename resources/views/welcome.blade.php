@@ -15,8 +15,9 @@
         <!-- Styles -->
         <style>
 					.udem-image{
-						width:20px;
-						height: 20px;
+						width:180px;
+						height: 180px;
+						margin-top:50px;
 					}
 					body{
 							font-family: "Poppins", sans-serif;
@@ -33,7 +34,7 @@
 							padding: 20px;
 							box-shadow: 0 0 10px rgba(0,0,0,0.1);
 							width:450px;
-							height: 250px;
+							height: 350px;
 							display: flex;
 							flex-direction: column;
 							justify-content: center;
@@ -106,7 +107,7 @@
 						</nav>
 				@endif
 				<div class="login-container">
-					<img src="{{asset('/resources/assets/descarga.png')}}" alt="" class="udem-image">
+					<img src="{{asset('/assets/udem.png')}}" alt="" class="udem-image">
 					<h1>Iniciar sesión</h1>
 					{{-- <form action="">
 						<img src="{{asset('/resources/assets/usuario.png')}}" alt="">
