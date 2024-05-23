@@ -28,7 +28,7 @@ form {
 		gap: 10px;
 
 }
-input[type="text"], input[type="password"], input[type="radio"] {
+input[type="text"], input[type="password"], input[type="radio"] , input[type="email"], input[type="number"] {
     border-radius: 15px;
 }
 .formulario > div {
@@ -134,8 +134,13 @@ input[type="text"], input[type="password"], input[type="radio"] {
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
           <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
               <div class="p-6 text-gray-900">
-                  <h2>Bienvenido Director</h2>
-                   <a href="#modal3"><button type="submit" class="agregar-alumno" href="">Registrar alumno</button></a> 
+                  <h1 style="font-size: 26px;"><b>Lista de alumnos registrados</b></h1>
+                  @if (session('success'))
+										<div class="alert alert-success">
+												{{ session('success') }}
+										</div>
+									@endif
+                   <a href="#modal3"><button type="submit" class="agregar-alumno" href="">Agregar alumno</button></a> 
 									<ul>
 								</ul>
 
@@ -151,12 +156,14 @@ input[type="text"], input[type="password"], input[type="radio"] {
 													<input type="text" name="nombre" id="nombre" required>
 													<label for="edad">Edad:</label>
 													<input type="number" name="edad" id="edad" required>
-													<label for="correo">Correo:</label>
-													<input type="email" name="correo" id="correo" required>
+													<label for="email">Correo:</label>
+													<input type="email" name="email" id="email" required>
 												</div>
-                                                <div class="second-part">
-													<label for="grupo">Cuatrimestre y grupo:</label>
-													<input type="text" name="grupo" id="grupo" required>
+                        <div class="second-part">
+												<label for="apellido">Apellido:</label>
+													<input type="text" name="apellido" id="apellido" required>
+													{{-- <label for="grupo">Cuatrimestre y grupo:</label>
+													<input type="text" name="grupo" id="grupo" required> --}}
 													<label for="sexo">Sexo:</label>
 													<div class="sexo">
 															<label for="sexo_masculino">Masculino</label>
