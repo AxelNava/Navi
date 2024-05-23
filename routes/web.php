@@ -35,7 +35,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::post('/nota-nutricion/crear', [NotaNutricionController::class,'crear']);
-Route::patch('/nota-nutricion/actualizar', [NotaNutricionController::class,'actualizar']);
+Route::get('/nota-nutricion/buscar/{id}', [NotaNutricionController::class,'crear'])->name('nota-nutricion_buscar');
+Route::post('/nota-nutricion/crear', [NotaNutricionController::class,'crear'])->name('nota-nutricion_crear');
+Route::patch('/nota-nutricion/actualizar/{id}', [NotaNutricionController::class,'actualizar'])->name('nota-nutricion_actualizar');
 
 require __DIR__ . '/auth.php';

@@ -25,10 +25,10 @@ class NotaNutricionController extends Controller
         $composicioncorporal = ApiComposicionCorporalDiagnosticoObesidad::where('id_consulta_paciente', $registrocitas->id_registro)->first();
         $bioquimico = ApiBioquimico::where('id_consulta_paciente', $registrocitas->id_registro)->first();
 
-        return [
+        return response()->json([
             $paciente,$registrocitas, $datospaciente, $controlcita, $exploracionfisica ?? new ApiExploFisica(),
             $composicioncorporal ?? new ApiComposicionCorporalDiagnosticoObesidad(),$bioquimico ?? new ApiBioquimico()
-        ];
+        ]);
     }
     public function crear(Request $request)
     {
