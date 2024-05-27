@@ -49,7 +49,5 @@ Route::middleware(['auth', 'role:director'])->group(function () {
 	//registrar alumno
 	Route::post('registrar-alumno', [UserController::class, 'createUser'])->name('registrar.alumno');
 });
-Route::post('/nota-nutricion/crear', [NotaNutricionController::class, 'crear']);
-Route::patch('/nota-nutricion/actualizar', [NotaNutricionController::class, 'actualizar']);
 
 require __DIR__ . '/auth.php';
