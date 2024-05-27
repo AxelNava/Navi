@@ -28,7 +28,7 @@ form {
 		gap: 10px;
 
 }
-input[type="text"], input[type="password"], input[type="radio"] {
+input[type="text"], input[type="password"], input[type="radio"] , input[type="email"], input[type="number"] {
     border-radius: 15px;
 }
 .formulario > div {
@@ -44,6 +44,19 @@ input[type="text"], input[type="password"], input[type="radio"] {
 			text-decoration: none;
 			display: inline-block;
 			font-size: 16px;
+			margin: 4px 2px;
+			cursor: pointer;
+		}
+		.ver-pacientes{
+			background-color: #618ef2;
+			border: none;
+			border-radius:45px;
+			color: white;
+			padding: 10px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 14px;
 			margin: 4px 2px;
 			cursor: pointer;
 		}
@@ -129,16 +142,47 @@ input[type="text"], input[type="password"], input[type="radio"] {
     background: #FAAC58;
     color:#222;
 }
+#alumnos{
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin-top: 20px;
+}
+#alumno{
+	background-color: #eeeeee;
+	border: 1px solid #00fd3f;
+	border-radius: 15px;
+	padding: 10px;
+	width: 300px;
+	box-shadow: #222 0px 0px 3px;
+}
 	</style>
   <div class="py-12">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
           <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
               <div class="p-6 text-gray-900">
-                  <h2>Bienvenido Director</h2>
-                   <a href="#modal3"><button type="submit" class="agregar-alumno" href="">Registrar alumno</button></a> 
+                  <h1 style="font-size: 26px;"><b>Lista de alumnos registrados</b></h1>
+										<button type="button" style="display:none" id="trigger">Trigger</button>
+                  @if (session('success'))
+										<div class="alert alert-success">
+												{{ session('success') }}
+										</div>
+									@endif
+                   <a href="#modal3"><button type="submit" class="agregar-alumno" href="">Agregar alumno</button></a> 
 									<ul>
 								</ul>
-
+								<b class="contador-alumnos"></b>
+							{{-- renderizado de alumnos con javascript --}}
+							<div id="alumnos">
+								{{-- <div id="alumno">
+									<h2>Nombre: </h2>
+									<h2>Grupo: </h2>
+									<form action="">
+										<input type="submit" value="Ver pacientes" class="ver-pacientes">
+									</form>
+								</div> --}}
+							</div>
+								{{-- modal para agregar alumno --}}
 								<div id="modal3" class="modalmask">
 									<div class="modalbox resize">
 										<a href="#close" title="Close" class="close">X</a>
@@ -151,12 +195,14 @@ input[type="text"], input[type="password"], input[type="radio"] {
 													<input type="text" name="nombre" id="nombre" required>
 													<label for="edad">Edad:</label>
 													<input type="number" name="edad" id="edad" required>
-													<label for="correo">Correo:</label>
-													<input type="email" name="correo" id="correo" required>
+													<label for="email">Correo:</label>
+													<input type="email" name="email" id="email" required>
 												</div>
-                                                <div class="second-part">
-													<label for="grupo">Cuatrimestre y grupo:</label>
-													<input type="text" name="grupo" id="grupo" required>
+                        <div class="second-part">
+												<label for="apellido">Apellido:</label>
+													<input type="text" name="apellido" id="apellido" required>
+													{{-- <label for="grupo">Cuatrimestre y grupo:</label>
+													<input type="text" name="grupo" id="grupo" required> --}}
 													<label for="sexo">Sexo:</label>
 													<div class="sexo">
 															<label for="sexo_masculino">Masculino</label>
@@ -178,3 +224,38 @@ input[type="text"], input[type="password"], input[type="radio"] {
       </div>
   </div>
 </x-app-layout>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+	let alumnosContainer = document.getElementById('alumnos');
+		let contador = document.querySelector('.contador-alumnos	');
+    let trigger = document.getElementById('trigger');
+		let nutriologos = [];
+    let form = trigger.form;
+		trigger,addEventListener('click', () => {
+			fetch('/director/ListadoAlumnos')
+				.then(response => response.json())
+				.then(data => {
+					//vaciar el contenedor
+					alumnosContainer.innerHTML = '';
+					nutriologos = data['Nutriologos'];
+					nutriologos.forEach(nutriologo => {
+						let html = `
+						<div id="alumno">
+							<h2>Nombre: ${nutriologo['Nutriologo']['nombre']}</h2>
+							<h2>Grado y grupo: ${nutriologo['Datos del alumno']}</h2>
+							<h2>ID: ${nutriologo['ID Nutriologo']}</h2>
+									<form action="">
+										<input type="submit" value="Ver pacientes" class="ver-pacientes">
+									</form>
+								</div>
+						`;
+						alumnosContainer.innerHTML += html;
+					});
+					let contadorData = data['Total de alumnos'];
+					contador.innerHTML = `Total de alumnos: ${contadorData}`;
+				})
+				.catch(error => console.error(error));
+		});
+		trigger.click();
+});
+</script>

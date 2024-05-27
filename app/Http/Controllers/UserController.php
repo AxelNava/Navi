@@ -4,23 +4,30 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function createUser(Request $request)
-    {
-        dd($request->all());
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        $user->save();
-        session()->flash('success', 'Alumno registrado correctamente');
-        return redirect()->route('director.inicio');
-        /*return response()->json([
-            'success' => true,
-            'user' => $user,
-            'message' => 'User created successfully'
-        ]);*/
-    }
+	public function createUser(Request $request)
+	{
+		$request->validate([
+			'nombre' => ['required', 'string', 'max:255'],
+			'apellido' => ['required', 'string', 'max:255'],
+			'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
+			'password' => ['required', 'string', 'min:8'],
+		]);
+
+		$user = User::create([
+			'nombre' => $request->nombre,
+			'apellido' => $request->apellido,
+			'email' => $request->email,
+			'password' => Hash::make($request->password),
+		]);
+
+		//darle el rol de alumno
+		$user->assignRole('alumno');
+
+		session()->flash('success', 'Alumno registrado correctamente');
+		return redirect()->route('director.inicio');
+	}
 }
