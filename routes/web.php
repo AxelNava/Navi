@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DatosPaciente_ControlCitas;
 use App\Http\Controllers\ListadoPacientes_VistaAlumno;
 use App\Http\Controllers\ListadoPacientes_VistaDirector;
 use App\Http\Controllers\ListadoAlumnos_VistaDirector;
@@ -27,6 +28,9 @@ Route::get("alumno/{id}/ListadoPacientes", [ListadoPacientes_VistaAlumno::class,
 Route::get('director/ListadoAlumnos', [ListadoAlumnos_VistaDirector::class, 'enlistar'])->name('listado_alumnos_Director');
 
 Route::get('director/ListadoAlumnos/{id}', [ListadoPacientes_VistaDirector::class, 'enlistar'])->name('listado_pacientes_Director');
+
+Route::get('controlCitas/{id}', [DatosPaciente_ControlCitas::class, 'show'])->name('control_citas');
+Route::patch('controlCitas/actualizar/{id}', [DatosPaciente_ControlCitas::class, 'update'])->name('control_citas');
 
 Route::get('alumno/agregar-paciente', function () {
 	return view('alumno.agregar_paciente');
