@@ -8,6 +8,7 @@ use App\Http\Controllers\NotaNutricionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DietaPaciente;
 use App\Http\Controllers\EstudiantesController;
 
 Route::get('/', function () {
@@ -48,6 +49,11 @@ Route::middleware('auth')->group(function () {
 Route::get('/nota-nutricion/buscar/{id}', [NotaNutricionController::class, 'buscar'])->name('nota-nutricion_buscar');
 Route::post('/nota-nutricion/crear', [NotaNutricionController::class, 'crear'])->name('nota-nutricion_crear');
 Route::patch('/nota-nutricion/actualizar/{id}', [NotaNutricionController::class, 'actualizar'])->name('nota-nutricion_actualizar');
+
+Route::get('dieta-paciente/buscar/{id}', [DietaPaciente::class, 'buscar'])->name('dieta-paciente_buscar');
+Route::get('dieta-paciente/crear', function() {
+	return view('alumno.agregar_dieta');
+});
 
 //rutas para el director
 Route::middleware(['auth', 'role:director'])->group(function () {
