@@ -82,6 +82,59 @@
     flex-direction: column;
     gap: 12px;
   }
+  .tabla-bioquimicos{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 10px;
+  }
+  .tabla-uno, .tabla-dos, .tabla-tres, .tabla-cuatro{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-right: 1px solid black;
+    padding: 15px;
+  }
+  .bioquimico-formulario1, .bioquimico-formulario2, .bioquimico-formulario3, .bioquimico-formulario4{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .tabla-bioquimicos .inputs{
+    display: flex;
+    gap: 10px;  
+  }
+  .tabla-dieteticos{
+    display: flex;
+    gap:30px;
+    border: solid black 1px;
+    border-radius: 15px;
+    justify-content: center;
+    align-items: center;
+    height:100px;
+    flex-direction: column;
+    padding: 70px;
+  }
+  .dieteticos1, .dieteticos2{
+    display: flex;
+    gap: 10px;
+  }
+  .btn-guardar{
+    background-color: blue;
+    padding:30px;
+    color:white;
+    border-radius: 10px;
+    width: 140px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px auto;
+  }
+
+
 		</style>
 		<x-slot name="header">
 				<h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -95,7 +148,7 @@
               <div class="p-6 text-gray-900">
                 <h2>Bienvenido {{Auth::user()->nombre}}</h2>
                 <div class="formulario">
-                  <b style="font-size: 20px">Nota de nutrición</b>
+                  <b style="font-size: 20px">NOTA DE NUTRICIÓN</b>
                   <form action="">
                     <div class="inputs-form">
                       <div class="primera-parte">
@@ -107,18 +160,25 @@
                         <input type="time" name="hora" id="hora">
                       </div>
                       <div class="segunda-parte">
+                        <br>
                         <label for="genero">GÉNERO</label>
                         <input type="text" name="genero" id="genero">
                         <label for="expediente">NO. EXPEDIENTE</label>
                         <input type="text" name="expediente" id="expediente">
                         <label for="fecha_nacimiento">FECHA DE NACIMIENTO</label>
                         <input type="date" name="fecha_nacimiento" id="fecha_nacimiento">
+                        <br>
+                        <br>
                         <label for="no_consulta_paciente">CONSULTA NO.</label>
                         <input type="text" name="no_consulta_paciente" id="no_consulta_paciente">
                       </div>
                       <div class="tercera-parte">
+                        <br>
                         <label for="motivo_consulta">MOTIVO DE CONSULTA:</label>
+                        <br>
                         <input type="text" name="motivo_consulta" id="motivo_consulta" style="width: 500px">
+                        <br>
+                        <br>
                         {{-- revisar aqui --}}
                         <label for="sintomas">SÍNTOMAS GASTROINTESTINALES:</label>
                         <label for="bristol">BRISTOL:</label>
@@ -190,12 +250,12 @@
                         </div>
                       </div>
                       <div class="quinta-parte">
-                        <h2 style="font-size:20px;font-weight:900;margin: 10px 0px;">Hidratación</h2>
+                        <h2 style="font-size:20px;font-weight:900;margin: 10px 0px;">HIDRATACIÓN</h2>
                         <label for="agua">Agua simple (en mililitros)</label>
                         <input type="number" name="agua" id="agua" style="width:100px;">
                         <label for="sintomas_generales">Síntomas generales</label>
                         <input type="text" name="sintomas_generales" id="">
-                        <h2 style="font-size:20px;font-weight:900;margin: 10px 0px;">Exploración física centrada en hallazgos de nutrición</h2>
+                        <h2 style="font-size:20px;font-weight:900;margin: 10px 0px;">EXPLORACIÓN FÍSICA CENTRADA EN HALLAZGOS DE NUTRICIÓN</h2>
                         <label for="pelo">Pelo y uñas</label>
                         <input type="text" name="pelo_unias" id="pelo">
                         <label for="piel">Piel</label>
@@ -206,16 +266,16 @@
                         <input type="text" name="musculo" id="musculo">
                         <label for="otros">Otros</label>
                         <input type="text" name="otros" id="otros">
-                        <h2 style="font-size: 20px; font-weight:900">Intolerancia a alimentos</h2>
+                        <h2 style="font-size: 20px; font-weight:900">INTOLERANCIA A ALIMENTOS</h2>
                         <label for="no">No</label>
                         <input type="radio" name="intolerancia_alimentos" id="intolerancia" value="no">
                         <label for="si">Si</label>
                         <input type="radio" name="intolerancia_alimentos" id="intolerancia" value="si">
                         <label for="cuales">Cuales</label>
                         <input type="text" name="cuales" id="cuales">
-                        <label  for="actividad" style="font-size: 20px; font-weight:900">Actividad fisica actual (frecuencia/intensidad/tiempo)</label>
+                        <label  for="actividad" style="font-size: 20px; font-weight:900">ACTIVIDAD FÍSICA ACTUAL (frecuencia/intensidad/tiempo)</label>
                         <input type="text" name="actividad_fis_actual" id="actividad">
-                        <label  for="cambios_pos_estilo_vida" style="font-size: 20px; font-weight:900">Cambios positivos en el estilo de vida</label>
+                        <label  for="cambios_pos_estilo_vida" style="font-size: 20px; font-weight:900">CAMBIOS POSITIVOS EN EL ESTILO DE VIDA</label>
                         <input type="text" name="cambios_pos_estilo_vida" id="cambios_pos_estilo_vida">
                         {{-- TABLA DE ANTROPOMÉTRICOS --}}
                         <h2 style="font-size:20px;font-weight:900;margin: 10px 0px;">ANTROPOMÉTRICOS</h2>
@@ -244,28 +304,186 @@
                           </div>
                           <div class="tabla-derecha">
                             <div class="mediciones">
-                              <h2>Mediciones</h2>
-                              <h2>Peso actual</h2>
-                              <h2>Circunferencia cintura</h2>
-                              <h2>Circunferencia cadera</h2>
-                              <h2>Masa músculo (kg)</h2>
-                              <h2>Masa grasa corporal (kg)</h2>
-                              <h2>Masa libre de grasa (kg)</h2>
-                              <h2>Agua corporal total (kg)</h2>
+                              <h2>IMC (kg/m2) Diagnóstico:</h2>
+                              <h2>Índice cintura-cadera</h2>
+                              <h2>Rango de peso saludable</h2>
+                              <h2>Índice de masa libre de grasa</h2>
+                              <h2>% Grasa corporal</h2>
+                              <h2>Otros</h2>
                             </div>
                             <div class="valor">
-                              <input type="text">
-                              <input type="text">
-                              <input type="text">
-                              <input type="text">
-                              <input type="text">
-                              <input type="text">
-                              <input type="text">
-                              <input type="text">
+                              <input type="text" style="height: 30px">
+                              <input type="text" style="height: 30px">
+                              <input type="text" style="height: 30px">
+                              <input type="text" style="height: 30px">
+                              <input type="text" style="height: 30px">
+                              <input type="text" style="height: 30px">
                             </div>
                           </div>
                         </div>
                       </div>
+                      {{-- tabla de bioquimicos --}}
+                      <div class="sexta-parte">
+                        <h2 style="font-size:20px;font-weight:900;margin: 10px 0px;">BIOQUÍMICOS</h2>
+                        <div class="tabla-bioquimicos">
+                          <div class="tabla-uno">
+                            <div class="bioquimico-formulario1">
+                              <div class="inputs">
+                                <p>BIOQUIMICOS:</p>
+                                <input type="radio" name="" id="">
+                                <input type="radio" name="" id="">
+                                <input type="radio" name="" id="">
+                              </div>
+                              <div class="inputs">
+                                <label>Glucosa</label>
+                                <input type="text" name="" id="" placeholder="mg/dl">
+                              </div>
+                              <div class="inputs">
+                                <label for="hbAc1">HbAc1</label>
+                                <input type="text" name="hbAc1" id="hbAc1" placeholder="%">
+                              </div>
+                              <div class="inputs">
+                                <label for="TG">TG</label>
+                                <input type="text" name="TG" id="TG" placeholder="mg/dl">
+                              </div>
+                              <div class="inputs">
+                                <label for="CT">CT</label>
+                                <input type="text" name="CT" id="CT" placeholder="mg/dl">
+                              </div>
+                              <div class="inputs">
+                                <label for="HDL">HDL</label>
+                                <input type="text" name="HDL" id="HDL" placeholder="mg/dl">
+                              </div>
+                              <div class="inputs">
+                                <label for="LDL">LDL</label>
+                                <input type="text" name="LDL" id="LDL" placeholder="mg/dl">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="tabla-dos">
+                            <div class="bioquimico-formulario2">
+                              <div class="inputs">
+                                <label for="AST_perc">%AST</label>
+                                <input type="text" name="AST_perc" id="AST_perc" placeholder="UI/L">
+                              </div>
+                              <div class="inputs">
+                                <label for="ALT">ALT</label>
+                                <input type="text" name="ALT" id="ALT" placeholder="UI/L">
+                              </div>
+                              <div class="inputs">
+                                <label for="TSH">TSH</label>
+                                <input type="text" name="TSH" id="TSH" placeholder="UI/L">
+                              </div>
+                              <div class="inputs">
+                                <label for="T3">T3</label>
+                                <input type="text" name="T3" id="T3" placeholder="UI/L">
+                              </div>
+                              <div class="inputs">
+                                <label for="T4">T4</label>
+                                <input type="text" name="T4" id="T4" placeholder="UI/L">
+                              </div>
+                              <div class="inputs">
+                                <label for="Hb">Hb</label>
+                                <input type="text" name="Hb" id="Hb" placeholder="UI/L">
+                              </div>
+                              <div class="inputs">
+                                <label for="Hierro">Hierro</label>
+                                <input type="text" name="hierro" id="Hierro" placeholder="UI/L">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="tabla-tres">
+                            <div class="bioquimico-formulario3">
+                              <div class="inputs">
+                                <label for="transferrina">Transferrina</label>
+                                <input type="text" name="transferrina" id="transferrina" placeholder="mg/dL">
+                              </div>
+                              <div class="inputs">
+                                <label for="ferritina">Ferritina</label>
+                                <input type="text" name="ferritina" id="ferritina" placeholder="ng/mL">
+                              </div>
+                              <div class="inputs">
+                                <label for="t3_libre">T3Libre</label>
+                                <input type="text" name="t3_libre" id="t3_libre" placeholder="pg/dL">
+                              </div>
+                              <div class="inputs">
+                                <label for="t4_libre">T4Libre</label>
+                                <input type="text" name="t4_libre" id="t4_libre" placeholder="ng/dL">
+                              </div>
+                              <div class="inputs">
+                                <label for="hto">Hto</label>
+                                <input type="text" name="hto" id="hto" placeholder="%">
+                              </div>
+                              <div class="inputs">
+                                <label for="B12">B12</label>
+                                <input type="text" name="B12" id="B12" placeholder="pg/mL">
+                              </div>
+                              <div class="inputs">
+                                <label for="folatos">Folatos</label>
+                                <input type="text" name="folatos" id="folatos" placeholder="ng/mL">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="tabla-cuatro">
+                            <div class="bioquimico-formulario4">
+                              <div class="inputs">
+                                <label for="PT">PT</label>
+                                <input type="text" name="PT" id="PT" placeholder="d/dL">
+                              </div>
+                              <div class="inputs">
+                                <label for="albumina">Albúmina</label>
+                                <input type="text" name="albumina" id="albumina" placeholder="g/dL">
+                              </div>
+                              <div class="inputs">
+                                <label for="Ca">Ca</label>
+                                <input type="text" name="Ca" id="Ca" placeholder="UI/L">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      {{-- septima parte - clinicos, medicamentos  y tabla dieteticos --}}
+                      <div class="septima-parte">
+                        <h2 style="font-size:20px;font-weight:900;margin: 10px 0px;">CLÍNICOS</h2>
+                        <label for="dx_medicos">DX MEDICOS</label>
+                        <input type="text" name="dx_medicos" id="dx_medicos">
+                        <label for="dinamometria">DINAMOMETRÍA (fuerza de agarre)</label>
+                        <input type="text" name="dinamometria" id="dinamometria" placeholder="KG">
+                        <br>
+                        <br>
+                        <label for="interpretacion_dinamometrica">INTERPRETACIÓN DINAMOMETRICA</label>
+                        <input type="text" name="interpretacion_dinamometrica" id="interpretacion_dinamometrica">
+                        <h2 style="font-size:20px;font-weight:900;margin: 10px 0px;">MEDICAMENTOS/SUPLEMENTOS</h2>
+                        <input type="text" name="medicamentos_suplementos" id="medicamentos_suplementos" style="width:650px;">
+                        <h2 style="font-size:20px;font-weight:900;margin: 10px 0px;">DIETÉTICOS: FRECUENCIA DE CONSUMO DE ALIMENTOS, ¿Cuántas veces por semana consume los siguientes alimentos?</h2>
+                        <div class="tabla-dieteticos">
+                          <div class="dieteticos1">
+                            <h2 style="background:rgb(194, 194, 194);padding:3px">Frutas</h2>
+                            <h2 style="background:rgb(194, 194, 194);padding:3px">Verduras</h2>
+                            <h2 style="background:rgb(194, 194, 194);padding:3px">Cereales s/g</h2>
+                            <h2 style="background:rgb(194, 194, 194);padding:3px">Cereales c/g</h2>
+                            <h2 style="background:rgb(194, 194, 194);padding:3px">Leguminosas</h2>
+                            <h2 style="background:rgb(194, 194, 194);padding:3px">POA</h2>
+                            <h2 style="background:rgb(194, 194, 194);padding:3px">Lácteos</h2>
+                            <h2 style="background:rgb(194, 194, 194);padding:3px">Aceites s/p</h2>
+                            <h2 style="background:rgb(194, 194, 194);padding:3px">Aceites c/p</h2>
+                            <h2 style="background:rgb(194, 194, 194);padding:3px">Azúcares</h2>
+                          </div>
+                          <div class="dieteticos2">
+                            <input type="text" name="frutas" id="" style="width:70px">
+                            <input type="text" name="verduras" id="" style="width:70px">
+                            <input type="text" name="cereales_sg" id="" style="width:70px">
+                            <input type="text" name="cereales_cg" id="" style="width:70px">
+                            <input type="text" name="leguminosas" id="" style="width:70px">
+                            <input type="text" name="poa" id="" style="width:70px">
+                            <input type="text" name="lacteos" id="" style="width:70px">
+                            <input type="text" name="aceites_sp" id="" style="width:70px">
+                            <input type="text" name="aceites_cp" id="" style="width:70px">
+                            <input type="text" name="azucares" id="" style="width:70px">
+                          </div>
+                        </div>
+                      </div>
+                      <button type="submit" class="btn-guardar">Guardar datos</button>
                     </div>
                   </form>
                 </div>
