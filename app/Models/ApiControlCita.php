@@ -38,7 +38,7 @@ class ApiControlCita extends Model
 {
 	protected $table = 'api_control_citas';
 	protected $primaryKey = 'id_cita';
-	public $incrementing = false;
+	public $incrementing = true;
 	public $timestamps = false;
 
 	protected $casts = [

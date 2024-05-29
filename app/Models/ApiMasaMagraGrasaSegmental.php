@@ -47,7 +47,7 @@ class ApiMasaMagraGrasaSegmental extends Model
 {
 	protected $table = 'api_masa_magra_grasa_segmental';
 	protected $primaryKey = 'id_masa';
-	public $incrementing = false;
+	public $incrementing = true;
 	public $timestamps = false;
 
 	protected $casts = [

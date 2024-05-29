@@ -6,6 +6,7 @@
 
 namespace App\Models;
 
+use App\enums\Genero as EnumsGenero;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
@@ -29,7 +30,8 @@ class ApiPersona extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'edad' => 'int'
+		'edad' => 'int',
+		'nombre' => EnumsGenero::class,
 	];
 
 	protected $fillable = [

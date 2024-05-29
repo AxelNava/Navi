@@ -31,7 +31,7 @@ Route::get('director/ListadoAlumnos', [ListadoAlumnos_VistaDirector::class, 'enl
 Route::get('director/ListadoAlumnos/{id}', [ListadoPacientes_VistaDirector::class, 'enlistar'])->name('listado_pacientes_Director');
 
 Route::get('controlCitas/{id}', [DatosPaciente_ControlCitas::class, 'show'])->name('control_citas');
-Route::patch('controlCitas/actualizar/{id}', [DatosPaciente_ControlCitas::class, 'update'])->name('control_citas_actualizar');
+Route::patch('controlCitas/actualizar/{id_cita}', [DatosPaciente_ControlCitas::class, 'update'])->name('control_citas_actualizar');
 
 Route::get('alumno/agregar-paciente', function () {
 	return view('alumno.agregar_paciente');

@@ -30,7 +30,7 @@ class ApiComposicionCorporalDiagnosticoObesidad extends Model
 {
 	protected $table = 'api_composicion_corporal_diagnostico_obesidad';
 	protected $primaryKey = 'id_comp_corp';
-	public $incrementing = false;
+	public $incrementing = true;
 	public $timestamps = false;
 
 	protected $casts = [

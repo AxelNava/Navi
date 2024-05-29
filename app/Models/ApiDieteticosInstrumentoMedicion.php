@@ -41,7 +41,7 @@ class ApiDieteticosInstrumentoMedicion extends Model
 {
 	protected $table = 'api_dieteticos_instrumento_medicion';
 	protected $primaryKey = 'id_dietetico_instru';
-	public $incrementing = false;
+	public $incrementing = true;
 	public $timestamps = false;
 
 	protected $casts = [

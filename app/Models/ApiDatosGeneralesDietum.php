@@ -36,7 +36,7 @@ class ApiDatosGeneralesDietum extends Model
 {
 	protected $table = 'api_datos_generales_dieta';
 	protected $primaryKey = 'id_dieta';
-	public $incrementing = false;
+	public $incrementing = true;
 	public $timestamps = false;
 
 	protected $casts = [
@@ -48,7 +48,7 @@ class ApiDatosGeneralesDietum extends Model
 		'lip_porcen_dieta' => 'float',
 		'lip_g_dieta' => 'float',
 		'hco_porcen_dieta' => 'float',
-		'hco_g_dieta' => 'float'
+		'hco_g_dieta' => 'float',
 	];
 
 	protected $fillable = [
