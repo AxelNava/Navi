@@ -2,14 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\enums\Genero;
 use Illuminate\Http\Request;
-use App\Models\User;
 use App\Models\ApiDatosPaciente;
 use App\Models\ApiControlCita;
-use App\Models\ApiPersona;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Rule;
 
 class DatosPaciente_ControlCitas extends Controller
 {
