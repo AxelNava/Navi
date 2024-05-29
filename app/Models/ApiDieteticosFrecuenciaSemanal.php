@@ -32,7 +32,7 @@ class ApiDieteticosFrecuenciaSemanal extends Model
 {
 	protected $table = 'api_dieteticos_frecuencia_semanal';
 	protected $primaryKey = 'id_dietetico';
-	public $incrementing = false;
+	public $incrementing = true;
 	public $timestamps = false;
 
 	protected $casts = [

@@ -48,7 +48,7 @@ class ApiBioquimico extends Model
 {
 	protected $table = 'api_bioquimicos';
 	protected $primaryKey = 'id_bioquimico';
-	public $incrementing = false;
+	public $incrementing = true;
 	public $timestamps = false;
 
 	protected $casts = [
@@ -75,7 +75,7 @@ class ApiBioquimico extends Model
 		'folatos' => 'float',
 		'PT' => 'float',
 		'albumina' => 'float',
-		'Ca' => 'float'
+		'Ca' => 'float',
 	];
 
 	protected $fillable = [

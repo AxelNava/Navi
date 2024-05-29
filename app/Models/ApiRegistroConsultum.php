@@ -40,7 +40,7 @@ class ApiRegistroConsultum extends Model
 {
 	protected $table = 'api_registro_consulta';
 	protected $primaryKey = 'id_registro';
-	public $incrementing = false;
+	public $incrementing = true;
 	public $timestamps = false;
 
 	protected $casts = [

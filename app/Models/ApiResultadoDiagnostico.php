@@ -26,7 +26,7 @@ class ApiResultadoDiagnostico extends Model
 {
 	protected $table = 'api_resultado_diagnostico';
 	protected $primaryKey = 'id_resultado';
-	public $incrementing = false;
+	public $incrementing = true;
 	public $timestamps = false;
 
 	protected $casts = [
