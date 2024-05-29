@@ -71,33 +71,33 @@ class NotaNutricionController extends Controller
             'fecha_prox_cita' => ['required', 'date_format:Y-m-d'],
             'control_musculo' => ['required', 'decimal:0,2'],
             'control_grasa' => ['required', 'decimal:0,2'],
-            'pgc' => ['decimal:0,2'],
-            'rcc' => ['decimal:0,2'],
-            'metabolismo_kcal_basal' => ['decimal:0,2'],
-            'hbAc1' => ['decimal:0,2'],
-            'TG' => ['decimal:0,2'],
-            'CT' => ['decimal:0,2'],
-            'HDL' => ['decimal:0,2'],
-            'LDL' => ['decimal:0,2'],
-            'AST_perc' => ['decimal:0,2'],
-            'ALT' => ['decimal:0,2'],
-            'THS' => ['decimal:0,2'],
-            'T3' => ['decimal:0,2'],
-            'T4' => ['decimal:0,2'],
-            'Hb' => ['decimal:0,2'],
-            'hierro' => ['decimal:0,2'],
-            'transferrina' => ['decimal:0,2'],
-            't3_libre' => ['decimal:0,2'],
-            't4_libre' => ['decimal:0,2'],
-            'hto' => ['decimal:0,2'],
-            'B12' => ['decimal:0,2'],
-            'folatos' => ['decimal:0,2'],
-            'PT' => ['decimal:0,2'],
-            'albumina' => ['decimal:0,2'],
-            'Ca' => ['decimal:0,2'],
-            'otros_bioquimicos' => '',
-            'clinicos' => '',
-            'medicamentos_suplementos' => [],
+            'pgc' => ['nullable','decimal:0,2'],
+            'rcc' => ['nullable','decimal:0,2'],
+            'metabolismo_kcal_basal' => ['nullable','decimal:0,2'],
+            'hbAc1' => ['nullable','decimal:0,2'],
+            'TG' => ['nullable','decimal:0,2'],
+            'CT' => ['nullable','decimal:0,2'],
+            'HDL' => ['nullable','decimal:0,2'],
+            'LDL' => ['nullable','decimal:0,2'],
+            'AST_perc' => ['nullable','decimal:0,2'],
+            'ALT' => ['nullable','decimal:0,2'],
+            'THS' => ['nullable','decimal:0,2'],
+            'T3' => ['nullable','decimal:0,2'],
+            'T4' => ['nullable','decimal:0,2'],
+            'Hb' => ['nullable','decimal:0,2'],
+            'hierro' => ['nullable','decimal:0,2'],
+            'transferrina' => ['nullable','decimal:0,2'],
+            't3_libre' => ['nullable','decimal:0,2'],
+            't4_libre' => ['nullable','decimal:0,2'],
+            'hto' => ['nullable','decimal:0,2'],
+            'B12' => ['nullable','decimal:0,2'],
+            'folatos' => ['nullable','decimal:0,2'],
+            'PT' => ['nullable','decimal:0,2'],
+            'albumina' => ['nullable','decimal:0,2'],
+            'Ca' => ['nullable','decimal:0,2'],
+            'otros_bioquimicos' => ['nullable'],
+            'clinicos' => ['nullable'],
+            'medicamentos_suplementos' => ['nullable'],
         ]);
         $paciente = new ApiPersona();
         $paciente->nombre = $request->nombre;
@@ -113,29 +113,30 @@ class NotaNutricionController extends Controller
 
         $registrocitas = new ApiRegistroConsultum();
         $registrocitas->no_consulta_paciente = $request->no_consulta_paciente;
-        $registrocitas->id_paciente = $paciente->persona_id;
+        $registrocitas->id_paciente = $datospaciente->id_dato_paciente;
         $registrocitas->motivo_consulta = $request->motivo_consulta;
         $registrocitas->sintoma_gastro = $request->sintoma_gastro;
         $registrocitas->apego_plan_anterior_barr_apego = $request->apego_plan_anterior_barr_apego;
-        $registrocitas->motivacion = $request->motivacion;
-        $registrocitas->hidratacion = [json_encode($request->hidratacion)];
+        $registrocitas->motivacion = $request->motivacion;   
+        $registrocitas->hidratacion =  json_decode($request->hidratacion, flags:JSON_OBJECT_AS_ARRAY);
         $registrocitas->sintomas_generales = $request->sintomas_generales;
+        $registrocitas->consulta_actual = $request->consulta_actual;
         $registrocitas->save();
-
+        
         $exploracionfisica = new ApiExploFisica();
-        $exploracionfisica->id_consulta_paciente = $registrocitas->id_consulta_paciente;
+        $exploracionfisica->id_consulta_paciente = $registrocitas->id_registro;
         $exploracionfisica->pelo_unias = $request->pelo_unias;
         $exploracionfisica->piel = $request->piel;
         $exploracionfisica->ojos = $request->ojos;
         $exploracionfisica->musculo = $request->musculo;
         $exploracionfisica->otros = $request->otros;
         $exploracionfisica->intolerancia_alimentos = $request->intolerancia_alimentos;
-        $exploracionfisica->actividad_fis_actual = $request->actividad_fis_actual;
+        $exploracionfisica->actividad_fis_actual = json_decode($request->actividad_fis_actual , flags:JSON_OBJECT_AS_ARRAY);
         $exploracionfisica->cambios_pos_estilo_vida = $request->cambios_pos_estilo_vida;
         $exploracionfisica->save();
 
         $composicioncorporal = new ApiComposicionCorporalDiagnosticoObesidad();
-        $composicioncorporal->id_consulta_paciente = $registrocitas->id_consulta_paciente;
+        $composicioncorporal->id_consulta_paciente = $registrocitas->id_registro;
         $composicioncorporal->peso = $request->peso;
         $composicioncorporal->masa_muscular = $request->masa_muscular;
         $composicioncorporal->mas_grasa_corporal = $request->masa_grasa_corporal;
@@ -147,8 +148,8 @@ class NotaNutricionController extends Controller
         $composicioncorporal->save();
 
         $controlcita = new ApiControlCita();
-        $controlcita->id_consulta_paciente = $paciente->persona_id;
-        $controlcita->id_consulta_paciente = $registrocitas->id_registro;
+        $controlcita->id_paciente = $datospaciente->id_dato_paciente;;
+        $controlcita->id_registro_consulta = $registrocitas->id_registro;
         $controlcita->peso = $request->peso;
         $controlcita->IMC = $request->imc;
         $controlcita->masa_grasa_corporal = $request->masa_grasa_corporal;
@@ -169,7 +170,7 @@ class NotaNutricionController extends Controller
         if ($bioquimico->glucosa == null) {
             return "se guardaron los datos, menos bioquimicos";
         }
-        $bioquimico->id_consulta_paciente = $registrocitas->id_consulta_paciente;
+        $bioquimico->id_consulta_paciente = $registrocitas->id_registro;
         $bioquimico->hbAc1 = $request->hbAc1;
         $bioquimico->TG = $request->TG;
         $bioquimico->CT = $request->CT;
@@ -190,10 +191,10 @@ class NotaNutricionController extends Controller
         $bioquimico->folatos = $request->folatos;
         $bioquimico->PT = $request->PT;
         $bioquimico->albumina = $request->albumina;
-        $bioquimico->Ca = $request->Ca;
-        $bioquimico->otros = $request->otros;
-        $bioquimico->clinicos = $request->clinicos;
-        $bioquimico->dinamometria = [json_encode($request->dinamometria)];
+        $bioquimico->Ca= $request->Ca;
+        $bioquimico->otros= $request->otros;
+        $bioquimico->clinicos= $request->clinicos;
+        $bioquimico->dinamometria = json_decode($request->dinamometria,flags:JSON_OBJECT_AS_ARRAY);
         $bioquimico->medicamentos_suplementos = $request->medicamentos_suplementos;
         $bioquimico->save();
         return "se guardaron los datos";
