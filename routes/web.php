@@ -30,7 +30,7 @@ Route::get('director/ListadoAlumnos', [ListadoAlumnos_VistaDirector::class, 'enl
 Route::get('director/ListadoAlumnos/{id}', [ListadoPacientes_VistaDirector::class, 'enlistar'])->name('listado_pacientes_Director');
 
 Route::get('controlCitas/{id}', [DatosPaciente_ControlCitas::class, 'show'])->name('control_citas');
-Route::patch('controlCitas/actualizar/{id}', [DatosPaciente_ControlCitas::class, 'update'])->name('control_citas');
+Route::patch('controlCitas/actualizar/{id}', [DatosPaciente_ControlCitas::class, 'update'])->name('control_citas_actualizar');
 
 Route::get('alumno/agregar-paciente', function () {
 	return view('alumno.agregar_paciente');
@@ -45,7 +45,7 @@ Route::middleware('auth')->group(function () {
 	Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 	Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::get('/nota-nutricion/buscar/{id}', [NotaNutricionController::class, 'crear'])->name('nota-nutricion_buscar');
+Route::get('/nota-nutricion/buscar/{id}', [NotaNutricionController::class, 'buscar'])->name('nota-nutricion_buscar');
 Route::post('/nota-nutricion/crear', [NotaNutricionController::class, 'crear'])->name('nota-nutricion_crear');
 Route::patch('/nota-nutricion/actualizar/{id}', [NotaNutricionController::class, 'actualizar'])->name('nota-nutricion_actualizar');
 
