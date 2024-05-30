@@ -3,27 +3,44 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\ApiDatosGeneralesDietum;
-use App\Models\ApiDieteticosInstrumentoMedicion;
-use App\Models\ApiDieteticosFrecuenciaSemanal;
-use App\Models\ApiRegistroConsultum;
-use App\Models\ApiResultadoDiagnostico;
+use App\Models\ApiRegistroConsultum; //Aqui se busca el id del paciente
+use App\Models\ApiDieteticosInstrumentoMedicion; //Tipo de instrumento - Aspectos cualitativos
+use App\Models\ApiDieteticosFrecuenciaSemanal; //Frutas, Verduras, azucares, etc.
+use App\Models\ApiResultadoDiagnostico; //Requerimientos, DX Nutricion
+use App\Models\ApiDatosGeneralesDietum; //Objetivo - Monitoreo
+
 
 class DietaPaciente extends Controller
 {
-    public function buscar($id) {
+    // public function buscar($id) {
+    //     $dietaid = ApiRegistroConsultum::find($id);
+    //     if ($dietaid == null) return "No se encontró la dieta.";
+
+    //     $regConsulta = ApiRegistroConsultum::find($dietaid->id_registro);
+    //     $regConsulta2 = ApiRegistroConsultum::where("id_registro", $id)->value("no_consulta_paciente");
+    //     $resDiagnostico = ApiResultadoDiagnostico::find($dietaid->id_resultado);
+    //     $generales = ApiDatosGeneralesDietum::find($dietaid->id_dieta);
+    //     $instrumento = ApiDieteticosInstrumentoMedicion::find($dietaid->id_dietetico_instru);
+    //     $instrumento2 = ApiDieteticosInstrumentoMedicion::where('id_consulta_paciente', $id);
+    //     $frecuencia = ApiDieteticosFrecuenciaSemanal::find($dietaid->id_consulta_paciente);
+
+    //     return response()->json([
+    //         $regConsulta, $resDiagnostico, $generales ?? new ApiDatosGeneralesDietum(),
+    //         $instrumento ?? new ApiDieteticosInstrumentoMedicion(), $frecuencia ?? new ApiDieteticosFrecuenciaSemanal()
+    //     ]);
+        
+    // }
+    
+    public function buscar($id){
         $dietaid = ApiRegistroConsultum::find($id);
         if ($dietaid == null) return "No se encontró la dieta.";
-        $regConsulta = ApiRegistroConsultum::find($dietaid->id_registro);
-        $resDiagnostico = ApiResultadoDiagnostico::find($dietaid->id_resultado);
-        $generales = ApiDatosGeneralesDietum::find($dietaid->id_dieta);
-        $instrumento = ApiDieteticosInstrumentoMedicion::find($dietaid->id_dietetico_instru);
-        $frecuencia = ApiDieteticosFrecuenciaSemanal::find($dietaid->id_dietetico);
 
-        return response()->json([
-            $regConsulta, $resDiagnostico, $generales ?? new ApiDatosGeneralesDietum(),
-            $instrumento ?? new ApiDieteticosInstrumentoMedicion(), $frecuencia ?? new ApiDieteticosFrecuenciaSemanal()
-        ]);
+        $instrumento = ApiDieteticosInstrumentoMedicion::where('id_consulta_paciente', $id)->get();
+        $frecuencia = ApiDieteticosFrecuenciaSemanal::where('id_consulta_paciente', $id)->get();
+        $diagnostico = ApiResultadoDiagnostico::where('id_consulta_paciente', $id)->get();
+        $generales = ApiDatosGeneralesDietum::where('id_consulta_paciente', $id)->get();
+
+        return view('alumno.agregar_dieta', compact('instrumento', 'frecuencia', 'diagnostico', 'generales'));
     }
 
     public function crear(Request $req) {
