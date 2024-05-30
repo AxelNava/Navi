@@ -44,13 +44,13 @@ class NotaNutricionController extends Controller
             'nombre' => ['required'],
             'edad' => ['required', 'integer'],
             'genero' => ['required', Rule::enum(Genero::class)],
-            'expediente' => ['required', 'unique:App\Models\ApiDatosPaciente,expediente','integer'],
+            'expediente' => ['required', 'unique:App\Models\ApiDatosPaciente,expediente', 'integer'],
             'fecha_nacimiento' => ['required', 'date_format:Y-m-d'],
-            'motivo_consulta' => ['required','max:500'],
+            'motivo_consulta' => ['required', 'max:500'],
             'sintoma_gastro' => ['required'],
-            'apego_plan_anterior_barr_apego' => ['required','max:250'],
+            'apego_plan_anterior_barr_apego' => ['required', 'max:250'],
             'motivacion' => ['required'],
-            'sintomas_generales' => ['required','max:500'],
+            'sintomas_generales' => ['required', 'max:500'],
             'pelo_unias' => ['required'],
             'piel' => ['required'],
             'ojos' => ['required'],
@@ -72,30 +72,30 @@ class NotaNutricionController extends Controller
             'fecha_prox_cita' => ['required', 'date_format:Y-m-d'],
             'control_musculo' => ['required', 'decimal:0,2'],
             'control_grasa' => ['required', 'decimal:0,2'],
-            'pgc' => ['nullable','decimal:0,2'],
-            'rcc' => ['nullable','decimal:0,2'],
-            'metabolismo_kcal_basal' => ['nullable','decimal:0,2'],
-            'hbAc1' => ['nullable','decimal:0,2'],
-            'TG' => ['nullable','decimal:0,2'],
-            'CT' => ['nullable','decimal:0,2'],
-            'HDL' => ['nullable','decimal:0,2'],
-            'LDL' => ['nullable','decimal:0,2'],
-            'AST_perc' => ['nullable','decimal:0,2'],
-            'ALT' => ['nullable','decimal:0,2'],
-            'THS' => ['nullable','decimal:0,2'],
-            'T3' => ['nullable','decimal:0,2'],
-            'T4' => ['nullable','decimal:0,2'],
-            'Hb' => ['nullable','decimal:0,2'],
-            'hierro' => ['nullable','decimal:0,2'],
-            'transferrina' => ['nullable','decimal:0,2'],
-            't3_libre' => ['nullable','decimal:0,2'],
-            't4_libre' => ['nullable','decimal:0,2'],
-            'hto' => ['nullable','decimal:0,2'],
-            'B12' => ['nullable','decimal:0,2'],
-            'folatos' => ['nullable','decimal:0,2'],
-            'PT' => ['nullable','decimal:0,2'],
-            'albumina' => ['nullable','decimal:0,2'],
-            'Ca' => ['nullable','decimal:0,2'],
+            'pgc' => ['nullable', 'decimal:0,2'],
+            'rcc' => ['nullable', 'decimal:0,2'],
+            'metabolismo_kcal_basal' => ['nullable', 'decimal:0,2'],
+            'hbAc1' => ['nullable', 'decimal:0,2'],
+            'TG' => ['nullable', 'decimal:0,2'],
+            'CT' => ['nullable', 'decimal:0,2'],
+            'HDL' => ['nullable', 'decimal:0,2'],
+            'LDL' => ['nullable', 'decimal:0,2'],
+            'AST_perc' => ['nullable', 'decimal:0,2'],
+            'ALT' => ['nullable', 'decimal:0,2'],
+            'THS' => ['nullable', 'decimal:0,2'],
+            'T3' => ['nullable', 'decimal:0,2'],
+            'T4' => ['nullable', 'decimal:0,2'],
+            'Hb' => ['nullable', 'decimal:0,2'],
+            'hierro' => ['nullable', 'decimal:0,2'],
+            'transferrina' => ['nullable', 'decimal:0,2'],
+            't3_libre' => ['nullable', 'decimal:0,2'],
+            't4_libre' => ['nullable', 'decimal:0,2'],
+            'hto' => ['nullable', 'decimal:0,2'],
+            'B12' => ['nullable', 'decimal:0,2'],
+            'folatos' => ['nullable', 'decimal:0,2'],
+            'PT' => ['nullable', 'decimal:0,2'],
+            'albumina' => ['nullable', 'decimal:0,2'],
+            'Ca' => ['nullable', 'decimal:0,2'],
             'otros_bioquimicos' => ['nullable'],
             'clinicos' => ['nullable'],
             'medicamentos_suplementos' => ['nullable'],
@@ -119,12 +119,12 @@ class NotaNutricionController extends Controller
         $registrocitas->sintoma_gastro = $request->sintoma_gastro;
         $registrocitas->escala_bristol = $request->escala_bristol;
         $registrocitas->apego_plan_anterior_barr_apego = $request->apego_plan_anterior_barr_apego;
-        $registrocitas->motivacion = $request->motivacion;   
-        $registrocitas->hidratacion =  $request->hidratacion;
+        $registrocitas->motivacion = $request->motivacion;
+        $registrocitas->hidratacion = $request->hidratacion;
         $registrocitas->sintomas_generales = $request->sintomas_generales;
         $registrocitas->consulta_actual = $request->consulta_actual;
         $registrocitas->save();
-        
+
         $exploracionfisica = new ApiExploFisica();
         $exploracionfisica->id_consulta_paciente = $registrocitas->id_registro;
         $exploracionfisica->pelo_unias = $request->pelo_unias;
@@ -150,7 +150,8 @@ class NotaNutricionController extends Controller
         $composicioncorporal->save();
 
         $controlcita = new ApiControlCita();
-        $controlcita->id_paciente = $datospaciente->id_dato_paciente;;
+        $controlcita->id_paciente = $datospaciente->id_dato_paciente;
+        ;
         $controlcita->id_registro_consulta = $registrocitas->id_registro;
         $controlcita->peso = $request->peso;
         $controlcita->IMC = $request->imc;
@@ -193,9 +194,9 @@ class NotaNutricionController extends Controller
         $bioquimico->folatos = $request->folatos;
         $bioquimico->PT = $request->PT;
         $bioquimico->albumina = $request->albumina;
-        $bioquimico->Ca= $request->Ca;
-        $bioquimico->otros= $request->otros_bioquimicos;
-        $bioquimico->clinicos= $request->clinicos;
+        $bioquimico->Ca = $request->Ca;
+        $bioquimico->otros = $request->otros_bioquimicos;
+        $bioquimico->clinicos = $request->clinicos;
         $bioquimico->dinamometria = $request->dinamometria;
         $bioquimico->medicamentos_suplementos = $request->medicamentos_suplementos;
         $bioquimico->save();
@@ -294,6 +295,6 @@ class NotaNutricionController extends Controller
         $bioquimico->dinamometria = $request->dinamometria;
         $bioquimico->medicamentos_suplementos = $request->medicamentos_suplementos;
         $bioquimico->save();
-        return "se actualizaron los datos";
+        return response()->json(["se actualizaron los datos", "id_registro_consulta" => $controlcita->id_registro_consulta]);
     }
 }
