@@ -204,12 +204,12 @@ class NotaNutricionController extends Controller
 
     public function actualizar(Request $request, string $id)
     {
-        return $request;
         $registrocitas = ApiRegistroConsultum::find($id);
         if ($registrocitas == null) {
             return "No se enconto la cita";
         }
-        $paciente = ApiPersona::find($registrocitas->id_paciente);
+        $datopaciente = ApiDatosPaciente::find($registrocitas->id_paciente);
+        $paciente = ApiPersona::find($datopaciente->id_persona);
         $paciente->edad = $request->edad;
         $paciente->save();
 
