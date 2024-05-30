@@ -31,7 +31,7 @@ class ApiPersona extends Model
 
 	protected $casts = [
 		'edad' => 'int',
-		'nombre' => EnumsGenero::class,
+		'genero' => EnumsGenero::class,
 	];
 
 	protected $fillable = [

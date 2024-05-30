@@ -39,6 +39,7 @@ class NotaNutricionController extends Controller
     }
     public function crear(Request $request)
     {
+
         $request->validate([
             'nombre' => ['required'],
             'edad' => ['required', 'integer'],
@@ -116,9 +117,10 @@ class NotaNutricionController extends Controller
         $registrocitas->id_paciente = $datospaciente->id_dato_paciente;
         $registrocitas->motivo_consulta = $request->motivo_consulta;
         $registrocitas->sintoma_gastro = $request->sintoma_gastro;
+        $registrocitas->escala_bristol = $request->escala_bristol;
         $registrocitas->apego_plan_anterior_barr_apego = $request->apego_plan_anterior_barr_apego;
         $registrocitas->motivacion = $request->motivacion;   
-        $registrocitas->hidratacion =  json_decode($request->hidratacion, flags:JSON_OBJECT_AS_ARRAY);
+        $registrocitas->hidratacion =  $request->hidratacion;
         $registrocitas->sintomas_generales = $request->sintomas_generales;
         $registrocitas->consulta_actual = $request->consulta_actual;
         $registrocitas->save();
@@ -129,9 +131,9 @@ class NotaNutricionController extends Controller
         $exploracionfisica->piel = $request->piel;
         $exploracionfisica->ojos = $request->ojos;
         $exploracionfisica->musculo = $request->musculo;
-        $exploracionfisica->otros = $request->otros;
+        $exploracionfisica->otros = $request->otros_explo_fisica;
         $exploracionfisica->intolerancia_alimentos = $request->intolerancia_alimentos;
-        $exploracionfisica->actividad_fis_actual = json_decode($request->actividad_fis_actual , flags:JSON_OBJECT_AS_ARRAY);
+        $exploracionfisica->actividad_fis_actual = $request->actividad_fis_actual;
         $exploracionfisica->cambios_pos_estilo_vida = $request->cambios_pos_estilo_vida;
         $exploracionfisica->save();
 
@@ -192,15 +194,17 @@ class NotaNutricionController extends Controller
         $bioquimico->PT = $request->PT;
         $bioquimico->albumina = $request->albumina;
         $bioquimico->Ca= $request->Ca;
-        $bioquimico->otros= $request->otros;
+        $bioquimico->otros= $request->otros_bioquimicos;
         $bioquimico->clinicos= $request->clinicos;
-        $bioquimico->dinamometria = json_decode($request->dinamometria,flags:JSON_OBJECT_AS_ARRAY);
+        $bioquimico->dinamometria = $request->dinamometria;
         $bioquimico->medicamentos_suplementos = $request->medicamentos_suplementos;
         $bioquimico->save();
         return "se guardaron los datos";
     }
+
     public function actualizar(Request $request, string $id)
     {
+        return $request;
         $registrocitas = ApiRegistroConsultum::find($id);
         if ($registrocitas == null) {
             return "No se enconto la cita";
@@ -209,13 +213,12 @@ class NotaNutricionController extends Controller
         $paciente->edad = $request->edad;
         $paciente->save();
 
-        $registrocitas->no_consulta_paciente = $request->no_consulta_paciente;
-        $registrocitas->id_paciente = $paciente->persona_id;
         $registrocitas->motivo_consulta = $request->motivo_consulta;
         $registrocitas->sintoma_gastro = $request->sintoma_gastro;
+        $registrocitas->escala_bristol = $request->escala_bristol;
         $registrocitas->apego_plan_anterior_barr_apego = $request->apego_plan_anterior_barr_apego;
         $registrocitas->motivacion = $request->motivacion;
-        $registrocitas->hidratacion = [json_encode($request->hidratacion)];
+        $registrocitas->hidratacion = $request->hidratacion;
         $registrocitas->sintomas_generales = $request->sintomas_generales;
         $registrocitas->save();
 
@@ -240,7 +243,7 @@ class NotaNutricionController extends Controller
         $exploracionfisica->piel = $request->piel;
         $exploracionfisica->ojos = $request->ojos;
         $exploracionfisica->musculo = $request->musculo;
-        $exploracionfisica->otros = $request->otros;
+        $exploracionfisica->otros = $request->otros_explo_fisica;
         $exploracionfisica->intolerancia_alimentos = $request->intolerancia_alimentos;
         $exploracionfisica->actividad_fis_actual = $request->actividad_fis_actual;
         $exploracionfisica->cambios_pos_estilo_vida = $request->cambios_pos_estilo_vida;
@@ -263,7 +266,7 @@ class NotaNutricionController extends Controller
         $bioquimico = ApiBioquimico::where('id_consulta_paciente', $registrocitas->id_registro)->first();
         if ($bioquimico == null) {
             $bioquimico = new ApiBioquimico();
-            $bioquimico->id_consulta_paciente = $registrocitas->id_consulta_paciente;
+            $bioquimico->id_consulta_paciente = $registrocitas->id_registro;
         }
         $bioquimico->hbAc1 = $request->hbAc1;
         $bioquimico->TG = $request->TG;
@@ -286,9 +289,9 @@ class NotaNutricionController extends Controller
         $bioquimico->PT = $request->PT;
         $bioquimico->albumina = $request->albumina;
         $bioquimico->Ca = $request->Ca;
-        $bioquimico->otros = $request->otros;
+        $bioquimico->otros = $request->otros_bioquimicos;
         $bioquimico->clinicos = $request->clinicos;
-        $bioquimico->dinamometria = [json_encode($request->dinamometria)];
+        $bioquimico->dinamometria = $request->dinamometria;
         $bioquimico->medicamentos_suplementos = $request->medicamentos_suplementos;
         $bioquimico->save();
         return "se actualizaron los datos";
