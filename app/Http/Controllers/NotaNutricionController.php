@@ -7,9 +7,11 @@ use App\Models\ApiBioquimico;
 use App\Models\ApiComposicionCorporalDiagnosticoObesidad;
 use App\Models\ApiControlCita;
 use App\Models\ApiDatosPaciente;
+use App\Models\ApiDieteticosFrecuenciaSemanal;
 use App\Models\ApiExploFisica;
 use App\Models\ApiPersona;
 use App\Models\ApiRegistroConsultum;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -56,22 +58,21 @@ class NotaNutricionController extends Controller
             'ojos' => ['required'],
             'musculo' => ['required'],
             'otros_explo_fisica' => ['required'],
-            'intolerancia_alimentos' => ['required'],
+            'intolerancia_alimentos' => ['required_if_accepted:radio_into_aliment'],
             'actividad_fis_actual' => ['required'],
             'cambios_pos_estilo_vida' => ['required'],
             'peso' => ['required', 'decimal:0,2'],
             'imc' => ['required', 'decimal:0,2'],
-            'masa_grasa_corporal' => ['required', 'decimal:0,2'],
+            'mas_grasa_corporal' => ['required', 'decimal:0,2'],
             'porcentaje_grasa_corporal' => ['required', 'decimal:0,2'],
             'masa_muscular' => ['required', 'decimal:0,2'],
-            'agua_corpolar' => ['required', 'decimal:0,2'],
+            'masa_libre_grasa' => ['required', 'decimal:0,2'],
+            'act' => ['required', 'decimal:0,2'],
             'circunferencia_cintura' => ['required', 'numeric', 'max:32767'],
             'circunferencia_cadera' => ['required', 'numeric', 'max:32767'],
             'fecha_cita' => ['required', 'date_format:Y-m-d'],
             'hora_cita' => ['required', 'date_format:H:i'],
-            'fecha_prox_cita' => ['required', 'date_format:Y-m-d'],
-            'control_musculo' => ['required', 'decimal:0,2'],
-            'control_grasa' => ['required', 'decimal:0,2'],
+            
             'pgc' => ['nullable', 'decimal:0,2'],
             'rcc' => ['nullable', 'decimal:0,2'],
             'metabolismo_kcal_basal' => ['nullable', 'decimal:0,2'],
@@ -118,6 +119,7 @@ class NotaNutricionController extends Controller
         $registrocitas->motivo_consulta = $request->motivo_consulta;
         $registrocitas->sintoma_gastro = $request->sintoma_gastro;
         $registrocitas->escala_bristol = $request->escala_bristol;
+        $registrocitas->otros_sintoma_gastro = $request->otros_sintoma_gastro ?? '';
         $registrocitas->apego_plan_anterior_barr_apego = $request->apego_plan_anterior_barr_apego;
         $registrocitas->motivacion = $request->motivacion;
         $registrocitas->hidratacion = $request->hidratacion;
@@ -141,32 +143,44 @@ class NotaNutricionController extends Controller
         $composicioncorporal->id_consulta_paciente = $registrocitas->id_registro;
         $composicioncorporal->peso = $request->peso;
         $composicioncorporal->masa_muscular = $request->masa_muscular;
-        $composicioncorporal->mas_grasa_corporal = $request->masa_grasa_corporal;
+        $composicioncorporal->mas_grasa_corporal = $request->mas_grasa_corporal;
         $composicioncorporal->act = $request->act;
         $composicioncorporal->imc = $request->imc;
-        $composicioncorporal->pgc = $request->pgc;
+        $composicioncorporal->pgc = $request->porcentaje_grasa_corporal;
         $composicioncorporal->rcc = $request->rcc;
-        $composicioncorporal->metabolismo_kcal_basal = $request->metabolismo_kcal_basal;
+        $composicioncorporal->metabolismo_kcal_basal = $request->metabolismo_kcal_basal ?? 0;
         $composicioncorporal->save();
 
         $controlcita = new ApiControlCita();
         $controlcita->id_paciente = $datospaciente->id_dato_paciente;
-        ;
+
         $controlcita->id_registro_consulta = $registrocitas->id_registro;
         $controlcita->peso = $request->peso;
         $controlcita->IMC = $request->imc;
-        $controlcita->masa_grasa_corporal = $request->masa_grasa_corporal;
+        $controlcita->masa_grasa_corporal = $request->mas_grasa_corporal;
         $controlcita->porcentaje_grasa_corporal = $request->porcentaje_grasa_corporal;
         $controlcita->masa_muscular_kg = $request->masa_muscular;
-        $controlcita->agua_corpolar = $request->agua_corpolar;
+        $controlcita->agua_corpolar = $request->act;
         $controlcita->circunferencia_cintura = $request->circunferencia_cintura;
         $controlcita->circunferencia_cadera = $request->circunferencia_cadera;
-        $controlcita->fecha_cita = $request->fecha_cita;
-        $controlcita->hora_cita = $request->hora_cita;
-        $controlcita->fecha_prox_cita = $request->fecha_prox_cita;
-        $controlcita->control_musculo = $request->control_musculo;
-        $controlcita->control_grasa = $request->control_grasa;
+        $controlcita->fecha_cita = Carbon::today();
+        $controlcita->hora_cita = Carbon::createFromTimeString($request->hora);
+        
         $controlcita->save();
+
+        $freq = new ApiDieteticosFrecuenciaSemanal();
+        $freq->id_consulta_paciente = $registrocitas->id_registro;
+        $freq->frutas = $request->frutas;
+        $freq->verduras = $request->verduras;
+        $freq->cereales_s_g = $request->cereales_sg;
+        $freq->cereales_c_g = $request->cereales_cg;
+        $freq->leguminosas = $request->leguminosas;
+        $freq->poa = $request->poa;
+        $freq->lacteos = $request->lacteos;
+        $freq->aceites_s_p = $request->aceites_sp;
+        $freq->aceites_c_p = $request->aceites_cp;
+        $freq->azucares = $request->azucares;
+        $freq->save();
 
         $bioquimico = new ApiBioquimico();
         $bioquimico->glucosa = $request->glucosa;
@@ -200,7 +214,7 @@ class NotaNutricionController extends Controller
         $bioquimico->dinamometria = $request->dinamometria;
         $bioquimico->medicamentos_suplementos = $request->medicamentos_suplementos;
         $bioquimico->save();
-        return "se guardaron los datos";
+        return response()->json(['Se han guardado los datos', 'id_registro' => $registrocitas->id_registro]);
     }
 
     public function actualizar(Request $request, string $id)
@@ -229,7 +243,7 @@ class NotaNutricionController extends Controller
         $controlcita->masa_grasa_corporal = $request->masa_grasa_corporal;
         $controlcita->porcentaje_grasa_corporal = $request->porcentaje_grasa_corporal;
         $controlcita->masa_muscular_kg = $request->masa_muscular;
-        $controlcita->agua_corpolar = $request->agua_corpolar;
+        $controlcita->agua_corpolar = $request->act;
         $controlcita->circunferencia_cintura = $request->circunferencia_cintura;
         $controlcita->circunferencia_cadera = $request->circunferencia_cadera;
         $controlcita->fecha_cita = $request->fecha_cita;
@@ -260,6 +274,20 @@ class NotaNutricionController extends Controller
         $composicioncorporal->rcc = $request->rcc;
         $composicioncorporal->metabolismo_kcal_basal = $request->metabolismo_kcal_basal;
         $composicioncorporal->save();
+
+        $freq = new ApiDieteticosFrecuenciaSemanal();
+        $freq->id_consulta_paciente = $registrocitas->id_registro;
+        $freq->frutas = $request->frutas;
+        $freq->verduras = $request->verduras;
+        $freq->cereales_s_g = $request->cereales_sg;
+        $freq->cereales_c_g = $request->cereales_cg;
+        $freq->leguminosas = $request->leguminosas;
+        $freq->poa = $request->poa;
+        $freq->lacteos = $request->lacteos;
+        $freq->aceites_s_p = $request->aceites_sp;
+        $freq->aceites_c_p = $request->aceites_cp;
+        $freq->azucares = $request->azucares;
+        $freq->save();
 
         if ($request->glucosa == null) {
             return "se actualizaron los datos, menos bioquimicos";
