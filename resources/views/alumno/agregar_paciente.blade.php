@@ -199,7 +199,7 @@
                                 <div class="primera-parte">
                                     <label for="nombre">NOMBRE</label>
                                     <input type="text" name="nombre" id="nombre" style="width:300px"
-                                        value="{{ old('nombre') }}">
+                                        value="{{ old('nombre','') }}">
                                     <label for="nombre">EDAD</label>
                                     <input type="number" name="edad" id="edad" value="{{ old('edad') }}">
                                     <label for="nombre">HORA</label>

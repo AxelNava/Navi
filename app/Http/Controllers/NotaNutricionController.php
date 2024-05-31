@@ -13,6 +13,7 @@ use App\Models\ApiPersona;
 use App\Models\ApiRegistroConsultum;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class NotaNutricionController extends Controller
@@ -41,12 +42,19 @@ class NotaNutricionController extends Controller
     }
     public function crear(Request $request)
     {
-
+        $token = $request->session()->token();
+        $token = csrf_token();
         $request->validate([
             'nombre' => ['required'],
             'edad' => ['required', 'integer'],
             'genero' => ['required', Rule::enum(Genero::class)],
-            'expediente' => ['required', 'unique:App\Models\ApiDatosPaciente,expediente', 'integer'],
+            'expediente' => [
+                'required',
+                Rule::unique('api_datos_paciente', 'expediente')
+                    ->ignore($request->expediente, 'expediente')
+                ,
+                'integer'
+            ],
             'fecha_nacimiento' => ['required', 'date_format:Y-m-d'],
             'motivo_consulta' => ['required', 'max:500'],
             'sintoma_gastro' => ['required'],
@@ -70,9 +78,10 @@ class NotaNutricionController extends Controller
             'act' => ['required', 'decimal:0,2'],
             'circunferencia_cintura' => ['required', 'numeric', 'max:32767'],
             'circunferencia_cadera' => ['required', 'numeric', 'max:32767'],
-            'fecha_cita' => ['required', 'date_format:Y-m-d'],
-            'hora_cita' => ['required', 'date_format:H:i'],
-            
+
+            'hora' => ['required', 'date_format:H:i'],
+            'dinamometria' => ['nullable', 'decimal:0,2'],
+            'interpretacion_dinamometrica' => ['nullable'],
             'pgc' => ['nullable', 'decimal:0,2'],
             'rcc' => ['nullable', 'decimal:0,2'],
             'metabolismo_kcal_basal' => ['nullable', 'decimal:0,2'],
@@ -101,6 +110,7 @@ class NotaNutricionController extends Controller
             'clinicos' => ['nullable'],
             'medicamentos_suplementos' => ['nullable'],
         ]);
+
         $paciente = new ApiPersona();
         $paciente->nombre = $request->nombre;
         $paciente->edad = $request->edad;
@@ -112,6 +122,11 @@ class NotaNutricionController extends Controller
         $datospaciente->expediente = $request->expediente;
         $datospaciente->fecha_nacimiento = $request->fecha_nacimiento;
         $datospaciente->save();
+        // if (!$datospaciente->exists()) {
+        // } else {
+        //     $id_dato_paciente = DB::table('api_datos_paciente')->where('expediente', '=', (int) $request->expediente)
+        //         ->get('id_dato_paciente')->first()->id_dato_paciente;
+        // }
 
         $registrocitas = new ApiRegistroConsultum();
         $registrocitas->no_consulta_paciente = $request->no_consulta_paciente;
@@ -124,7 +139,13 @@ class NotaNutricionController extends Controller
         $registrocitas->motivacion = $request->motivacion;
         $registrocitas->hidratacion = $request->hidratacion;
         $registrocitas->sintomas_generales = $request->sintomas_generales;
-        $registrocitas->consulta_actual = $request->consulta_actual;
+        // $registrocitas->consulta_actual = $request->consulta_actual;
+        $registrocitas->clinicos = $request->dx_medicos;
+        $registrocitas->dinamometria = [
+            'dinamometria' => $request->dinamometria ?? '',
+            'interpretacion_dinamometrica' => $request->interpretacion_dinamometrica ?? ''
+        ];
+        $registrocitas->medicamentos_suplementos = $request->medicamentos_suplementos;
         $registrocitas->save();
 
         $exploracionfisica = new ApiExploFisica();
@@ -165,7 +186,7 @@ class NotaNutricionController extends Controller
         $controlcita->circunferencia_cadera = $request->circunferencia_cadera;
         $controlcita->fecha_cita = Carbon::today();
         $controlcita->hora_cita = Carbon::createFromTimeString($request->hora);
-        
+
         $controlcita->save();
 
         $freq = new ApiDieteticosFrecuenciaSemanal();
@@ -182,10 +203,11 @@ class NotaNutricionController extends Controller
         $freq->azucares = $request->azucares;
         $freq->save();
 
+        $id_registro = $registrocitas->id_registro;
         $bioquimico = new ApiBioquimico();
         $bioquimico->glucosa = $request->glucosa;
         if ($bioquimico->glucosa == null) {
-            return "se guardaron los datos, menos bioquimicos";
+            return view('alumno.agregar_dieta', compact('id_registro'));
         }
         $bioquimico->id_consulta_paciente = $registrocitas->id_registro;
         $bioquimico->hbAc1 = $request->hbAc1;
@@ -210,11 +232,8 @@ class NotaNutricionController extends Controller
         $bioquimico->albumina = $request->albumina;
         $bioquimico->Ca = $request->Ca;
         $bioquimico->otros = $request->otros_bioquimicos;
-        $bioquimico->clinicos = $request->clinicos;
-        $bioquimico->dinamometria = $request->dinamometria;
-        $bioquimico->medicamentos_suplementos = $request->medicamentos_suplementos;
         $bioquimico->save();
-        return response()->json(['Se han guardado los datos', 'id_registro' => $registrocitas->id_registro]);
+        return view('alumno.agregar_dieta', compact('id_registro'));
     }
 
     public function actualizar(Request $request, string $id)
@@ -246,9 +265,6 @@ class NotaNutricionController extends Controller
         $controlcita->agua_corpolar = $request->act;
         $controlcita->circunferencia_cintura = $request->circunferencia_cintura;
         $controlcita->circunferencia_cadera = $request->circunferencia_cadera;
-        $controlcita->fecha_cita = $request->fecha_cita;
-        $controlcita->hora_cita = $request->hora_cita;
-        $controlcita->fecha_prox_cita = $request->fecha_prox_cita;
         $controlcita->control_musculo = $request->control_musculo;
         $controlcita->control_grasa = $request->control_grasa;
         $controlcita->save();
@@ -319,9 +335,7 @@ class NotaNutricionController extends Controller
         $bioquimico->albumina = $request->albumina;
         $bioquimico->Ca = $request->Ca;
         $bioquimico->otros = $request->otros_bioquimicos;
-        $bioquimico->clinicos = $request->clinicos;
-        $bioquimico->dinamometria = $request->dinamometria;
-        $bioquimico->medicamentos_suplementos = $request->medicamentos_suplementos;
+
         $bioquimico->save();
         return response()->json(["se actualizaron los datos", "id_registro_consulta" => $controlcita->id_registro_consulta]);
     }
