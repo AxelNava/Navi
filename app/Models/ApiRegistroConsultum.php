@@ -17,11 +17,16 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id_paciente
  * @property string $motivo_consulta
  * @property string|null $sintoma_gastro
+ * @property string|null $escala_bristol
+ * @property string|null $otros_sintoma_gastro
  * @property string $apego_plan_anterior_barr_apego
  * @property string|null $motivacion
  * @property string $hidratacion
  * @property string $sintomas_generales
  * @property int $consulta_actual
+ * @property string $clinicos
+ * @property string|null $dinamometria
+ * @property string $medicamentos_suplementos
  * 
  * @property ApiDatosPaciente $api_datos_paciente
  * @property Collection|ApiBioquimico[] $api_bioquimicos
@@ -59,7 +64,10 @@ class ApiRegistroConsultum extends Model
 		'motivacion',
 		'hidratacion',
 		'sintomas_generales',
-		'consulta_actual'
+		'consulta_actual',
+		'clinicos',
+		'dinamometria',
+		'medicamentos_suplementos'
 	];
 
 	public function api_datos_paciente()

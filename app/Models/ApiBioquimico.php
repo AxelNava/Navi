@@ -36,9 +36,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property float $albumina
  * @property float $Ca
  * @property string $otros
- * @property string $clinicos
- * @property string|null $dinamometria
- * @property string $medicamentos_suplementos
  * 
  * @property ApiRegistroConsultum $api_registro_consultum
  *
@@ -103,9 +100,6 @@ class ApiBioquimico extends Model
 		'albumina',
 		'Ca',
 		'otros',
-		'clinicos',
-		'dinamometria',
-		'medicamentos_suplementos'
 	];
 
 	public function api_registro_consultum()
