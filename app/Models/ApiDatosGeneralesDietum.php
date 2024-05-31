@@ -49,6 +49,7 @@ class ApiDatosGeneralesDietum extends Model
 		'lip_g_dieta' => 'float',
 		'hco_porcen_dieta' => 'float',
 		'hco_g_dieta' => 'float',
+		'param_meta' => 'array',
 	];
 
 	protected $fillable = [
