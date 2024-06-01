@@ -128,4 +128,31 @@ nvim
 sudo nvim /etc/hosts
 ```
 Para que pueda funcionar la edición, tienen que ejecutar el editor como root, ya sea con sudo o accediendo al root
+
 ## Levantamiento de proyecto
+Una vez que se tenga todos los componentes listos, se tiene que hacer lo siguiente para la base de datos
+
+### Base de datos
+To use the database you need create the next configuration en el archivo .env, se tienen que sustituir las variables 
+correspondientes
+
+- user: `navi`
+- password: `1>fCT)},dfVZ6Rbv9q*.`
+- port: `3306`
+- host: `localhost`
+
+To create the user in database if is not created:
+
+```sh CREATE USER 'navi'@localhost IDENTIFIED BY '1>fCT)},dfVZ6Rbv9q*.';```
+
+Then, give it the correct access to the database
+
+```sh GRANT USAGE ON *.* TO 'navi'@localhost IDENTIFIED BY '1>fCT)},dfVZ6Rbv9q*.';```
+
+Give the user access to the database
+
+```sh GRANT ALL ON `navi`.* TO 'navi'@localhost;```
+
+Apply the changes
+
+FLUSH PRIVILEGES;
