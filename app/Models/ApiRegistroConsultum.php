@@ -26,7 +26,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $consulta_actual
  * @property string $clinicos
  * @property string|null $dinamometria
- * @property string $medicamentos_suplementos
+ * @property string|null $pendintes
+ * @property string|null $nutri_elaborate_data
+ * @property string|null $nutri_who_approved_data
  * 
  * @property ApiDatosPaciente $api_datos_paciente
  * @property Collection|ApiBioquimico[] $api_bioquimicos
