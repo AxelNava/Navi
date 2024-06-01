@@ -199,7 +199,7 @@
                                 <div class="primera-parte">
                                     <label for="nombre">NOMBRE</label>
                                     <input type="text" name="nombre" id="nombre" style="width:300px"
-                                        value="{{ old('nombre','') }}">
+                                        value="{{ old('nombre', '') }}">
                                     <label for="nombre">EDAD</label>
                                     <input type="number" name="edad" id="edad" value="{{ old('edad') }}">
                                     <label for="nombre">HORA</label>
@@ -208,7 +208,11 @@
                                 <div class="segunda-parte">
                                     <br>
                                     <label for="genero">GÉNERO</label>
-                                    <input type="text" name="genero" id="genero" value="{{ old('genero') }}">
+                                    <select name="genero" id="genero">
+                                        <option value="M" @selected(old('genero') == 'M')>Masculino</option>
+                                        <option value="F" @selected(old('genero') == 'F')>Femenino</option>
+                                    </select>
+
                                     <label for="expediente">NO. EXPEDIENTE</label>
                                     <input type="text" name="expediente" id="expediente"
                                         value="{{ old('expediente') }}">
@@ -232,23 +236,32 @@
                                     {{-- revisar aqui --}}
                                     <label for="sintomas">SÍNTOMAS GASTROINTESTINALES:</label>
                                     <label for="bristol">BRISTOL:</label>
-                                    <input type="radio" value="bristol" name='sintoma_gastro'>
+                                    <input type="radio" value="bristol" name='sintoma_gastro'
+                                        @checked(old('sintoma_gastro') == 'bristol')>
                                     <label for="estreñimiento">ESTREÑIMIENTO:</label>
-                                    <input type="radio" value="estreñimiento" name='sintoma_gastro'>
+                                    <input type="radio" value="estreñimiento" name='sintoma_gastro'
+                                        @checked(old('sintoma_gastro') == 'estreñimiento')>
                                     <label for="diarrea">DIARREA:</label>
-                                    <input type="radio" value="diarrea" name='sintoma_gastro'>
+                                    <input type="radio" value="diarrea" name='sintoma_gastro'
+                                        @checked(old('sintoma_gastro') == 'diarrea')>
                                     <label for="reflujo">REFLUJO:</label>
-                                    <input type="radio" value="reflujo" name='sintoma_gastro'>
+                                    <input type="radio" value="reflujo" name='sintoma_gastro'
+                                        @checked(old('sintoma_gastro') == 'reflujo')>
                                     <label for="gastritis">GASTRITIS:</label>
-                                    <input type="radio" value="gastritis" name='sintoma_gastro'>
+                                    <input type="radio" value="gastritis" name='sintoma_gastro'
+                                        @checked(old('sintoma_gastro') == 'gastritis')>
                                     <label for="saciedad">SACIEDAD:</label>
-                                    <input type="radio" value="saciedad" name='sintoma_gastro'>
+                                    <input type="radio" value="saciedad" name='sintoma_gastro'
+                                        @checked(old('sintoma_gastro') == 'saciedad')>
                                     <label for="temprana">TEMPRANA:</label>
-                                    <input type="radio" value="temprana" name='sintoma_gastro'>
+                                    <input type="radio" value="temprana" name='sintoma_gastro'
+                                        @checked(old('sintoma_gastro') == 'temprana')>
                                     <label for="apetito">APETITO:</label>
-                                    <input type="radio" value="apetito" name='sintoma_gastro'>
+                                    <input type="radio" value="apetito" name='sintoma_gastro'
+                                        @checked(old('sintoma_gastro') == 'apetito')>
                                     <label for="flatulencia">FLATULENCIA:</label>
-                                    <input type="radio" value="flatulencia" name='sintoma_gastro'>
+                                    <input type="radio" value="flatulencia" name='sintoma_gastro'
+                                        @checked(old('sintoma_gastro') == 'flatulencia')>
                                 </div>
                                 <div class="cuarta-parte">
                                     <label for="otros">OTROS</label>
@@ -263,44 +276,52 @@
                                         <div class="motivacion-item">
                                             <p>Extremadamente desmotivado</p>
                                             <input type="radio" value="extramadamente_desmotivado"
-                                                name="motivacion">
+                                                name="motivacion" @checked(old('motivacion') == 'extramadamente_desmotivado')>
                                         </div>
                                         <div class="motivacion-item">
                                             <p>Muy desmotivado</p>
-                                            <input type="radio" value="muy_desmotivado" name="motivacion">
+                                            <input type="radio" value="muy_desmotivado" name="motivacion"
+                                                @checked(old('motivacion') == 'muy_desmotivado')>
                                         </div>
                                         <div class="motivacion-item">
                                             <p>Algo desmotivado</p>
-                                            <input type="radio" value="algo_desmotivado" name="motivacion">
+                                            <input type="radio" value="algo_desmotivado" name="motivacion"
+                                                @checked(old('motivacion') == 'algo_desmotivado')>
                                         </div>
                                         <div class="motivacion-item">
                                             <p>Ligeramente desmotivado</p>
-                                            <input type="radio" value="ligeramente_desmotivado" name="motivacion">
+                                            <input type="radio" value="ligeramente_desmotivado" name="motivacion"
+                                                @checked(old('motivacion') == 'ligeramente_desmotivado')>
                                         </div>
                                         <div class="motivacion-item">
                                             <p>Motivación neutral</p>
                                             <input type="radio" value="ni_motivado_ni_desmotivado"
-                                                name="motivacion">
+                                                name="motivacion" @checked(old('motivacion') == 'ni_motivado_ni_desmotivado')>
                                         </div>
                                         <div class="motivacion-item">
                                             <p>Ligeramente motivado</p>
-                                            <input type="radio" value="ligeramente_motivado" name="motivacion">
+                                            <input type="radio" value="ligeramente_motivado" name="motivacion"
+                                                @checked(old('motivacion') == 'ligeramente_motivado')>
                                         </div>
                                         <div class="motivacion-item">
                                             <p>Algo motivado</p>
-                                            <input type="radio" value="algo_motivado" name="motivacion">
+                                            <input type="radio" value="algo_motivado" name="motivacion"
+                                                @checked(old('motivacion') == 'algo_motivado')>
                                         </div>
                                         <div class="motivacion-item">
                                             <p>Muy motivado</p>
-                                            <input type="radio" value="muy_motivado" name="motivacion">
+                                            <input type="radio" value="muy_motivado" name="motivacion"
+                                                @checked(old('motivacion') == 'muy_motivado')>
                                         </div>
                                         <div class="motivacion-item">
                                             <p>Altamente motivado</p>
-                                            <input type="radio" value="altamente_motivado" name="motivacion">
+                                            <input type="radio" value="altamente_motivado" name="motivacion"
+                                                @checked(old('motivacion') == 'altamente_motivado')>
                                         </div>
                                         <div class="motivacion-item">
                                             <p>Extremadamente motivado</p>
-                                            <input type="radio" value="extremadamente_motivado" name="motivacion">
+                                            <input type="radio" value="extremadamente_motivado" name="motivacion"
+                                                @checked(old('motivacion') == 'extremadamente_motivado')>
                                         </div>
                                     </div>
                                 </div>
@@ -401,14 +422,12 @@
                                             <div class="valor">
                                                 <input type="text" style="height: 30px" name="imc"
                                                     value="{{ old('imc') }}">
-                                                <input type="text" style="height: 30px"
-                                                    name="rcc"
+                                                <input type="text" style="height: 30px" name="rcc"
                                                     value="{{ old('rcc') }}">
                                                 <input type="text" style="height: 30px"
                                                     name="rango_peso_saludable"
                                                     value="{{ old('rango_peso_saludable') }}">
-                                                <input type="text" style="height: 30px"
-                                                    name="rcc"
+                                                <input type="text" style="height: 30px" name="rcc"
                                                     value="{{ old('rcc') }}">
                                                 <input type="text" style="height: 30px"
                                                     name="porcentaje_grasa_corporal"
