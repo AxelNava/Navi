@@ -13,7 +13,6 @@ use App\Models\ApiPersona;
 use App\Models\ApiRegistroConsultum;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class NotaNutricionController extends Controller
@@ -46,13 +45,11 @@ class NotaNutricionController extends Controller
         $token = csrf_token();
         $request->validate([
             'nombre' => ['required'],
-            'edad' => ['required', 'integer'],
+            'edad' => ['required', 'integer', 'positive'],
             'genero' => ['required', Rule::enum(Genero::class)],
             'expediente' => [
-                'required',
-                Rule::unique('api_datos_paciente', 'expediente')
-                    ->ignore($request->expediente, 'expediente')
-                ,
+                Rule::requiredIf(!isset($request->id_paciente)),
+                Rule::unique('api_datos_paciente', 'expediente'),
                 'integer'
             ],
             'fecha_nacimiento' => ['required', 'date_format:Y-m-d'],
@@ -61,11 +58,12 @@ class NotaNutricionController extends Controller
             'apego_plan_anterior_barr_apego' => ['required', 'max:250'],
             'motivacion' => ['required'],
             'sintomas_generales' => ['required', 'max:500'],
+            'otros_sintoma_gastro' => ['nullable', 'max:255'],
             'pelo_unias' => ['required'],
             'piel' => ['required'],
             'ojos' => ['required'],
             'musculo' => ['required'],
-            'otros_explo_fisica' => ['required'],
+            'otros_explo_fisica' => ['nullable'],
             'intolerancia_alimentos' => ['required_if_accepted:radio_into_aliment'],
             'actividad_fis_actual' => ['required'],
             'cambios_pos_estilo_vida' => ['required'],
@@ -78,10 +76,19 @@ class NotaNutricionController extends Controller
             'act' => ['required', 'decimal:0,2'],
             'circunferencia_cintura' => ['required', 'numeric', 'max:32767'],
             'circunferencia_cadera' => ['required', 'numeric', 'max:32767'],
-
             'hora' => ['required', 'date_format:H:i'],
             'dinamometria' => ['nullable', 'decimal:0,2'],
             'interpretacion_dinamometrica' => ['nullable'],
+            'frutas' => ['required', 'integer', 'max:127'],
+            'verduras' => ['required', 'integer', 'max:127'],
+            'cereales_sg' => ['required', 'integer', 'max:127'],
+            'cereales_cg' => ['required', 'integer', 'max:127'],
+            'leguminosas' => ['required', 'integer', 'max:127'],
+            'poa' => ['required', 'integer', 'max:127'],
+            'lacteos' => ['required', 'integer', 'max:127'],
+            'aceites_sp' => ['required', 'integer', 'max:127'],
+            'aceites_cp' => ['required', 'integer', 'max:127'],
+            'azucares' => ['required', 'integer', 'max:127'],
             'pgc' => ['nullable', 'decimal:0,2'],
             'rcc' => ['nullable', 'decimal:0,2'],
             'metabolismo_kcal_basal' => ['nullable', 'decimal:0,2'],
@@ -110,23 +117,22 @@ class NotaNutricionController extends Controller
             'clinicos' => ['nullable'],
             'medicamentos_suplementos' => ['nullable'],
         ]);
+        $datospaciente = null;
+        if (isset($request->id_paciente)) {
+            $datospaciente = ApiDatosPaciente::find($request->id_paciente);
+        } else {
+            $paciente = new ApiPersona();
+            $paciente->nombre = $request->nombre;
+            $paciente->edad = $request->edad;
+            $paciente->genero = $request->genero;
+            $paciente->save();
 
-        $paciente = new ApiPersona();
-        $paciente->nombre = $request->nombre;
-        $paciente->edad = $request->edad;
-        $paciente->genero = $request->genero;
-        $paciente->save();
-
-        $datospaciente = new ApiDatosPaciente();
-        $datospaciente->id_persona = $paciente->persona_id;
-        $datospaciente->expediente = $request->expediente;
-        $datospaciente->fecha_nacimiento = $request->fecha_nacimiento;
-        $datospaciente->save();
-        // if (!$datospaciente->exists()) {
-        // } else {
-        //     $id_dato_paciente = DB::table('api_datos_paciente')->where('expediente', '=', (int) $request->expediente)
-        //         ->get('id_dato_paciente')->first()->id_dato_paciente;
-        // }
+            $datospaciente = new ApiDatosPaciente();
+            $datospaciente->id_persona = $paciente->persona_id;
+            $datospaciente->expediente = $request->expediente;
+            $datospaciente->fecha_nacimiento = $request->fecha_nacimiento;
+            $datospaciente->save();
+        }
 
         $registrocitas = new ApiRegistroConsultum();
         $registrocitas->no_consulta_paciente = $request->no_consulta_paciente;
@@ -139,7 +145,7 @@ class NotaNutricionController extends Controller
         $registrocitas->motivacion = $request->motivacion;
         $registrocitas->hidratacion = $request->hidratacion;
         $registrocitas->sintomas_generales = $request->sintomas_generales;
-        // $registrocitas->consulta_actual = $request->consulta_actual;
+
         $registrocitas->clinicos = $request->dx_medicos;
         $registrocitas->dinamometria = [
             'dinamometria' => $request->dinamometria ?? '',
@@ -238,6 +244,79 @@ class NotaNutricionController extends Controller
 
     public function actualizar(Request $request, string $id)
     {
+        $request->validate([
+            'nombre' => ['required'],
+            'edad' => ['required', 'integer', 'positive'],
+            'genero' => ['required', Rule::enum(Genero::class)],
+            'expediente' => [
+                'required',
+                'unique:App\Models\ApiDatosPaciente, expediente,' . $id
+            ],
+            'fecha_nacimiento' => ['required', 'date_format:Y-m-d'],
+            'motivo_consulta' => ['required', 'max:500'],
+            'sintoma_gastro' => ['required'],
+            'apego_plan_anterior_barr_apego' => ['required', 'max:250'],
+            'motivacion' => ['required'],
+            'sintomas_generales' => ['required', 'max:500'],
+            'otros_sintoma_gastro' => ['nullable', 'max:255'],
+            'pelo_unias' => ['required'],
+            'piel' => ['required'],
+            'ojos' => ['required'],
+            'musculo' => ['required'],
+            'otros_explo_fisica' => ['nullable'],
+            'intolerancia_alimentos' => ['required_if_accepted:radio_into_aliment'],
+            'actividad_fis_actual' => ['required'],
+            'cambios_pos_estilo_vida' => ['required'],
+            'peso' => ['required', 'decimal:0,2'],
+            'imc' => ['required', 'decimal:0,2'],
+            'mas_grasa_corporal' => ['required', 'decimal:0,2'],
+            'porcentaje_grasa_corporal' => ['required', 'decimal:0,2'],
+            'masa_muscular' => ['required', 'decimal:0,2'],
+            'masa_libre_grasa' => ['required', 'decimal:0,2'],
+            'act' => ['required', 'decimal:0,2'],
+            'circunferencia_cintura' => ['required', 'numeric', 'max:32767'],
+            'circunferencia_cadera' => ['required', 'numeric', 'max:32767'],
+            'hora' => ['required', 'date_format:H:i'],
+            'dinamometria' => ['nullable', 'decimal:0,2'],
+            'interpretacion_dinamometrica' => ['nullable'],
+            'pgc' => ['nullable', 'decimal:0,2'],
+            'rcc' => ['nullable', 'decimal:0,2'],
+            'metabolismo_kcal_basal' => ['nullable', 'decimal:0,2'],
+            'frutas' => ['required', 'integer', 'max:127'],
+            'verduras' => ['required', 'integer', 'max:127'],
+            'cereales_sg' => ['required', 'integer', 'max:127'],
+            'cereales_cg' => ['required', 'integer', 'max:127'],
+            'leguminosas' => ['required', 'integer', 'max:127'],
+            'poa' => ['required', 'integer', 'max:127'],
+            'lacteos' => ['required', 'integer', 'max:127'],
+            'aceites_sp' => ['required', 'integer', 'max:127'],
+            'aceites_cp' => ['required', 'integer', 'max:127'],
+            'azucares' => ['required', 'integer', 'max:127'],
+            'hbAc1' => ['nullable', 'decimal:0,2'],
+            'TG' => ['nullable', 'decimal:0,2'],
+            'CT' => ['nullable', 'decimal:0,2'],
+            'HDL' => ['nullable', 'decimal:0,2'],
+            'LDL' => ['nullable', 'decimal:0,2'],
+            'AST_perc' => ['nullable', 'decimal:0,2'],
+            'ALT' => ['nullable', 'decimal:0,2'],
+            'THS' => ['nullable', 'decimal:0,2'],
+            'T3' => ['nullable', 'decimal:0,2'],
+            'T4' => ['nullable', 'decimal:0,2'],
+            'Hb' => ['nullable', 'decimal:0,2'],
+            'hierro' => ['nullable', 'decimal:0,2'],
+            'transferrina' => ['nullable', 'decimal:0,2'],
+            't3_libre' => ['nullable', 'decimal:0,2'],
+            't4_libre' => ['nullable', 'decimal:0,2'],
+            'hto' => ['nullable', 'decimal:0,2'],
+            'B12' => ['nullable', 'decimal:0,2'],
+            'folatos' => ['nullable', 'decimal:0,2'],
+            'PT' => ['nullable', 'decimal:0,2'],
+            'albumina' => ['nullable', 'decimal:0,2'],
+            'Ca' => ['nullable', 'decimal:0,2'],
+            'otros_bioquimicos' => ['nullable'],
+            'clinicos' => ['nullable'],
+            'medicamentos_suplementos' => ['nullable'],
+        ]);
         $registrocitas = ApiRegistroConsultum::find($id);
         if ($registrocitas == null) {
             return "No se enconto la cita";
@@ -250,23 +329,29 @@ class NotaNutricionController extends Controller
         $registrocitas->motivo_consulta = $request->motivo_consulta;
         $registrocitas->sintoma_gastro = $request->sintoma_gastro;
         $registrocitas->escala_bristol = $request->escala_bristol;
+        $registrocitas->otros_sintoma_gastro = $request->otros_sintoma_gastro ?? '';
         $registrocitas->apego_plan_anterior_barr_apego = $request->apego_plan_anterior_barr_apego;
         $registrocitas->motivacion = $request->motivacion;
         $registrocitas->hidratacion = $request->hidratacion;
         $registrocitas->sintomas_generales = $request->sintomas_generales;
+        $registrocitas->clinicos = $request->dx_medicos;
+        $registrocitas->dinamometria = [
+            'dinamometria' => $request->dinamometria ?? '',
+            'interpretacion_dinamometrica' => $request->interpretacion_dinamometrica ?? ''
+        ];
+        $registrocitas->medicamentos_suplementos = $request->medicamentos_suplementos;
         $registrocitas->save();
 
         $controlcita = ApiControlCita::where('id_paciente', $registrocitas->id_paciente)->first();
         $controlcita->peso = $request->peso;
         $controlcita->IMC = $request->imc;
-        $controlcita->masa_grasa_corporal = $request->masa_grasa_corporal;
+        $controlcita->masa_grasa_corporal = $request->mas_grasa_corporal;
         $controlcita->porcentaje_grasa_corporal = $request->porcentaje_grasa_corporal;
         $controlcita->masa_muscular_kg = $request->masa_muscular;
         $controlcita->agua_corpolar = $request->act;
         $controlcita->circunferencia_cintura = $request->circunferencia_cintura;
         $controlcita->circunferencia_cadera = $request->circunferencia_cadera;
-        $controlcita->control_musculo = $request->control_musculo;
-        $controlcita->control_grasa = $request->control_grasa;
+        $controlcita->hora_cita = Carbon::createFromTimeString($request->hora);
         $controlcita->save();
 
         $exploracionfisica = ApiExploFisica::where('id_consulta_paciente', $registrocitas->id_registro)->first();
@@ -286,9 +371,9 @@ class NotaNutricionController extends Controller
         $composicioncorporal->mas_grasa_corporal = $request->masa_grasa_corporal;
         $composicioncorporal->act = $request->act;
         $composicioncorporal->imc = $request->imc;
-        $composicioncorporal->pgc = $request->pgc;
+        $composicioncorporal->pgc = $request->porcentaje_grasa_corporal;
         $composicioncorporal->rcc = $request->rcc;
-        $composicioncorporal->metabolismo_kcal_basal = $request->metabolismo_kcal_basal;
+        $composicioncorporal->metabolismo_kcal_basal = $request->metabolismo_kcal_basal ?? 0;
         $composicioncorporal->save();
 
         $freq = new ApiDieteticosFrecuenciaSemanal();
