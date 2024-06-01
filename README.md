@@ -141,18 +141,21 @@ correspondientes
 - port: `3306`
 - host: `localhost`
 
-To create the user in database if is not created:
+Para crear el usuario en la base de datos, en caso de que no esté creado, desde la terminal de mariadb, o
+desde un cliente SQL, ejecutar el siguiente comando (el usuario que debe de ejecutar esto debe de ser root o 
+un usuario con suficientes privilegios para hacerlo).
 
 ```sh CREATE USER 'navi'@localhost IDENTIFIED BY '1>fCT)},dfVZ6Rbv9q*.';```
 
-Then, give it the correct access to the database
+Luego, se debe de ejecutar el siguiente comando para conceder los privilegios al usuario que se
+acaba de crear de hacer todas las operaciones dentro de la base de datos.
 
 ```sh GRANT USAGE ON *.* TO 'navi'@localhost IDENTIFIED BY '1>fCT)},dfVZ6Rbv9q*.';```
 
-Give the user access to the database
+Se da acceso al usuario a la base de datos
 
 ```sh GRANT ALL ON `navi`.* TO 'navi'@localhost;```
 
-Apply the changes
+Para aplicar los cambios que se han hecho, se tiene que ejecutar el siguiente comando
 
-FLUSH PRIVILEGES;
+```sh FLUSH PRIVILEGES;```
