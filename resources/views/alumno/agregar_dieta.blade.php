@@ -49,11 +49,23 @@
             </label>
             <br><br>
             <label>
+                Total EQ: <br>
+                Verduras:<input type="text" name="verduras">
+                Frutas:<input type="text" name="frutas">
+                Cereales:<input type="text" name="cereales">
+                Leguminosas:<input type="text" name="leguminosas">
+                Carnes:<input type="text" name="carnes">
+                Leche:<input type="text" name="leche">
+                Grasa:<input type="text" name="grasa">
+                Azúcar:<input type="text" name="azucar">
+            </label>
+            <br><br>
+            <label>
                 TOTAL:<br>
                 Kcal:<input type="text" name="total_kcal">
-                Prot:<input type="text" name="total_prot">(<input type="text" name="prot-g">) 
-                Lip:<input type="text" name="total_lip">(<input type="text" name="lip-g">) 
-                Hco:<input type="text" name="total_hco">(<input type="text" name="hco-g">)
+                Prot:<input type="text" name="total_prot">(<input type="text" name="prot_g">) 
+                Lip:<input type="text" name="total_lip">(<input type="text" name="lip_g">) 
+                Hco:<input type="text" name="total_hco">(<input type="text" name="hco_g">)
             </label>
             <br><br>
             <label>
@@ -129,12 +141,12 @@
             <br>
             <label>
                 NOMBRE COMPLETO, FIRMA Y CÉDULA PROFESIONAL DE QUIEN ELABORÓ LA HISTORIA CLINICA NUTRICIA:<br>
-                <input type="text" name="datos-elaborador">
+                <input type="text" name="datos_elaborador">
             </label>
             <br>
             <label>
                 NOMBRE COMPLETO, FIRMA Y CÉDULA PROFESIONAL DE NUTRIÓLOG() RESPONSABLE:<br>
-                <input type="text" name="datos-nutriologo">
+                <input type="text" name="datos_nutriologo">
             </label>
             
             <button type="submit">

@@ -43,18 +43,34 @@ class DietaPaciente extends Controller
         $instrumento->colacion2 = $req->colacion2;
         $instrumento->cena_hora = $req->cena_hora;
         $instrumento->colacion3 = $req->colacion3;
-        $instrumento->grupo_total_eq = "grupo_total_eq"; //Que es esta casilla?
+        $instrumento->grupo_total_eq = [
+            'verduras' => $req -> verduras,
+            'frutas' => $req -> frutas,
+            'cereales' => $req -> cereales,
+            'leguminosas' => $req -> leguminosas,
+            'carnes' => $req -> carnes,
+            'leche' => $req -> leche,
+            'grasa' => $req -> grasa,
+            'azucar' => $req -> azucar];
         $instrumento->total_kcal = $req->total_kcal;
-        $instrumento->total_prot = $req->total_prot;
-        $instrumento->total_lip = $req->total_lip;
-        $instrumento->total_hco = $req->total_hco;
+        $instrumento->total_prot = [
+            'prot_porcent' => $req -> total_prot,
+            'prot_g' => $req -> prot_g];
+        $instrumento->total_lip = [
+            'lip_porcent' => $req -> total_lip,
+            'lip_g' => $req -> lip_g,
+        ];
+        $instrumento->total_hco = [
+            'hco_porcent' => $req -> total_hco,
+            'hco_g' => $req -> hco_g,
+        ];
         $instrumento->adecuacion_porcen_ene = $req->adecuacion_porcen_ene;
         $instrumento->adecuacion_porcen_ener_kcal = $req->adecuacion_porcen_ener_kcal;
         $instrumento->adecuacion_porcen_prot = $req->adecuacion_porcen_prot;
         $instrumento->adecuacion_porcen_lip = $req->adecuacion_porcen_lip;
         $instrumento->adecuacion_porcen_hco = $req->adecuacion_porcen_hco;
         $instrumento->aspectos_cualita_dieta_habitual = $req->aspectos_cualita_dieta_habitual;
-        $instrumento->save();
+        //$instrumento->save();
 
         $diagnostico = new ApiResultadoDiagnostico();
         $diagnostico->id_consulta_paciente = 1; //Aqui hay que agregar bien el id
@@ -62,7 +78,7 @@ class DietaPaciente extends Controller
         $diagnostico->reque_proteina = $req->reque_proteina;
         $diagnostico->reque_kg_dia = $req->reque_kg_dia;
         $diagnostico->dx_nutricio = $req->dx_nutricio;
-        $diagnostico->save();
+        //$diagnostico->save();
 
         $generales = new ApiDatosGeneralesDietum();
         $generales->id_consulta_paciente = 1; //Aqui hay que agregar bien el id
@@ -87,9 +103,21 @@ class DietaPaciente extends Controller
         'selec_alimentos' => $req -> meta_alimentos];
         $generales->educacion = $req->educacion;
         $generales->monitoreo = $req->monitoreo;
-        $generales->save();
+        //$generales->save();
 
-        return "Datos subidos";
+        $registro = new ApiRegistroConsultum();
+        $registro -> pendientes = $req -> pendientes;
+        $registro -> nutri_elaborate_data = $req -> datos_elaborador;
+        $registro -> nutri_who_approved_data = $req -> datos_nutriologo;
+
+        // return $registro;
+
+        return[
+            $instrumento,
+            $diagnostico,
+            $generales,
+            $registro
+        ];
     }
 
     public function actualizar(Request $req, string $id) {
