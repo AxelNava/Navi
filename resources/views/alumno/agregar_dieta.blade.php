@@ -6,16 +6,16 @@
         <title>Crear dieta</title>
     </head>
     <body>
-        <h1>El un formulario para registrar pacientes</h1>
+        <h1>El un formulario para registrar dietas</h1>
         
         <form action="crear" method="POST">
             @csrf
             
             <label>
                 Tipo de instrumentos:
-                <input type="radio" name="instrumento" id="hrs">24 hrs
-                <input type="radio" name="instrumento" id="semi">Semicuantitativa 
-                <input type="radio" name="instrumento" id="diario">Diario
+                <input type="radio" name="instrumento" id="hrs" value="24 hrs">24 hrs
+                <input type="radio" name="instrumento" id="semi" value="Semicuantitativa">Semicuantitativa
+                <input type="radio" name="instrumento" id="diario" value="Diario">Diario
             </label>
             <br>
             <label>
@@ -68,43 +68,48 @@
             <br><br>
             <label>
                 REQUERIMIENTOS:<br>
-                Energia:<input type="text" name="req-energ">
-                Proteina total:<input type="text" name="req-prot-g">(<input type="text" name="req-prot-dia">)
+                Energia:<input type="text" name="reque_ener">
+                Proteina total:<input type="text" name="reque_proteina">(<input type="text" name="reque_kg_dia">)
             </label>
             <br><br>
             <label>
                 DX:NUTRICIO:<br>
-                <input type="text" name="dxNutricio">
+                <input type="text" name="dx_nutricio">
             </label>
             <br>
             <label>
                 OBJETIVOS:<br>
-                <input type="text" name="objetivos">
+                <input type="text" name="objetivos_dieta">
             </label>
             <br>
             <label>
                 PLAN DE ALIMENTACIÓN:<br>
-                Dieta <input type="text" name="plan-dieta"> de <input type="text" name="plan-de">
-                Prot:<input type="text" name="plan-prot-per">(<input type="text" name="plan-prot-g">)
-                Lip:<input type="text" name="plan-lip-per">(<input type="text" name="plan-lip-g">)
-                Hco:<input type="text" name="plan-hco-per">(<input type="text" name="plan-hco-g">)
+                Dieta <input type="text" name="tipo_dieta"> de <input type="text" name="kcal_dieta">
+                Prot:<input type="text" name="prot_porcent_dieta">(<input type="text" name="prot_kg_dia_dieta">)
+                Lip:<input type="text" name="lip_porcen_dieta">(<input type="text" name="lip_g_dieta">)
+                Hco:<input type="text" name="hco_porcen_dieta">(<input type="text" name="hco_g_dieta">)
             </label>
+            <br>
             <label>
                 SUPLEMENTOS:<br>
                 <input type="text" name="suplementos">
             </label>
+            <br>
             <label>
                 METAS SMART:<br>
-                <input type="text" name="metas-smart">
+                <input type="text" name="metas_smart">
             </label>
             <br>
             <label>
                 PARAMETROS META:<br>
-                Peso:<input type="text" name="meta-peso"> %Grasa:<input type="text" name="meta-grasa"> Músculo:<input type="text" name="meta-musculo"> 
-                C. Cintura:<input type="text" name="meta-cintura">
+                Peso:<input type="text" name="meta_peso">
+                %Grasa:<input type="text" name="meta_grasa">
+                Músculo:<input type="text" name="meta_musculo"> 
+                C. Cintura:<input type="text" name="meta_cintura">
                 <br>
-                Horarios:<input type="text" name="meta-horario"> Mejorar hábitos:<input type="text" name="meta-mejorar"> 
-                Selección de alimentos:<input type="text" name="meta-alimentos">
+                Horarios:<input type="text" name="meta_horario">
+                Mejorar hábitos:<input type="text" name="meta_mejorar"> 
+                Selección de alimentos:<input type="text" name="meta_alimentos">
             </label>
             <br>
             <label>

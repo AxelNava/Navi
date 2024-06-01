@@ -54,6 +54,7 @@ Route::get('dieta-paciente/buscar/{id}', [DietaPaciente::class, 'buscar'])->name
 Route::get('dieta-paciente/crear', function() {
 	return view('alumno.agregar_dieta');
 });
+Route::post('dieta-paciente/crear', [DietaPaciente::class, 'crear'])->name('dieta-paciente_crear');
 
 //rutas para el director
 Route::middleware(['auth', 'role:director'])->group(function () {
