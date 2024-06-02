@@ -206,9 +206,9 @@ input[type="text"], input[type="password"], input[type="radio"] , input[type="em
 													<label for="sexo">Sexo:</label>
 													<div class="sexo">
 															<label for="sexo_masculino">Masculino</label>
-															<input type="radio" name="sexo" id="sexo_masculino" value="Masculino">
+															<input type="radio" name="sexo" id="sexo_masculino" value="M">
 															<label for="sexo_femenino">Femenino</label>
-															<input type="radio" name="sexo" id="sexo_femenino" value="Femenino">
+															<input type="radio" name="sexo" id="sexo_femenino" value="F">
 													</div>
 													<label for="password">Contraseña:</label>
 													<input type="password" name="password" id="password" required>

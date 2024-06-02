@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
 		$data = [
 			[
 				'nombre' => 'Director',
-				'persona_id' => 31,
+				'persona_id' => 42,
 				'apellido' => '',
 				'email' => 'director@udem.com',
 				'password' => Hash::make('Director12345')
