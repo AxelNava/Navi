@@ -62,6 +62,9 @@ server{
 ```
 En el ejemplo de arriba, utiliza la configuración que ya instala php-fpm al momento de instalarlo en Linux.
 
+Otro ejemplo de configuración se puede encontrar en la documentación de Laravel:
+`https://laravel.com/docs/11.x/deployment#nginx`
+
 ### Linux
 Para la instalación en Linux es más sencillo, dependiendo de la distribución se usará el gestor de paquetes que trae por defecto, se mostrará el ejemplo para
 fedora.
@@ -130,32 +133,70 @@ sudo nvim /etc/hosts
 Para que pueda funcionar la edición, tienen que ejecutar el editor como root, ya sea con sudo o accediendo al root
 
 ## Levantamiento de proyecto
-Una vez que se tenga todos los componentes listos, se tiene que hacer lo siguiente para la base de datos
+Clona el proyecto en la carpeta que se definió en la configuración de nginx.
+Una vez que se tenga todos los componentes listos, se tiene que hacer lo siguiente para la base de datos.
 
 ### Base de datos
-To use the database you need create the next configuration en el archivo .env, se tienen que sustituir las variables 
-correspondientes
+Para configurar la base de datos en el proyecto, se debe de copiar y renombrar el archivo .env.example, y renombrarlo a .env, en este se tienen que sustituir las variables 
+correspondientes.
+
+- DB_CONNECTION=`mysql`
+- DB_HOST=`127.0.0.1`
+- DB_PORT=`3306`
+- DB_DATABASE=`navi`
+- DB_USERNAME=`root`
+- DB_PASSWORD=`123456`
+
+Estos son los datos para la base de datos
 
 - user: `navi`
 - password: `1>fCT)},dfVZ6Rbv9q*.`
 - port: `3306`
 - host: `localhost`
 
-Para crear el usuario en la base de datos, en caso de que no esté creado, desde la terminal de mariadb, o
-desde un cliente SQL, ejecutar el siguiente comando (el usuario que debe de ejecutar esto debe de ser root o 
+Para crear el usuario en la base de datos, en caso de que no esté creado, desde la terminal de mariadb o
+desde un cliente SQL que esté conectado a la base de datos, ejecutar el siguiente comando (el usuario que debe de ejecutar esto debe de ser root o 
 un usuario con suficientes privilegios para hacerlo).
 
-```sh CREATE USER 'navi'@localhost IDENTIFIED BY '1>fCT)},dfVZ6Rbv9q*.';```
+```sh
+CREATE USER 'navi'@localhost IDENTIFIED BY '1>fCT)},dfVZ6Rbv9q*.';
+```
 
 Luego, se debe de ejecutar el siguiente comando para conceder los privilegios al usuario que se
 acaba de crear de hacer todas las operaciones dentro de la base de datos.
 
-```sh GRANT USAGE ON *.* TO 'navi'@localhost IDENTIFIED BY '1>fCT)},dfVZ6Rbv9q*.';```
+```sh
+GRANT USAGE ON *.* TO 'navi'@localhost IDENTIFIED BY '1>fCT)},dfVZ6Rbv9q*.';
+```
 
 Se da acceso al usuario a la base de datos
 
-```sh GRANT ALL ON `navi`.* TO 'navi'@localhost;```
+```sh
+GRANT ALL ON `navi`.* TO 'navi'@localhost;
+```
 
 Para aplicar los cambios que se han hecho, se tiene que ejecutar el siguiente comando
 
-```sh FLUSH PRIVILEGES;```
+```sh 
+FLUSH PRIVILEGES;
+```
+
+
+### Composer
+Se puede instalar de manera local como también de manera global, para instalarlo con windows, es seguir
+los pasos de su instalador
+
+### NodeJS
+Laravel utiliza npm, un administrador de paquetes de JavaScript, para instalarlo, se puede hacer instalando
+NodeJS.
+
+### En el proyecto
+Una vez que se haya instalado todo y se tenga la configuración correcta, ahora se tiene que instalar todas las dependencias, para esto
+se tiene que ejecutar los siguientes comando estando en la raíz del proyecto
+```sh
+composer install
+npm install
+php artisan optimize
+php artisan config:cache
+```
+
