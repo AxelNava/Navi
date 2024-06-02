@@ -9,6 +9,7 @@ use App\Models\ApiControlCita;
 use App\Models\ApiDatosPaciente;
 use App\Models\ApiDieteticosFrecuenciaSemanal;
 use App\Models\ApiExploFisica;
+use App\Models\ApiNutriologoPaciente;
 use App\Models\ApiPersona;
 use App\Models\ApiRegistroConsultum;
 use Carbon\Carbon;
@@ -132,6 +133,20 @@ class NotaNutricionController extends Controller
             $datospaciente->expediente = $request->expediente;
             $datospaciente->fecha_nacimiento = $request->fecha_nacimiento;
             $datospaciente->save();
+        }
+
+        $nutriologo = new ApiNutriologoPaciente();
+        $nutriologo->id_nutriologo = $request->user()->id;
+        $nutriologo->id_paciente = $datospaciente->id_dato_paciente;
+        if (
+            !ApiNutriologoPaciente::
+                where(
+                    ['id_paciente', 'id_nutriologo'],
+                    '=',
+                    [$nutriologo->id_nutriologo, $nutriologo->id_paciente]
+                )->first()
+        ) {
+            $nutriologo->save();
         }
 
         $registrocitas = new ApiRegistroConsultum();

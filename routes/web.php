@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AltaNutriologo;
 use App\Http\Controllers\DatosPaciente_ControlCitas;
 use App\Http\Controllers\ListadoPacientes_VistaAlumno;
 use App\Http\Controllers\ListadoPacientes_VistaDirector;
@@ -51,7 +52,7 @@ Route::post('/nota-nutricion/crear', [NotaNutricionController::class, 'crear'])-
 Route::patch('/nota-nutricion/actualizar/{id}', [NotaNutricionController::class, 'actualizar'])->name('nota-nutricion_actualizar');
 
 Route::get('dieta-paciente/buscar/{id}', [DietaPaciente::class, 'buscar'])->name('dieta-paciente_buscar');
-Route::get('dieta-paciente/crear', function() {
+Route::get('dieta-paciente/crear', function () {
 	return view('alumno.agregar_dieta');
 });
 Route::post('dieta-paciente/crear', [DietaPaciente::class, 'crear'])->name('dieta-paciente_crear');
@@ -63,7 +64,7 @@ Route::middleware(['auth', 'role:director'])->group(function () {
 		return view('director.inicio');
 	})->name('director.inicio');
 	//registrar alumno
-	Route::post('registrar-alumno', [UserController::class, 'createUser'])->name('registrar.alumno');
+	Route::post('registrar-alumno', [AltaNutriologo::class, 'store'])->name('registrar.alumno');
 });
 
 require __DIR__ . '/auth.php';
