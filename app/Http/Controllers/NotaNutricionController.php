@@ -6,6 +6,7 @@ use App\enums\Genero;
 use App\Models\ApiBioquimico;
 use App\Models\ApiComposicionCorporalDiagnosticoObesidad;
 use App\Models\ApiControlCita;
+use App\Models\ApiDatosNutriologo;
 use App\Models\ApiDatosPaciente;
 use App\Models\ApiDieteticosFrecuenciaSemanal;
 use App\Models\ApiExploFisica;
@@ -46,12 +47,12 @@ class NotaNutricionController extends Controller
         $token = csrf_token();
         $request->validate([
             'nombre' => ['required'],
-            'edad' => ['required', 'integer', 'positive'],
+            'edad' => ['required', 'integer', 'gt:0'],
             'genero' => ['required', Rule::enum(Genero::class)],
             'expediente' => [
-                Rule::requiredIf(!isset($request->id_paciente)),
-                Rule::unique('api_datos_paciente', 'expediente'),
-                'integer'
+                'required',
+                'integer',
+                Rule::unique('api_datos_paciente', 'expediente')->ignore($request->id_paciente ?? 0),
             ],
             'fecha_nacimiento' => ['required', 'date_format:Y-m-d'],
             'motivo_consulta' => ['required', 'max:500'],
@@ -136,12 +137,16 @@ class NotaNutricionController extends Controller
         }
 
         $nutriologo = new ApiNutriologoPaciente();
-        $nutriologo->id_nutriologo = $request->user()->id;
+        $nutriologo->id_nutriologo = ApiDatosNutriologo::where(
+            'id_persona',
+            '=',
+            $request->user()->persona_id
+        )->first()->id_nutriologo;
         $nutriologo->id_paciente = $datospaciente->id_dato_paciente;
         if (
             !ApiNutriologoPaciente::
                 where(
-                    ['id_paciente', 'id_nutriologo'],
+                    ['id_paciente' => 'id_paciente', 'id_nutriologo' => 'id_nutriologo'],
                     '=',
                     [$nutriologo->id_nutriologo, $nutriologo->id_paciente]
                 )->first()
