@@ -38,9 +38,10 @@ Route::get('alumno/agregar-paciente', function () {
 	return view('alumno.agregar_paciente');
 });
 
-Route::get('alumno/inicio', function () {
-	return view('alumno.inicio');
-})->name('alumno.inicio');
+Route::get('alumno/inicio', [ListadoPacientes_VistaAlumno::class, 'enlistar'])->name('alumno.inicio');
+Route::get('alumno/control-citas-paciente/{id}', function () {
+	return view('alumno.mostrar_control_citas_paciente');
+})->name('alumno-paciente-control-citas');
 
 Route::middleware('auth')->group(function () {
 	Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

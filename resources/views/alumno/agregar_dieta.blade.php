@@ -8,19 +8,19 @@
     <body>
         <h1>El un formulario para registrar dietas</h1>
         
-        <form action="crear" method="POST">
+        <form action="{{route('dieta-paciente_crear')}}" method="POST">
             @csrf
-            
+            <input type="hidden" name="id_registro" value="{{$id_registro}}">
             <label>
                 Tipo de instrumentos:
-                <input type="radio" name="instrumento" id="hrs" value="24 hrs">24 hrs
-                <input type="radio" name="instrumento" id="semi" value="Semicuantitativa">Semicuantitativa
-                <input type="radio" name="instrumento" id="diario" value="Diario">Diario
+                <input type="radio" name="instrumento" id="hrs" value="Recorda 24/h">24 hrs
+                <input type="radio" name="instrumento" id="semi" value="Dieta habitual semicuantitativa">Semicuantitativa
+                <input type="radio" name="instrumento" id="diario" value="Diario de alimentos">Diario
             </label>
             <br>
             <label>
                 Desayuno hora: 
-                <input type="text" name="desayuno_hora">
+                <input type="time" name="desayuno_hora">
             </label>
             <br>
             <label>
@@ -30,7 +30,7 @@
             <br>
             <label>
                 Comida hora:
-                <input type="text" name="comida_hora">
+                <input type="time" name="comida_hora">
             </label>
             <br>
             <label>
@@ -40,7 +40,7 @@
             <br>
             <label>
                 Cena hora:
-                <input type="text" name="cena_hora">
+                <input type="time" name="cena_hora">
             </label>
             <br>
             <label>

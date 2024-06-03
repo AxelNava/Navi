@@ -11,18 +11,14 @@ use App\Models\User;
 
 class ListadoPacientes_VistaAlumno extends Controller
 {
-    public function enlistar($id)
+    public function enlistar()
     {
         //La obtencion del user queda pendiente
-        //$user = User::all();
-        
+        $idPersona = auth()->user()->persona_id;
+
         //Obtener datos del nutriologo --- ID/Nombre/Edad/Genero
-        $idPersona = ApiDatosNutriologo::where('id_nutriologo', $id)->value('id_persona');
-        if (!$idPersona) {
-            return response()->json([
-                'Error' => 'El ID del nutriologo no existe.'
-            ], 404);
-        }
+        $id = ApiDatosNutriologo::where('id_persona', $idPersona)->value('id_nutriologo');
+
         $datosNutriologo = ApiPersona::find($idPersona);
 
         //Obtener cantidad de pacientes del nutriologo
@@ -33,11 +29,13 @@ class ListadoPacientes_VistaAlumno extends Controller
         $datosPacientes = ApiDatosPaciente::whereIn('id_dato_paciente', $pacientesIds)->pluck('id_persona');
         $infoPacientes = ApiPersona::whereIn('persona_id', $datosPacientes)->get();
 
-        return [
-            'Datos del nutriologo' => $datosNutriologo,
-            'Cantidad de pacientes del nutriologo' => $cantidadPacientes,
-            'Datos de sus pacientes' => $infoPacientes,
-            //'User' => $user
-        ];
+        return view('alumno.inicio', [
+            'data' => [
+                'Datos del nutriologo' => $datosNutriologo,
+                'Cantidad_pacientes_nutriologo' => $cantidadPacientes,
+                'Datos_pacientes_persona' => $infoPacientes,
+                'Datos_paciente' => $pacientesIds
+            ]
+        ]);
     }
 }

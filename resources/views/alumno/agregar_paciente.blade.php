@@ -1,3 +1,4 @@
+@use('\App\Models\ApiDatosPaciente')
 <x-app-layout>
     <style>
         .inputs-form label,
@@ -175,7 +176,7 @@
             {{ __('Agregar paciente') }}
         </h2>
     </x-slot>
-
+    
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -215,7 +216,7 @@
 
                                     <label for="expediente">NO. EXPEDIENTE</label>
                                     <input type="text" name="expediente" id="expediente"
-                                        value="{{ old('expediente') }}">
+                                        value="{{ApiDatosPaciente::max('expediente') + 1}}" readonly>
                                     <label for="fecha_nacimiento">FECHA DE NACIMIENTO</label>
                                     <input type="date" name="fecha_nacimiento" id="fecha_nacimiento"
                                         value="{{ old('fecha_nacimiento') }}">

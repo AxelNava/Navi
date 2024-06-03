@@ -34,9 +34,12 @@ class DietaPaciente extends Controller
     }
 
     public function crear(Request $req) {
+        $req->validate([
+            'id_registro' => ['required'],
+        ]);
         $instrumento = new ApiDieteticosInstrumentoMedicion();
-        $instrumento->id_consulta_paciente = 1; //Aqui hay que agregar bien el id
-        $instrumento->tipo_instrumento = $req->instrumento;
+        $instrumento->id_consulta_paciente = $req->id_registro;
+        $instrumento->tipo_instrumento = $req->tipo_instrumento; 
         $instrumento->desayuno_hora = $req->desayuno_hora;
         $instrumento->colacion1 = $req->colacion1;
         $instrumento->comida_hora = $req->comida_hora;
@@ -70,18 +73,18 @@ class DietaPaciente extends Controller
         $instrumento->adecuacion_porcen_lip = $req->adecuacion_porcen_lip;
         $instrumento->adecuacion_porcen_hco = $req->adecuacion_porcen_hco;
         $instrumento->aspectos_cualita_dieta_habitual = $req->aspectos_cualita_dieta_habitual;
-        //$instrumento->save();
+        $instrumento->save();
 
         $diagnostico = new ApiResultadoDiagnostico();
-        $diagnostico->id_consulta_paciente = 1; //Aqui hay que agregar bien el id
+        $diagnostico->id_consulta_paciente = $req->id_registro;
         $diagnostico->reque_ener = $req->reque_ener;
         $diagnostico->reque_proteina = $req->reque_proteina;
         $diagnostico->reque_kg_dia = $req->reque_kg_dia;
         $diagnostico->dx_nutricio = $req->dx_nutricio;
-        //$diagnostico->save();
+        $diagnostico->save();
 
         $generales = new ApiDatosGeneralesDietum();
-        $generales->id_consulta_paciente = 1; //Aqui hay que agregar bien el id
+        $generales->id_consulta_paciente = $req->id_registro;
         $generales->objetivos_dieta = $req->objetivos_dieta;
         $generales->tipo_dieta = $req->tipo_dieta;
         $generales->kcal_dieta = $req->kcal_dieta;
@@ -103,13 +106,18 @@ class DietaPaciente extends Controller
         'selec_alimentos' => $req -> meta_alimentos];
         $generales->educacion = $req->educacion;
         $generales->monitoreo = $req->monitoreo;
-        //$generales->save();
+        $generales->save();
 
         $registro = new ApiRegistroConsultum();
+        $registro->id_registro = $req->id_registro;
         $registro -> pendientes = $req -> pendientes;
         $registro -> nutri_elaborate_data = $req -> datos_elaborador;
         $registro -> nutri_who_approved_data = $req -> datos_nutriologo;
-
+        $registro->where('id_registro',$req->id_registro)->update([
+            'pendientes' => $registro->pendientes,
+            'nutri_elaborate_data' => $registro->nutri_elaborate_data,
+            'nutri_who_approved_data' => $registro->nutri_who_approved_data,
+        ]);
         // return $registro;
 
         return[
