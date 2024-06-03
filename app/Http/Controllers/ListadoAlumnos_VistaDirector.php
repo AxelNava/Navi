@@ -9,7 +9,6 @@ use App\Models\ApiPersona;
 class ListadoAlumnos_VistaDirector extends Controller
 {
     public function enlistar(){
-        //La obtencion del user queda pendiente
         
         //Obtener cantidad total de alumnos
         $cantidadAlumnos = ApiDatosNutriologo::count();

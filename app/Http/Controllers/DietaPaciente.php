@@ -8,8 +8,6 @@ use App\Models\ApiDieteticosInstrumentoMedicion; //Tipo de instrumento - Aspecto
 use App\Models\ApiResultadoDiagnostico; //Requerimientos, DX Nutricion
 use App\Models\ApiDatosGeneralesDietum; //Objetivo - Monitoreo
 
-use function PHPUnit\Framework\isEmpty;
-
 class DietaPaciente extends Controller
 {   
     public function buscar($id){

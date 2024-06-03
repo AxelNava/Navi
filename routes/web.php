@@ -29,7 +29,7 @@ Route::get("alumno/{id}/ListadoPacientes", [ListadoPacientes_VistaAlumno::class,
 
 Route::get('director/ListadoAlumnos', [ListadoAlumnos_VistaDirector::class, 'enlistar'])->name('listado_alumnos_Director');
 
-Route::get('director/ListadoAlumnos/{id}', [ListadoPacientes_VistaDirector::class, 'enlistar'])->name('listado_pacientes_Director');
+Route::get('director/ListadoAlumnos/{id_nutriologo}', [ListadoPacientes_VistaDirector::class, 'enlistar'])->name('listado_pacientes_Director');
 
 Route::get('controlCitas/{id}', [DatosPaciente_ControlCitas::class, 'show'])->name('control_citas');
 Route::patch('controlCitas/actualizar/{id_cita}', [DatosPaciente_ControlCitas::class, 'update'])->name('control_citas_actualizar');
@@ -42,6 +42,8 @@ Route::get('alumno/inicio', [ListadoPacientes_VistaAlumno::class, 'enlistar'])->
 Route::get('alumno/control-citas-paciente/{id}', function () {
 	return view('alumno.mostrar_control_citas_paciente');
 })->name('alumno-paciente-control-citas');
+
+
 
 Route::middleware('auth')->group(function () {
 	Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -64,6 +66,15 @@ Route::middleware(['auth', 'role:director'])->group(function () {
 	Route::get('director/inicio', function () {
 		return view('director.inicio');
 	})->name('director.inicio');
+
+	// Route::get('director/alumno/control-citas-paciente/{id}', function () {
+	// 	return view('director.');
+	// })->name('director-alumno-paciente-control-citas');
+
+	Route::get('director/lista_pacientes_alumno/{id_nutriologo}', function () {
+		return view('director.lista_pacientes_alumno');
+	})->name('director-lista-pacientes-alumno');
+	
 	//registrar alumno
 	Route::post('registrar-alumno', [AltaNutriologo::class, 'store'])->name('registrar.alumno');
 });

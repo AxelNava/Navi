@@ -11,12 +11,12 @@ use App\Models\User;
 
 class ListadoPacientes_VistaDirector extends Controller
 {
-    public function enlistar($id)
+    public function enlistar($id_nutriologo)
     {
         //La obtencion del user queda pendiente
         
         //Obtener nombre del alumno
-        $idPersona = ApiDatosNutriologo::where('id_nutriologo', $id)->value('id_persona');
+        $idPersona = ApiDatosNutriologo::where('id_nutriologo', $id_nutriologo)->value('id_persona');
         if (!$idPersona) {
             return response()->json([
                 'Error' => 'El ID de este alumno no existe.'
@@ -25,13 +25,13 @@ class ListadoPacientes_VistaDirector extends Controller
         $datosNutriologo = ApiPersona::find($idPersona);
         
         //Obtener grupo del alumno
-        $grupoNutriologo = ApiDatosNutriologo::where('id_nutriologo', $id)->value('datos_alumno');
+        $grupoNutriologo = ApiDatosNutriologo::where('id_nutriologo', $id_nutriologo)->value('datos_alumno');
         
         //Obtener cantidad total de pacientes del alumno
-        $cantidadPacientes = ApiNutriologoPaciente::where('id_nutriologo', $id)->count();
+        $cantidadPacientes = ApiNutriologoPaciente::where('id_nutriologo', $id_nutriologo)->count();
 
         //Obtener los datos de los pacientes del alumno
-        $pacientesIds = ApiNutriologoPaciente::where('id_nutriologo', $id)->pluck('id_paciente');
+        $pacientesIds = ApiNutriologoPaciente::where('id_nutriologo', $id_nutriologo)->pluck('id_paciente');
         $datosPacientes = ApiDatosPaciente::whereIn('id_dato_paciente', $pacientesIds)->pluck('id_persona');
         $infoPacientes = ApiPersona::whereIn('persona_id', $datosPacientes)->get();
 
