@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property float $LDL
  * @property int $AST_perc
  * @property float $ALT
- * @property float $THS
+ * @property float $TSH
  * @property float $T3
  * @property float $T4
  * @property float $Hb
@@ -59,7 +59,7 @@ class ApiBioquimico extends Model
 		'LDL' => 'float',
 		'AST_perc' => 'int',
 		'ALT' => 'float',
-		'THS' => 'float',
+		'TSH' => 'float',
 		'T3' => 'float',
 		'T4' => 'float',
 		'Hb' => 'float',
@@ -85,7 +85,7 @@ class ApiBioquimico extends Model
 		'LDL',
 		'AST_perc',
 		'ALT',
-		'THS',
+		'TSH',
 		'T3',
 		'T4',
 		'Hb',

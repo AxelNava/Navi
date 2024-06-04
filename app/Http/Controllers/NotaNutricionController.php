@@ -101,7 +101,7 @@ class NotaNutricionController extends Controller
             'LDL' => ['nullable', 'decimal:0,2'],
             'AST_perc' => ['nullable', 'decimal:0,2'],
             'ALT' => ['nullable', 'decimal:0,2'],
-            'THS' => ['nullable', 'decimal:0,2'],
+            'TSH' => ['nullable', 'decimal:0,2'],
             'T3' => ['nullable', 'decimal:0,2'],
             'T4' => ['nullable', 'decimal:0,2'],
             'Hb' => ['nullable', 'decimal:0,2'],
@@ -243,7 +243,7 @@ class NotaNutricionController extends Controller
         $bioquimico->LDL = $request->LDL;
         $bioquimico->AST_perc = $request->AST_perc;
         $bioquimico->ALT = $request->ALT;
-        $bioquimico->THS = $request->THS;
+        $bioquimico->TSH = $request->TSH;
         $bioquimico->T3 = $request->T3;
         $bioquimico->T4 = $request->T4;
         $bioquimico->Hb = $request->Hb;
@@ -319,7 +319,7 @@ class NotaNutricionController extends Controller
             'LDL' => ['nullable', 'decimal:0,2'],
             'AST_perc' => ['nullable', 'decimal:0,2'],
             'ALT' => ['nullable', 'decimal:0,2'],
-            'THS' => ['nullable', 'decimal:0,2'],
+            'TSH' => ['nullable', 'decimal:0,2'],
             'T3' => ['nullable', 'decimal:0,2'],
             'T4' => ['nullable', 'decimal:0,2'],
             'Hb' => ['nullable', 'decimal:0,2'],
@@ -425,7 +425,7 @@ class NotaNutricionController extends Controller
         $bioquimico->LDL = $request->LDL;
         $bioquimico->AST_perc = $request->AST_perc;
         $bioquimico->ALT = $request->ALT;
-        $bioquimico->THS = $request->THS;
+        $bioquimico->TSH = $request->TSH;
         $bioquimico->T3 = $request->T3;
         $bioquimico->T4 = $request->T4;
         $bioquimico->Hb = $request->Hb;
