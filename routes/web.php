@@ -11,6 +11,8 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DietaPaciente;
 use App\Http\Controllers\EstudiantesController;
+use App\Http\Controllers\ListadoPacientesRegistros;
+use App\Http\Controllers\ListadoRegistrosConsultaDePaciente;
 
 Route::get('/', function () {
 	return view('welcome');
@@ -25,11 +27,22 @@ Route::get('director/inicio', function () {
 	return view('director.inicio');
 })->name('director.inicio');
 
-Route::get("alumno/{id}/ListadoPacientes", [ListadoPacientes_VistaAlumno::class, 'enlistar'])->name('listado_pacientes_Alumnos');
+Route::get("alumno/{id}/ListadoPacientes", [ListadoPacientes_VistaAlumno::class, 'enlistar'])
+	->name('listado_pacientes_Alumnos');
+Route::get('alumno/listado-registros-pacientes/{id_persona_nutriologo}', [ListadoPacientesRegistros::class, 'listar'])
+	->name('listado-pacientes');
+Route::get('alumno/registros-paciente/{id_paciente}', [ListadoRegistrosConsultaDePaciente::class, 'listar_registros'])
+	->name('listado-registros-paciente');
+Route::get('alumno/ListadoRegistroPacientes/', function () {
+	return view('alumno.listado_registros_pacientes');
+});
 
-Route::get('director/ListadoAlumnos', [ListadoAlumnos_VistaDirector::class, 'enlistar'])->name('listado_alumnos_Director');
 
-Route::get('director/ListadoAlumnos/{id_nutriologo}', [ListadoPacientes_VistaDirector::class, 'enlistar'])->name('listado_pacientes_Director');
+Route::get('director/ListadoAlumnos', [ListadoAlumnos_VistaDirector::class, 'enlistar'])
+	->name('listado_alumnos_Director');
+
+Route::get('director/ListadoAlumnos/{id_nutriologo}', [ListadoPacientes_VistaDirector::class, 'enlistar'])
+	->name('listado_pacientes_Director');
 
 Route::get('controlCitas/{id}', [DatosPaciente_ControlCitas::class, 'show'])->name('control_citas');
 Route::patch('controlCitas/actualizar/{id_cita}', [DatosPaciente_ControlCitas::class, 'update'])->name('control_citas_actualizar');
@@ -74,7 +87,7 @@ Route::middleware(['auth', 'role:director'])->group(function () {
 	Route::get('director/lista_pacientes_alumno/{id_nutriologo}', function () {
 		return view('director.lista_pacientes_alumno');
 	})->name('director-lista-pacientes-alumno');
-	
+
 	//registrar alumno
 	Route::post('registrar-alumno', [AltaNutriologo::class, 'store'])->name('registrar.alumno');
 });
