@@ -29,8 +29,9 @@ Para poder instalarlo, se puede seguir el siguiente tutorial para tener la insta
 ``https://www.youtube.com/watch?v=DKXdkXCgtCQ``
 
 Una vez que se haya instalado nginx, se tiene que agregar el dominio en los dominios registrados de windows.
-Para esto se debe de ir a la carpeta ``C:\System32\local\hosts``
-Se debe de editar el archivo de hosts y poner la dirección de 127.0.0.1 y el nombre de host navi.local
+Para esto se debe de ir a la carpeta ``C:\Windows\System32\drivers\etc``
+Se debe de editar el archivo de hosts con un editor con privilegios de administrador, esto puede realizarse desde la terminal utilizando un editor de texto como nvim
+para poner la dirección de 127.0.0.1 y el nombre de host navi.local
 
 Luego de configurar el host, se tiene que volver a configurar nginx, se tiene que agregar la configuración
 del servidor
