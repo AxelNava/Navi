@@ -13,6 +13,21 @@
             margin: 4px 2px;
             cursor: pointer;
         }
+        #alumnos {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 20px;
+        }
+        #alumno {
+            margin: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            border: black 1px solid;
+            width: 300px;
+        }
     </style>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
