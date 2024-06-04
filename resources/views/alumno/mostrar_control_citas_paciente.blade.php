@@ -41,6 +41,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
+                    {{-- <h2>ID PACIENTE: {{$id}}</h2> --}}
+										<h2 class="nombre"></h2>
+                    <br>
                     <table>
                         <tr>
                             <th class='header_title'>Fecha Paciente</th>
@@ -65,3 +68,32 @@
     </div>
 </x-app-layout>
 
+<script>
+    let id = {{$id}};
+		let nombre = document.querySelector('.nombre');
+    const url = `/controlCitas/${id}`;
+    const datos_control_citas = document.querySelector('.datos_control_citas');
+
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data)
+				nombre.innerHTML = `Nombre: ${data.data[0].nombre}`;
+        data.data.forEach(dato => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${dato.fecha_cita}</td>
+                <td>${dato.peso}</td>
+                <td>${dato.IMC}</td>
+                <td>${dato.masa_grasa_corporal}</td>
+                <td>${dato.porcentaje_grasa_corporal}</td>
+                <td>${dato.masa_muscular_kg}</td>
+                <td>${dato.agua_corpolar}</td>
+                <td>${dato.circunferencia_cintura}</td>
+                <td>${dato.circunferencia_cadera}</td>
+                <td>${dato.fecha_prox_cita}</td>
+            `;
+            datos_control_citas.appendChild(tr);
+        });
+    });
+</script>

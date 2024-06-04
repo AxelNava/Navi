@@ -54,6 +54,11 @@ class DatosPaciente_ControlCitas extends Controller
         return response()->json(['data' => 'Identificador incorrecto'], 200);
     }
 
+    public function showView($id)
+    {
+        return view('alumno.mostrar_control_citas_paciente', compact('id'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -93,5 +98,4 @@ class DatosPaciente_ControlCitas extends Controller
         }
         return response()->json('Ha habido un error, no se han actualizado los datos');
     }
-
 }
