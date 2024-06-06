@@ -381,7 +381,7 @@ class NotaNutricionController extends Controller
             'ojos' => ['required'],
             'musculo' => ['required'],
             'otros_explo_fisica' => ['nullable'],
-            'intolerancia_alimentos' => ['required_if_accepted:radio_into_aliment'],
+            'intolerancia_alimentos' => ['nullable', 'required_if_accepted:radio_into_aliment'],
             'actividad_fis_actual' => ['required'],
             'cambios_pos_estilo_vida' => ['required'],
             'peso' => ['required', 'decimal:0,2'],
