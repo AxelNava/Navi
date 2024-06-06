@@ -55,7 +55,7 @@ Seleccionar el path del sistema y luego en editar
 Luego de eso dar click en Nuevo y de ahí agregar la dirección en donde está PHP, ejemplo `C:\php\`
 
 También se tiene que renombrar el archivo de php.ini.production a php.ini, se deja la información del php.ini a continuación
-[php.ini](files_config_php/php.ini)
+[php.ini](files_config/php.ini)
 
 
 #### nginx
@@ -245,6 +245,15 @@ Para aplicar los cambios que se han hecho, se tiene que ejecutar el siguiente co
 ```sh 
 FLUSH PRIVILEGES;
 ```
+Primero se debe crear la base de datos, para esto
+se ejecuta la siguiente consulta
+````sql
+CREATE DATABASE navi;
+````
+Luego se debe de seleccionar la base de datos
+Utilizando algún cliente SQL (cuando se instala MariaDB se instala HeidiSQL),
+se debe de importar la [base de datos](files_config/navi.sql)
+
 
 ### En el proyecto
 Una vez que se haya instalado todo y se tenga la configuración correcta, ahora se tiene que instalar todas las dependencias, para esto
@@ -252,6 +261,8 @@ se tiene que ejecutar los siguientes comando estando en la raíz del proyecto
 ```sh
 composer install
 npm install
+php artisan migrate
+php artisan db:seed
 php artisan optimize
 php artisan config:cache
 ```
