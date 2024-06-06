@@ -5,28 +5,71 @@ Proyecto para la facultad de Nutrición
 ## Instalación de requisitos
 Si ya cuentes con MariDB, composer y PHP, o lo estás utilizando con XAMPP o similar,
 omite esto y ve a la siguiente sección.
+La configuración aquí presentada es para producción
 ### Windows
 Para instalar los programas, para todos los casos se debe de ir a los enlaces que proporcionan
 las mismas páginas
+#### Git
+Se necesita Git para poder instalar Laravel, para descargar, ir al siguiente link [git/download/win](https://git-scm.com/download/win)
+Para la instalación de git se puede seguir el siguiente tutorial [Cómo Instalar Git en Windows 10 en 2024](https://www.youtube.com/watch?v=JWnZvHOYBDc)
+
+#### NodeJS
+Otro componente que utiliza Laravel es el administrador de paquete NPM, para poder instalarlo, NodeJS trae
+como por defecto este administrador de paquetes (al menos hasta la 20.14), instalar NodeJS
+con el siguiente link para descargar [nodejs.org/dist/20.14.0/](https://nodejs.org/dist/v20.14.0/node-v20.14.0-x64.msi)
+Para su instalación se puede seguir el siguiente tutorial [como Instalar Node JS en Windows en 2024](https://www.youtube.com/watch?v=29mihvA_zEA)
+
+### Composer
+Se puede instalar de manera local como también de manera global, para instalarlo con windows, es seguir
+los pasos de su instalador
+[Link de tutorial para instalación](https://www.youtube.com/watch?v=yyJjHsnWow8)
+
 #### MariaDB
 Ir al siguiente enlace para descargar MariaDB
-``https://mariadb.org/download/?t=mariadb&p=mariadb&r=11.4.2``
+[mariadb.org/download](https://mariadb.org/download/?t=mariadb&p=mariadb&r=11.4.2)
 Se deben de seguir las instrucciones del instalador
+Enlace a un tutorial para instalar MariaDb [01 - Descarga e Instalación de MariaDB | Curso de Base de Datos MariaDB Server](https://www.youtube.com/watch?v=syYStO_BFgw)
+
 #### PHP
 Ir al siguiente enlace para descargar PHP
-``https://windows.php.net/download#php-8.3``
-Para este enlace, se debe de descargar el PHP Thread safe, descargar el zip
+[php.net/download#php-8.3](https://windows.php.net/download#php-8.3)
+Para este enlace, se debe de descargar el PHP Non Thread safe, descargar el zip
 Este es el enlace para las plataformas x64:
-``https://windows.php.net/downloads/releases/php-8.3.7-Win32-vs16-x64.zip``
+[php 8.3.8 x64-nts](https://windows.php.net/downloads/releases/php-8.3.8-nts-Win32-vs16-x64.zip)
 Enlace para plataformas x86
-``https://windows.php.net/downloads/releases/php-8.3.7-Win32-vs16-x86.zip``
+[php 8.3.8 x86-nts](https://windows.php.net/downloads/releases/php-8.3.8-nts-Win32-vs16-x86.zip)
+
+Una vez que se haya descargado, descomprimir y renombrar la carpeta a php, dentro de esta carpeta tiene que estar todos los archivos
+de PHP, luego de descomprimir y renombrar, se debe de mover a ``C:\`` y también agregar en las variables de entorno
+
+Para agregar PHP a las variables de entorno, se debe de pulsar la tecla `Windows` y luego buscar "Variables de entorno", abre la opción
+de Editar Variables de Entorno.
+Luego dar click en Variables de entorno 
+
+![Variables de entorno](images_readme/variables_entorno1.png)
+
+Seleccionar el path del sistema y luego en editar
+
+![Variables de entorno](images_readme/variables_path.png)
+
+Luego de eso dar click en Nuevo y de ahí agregar la dirección en donde está PHP, ejemplo `C:\php\`
+
+También se tiene que renombrar el archivo de php.ini.production a php.ini, se deja la información del php.ini a continuación
+[php.ini](files_config_php/php.ini)
+
 
 #### nginx
 Ir al siguiente enlace para descargar nginx
-``https://nginx.org/download/nginx-1.26.1.zip``
+[nginx/download/nginx-1.26](https://nginx.org/download/nginx-1.26.1.zip)
 
 Para poder instalarlo, se puede seguir el siguiente tutorial para tener la instalación
-``https://www.youtube.com/watch?v=DKXdkXCgtCQ``
+[How to install and setup NGINX in Windows 11 [2023]](https://www.youtube.com/watch?v=DKXdkXCgtCQ)
+Nginx se tiene que instalar como servicio, para esto, se tiene instalar [WinSW](https://github.com/winsw/winsw/releases/tag/v2.12.0).
+
+[Link directo para descarga](https://github.com/winsw/winsw/releases/download/v2.12.0/WinSW-x64.exe)
+
+Se puede seguir los siguientes pasos para instalar nginx como servicio, esto también servirá para PHP-cgi
+[Windows 10 + Nginx + PHP FastCGI Service](https://gist.github.com/sistematico/d84e04bbd7eec65dc35a76b634726887)
 
 Una vez que se haya instalado nginx, se tiene que agregar el dominio en los dominios registrados de windows.
 Para esto se debe de ir a la carpeta ``C:\Windows\System32\drivers\etc``
@@ -42,34 +85,50 @@ Luego de configurar el host, se tiene que volver a configurar nginx, se tiene qu
 del servidor
 Ejemplo de configuración
 ```sh
-server{
-    listen 80;
-    listen [::]:80;
-    server_name navi.local www.navi.local;
-    charset utf-8;
+server {
+        listen 80;
+        listen [::]:80;
+        server_name navi.local;
+        root C:\\AppServer\\prueba;
 
-    client_max_body_size 75M;
-    root /var/www/Navi/public;
+        add_header X-Frame-Options "SAMEORIGIN";
+        add_header X-Content-Type-Options "nosniff";
 
-    add_header X-Frame-Options "SAMEORIGIN";
-    add_header X-XSS-Protection "1; mode=block";
-    add_header X-Content-Type-Options "nosniff";
+        index index.php;
 
-    location = /favicon.ico { access_log off; log_not_found off; }
-    location = /robots.txt  { access_log off; log_not_found off; }
+        charset utf-8;
 
-    error_page 404 /index.php;
+        location / {
+            try_files $uri $uri/ /index.php?$query_string;
+        }
 
-    include /etc/nginx/default.d/*.conf;
-    location / {
-            try_files $uri $uri/ /index.php?$args /index.php?$query_string;
+        location = /favicon.ico {
+            access_log off; log_not_found off;
+        }
+        location = /robots.txt {
+            access_log off; log_not_found off;
+        }
+
+        error_page 404 /index.php;
+
+        location ~ \.php$ {
+            fastcgi_pass 127.0.0.1:9123;
+            fastcgi_index index.php;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            include fastcgi_params;
+            fastcgi_hide_header X-Powered-By;
+        }
+
+        location ~ /\.(?!well-known).* {
+            deny all;
+        }
+
     }
-}
 ```
 En el ejemplo de arriba, utiliza la configuración que ya instala php-fpm al momento de instalarlo en Linux.
 
 Otro ejemplo de configuración se puede encontrar en la documentación de Laravel:
-`https://laravel.com/docs/11.x/deployment#nginx`
+[laravel.com/docs/11.x/deployment#nginx](https://laravel.com/docs/11.x/deployment#nginx)
 
 ### Linux
 Para la instalación en Linux es más sencillo, dependiendo de la distribución se usará el gestor de paquetes que trae por defecto, se mostrará el ejemplo para
@@ -186,15 +245,6 @@ Para aplicar los cambios que se han hecho, se tiene que ejecutar el siguiente co
 ```sh 
 FLUSH PRIVILEGES;
 ```
-
-
-### Composer
-Se puede instalar de manera local como también de manera global, para instalarlo con windows, es seguir
-los pasos de su instalador
-
-### NodeJS
-Laravel utiliza npm, un administrador de paquetes de JavaScript, para instalarlo, se puede hacer instalando
-NodeJS.
 
 ### En el proyecto
 Una vez que se haya instalado todo y se tenga la configuración correcta, ahora se tiene que instalar todas las dependencias, para esto
