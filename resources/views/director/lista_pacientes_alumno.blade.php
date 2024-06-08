@@ -1,4 +1,3 @@
--- Active: 1706557295633@@127.0.0.1@3306@navi
 <x-app-layout>
     <style>
         .agregar-alumno {
@@ -25,10 +24,8 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <h2>Bienvenido {{ Auth::user()->nombre }}</h2>
-                    <button type="button" style="display:none" id='trigger'></button>
-                    <div id="pacientes">
-
+                    <h1 class="nutriologo-nombre"></h1>
+										<button type="button" style="display:none" id='trigger' data-idNutriologo="{{ $id_nutriologo }}"></button>                    <div id="pacientes">
                     </div>
                 </div>
             </div>
@@ -36,17 +33,21 @@
     </div>
 </x-app-layout>
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const trigger = document.getElementById('trigger');
-        const contenedor = document.getElementById('pacientes');
-        const id_nutriologo = window.location.href.split('/')[5];
-        const url_to_fetch = `director/ListadoAlumnos/${id_nutriologo}`;
-        trigger.addEventListener('click', () => {
-            fetch(`director/ListadoAlumnos/${id_nutriologo}`)
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                }).catch(error => console.error(error));
-        });
-    });
+document.addEventListener('DOMContentLoaded', () => {
+	let idNutriologo = {!! json_encode($id_nutriologo) !!};
+	let nombreNutriologo = document.querySelector('.nutriologo-nombre');
+	let trigger = document.getElementById('trigger');
+
+	trigger.addEventListener('click', () => {
+		fetch(`/director/lista_pacientes_alumno_data/${idNutriologo}`)
+			.then(response => response.json())
+			.then(data => {
+				console.log(data);
+				nombreNutriologo.innerHTML = `ESTUDIANTE: ${data['Datos del alumno'].nombre}`;
+			});
+	});
+
+	// Simulate a click on the trigger button
+	trigger.click();
+});
 </script>

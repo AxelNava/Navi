@@ -260,15 +260,15 @@
                     nutriologos = data['Nutriologos'];
                     nutriologos.forEach(nutriologo => {
                         let html = `
-						<div id="alumno">
-							<h2>Nombre: ${nutriologo['Nutriologo']['nombre']}</h2>
-							<h2>Grado y grupo: ${nutriologo['Datos del alumno']}</h2>
-							<h2>ID: ${nutriologo['ID Nutriologo']}</h2>
-									<form action="lista_pacientes_alumno/${nutriologo['ID Nutriologo']}">
-										<input type="submit" value="Ver pacientes" class="ver-pacientes">
-									</form>
-								</div>
-						`;
+        <div id="alumno">
+            <h2>Nombre: ${nutriologo['Nutriologo']['nombre']}</h2>
+            <h2>Grado y grupo: ${nutriologo['Datos del alumno']}</h2>
+            <h2>ID: ${nutriologo['ID Nutriologo']}</h2>
+            <form action="/director/lista_pacientes_alumno/${nutriologo['ID Nutriologo']}">
+                <input type="submit" value="Ver pacientes" class="ver-pacientes">
+            </form>
+        </div>
+    `;
                         alumnosContainer.innerHTML += html;
                     });
                     let contadorData = data['Total de alumnos'];

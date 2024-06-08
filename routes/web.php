@@ -90,9 +90,21 @@ Route::middleware(['auth', 'role:director'])->group(function () {
 	// 	return view('director.');
 	// })->name('director-alumno-paciente-control-citas');
 
-	Route::get('director/lista_pacientes_alumno/{id_nutriologo}', function () {
-		return view('director.lista_pacientes_alumno');
-	})->name('director-lista-pacientes-alumno');
+	// Route::get('director/lista_pacientes_alumno/{id_nutriologo}', function () {
+	// 	return view('director.lista_pacientes_alumno');
+	// })->name('director-lista-pacientes-alumno');
+
+	//consumir la vista de listar pacientes de un nutriologo
+	Route::get('director/lista_pacientes_alumno/{id_nutriologo}', [ListadoPacientes_VistaDirector::class, 'enlistarView'])
+		->name('director-lista-pacientes-alumno-view');
+	//consumir pacientes de un nutriologo
+	Route::get('director/lista_pacientes_alumno_data/{idNutriologo}', [ListadoPacientes_VistaDirector::class, 'enlistar'])
+		->name('director-lista-pacientes-alumno-data');
+
+	// Route::get('director/lista_pacientes_alumno/{id_nutriologo}', function ($id_nutriologo) {
+	// 	return view('director.lista_pacientes_alumno', ['id_nutriologo' => $id_nutriologo]);
+	// })->name('director-lista-pacientes-alumno');
+
 
 	//registrar alumno
 	Route::post('registrar-alumno', [AltaNutriologo::class, 'store'])->name('registrar.alumno');
