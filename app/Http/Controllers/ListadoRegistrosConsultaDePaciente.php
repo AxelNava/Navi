@@ -12,4 +12,8 @@ class ListadoRegistrosConsultaDePaciente extends Controller
 
         return response()->json(['data' => $ids_registros]);
     }
+    public function listar_formularios_paciente($id_paciente)
+    {
+        return view('alumno.listado_formularios_paciente', compact('id_paciente'));
+    }
 }

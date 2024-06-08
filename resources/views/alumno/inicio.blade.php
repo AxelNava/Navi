@@ -13,6 +13,7 @@
             margin: 4px 2px;
             cursor: pointer;
         }
+
         #alumnos {
             margin-top: 20px;
             display: flex;
@@ -21,6 +22,7 @@
             align-items: center;
             padding: 20px;
         }
+
         #alumno {
             margin: 10px;
             padding: 10px;
@@ -50,6 +52,9 @@
                                 <form
                                     action="{{ route('alumno-paciente-control-citas', $data['Datos_paciente'][$id]) }}">
                                     <button type="submit" class="agregar-alumno">Revisar datos paciente</button>
+                                </form>
+                                <form action="{{ route('listado_formularios', $data['Datos_paciente'][$id]) }}">
+                                    <button type="submit" class="agregar-alumno">Ver formularios paciente</button>
                                 </form>
                             </div>
                         @endforeach

@@ -37,6 +37,8 @@ Route::get('alumno/ListadoRegistroPacientes/', function () {
 	return view('alumno.listado_registros_pacientes');
 });
 
+Route::get('alumno/listado_pacientes_formularios/{id_paciente}', [ListadoRegistrosConsultaDePaciente::class, 'listar_formularios_paciente'])->name('listado_formularios');
+
 
 Route::get('director/ListadoAlumnos', [ListadoAlumnos_VistaDirector::class, 'enlistar'])
 	->name('listado_alumnos_Director');
@@ -65,6 +67,7 @@ Route::middleware('auth')->group(function () {
 	Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 	Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 Route::get('/nota-nutricion/buscar/{id}', [NotaNutricionController::class, 'buscar'])->name('nota-nutricion_buscar');
 //crear dieta
 Route::post('/nota-nutricion/crear', [NotaNutricionController::class, 'crear'])->name('nota-nutricion_crear');
