@@ -10,7 +10,7 @@
             text-decoration: none;
             display: inline-block;
             font-size: 16px;
-            margin: 4px 2px;
+            margin: 20px 2px;
             cursor: pointer;
         }
 
@@ -61,7 +61,9 @@
                             
                         </tbody>
                     </table>
-
+                    <form action="">
+                        <input type="submit" value="Crear dieta" class="agregar-alumno"/>
+                    </form>
                 </div>
             </div>
         </div>

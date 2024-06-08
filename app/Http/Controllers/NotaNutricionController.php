@@ -13,7 +13,10 @@ use App\Models\ApiExploFisica;
 use App\Models\ApiNutriologoPaciente;
 use App\Models\ApiPersona;
 use App\Models\ApiRegistroConsultum;
+use App\Models\ApiDieteticosInstrumentoMedicion;
 use Carbon\Carbon;
+use App\Models\ApiDatosGeneralesDietum;
+use App\Models\ApiResultadoDiagnostico;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -144,12 +147,11 @@ class NotaNutricionController extends Controller
         )->first()->id_nutriologo;
         $nutriologo->id_paciente = $datospaciente->id_dato_paciente;
         if (
-            !ApiNutriologoPaciente::
-                where(
-                    ['id_paciente' => 'id_paciente', 'id_nutriologo' => 'id_nutriologo'],
-                    '=',
-                    [$nutriologo->id_nutriologo, $nutriologo->id_paciente]
-                )->first()
+            !ApiNutriologoPaciente::where(
+                ['id_paciente' => 'id_paciente', 'id_nutriologo' => 'id_nutriologo'],
+                '=',
+                [$nutriologo->id_nutriologo, $nutriologo->id_paciente]
+            )->first()
         ) {
             $nutriologo->save();
         }
@@ -259,7 +261,102 @@ class NotaNutricionController extends Controller
         $bioquimico->Ca = $request->Ca;
         $bioquimico->otros = $request->otros_bioquimicos;
         $bioquimico->save();
-        return view('alumno.agregar_dieta', compact('id_registro'));
+
+
+        // dieta paciente
+        $instrumento = new ApiDieteticosInstrumentoMedicion();
+        $instrumento->id_consulta_paciente = $request->id_registro;
+        $instrumento->tipo_instrumento = $request->tipo_instrumento;
+        $instrumento->desayuno_hora = $request->desayuno_hora;
+        $instrumento->colacion1 = $request->colacion1;
+        $instrumento->comida_hora = $request->comida_hora;
+        $instrumento->colacion2 = $request->colacion2;
+        $instrumento->cena_hora = $request->cena_hora;
+        $instrumento->colacion3 = $request->colacion3;
+        $instrumento->grupo_total_eq = [
+            'verduras' => $request->verduras,
+            'frutas' => $request->frutas,
+            'cereales' => $request->cereales,
+            'leguminosas' => $request->leguminosas,
+            'carnes' => $request->carnes,
+            'leche' => $request->leche,
+            'grasa' => $request->grasa,
+            'azucar' => $request->azucar
+        ];
+        $instrumento->total_kcal = $request->total_kcal;
+        $instrumento->total_prot = [
+            'prot_porcent' => $request->total_prot,
+            'prot_g' => $request->prot_g
+        ];
+        $instrumento->total_lip = [
+            'lip_porcent' => $request->total_lip,
+            'lip_g' => $request->lip_g,
+        ];
+        $instrumento->total_hco = [
+            'hco_porcent' => $request->total_hco,
+            'hco_g' => $request->hco_g,
+        ];
+        $instrumento->adecuacion_porcen_ene = $request->adecuacion_porcen_ene;
+        $instrumento->adecuacion_porcen_ener_kcal = $request->adecuacion_porcen_ener_kcal;
+        $instrumento->adecuacion_porcen_prot = $request->adecuacion_porcen_prot;
+        $instrumento->adecuacion_porcen_lip = $request->adecuacion_porcen_lip;
+        $instrumento->adecuacion_porcen_hco = $request->adecuacion_porcen_hco;
+        $instrumento->aspectos_cualita_dieta_habitual = $request->aspectos_cualita_dieta_habitual;
+        $instrumento->save();
+
+        $diagnostico = new ApiResultadoDiagnostico();
+        $diagnostico->id_consulta_paciente = $request->id_registro;
+        $diagnostico->requestue_ener = $request->requestue_ener;
+        $diagnostico->requestue_proteina = $request->requestue_proteina;
+        $diagnostico->requestue_kg_dia = $request->requestue_kg_dia;
+        $diagnostico->dx_nutricio = $request->dx_nutricio;
+        $diagnostico->save();
+
+        $generales = new ApiDatosGeneralesDietum();
+        $generales->id_consulta_paciente = $request->id_registro;
+        $generales->objetivos_dieta = $request->objetivos_dieta;
+        $generales->tipo_dieta = $request->tipo_dieta;
+        $generales->kcal_dieta = $request->kcal_dieta;
+        $generales->prot_porcent_dieta = $request->prot_porcent_dieta;
+        $generales->prot_kg_dia_dieta = $request->prot_kg_dia_dieta;
+        $generales->lip_porcen_dieta = $request->lip_porcen_dieta;
+        $generales->lip_g_dieta = $request->lip_g_dieta;
+        $generales->hco_porcen_dieta = $request->hco_porcen_dieta;
+        $generales->hco_g_dieta = $request->hco_g_dieta;
+        $generales->suplementos = $request->suplementos;
+        $generales->metas_smart = $request->metas_smart;
+        $generales->param_meta = [
+            'peso' => $request->meta_peso,
+            'porcen_grasa' => $request->meta_grasa,
+            'musculo' => $request->meta_musculo,
+            'c_cintura' => $request->meta_cintura,
+            'horarios' => $request->meta_horario,
+            'm_habitos' => $request->meta_mejorar,
+            'selec_alimentos' => $request->meta_alimentos
+        ];
+        $generales->educacion = $request->educacion;
+        $generales->monitoreo = $request->monitoreo;
+        $generales->save();
+
+        $registro = new ApiRegistroConsultum();
+        $registro->id_registro = $request->id_registro;
+        $registro->pendientes = $request->pendientes;
+        $registro->nutri_elaborate_data = $request->datos_elaborador;
+        $registro->nutri_who_approved_data = $request->datos_nutriologo;
+        $registro->where('id_registro', $request->id_registro)->update([
+            'pendientes' => $registro->pendientes,
+            'nutri_elaborate_data' => $registro->nutri_elaborate_data,
+            'nutri_who_approved_data' => $registro->nutri_who_approved_data,
+        ]);
+        // return $registro;
+
+        // return [
+        //     $instrumento,
+        //     $diagnostico,
+        //     $generales,
+        //     $registro
+        // ];
+        return view('alumno.agregar_dieta');
     }
 
     public function actualizar(Request $request, string $id)
