@@ -247,6 +247,8 @@ Para que pueda funcionar la edición, tienen que ejecutar el editor como root, y
 Clona el proyecto en la carpeta que se definió en la configuración de nginx.
 Una vez que se tenga todos los componentes listos, se tiene que hacer lo siguiente para la base de datos.
 
+Primero que nada se debe de descargar el proyecto (o clonarlo con git).
+
 ### Base de datos
 Para configurar la base de datos en el proyecto, se debe de copiar y renombrar el archivo .env.example, y renombrarlo a .env, en este se tienen que sustituir las variables 
 correspondientes.
