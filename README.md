@@ -70,7 +70,9 @@ Nginx se tiene que instalar como servicio, para esto, se tiene instalar [WinSW](
 
 Se puede seguir los siguientes pasos para instalar nginx como servicio, esto también servirá para PHP-cgi
 [Windows 10 + Nginx + PHP FastCGI Service](https://gist.github.com/sistematico/d84e04bbd7eec65dc35a76b634726887). Omitir los pasos 3,4,5, para el paso 2 los directorios serán en donde se encuentren los
-ejecutables de PHP y nginx
+ejecutables de PHP y nginx.
+El programa de `WinSW` debe de tener el mismo nombre que el XML de configuración, en el ejemplo del repositorio de `Windows 10 + Nginx + PHP FastCGI Service` está
+como `phpsvc.exe` y `nginxsvc.exe`, ambos son el programa `WinSW` pero renombrador al nombre del archivo de configuración XML.
 
 **NOTA IMPORTANTE** Para este paso de agregar como servicio nginx y el php_cgi, se debe de verificar que estén correctos
 las rutas que están en los archivos .XML, tiene que tener la ruta en donde se encuentra el programa a dar el servicio (
