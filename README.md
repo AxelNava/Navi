@@ -82,6 +82,8 @@ las rutas que están en los archivos .XML, tiene que tener la ruta en donde se e
     en este caso, la ruta en donde se encuentra el ejecutable de nginx.exe y el ejecutable de php_cgi.exe
 ). Las rutas a cambiar(en caso de que no sean las mismas) son:
 
+Para el archivo `nginxsvc.xml`
+
 `<executable>c:\nginx\nginx.exe</executable>`
 
 `<logpath>c:\nginx\logs\</logpath>`
@@ -91,6 +93,8 @@ las rutas que están en los archivos .XML, tiene que tener la ruta en donde se e
 `<stopexecutable>c:\nginx\nginx.exe</stopexecutable>`
 
 `<stopargument>c:\nginx</stopargument>`
+
+Para el archivo `phpsvc.xml`
 
 `<description>PHP-FCGI service.</description>`
 
