@@ -76,7 +76,7 @@ las rutas que están en los archivos .XML, tiene que tener la ruta en donde se e
 )
 Luego de esto, se tienen que activar los servicio de manera manual, para esto puede pulsar la tecla
 `windows` y luego buscar `Servicio`, luego de eso, se debe de buscar los servicios, que estarán con el nombre que se puso
-en los archivos XML del paso anterior, por defecto está como `Nginx` y `PHP-CGI`
+en los archivos XML del paso anterior, por defecto está como `Nginx` y `PHP`
 
 Una vez que se haya instalado nginx, se tiene que agregar el dominio en los dominios registrados de windows.
 Para esto se debe de ir a la carpeta ``C:\Windows\System32\drivers\etc``
