@@ -74,6 +74,9 @@ Se puede seguir los siguientes pasos para instalar nginx como servicio, esto tam
 las rutas que están en los archivos .XML, tiene que tener la ruta en donde se encuentra el programa a dar el servicio (
     en este caso, la ruta en donde se encuentra el ejecutable de nginx.exe y el ejecutable de php_cgi.exe
 )
+Luego de esto, se tienen que activar los servicio de manera manual, para esto puede pulsar la tecla
+`windows` y luego buscar `Servicio`, luego de eso, se debe de buscar los servicios, que estarán con el nombre que se puso
+en los archivos XML del paso anterior, por defecto está como `Nginx` y `PHP-CGI`
 
 Una vez que se haya instalado nginx, se tiene que agregar el dominio en los dominios registrados de windows.
 Para esto se debe de ir a la carpeta ``C:\Windows\System32\drivers\etc``
