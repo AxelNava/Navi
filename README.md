@@ -19,11 +19,6 @@ como por defecto este administrador de paquetes (al menos hasta la 20.14), insta
 con el siguiente link para descargar [nodejs.org/dist/20.14.0/](https://nodejs.org/dist/v20.14.0/node-v20.14.0-x64.msi)
 Para su instalación se puede seguir el siguiente tutorial [como Instalar Node JS en Windows en 2024](https://www.youtube.com/watch?v=29mihvA_zEA)
 
-### Composer
-Se puede instalar de manera local como también de manera global, para instalarlo con windows, es seguir
-los pasos de su instalador
-[Link de tutorial para instalación](https://www.youtube.com/watch?v=yyJjHsnWow8)
-
 #### MariaDB
 Ir al siguiente enlace para descargar MariaDB
 [mariadb.org/download](https://mariadb.org/download/?t=mariadb&p=mariadb&r=11.4.2)
@@ -57,6 +52,10 @@ Luego de eso dar click en Nuevo y de ahí agregar la dirección en donde está P
 También se tiene que renombrar el archivo de php.ini.production a php.ini, se deja la información del php.ini a continuación
 [php.ini](files_config/php.ini)
 
+### Composer
+Se puede instalar de manera local como también de manera global, para instalarlo con windows, es seguir
+los pasos de su instalador, omitir los pasos de XAMPP
+[Link de tutorial para instalación](https://www.youtube.com/watch?v=yyJjHsnWow8)
 
 #### nginx
 Ir al siguiente enlace para descargar nginx
