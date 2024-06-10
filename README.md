@@ -19,11 +19,6 @@ como por defecto este administrador de paquetes (al menos hasta la 20.14), insta
 con el siguiente link para descargar [nodejs.org/dist/20.14.0/](https://nodejs.org/dist/v20.14.0/node-v20.14.0-x64.msi)
 Para su instalación se puede seguir el siguiente tutorial [como Instalar Node JS en Windows en 2024](https://www.youtube.com/watch?v=29mihvA_zEA)
 
-### Composer
-Se puede instalar de manera local como también de manera global, para instalarlo con windows, es seguir
-los pasos de su instalador
-[Link de tutorial para instalación](https://www.youtube.com/watch?v=yyJjHsnWow8)
-
 #### MariaDB
 Ir al siguiente enlace para descargar MariaDB
 [mariadb.org/download](https://mariadb.org/download/?t=mariadb&p=mariadb&r=11.4.2)
@@ -54,22 +49,64 @@ Seleccionar el path del sistema y luego en editar
 
 Luego de eso dar click en Nuevo y de ahí agregar la dirección en donde está PHP, ejemplo `C:\php\`
 
-También se tiene que renombrar el archivo de php.ini.production a php.ini, se deja la información del php.ini a continuación
-[php.ini](files_config/php.ini)
+También se tiene que renombrar el archivo de php.ini.production a php.ini, si quieres saltarte todos los pasos para configurar
+el archivo, se deja el archivo [php.ini](files_config/php.ini) para su descarga directa, si tiene mensajes de que tendrá
+algún tipo de daño, solo dar click en la opción de 'si'.
 
+### Composer
+Se puede instalar de manera local como también de manera global, para instalarlo con windows, es seguir
+los pasos de su instalador, omitir los pasos de XAMPP
+[Link de tutorial para instalación](https://www.youtube.com/watch?v=yyJjHsnWow8)
 
 #### nginx
 Ir al siguiente enlace para descargar nginx
 [nginx/download/nginx-1.26](https://nginx.org/download/nginx-1.26.1.zip)
 
 Para poder instalarlo, se puede seguir el siguiente tutorial para tener la instalación
-[How to install and setup NGINX in Windows 11 [2023]](https://www.youtube.com/watch?v=DKXdkXCgtCQ)
+[How to install and setup NGINX in Windows 11 [2023]](https://www.youtube.com/watch?v=DKXdkXCgtCQ), si se sigue este tutorial, solo seguirlo hasta el minuto 2:46
 Nginx se tiene que instalar como servicio, para esto, se tiene instalar [WinSW](https://github.com/winsw/winsw/releases/tag/v2.12.0).
 
 [Link directo para descarga](https://github.com/winsw/winsw/releases/download/v2.12.0/WinSW-x64.exe)
 
 Se puede seguir los siguientes pasos para instalar nginx como servicio, esto también servirá para PHP-cgi
-[Windows 10 + Nginx + PHP FastCGI Service](https://gist.github.com/sistematico/d84e04bbd7eec65dc35a76b634726887)
+[Windows 10 + Nginx + PHP FastCGI Service](https://gist.github.com/sistematico/d84e04bbd7eec65dc35a76b634726887). Omitir los pasos 3,4,5, para el paso 2 los directorios serán en donde se encuentren los
+ejecutables de PHP y nginx.
+El programa de `WinSW` debe de tener el mismo nombre que el archivo XML de configuración, en el ejemplo del repositorio de `Windows 10 + Nginx + PHP FastCGI Service` está
+como `phpsvc.exe` y `nginxsvc.exe`, ambos son el programa `WinSW` pero renombrador al nombre del archivo de configuración XML, en el ejemplo de repositorio los nombres de los archivos
+y el programa `WinSW` quedan de la siguiente manera
+PHP: `nginxsvc.xml ` `nginxsvc.exe`
+Nginx: `phpsvc.exe` `phpsvc.xml `
+
+**NOTA IMPORTANTE** Para este paso de agregar como servicio nginx y el php_cgi, se debe de verificar que estén correctos
+las rutas que están en los archivos .XML, tiene que tener la ruta en donde se encuentra el programa a dar el servicio (
+    en este caso, la ruta en donde se encuentra el ejecutable de nginx.exe y el ejecutable de php_cgi.exe
+). Las rutas a cambiar(en caso de que no sean las mismas) son:
+
+Para el archivo `nginxsvc.xml`
+
+`<executable>c:\nginx\nginx.exe</executable>`
+
+`<logpath>c:\nginx\logs\</logpath>`
+
+`<startargument>c:\nginx</startargument>`
+
+`<stopexecutable>c:\nginx\nginx.exe</stopexecutable>`
+
+`<stopargument>c:\nginx</stopargument>`
+
+Para el archivo `phpsvc.xml`
+
+`<description>PHP-FCGI service.</description>`
+
+`<executable>c:\php\php-cgi.exe</executable>`
+
+`<logpath>c:\php\logs\</logpath>`
+
+`<startargument>C:\php\php.ini</startargument>`
+
+Luego de esto, se tienen que activar los servicio de manera manual, para esto puede pulsar la tecla
+`windows` y luego buscar `Servicio`, luego de eso, se debe de buscar los servicios, que estarán con el nombre que se puso
+en los archivos XML del paso anterior, por defecto está como `Nginx` y `PHP`
 
 Una vez que se haya instalado nginx, se tiene que agregar el dominio en los dominios registrados de windows.
 Para esto se debe de ir a la carpeta ``C:\Windows\System32\drivers\etc``
