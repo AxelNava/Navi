@@ -123,7 +123,7 @@ Ejemplo de código
 Este último se puede colocar hasta el final del archivo
 
 Luego de configurar el host, se tiene que volver a configurar nginx, se tiene que agregar la configuración
-del servidor
+del servidor, este archivo de configuración se encuentra en la carpeta donde está nginx, en la carpeta conf y el archivo es nginx.conf.
 Ejemplo de configuración
 ```sh
 server {
@@ -166,7 +166,10 @@ server {
 
     }
 ```
-En el ejemplo de arriba, utiliza la configuración que ya instala php-fpm al momento de instalarlo en Linux.
+En el ejemplo de arriba es ejemplo de arriba, puede ser usado para copiar y pegar, solo se debe de cambiar el directorio raíz, la directiva `root` debe de tener 
+la dirección en donde se encuentra el proyecto, para este caso al final de la ruta debe de decir `Navi\\public`, ejemplo:
+
+`root C:\\AppServer\\Navi\\public;` el punto y coma debe de ir al final de la línea.
 
 Otro ejemplo de configuración se puede encontrar en la documentación de Laravel:
 [laravel.com/docs/11.x/deployment#nginx](https://laravel.com/docs/11.x/deployment#nginx)
