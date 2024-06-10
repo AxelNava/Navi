@@ -241,6 +241,8 @@ sudo nvim /etc/hosts
 ```
 Para que pueda funcionar la edición, tienen que ejecutar el editor como root, ya sea con sudo o accediendo al root
 
+---
+
 ## Levantamiento de proyecto
 Clona el proyecto en la carpeta que se definió en la configuración de nginx.
 Una vez que se tenga todos los componentes listos, se tiene que hacer lo siguiente para la base de datos.
