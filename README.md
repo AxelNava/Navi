@@ -49,8 +49,8 @@ Seleccionar el path del sistema y luego en editar
 
 Luego de eso dar click en Nuevo y de ahí agregar la dirección en donde está PHP, ejemplo `C:\php\`
 
-También se tiene que renombrar el archivo de php.ini.production a php.ini, se deja la información del php.ini a continuación
-[php.ini](files_config/php.ini)
+También se tiene que renombrar el archivo de php.ini.production a php.ini, si quieres saltarte todos los pasos para configurar
+el archivo, se deja el archivo [php.ini](files_config/php.ini) para su descarga directa
 
 ### Composer
 Se puede instalar de manera local como también de manera global, para instalarlo con windows, es seguir
