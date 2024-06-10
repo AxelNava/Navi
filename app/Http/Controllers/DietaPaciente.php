@@ -59,12 +59,10 @@ class DietaPaciente extends Controller
             'prot_g' => $req -> prot_g];
         $instrumento->total_lip = [
             'lip_porcent' => $req -> total_lip,
-            'lip_g' => $req -> lip_g,
-        ];
+            'lip_g' => $req -> lip_g];
         $instrumento->total_hco = [
             'hco_porcent' => $req -> total_hco,
-            'hco_g' => $req -> hco_g,
-        ];
+            'hco_g' => $req -> hco_g];
         $instrumento->adecuacion_porcen_ene = $req->adecuacion_porcen_ene;
         $instrumento->adecuacion_porcen_ener_kcal = $req->adecuacion_porcen_ener_kcal;
         $instrumento->adecuacion_porcen_prot = $req->adecuacion_porcen_prot;
@@ -139,6 +137,8 @@ class DietaPaciente extends Controller
         $diagnostico->dx_nutricio = $req->dx_nutricio;
         $diagnostico->save();
 
+
+
         $datos = ApiDatosGeneralesDietum::where('id_consulta_paciente', $diagnostico->id_consulta_paciente)->first();
         $datos->objetivos_dieta = $req->objetivos_dieta;
         $datos->tipo_dieta = $req->tipo_dieta;
@@ -151,10 +151,20 @@ class DietaPaciente extends Controller
         $datos->hco_g_dieta = $req->hco_g_dieta;
         $datos->suplementos = $req->suplementos;
         $datos->metas_smart = $req->metas_smart;
-        $datos->param_meta = $req->param_meta;
+        $datos->param_meta = [
+            'peso' => $req -> meta_peso,
+            'porcen_grasa' => $req -> meta_grasa,
+            'musculo' => $req -> meta_musculo,
+            'c_cintura' => $req -> meta_cintura,
+            'horarios' => $req -> meta_horario,
+            'm_habitos' => $req -> meta_mejorar,
+            'selec_alimentos' => $req -> meta_alimentos];
         $datos->educacion = $req->educacion;
         $datos->monitoreo = $req->monitoreo;
+
         $datos->save();
+
+
 
         $instrum = ApiDieteticosInstrumentoMedicion::where('id_consulta_paciente', $diagnostico->id_consulta_paciente)->first();
         $instrum->tipo_instrumento = $req->tipo_instrumento;
@@ -164,11 +174,25 @@ class DietaPaciente extends Controller
         $instrum->colacion2 = $req->colacion2;
         $instrum->cena_hora = $req->cena_hora;
         $instrum->colacion3 = $req->colacion3;
-        $instrum->grupo_total_eq = $req->grupo_total_eq;
+        $instrum->grupo_total_eq = [
+            'verduras' => $req -> verduras,
+            'frutas' => $req -> frutas,
+            'cereales' => $req -> cereales,
+            'leguminosas' => $req -> leguminosas,
+            'carnes' => $req -> carnes,
+            'leche' => $req -> leche,
+            'grasa' => $req -> grasa,
+            'azucar' => $req -> azucar];
         $instrum->total_kcal = $req->total_kcal;
-        $instrum->total_prot = $req->total_prot;
-        $instrum->total_lip = $req->total_lip;
-        $instrum->total_hco = $req->total_hco;
+        $instrum->total_prot = [
+            'prot_porcent' => $req -> total_prot,
+            'prot_g' => $req -> prot_g];
+        $instrum->total_lip = [
+            'lip_porcent' => $req -> total_lip,
+            'lip_g' => $req -> lip_g];
+        $instrum->total_hco = [
+            'hco_porcent' => $req -> total_hco,
+            'hco_g' => $req -> hco_g];
         $instrum->adecuacion_porcen_ener_kcal = $req->adecuacion_porcen_ener_kcal;
         $instrum->adecuacion_porcen_ene = $req->adecuacion_porcen_ene;
         $instrum->adecuacion_porcen_prot = $req->adecuacion_porcen_prot;
@@ -176,5 +200,13 @@ class DietaPaciente extends Controller
         $instrum->adecuacion_porcen_hco = $req->adecuacion_porcen_hco;
         $instrum->aspectos_cualita_dieta_habitual = $req->aspectos_cualita_dieta_habitual;
         $instrum->save();
+
+
+
+        return[
+            $instrum,
+            $diagnostico,
+            $datos
+        ];
     }
 }
