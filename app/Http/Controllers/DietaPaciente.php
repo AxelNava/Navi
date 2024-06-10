@@ -10,17 +10,17 @@ use App\Models\ApiDatosGeneralesDietum; //Objetivo - Monitoreo
 
 class DietaPaciente extends Controller
 {   
-    public function buscar($id){
-        $dietaid = ApiRegistroConsultum::find($id); //Buscamos que el ID de registro exista
+    public function buscar($id_registro){
+        $dietaid = ApiRegistroConsultum::find($id_registro); //Buscamos que el ID de registro exista
         if ($dietaid == null) return "No se encontró la dieta."; //Si no existe, retorna un error
         
-        $diagnostico = ApiResultadoDiagnostico::where('id_consulta_paciente', $id)->get();
+        $diagnostico = ApiResultadoDiagnostico::where('id_consulta_paciente', $id_registro)->get();
         if ($diagnostico->isEmpty()) return "No se encontró el diagnostico."; //Si no existe, retorna un error
         
-        $generales = ApiDatosGeneralesDietum::where('id_consulta_paciente', $id)->get();
+        $generales = ApiDatosGeneralesDietum::where('id_consulta_paciente', $id_registro)->get();
         if ($generales->isEmpty()) return "No se encontraron datos generales."; //Si no existe, retorna un error
         
-        $instrumento = ApiDieteticosInstrumentoMedicion::where('id_consulta_paciente', $id)->get();
+        $instrumento = ApiDieteticosInstrumentoMedicion::where('id_consulta_paciente', $id_registro)->get();
         if ($instrumento->isEmpty()) return "No se encontraron datos del instrumento."; //Si no existe, retorna un error
 
         //return view('alumno.agregar_dieta', compact('instrumento', 'frecuencia', 'diagnostico', 'generales'));

@@ -54,7 +54,6 @@ class ApiControlCita extends Model
 		'circunferencia_cintura' => 'int',
 		'circunferencia_cadera' => 'int',
 		'fecha_cita' => 'datetime',
-		'hora_cita' => 'datetime',
 		'fecha_prox_cita' => 'datetime',
 		'control_musculo' => 'float',
 		'control_grasa' => 'float'

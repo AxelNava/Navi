@@ -22,26 +22,39 @@ use Illuminate\Validation\Rule;
 
 class NotaNutricionController extends Controller
 {
-    public function buscar(int $id)
+    public function buscar(int $id_registro)
     {
-        $registrocitas = ApiRegistroConsultum::find($id);
+        $registrocitas = ApiRegistroConsultum::find($id_registro);
         if ($registrocitas == null)
-            return "No se enconto la cita";
-        $paciente = ApiPersona::find($registrocitas->id_paciente);
+            return "No se encontró la cita";
         $datospaciente = ApiDatosPaciente::find($registrocitas->id_paciente);
+        $paciente = ApiPersona::find($datospaciente->id_persona);
         $controlcita = ApiControlCita::where('id_paciente', $registrocitas->id_paciente)->first();
         $exploracionfisica = ApiExploFisica::where('id_consulta_paciente', $registrocitas->id_registro)->first();
         $composicioncorporal = ApiComposicionCorporalDiagnosticoObesidad::where('id_consulta_paciente', $registrocitas->id_registro)->first();
         $bioquimico = ApiBioquimico::where('id_consulta_paciente', $registrocitas->id_registro)->first();
 
-        return response()->json([
-            $paciente,
-            $registrocitas,
-            $datospaciente,
-            $controlcita,
-            $exploracionfisica ?? new ApiExploFisica(),
-            $composicioncorporal ?? new ApiComposicionCorporalDiagnosticoObesidad(),
-            $bioquimico ?? new ApiBioquimico()
+
+        $diagnostico = ApiResultadoDiagnostico::where('id_consulta_paciente', $registrocitas->id_registro)->first();
+
+        $generales = ApiDatosGeneralesDietum::where('id_consulta_paciente', $registrocitas->id_registro)->first();
+
+        $instrumento = ApiDieteticosInstrumentoMedicion::where('id_consulta_paciente', $registrocitas->id_registro)->first();
+
+
+        return view('alumno.modificar_registro', [
+            'data' => [
+                'paciente' => $paciente,
+                'registro_consulta' => $registrocitas,
+                'datos_paciente' => $datospaciente,
+                'control_citas' => $controlcita,
+                'explo_fisica' => $exploracionfisica ?? new ApiExploFisica(),
+                'composcion_corp' => $composicioncorporal ?? new ApiComposicionCorporalDiagnosticoObesidad(),
+                'bioquimicos' => $bioquimico ?? new ApiBioquimico(),
+                'diagnostico' => $diagnostico,
+                'generales' => $generales,
+                'instrumento' => $instrumento
+            ]
         ]);
     }
     public function crear(Request $request)
@@ -234,38 +247,36 @@ class NotaNutricionController extends Controller
         $id_registro = $registrocitas->id_registro;
         $bioquimico = new ApiBioquimico();
         $bioquimico->glucosa = $request->glucosa;
-        if ($bioquimico->glucosa == null) {
-            return view('alumno.agregar_dieta', compact('id_registro'));
+        if ($bioquimico->glucosa != null) {
+            $bioquimico->id_consulta_paciente = $registrocitas->id_registro;
+            $bioquimico->hbAc1 = $request->hbAc1;
+            $bioquimico->TG = $request->TG;
+            $bioquimico->CT = $request->CT;
+            $bioquimico->HDL = $request->HDL;
+            $bioquimico->LDL = $request->LDL;
+            $bioquimico->AST_perc = $request->AST_perc;
+            $bioquimico->ALT = $request->ALT;
+            $bioquimico->TSH = $request->TSH;
+            $bioquimico->T3 = $request->T3;
+            $bioquimico->T4 = $request->T4;
+            $bioquimico->Hb = $request->Hb;
+            $bioquimico->hierro = $request->hierro;
+            $bioquimico->transferrina = $request->transferrina;
+            $bioquimico->t3_libre = $request->t3_libre;
+            $bioquimico->t4_libre = $request->t4_libre;
+            $bioquimico->hto = $request->hto;
+            $bioquimico->B12 = $request->B12;
+            $bioquimico->folatos = $request->folatos;
+            $bioquimico->PT = $request->PT;
+            $bioquimico->albumina = $request->albumina;
+            $bioquimico->Ca = $request->Ca;
+            $bioquimico->otros = $request->otros_bioquimicos;
+            $bioquimico->save();
         }
-        $bioquimico->id_consulta_paciente = $registrocitas->id_registro;
-        $bioquimico->hbAc1 = $request->hbAc1;
-        $bioquimico->TG = $request->TG;
-        $bioquimico->CT = $request->CT;
-        $bioquimico->HDL = $request->HDL;
-        $bioquimico->LDL = $request->LDL;
-        $bioquimico->AST_perc = $request->AST_perc;
-        $bioquimico->ALT = $request->ALT;
-        $bioquimico->TSH = $request->TSH;
-        $bioquimico->T3 = $request->T3;
-        $bioquimico->T4 = $request->T4;
-        $bioquimico->Hb = $request->Hb;
-        $bioquimico->hierro = $request->hierro;
-        $bioquimico->transferrina = $request->transferrina;
-        $bioquimico->t3_libre = $request->t3_libre;
-        $bioquimico->t4_libre = $request->t4_libre;
-        $bioquimico->hto = $request->hto;
-        $bioquimico->B12 = $request->B12;
-        $bioquimico->folatos = $request->folatos;
-        $bioquimico->PT = $request->PT;
-        $bioquimico->albumina = $request->albumina;
-        $bioquimico->Ca = $request->Ca;
-        $bioquimico->otros = $request->otros_bioquimicos;
-        $bioquimico->save();
-
 
         // dieta paciente
         $instrumento = new ApiDieteticosInstrumentoMedicion();
-        $instrumento->id_consulta_paciente = $request->id_registro;
+        $instrumento->id_consulta_paciente = $id_registro;
         $instrumento->tipo_instrumento = $request->tipo_instrumento;
         $instrumento->desayuno_hora = $request->desayuno_hora;
         $instrumento->colacion1 = $request->colacion1;
@@ -305,15 +316,15 @@ class NotaNutricionController extends Controller
         $instrumento->save();
 
         $diagnostico = new ApiResultadoDiagnostico();
-        $diagnostico->id_consulta_paciente = $request->id_registro;
-        $diagnostico->requestue_ener = $request->requestue_ener;
-        $diagnostico->requestue_proteina = $request->requestue_proteina;
-        $diagnostico->requestue_kg_dia = $request->requestue_kg_dia;
+        $diagnostico->id_consulta_paciente = $id_registro;
+        $diagnostico->reque_ener = $request->reque_ener;
+        $diagnostico->reque_proteina = $request->reque_proteina;
+        $diagnostico->reque_kg_dia = $request->reque_kg_dia;
         $diagnostico->dx_nutricio = $request->dx_nutricio;
         $diagnostico->save();
 
         $generales = new ApiDatosGeneralesDietum();
-        $generales->id_consulta_paciente = $request->id_registro;
+        $generales->id_consulta_paciente = $id_registro;
         $generales->objetivos_dieta = $request->objetivos_dieta;
         $generales->tipo_dieta = $request->tipo_dieta;
         $generales->kcal_dieta = $request->kcal_dieta;
@@ -339,7 +350,7 @@ class NotaNutricionController extends Controller
         $generales->save();
 
         $registro = new ApiRegistroConsultum();
-        $registro->id_registro = $request->id_registro;
+        $registro->id_registro = $id_registro;
         $registro->pendientes = $request->pendientes;
         $registro->nutri_elaborate_data = $request->datos_elaborador;
         $registro->nutri_who_approved_data = $request->datos_nutriologo;
@@ -356,7 +367,7 @@ class NotaNutricionController extends Controller
         //     $generales,
         //     $registro
         // ];
-        return view('alumno.agregar_dieta');
+        return view('alumno.inicio')->with('success', 'Se ha registrado al paciente correctamente');
     }
 
     public function actualizar(Request $request, string $id)

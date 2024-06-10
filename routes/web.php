@@ -7,10 +7,8 @@ use App\Http\Controllers\ListadoPacientes_VistaDirector;
 use App\Http\Controllers\ListadoAlumnos_VistaDirector;
 use App\Http\Controllers\NotaNutricionController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DietaPaciente;
-use App\Http\Controllers\EstudiantesController;
 use App\Http\Controllers\ListadoPacientesRegistros;
 use App\Http\Controllers\ListadoRegistrosConsultaDePaciente;
 
@@ -36,6 +34,7 @@ Route::get('alumno/registros-paciente/{id_paciente}', [ListadoRegistrosConsultaD
 Route::get('alumno/ListadoRegistroPacientes/', function () {
 	return view('alumno.listado_registros_pacientes');
 });
+Route::get('alumno/registro-paciente/{id_paciente}', [NotaNutricionController::class, 'buscar'])->name('registro-paciente');
 
 Route::get('alumno/listado_pacientes_formularios/{id_paciente}', [ListadoRegistrosConsultaDePaciente::class, 'listar_formularios_paciente'])->name('listado_formularios');
 
@@ -52,6 +51,8 @@ Route::patch('controlCitas/actualizar/{id_cita}', [DatosPaciente_ControlCitas::c
 Route::get('alumno/agregar-paciente', function () {
 	return view('alumno.agregar_paciente');
 });
+
+Route::get('alumno/modificar-registro/{id_registro}', [NotaNutricionController::class, 'buscar'])->name('modificar_registro_formulario');
 
 Route::get('alumno/inicio', [ListadoPacientes_VistaAlumno::class, 'enlistar'])->name('alumno.inicio');
 

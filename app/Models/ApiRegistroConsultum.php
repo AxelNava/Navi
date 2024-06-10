@@ -26,7 +26,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $consulta_actual
  * @property string $clinicos
  * @property string|null $dinamometria
- * @property string|null $pendintes
+ * @property string|null $pendientes
  * @property string|null $nutri_elaborate_data
  * @property string|null $nutri_who_approved_data
  * 
@@ -70,7 +70,8 @@ class ApiRegistroConsultum extends Model
 		'consulta_actual',
 		'clinicos',
 		'dinamometria',
-		'medicamentos_suplementos'
+		'medicamentos_suplementos',
+		'pendientes'
 	];
 
 	public function api_datos_paciente()

@@ -173,7 +173,7 @@
     </style>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Agregar paciente') }}
+            Formulario de
         </h2>
     </x-slot>
 
@@ -181,7 +181,6 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <h2>Bienvenido {{ Auth::user()->nombre }}</h2>
                     <div class="formulario">
                         <b style="font-size: 20px">NOTA DE NUTRICIÓN</b>
 
@@ -202,11 +201,12 @@
                                     <div class="primera-parte">
                                         <label for="nombre">NOMBRE</label>
                                         <input type="text" name="nombre" id="nombre" style="width:300px"
-                                            value="{{ old('nombre', '') }}">
+                                            value="{{ old('nombre', $data['paciente']->nombre) }}">
                                         <label for="nombre">EDAD</label>
-                                        <input type="number" name="edad" id="edad" value="{{ old('edad') }}">
+                                        <input type="number" name="edad" id="edad"
+                                            value="{{ old('edad', $data['paciente']->edad) }}">
                                         <label for="nombre">HORA</label>
-                                        <input type="time" name="hora" id="hora" value="{{ old('hora') }}">
+                                        <input type="time" name="hora" id="hora" value="{{ old('hora', $data['control_citas']->hora_cita) }}">
                                     </div>
                                     <div class="segunda-parte">
                                         <br>
