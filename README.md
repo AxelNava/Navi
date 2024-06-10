@@ -63,7 +63,7 @@ Ir al siguiente enlace para descargar nginx
 [nginx/download/nginx-1.26](https://nginx.org/download/nginx-1.26.1.zip)
 
 Para poder instalarlo, se puede seguir el siguiente tutorial para tener la instalación
-[How to install and setup NGINX in Windows 11 [2023]](https://www.youtube.com/watch?v=DKXdkXCgtCQ)
+[How to install and setup NGINX in Windows 11 [2023]](https://www.youtube.com/watch?v=DKXdkXCgtCQ), si se sigue este tutorial, solo seguirlo hasta el minuto 2:46
 Nginx se tiene que instalar como servicio, para esto, se tiene instalar [WinSW](https://github.com/winsw/winsw/releases/tag/v2.12.0).
 
 [Link directo para descarga](https://github.com/winsw/winsw/releases/download/v2.12.0/WinSW-x64.exe)
