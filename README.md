@@ -267,8 +267,9 @@ Estos son los datos para la base de datos
 - port: `3306`
 - host: `localhost`
 
-Para crear el usuario en la base de datos, en caso de que no esté creado, desde la terminal de mariadb o
-desde un cliente SQL que esté conectado a la base de datos, ejecutar el siguiente comando (el usuario que debe de ejecutar esto debe de ser root o 
+Para crear el usuario en la base de datos, en caso de que no esté creado, desde un cliente SQL que esté conectado a la base de datos (por defecto
+MariDB trae un cliente SQL que se llama HeidiSQL, se puede usar ese después de haber instalado MariaDB)
+, ejecutar el siguiente comando (el usuario que debe de ejecutar esto debe de ser root o 
 un usuario con suficientes privilegios para hacerlo).
 
 ```sh
