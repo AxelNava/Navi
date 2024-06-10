@@ -81,6 +81,7 @@ Nginx: `phpsvc.exe` `phpsvc.xml `
 las rutas que están en los archivos .XML, tiene que tener la ruta en donde se encuentra el programa a dar el servicio (
     en este caso, la ruta en donde se encuentra el ejecutable de nginx.exe y el ejecutable de php_cgi.exe
 ). Las rutas a cambiar(en caso de que no sean las mismas) son:
+
 `<executable>c:\nginx\nginx.exe</executable>`
 
 `<logpath>c:\nginx\logs\</logpath>`
