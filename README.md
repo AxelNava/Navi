@@ -13,7 +13,7 @@ las mismas páginas
 Se necesita Git para poder instalar Laravel, para descargar, ir al siguiente link [git/download/win](https://git-scm.com/download/win)
 Para la instalación de git se puede seguir el siguiente tutorial [Cómo Instalar Git en Windows 10 en 2024](https://www.youtube.com/watch?v=JWnZvHOYBDc)
 
-#### NodeJS
+#### NodeJSEspéra
 Otro componente que utiliza Laravel es el administrador de paquete NPM, para poder instalarlo, NodeJS trae
 como por defecto este administrador de paquetes (al menos hasta la 20.14), instalar NodeJS
 con el siguiente link para descargar [nodejs.org/dist/20.14.0/](https://nodejs.org/dist/v20.14.0/node-v20.14.0-x64.msi)
@@ -272,7 +272,9 @@ se ejecuta la siguiente consulta
 ````sql
 CREATE DATABASE navi;
 ````
-Luego se debe de seleccionar la base de datos Utilizando algún cliente SQL (cuando se instala MariaDB se instala HeidiSQL), se debe de importar la base de datos
+Luego se debe de seleccionar la base de datos
+Utilizando algún cliente SQL (cuando se instala MariaDB se instala HeidiSQL),
+se debe de importar la [base de datos](files_config/navi.sql)
 
   
 Para crear el usuario en la base de datos, en caso de que no esté creado, desde un cliente SQL que esté conectado a la base de datos (por defecto
@@ -302,10 +304,6 @@ Para aplicar los cambios que se han hecho, se tiene que ejecutar el siguiente co
 ```sh 
 FLUSH PRIVILEGES;
 ```
-
-Luego se debe de seleccionar la base de datos
-Utilizando algún cliente SQL (cuando se instala MariaDB se instala HeidiSQL),
-se debe de importar la [base de datos](files_config/navi.sql)
 
 
 ### En el proyecto
