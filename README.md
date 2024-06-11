@@ -267,6 +267,13 @@ Estos son los datos para la base de datos
 - port: `3306`
 - host: `localhost`
 
+Primero se debe crear la base de datos, para esto
+se ejecuta la siguiente consulta
+````sql
+CREATE DATABASE navi;
+````
+
+  
 Para crear el usuario en la base de datos, en caso de que no esté creado, desde un cliente SQL que esté conectado a la base de datos (por defecto
 MariDB trae un cliente SQL que se llama HeidiSQL, se puede usar ese después de haber instalado MariaDB)
 , ejecutar el siguiente comando (el usuario que debe de ejecutar esto debe de ser root o 
@@ -294,11 +301,7 @@ Para aplicar los cambios que se han hecho, se tiene que ejecutar el siguiente co
 ```sh 
 FLUSH PRIVILEGES;
 ```
-Primero se debe crear la base de datos, para esto
-se ejecuta la siguiente consulta
-````sql
-CREATE DATABASE navi;
-````
+
 Luego se debe de seleccionar la base de datos
 Utilizando algún cliente SQL (cuando se instala MariaDB se instala HeidiSQL),
 se debe de importar la [base de datos](files_config/navi.sql)
