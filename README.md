@@ -288,7 +288,10 @@ CREATE DATABASE navi;
 Luego se debe de seleccionar la base de datos
 Utilizando algún cliente SQL (cuando se instala MariaDB se instala HeidiSQL),
 se debe de importar la estructura de la [base de datos](files_config/navi.sql)(descargar archivo). Para poder importar esta estructura
-se puede copiar todo el contenido del archivo y pegar dentro de la ventana de script de HeidiSQL y luego ejecutar todo el script (dentro de HeidiSQL, tiene un botón en forma de triangulo, color verde, se puede pulsar ese para ejecutar todo el script).
+se puede copiar todo el contenido del archivo y pegar dentro de la ventana de script de HeidiSQL y luego ejecutar todo el script (
+    en HeidiSQL se puede pulsar el siguiente botón:
+    ![boton_heidi](/images_readme/boton_heidi_ejecutar.png)
+).
 
 Para seleccionar la base de datos, se puede hacer dando doble click a la base de datos (si se usa el cliente) o ejecutando
 la sentencia `use navi;` desde la ventana del script.
