@@ -11,16 +11,18 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property int $comentario
  * @property int $id_registro
-*/
+ */
 
 class ApiComentarioDirector extends Model
 {
-    use HasFactory;
-    protected $table = 'api_comentarios_director';
+	use HasFactory;
+	public $timestamps = false;
+	protected $table = 'api_comentarios_director';
 	protected $primaryKey = 'id_registro';
 	public $incrementing = true;
-    protected $fillable = [
+	protected $fillable = [
 		'comentario',
 		'id_registro',
+
 	];
 }

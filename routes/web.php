@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DietaPaciente;
 use App\Http\Controllers\ListadoPacientesRegistros;
 use App\Http\Controllers\ListadoRegistrosConsultaDePaciente;
+use App\Http\Controllers\ComentariosDirector;
 
 Route::get('/', function () {
 	return view('welcome');
@@ -106,6 +107,10 @@ Route::middleware(['auth', 'role:director'])->group(function () {
 	// 	return view('director.lista_pacientes_alumno', ['id_nutriologo' => $id_nutriologo]);
 	// })->name('director-lista-pacientes-alumno');
 
+	//agregar comentario
+	Route::post('director/comentario', [ComentariosDirector::class, 'store'])->name('agregar_comentario');
+	//ver comentarios
+	Route::get('director/comentario/{id_paciente}', [ComentariosDirector::class, 'show'])->name('ver_comentarios');
 	//ir a la vista de datos del paciente en vista de director
 	Route::get('director/control-citas-paciente/{id}', [DatosPaciente_ControlCitas::class, 'showViewDirector'])->name('director-paciente-control-citas');
 	//traernos el json

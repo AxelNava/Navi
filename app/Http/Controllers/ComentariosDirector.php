@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ApiComentarioDirector;
 use App\Models\ApiControlCita;
+use Illuminate\Support\Facades\Log;
 
 class ComentariosDirector extends Controller
 {
@@ -13,16 +14,18 @@ class ComentariosDirector extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(
-            [
-                'id_registro' => ['required']
-            ]
-        );
+
+        // dd($request->all());
+        // $request->validate(
+        //     [
+        //         'id_registro' => ['required']
+        //     ]
+        // );
         $comentario = new ApiComentarioDirector();
         $comentario->id_registro = $request->id_registro;
         $comentario->comentario = $request->comentario;
         $comentario->save();
-        return view('')->with('success', 'Se ha guardado el comentario');
+        return back()->with('success', 'Se ha guardado el comentario');
     }
 
     /**
@@ -30,6 +33,7 @@ class ComentariosDirector extends Controller
      */
     public function show(string $id_paciente)
     {
+        Log::info('id_paciente: ' . $id_paciente);
         $registros = ApiControlCita::where('id_paciente', $id_paciente)
             ->select('id_registro')->distinct()->get();
         $comentarios = ApiComentarioDirector::whereIn('id_registro', $registros)->get();
@@ -50,5 +54,4 @@ class ComentariosDirector extends Controller
         $comentario_director->save();
         return view('')->with('success', 'Se ha actualizado el comentario');
     }
-
 }

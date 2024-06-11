@@ -94,6 +94,7 @@
                 <td>${dato.circunferencia_cintura}</td>
                 <td>${dato.circunferencia_cadera}</td>
                 <td>${dato.fecha_prox_cita}</td>
+
             `;
             datos_control_citas.appendChild(tr);
         });
