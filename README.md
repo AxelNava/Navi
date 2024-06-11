@@ -24,6 +24,7 @@ Ir al siguiente enlace para descargar MariaDB
 [mariadb.org/download](https://mariadb.org/download/?t=mariadb&p=mariadb&r=11.4.2)
 Se deben de seguir las instrucciones del instalador
 Enlace a un tutorial para instalar MariaDb [01 - Descarga e Instalación de MariaDB | Curso de Base de Datos MariaDB Server](https://www.youtube.com/watch?v=syYStO_BFgw)
+Es importante notar que se tiene que guardar la contraseña que se pone para el usuario root, esto porque se va a utilizar más adelante.
 
 #### PHP
 Ir al siguiente enlace para descargar PHP
@@ -115,7 +116,9 @@ en los archivos XML del paso anterior, por defecto está como `Nginx` y `PHP`
 Una vez que se haya instalado nginx, se tiene que agregar el dominio en los dominios registrados de windows.
 Para esto se debe de ir a la carpeta ``C:\Windows\System32\drivers\etc``
 Se debe de editar el archivo de hosts con un editor con privilegios de administrador, esto puede realizarse desde la terminal utilizando un editor de texto como nvim
-para poner la dirección de 127.0.0.1 y el nombre de host navi.local
+para poner la dirección de 127.0.0.1 y el nombre de host navi.local.
+En caso de que no se cuente con nvim, se debe puede hacer esta modificación usando el block de notas con privilegios de administrador.
+
 Ejemplo de código
 ````sh
 127.0.0.1 navi.local
@@ -247,11 +250,13 @@ Para que pueda funcionar la edición, tienen que ejecutar el editor como root, y
 Clona el proyecto en la carpeta que se definió en la configuración de nginx.
 Una vez que se tenga todos los componentes listos, se tiene que hacer lo siguiente para la base de datos.
 
-Primero que nada se debe de descargar el proyecto (o clonarlo con git), luego de eso, se deben de seguir los siguientes pasos dentro de la carpeta del proyecto.
+Primero que nada se debe de descargar el proyecto (o clonarlo con git), esto en caso de que no se tenga el proyecto ya descargado 
+, luego de eso, se deben de seguir los siguientes pasos dentro de la carpeta del proyecto.
 
 ### Base de datos
-Para configurar la base de datos en el proyecto, se debe de copiar y renombrar el archivo .env.example, y renombrarlo a .env, en este se tienen que sustituir las variables 
-correspondientes.
+Para configurar los datos de acceso a la base de datos en el proyecto,
+se debe de copiar y renombrar el archivo .env.example, y renombrarlo a .env, en este se tienen que sustituir los valores
+de las variables correspondientes.
 
 - DB_CONNECTION=`mysql`
 - DB_HOST=`127.0.0.1`
@@ -260,12 +265,20 @@ correspondientes.
 - DB_USERNAME=`root`
 - DB_PASSWORD=`123456`
 
+Algunas de estas variables pueden aparecer con un `#` al principio, si es así se debe quitar ese `#`.
+
 Estos son los datos para la base de datos
 
 - user: `navi`
 - password: `1>fCT)},dfVZ6Rbv9q*.`
 - port: `3306`
 - host: `localhost`
+
+Para los siguientes pasos, se debe de usar un cliente SQL, uno de estos es HeidiSQL, que se instala al momento de instalar MariaDB,
+se tiene que abrir una nueva conexión a la base de datos con el usuario `root` y la contraseña que se estableció
+durante su instalación, para ver como abrir la conexión se puede volver a ver el [tutorial de instalación](https://www.youtube.com/watch?v=syYStO_BFgw) desde el minuto 11:12,
+y luego de eso abrir un nuevo script de SQL para poder ejecutar las
+sentencias SQL que se presentan en los siguientes pasos y también para poder importar la base de datos.
 
 Primero se debe crear la base de datos, para esto
 se ejecuta la siguiente consulta
@@ -274,29 +287,26 @@ CREATE DATABASE navi;
 ````
 Luego se debe de seleccionar la base de datos
 Utilizando algún cliente SQL (cuando se instala MariaDB se instala HeidiSQL),
-se debe de importar la [base de datos](files_config/navi.sql).
-Para seleccionar la base de datos, se puede hacer dando doble click a la base de datos (si se usa el cliente) o ejecutando
-el comando
-`use Navi;`
+se debe de importar la estructura de la [base de datos](files_config/navi.sql)(descargar archivo). Para poder importar esta estructura
+se puede copiar todo el contenido del archivo y pegar dentro de la ventana de script de HeidiSQL y luego ejecutar todo el script.
 
-  
-Para crear el usuario en la base de datos, en caso de que no esté creado, desde un cliente SQL que esté conectado a la base de datos (por defecto
-MariDB trae un cliente SQL que se llama HeidiSQL, se puede usar ese después de haber instalado MariaDB)
-, ejecutar el siguiente comando (el usuario que debe de ejecutar esto debe de ser root o 
-un usuario con suficientes privilegios para hacerlo).
+Para seleccionar la base de datos, se puede hacer dando doble click a la base de datos (si se usa el cliente) o ejecutando
+la sentencia `use navi;` desde la ventana del script.
+
+Dentro del mismo script de SQL que se abrió, se debe de ejecutar
 
 ```sh
 CREATE USER 'navi'@localhost IDENTIFIED BY '1>fCT)},dfVZ6Rbv9q*.';
 ```
 
-Luego, se debe de ejecutar el siguiente comando para conceder los privilegios al usuario que se
-acaba de crear de hacer todas las operaciones dentro de la base de datos.
+Luego, se debe de ejecutar el siguiente comando para conceder los privilegios al usuario de las cosas
+que puede hacer dentro de la base de datos.
 
 ```sh
 GRANT USAGE ON *.* TO 'navi'@localhost IDENTIFIED BY '1>fCT)},dfVZ6Rbv9q*.';
 ```
 
-Se da acceso al usuario a la base de datos
+Se da acceso al usuario a la base de datos.
 
 ```sh
 GRANT ALL ON `navi`.* TO 'navi'@localhost;
@@ -308,10 +318,13 @@ Para aplicar los cambios que se han hecho, se tiene que ejecutar el siguiente co
 FLUSH PRIVILEGES;
 ```
 
+Para probar que los datos de conexión funcionen, se puede volver a abrir una nueva conexión en el cliente SQL con
+el usuario y contraseña que se acaba de crear.
 
 ### En el proyecto
 Una vez que se haya instalado todo y se tenga la configuración correcta, ahora se tiene que instalar todas las dependencias, para esto
 se tiene que ejecutar los siguientes comando estando en la raíz del proyecto
+
 ```sh
 composer install
 npm install
@@ -321,3 +334,6 @@ php artisan optimize
 php artisan config:cache
 ```
 
+Luego de esto, si todo está funcionando bien, puede abrir un navegador y escribir `navi.local` y debe de aparecer el menú de inicio
+de la aplicación, a continuación se deja un ejemplo:
+![aplicación inicio](/images_readme/inicio_pagina.png)
