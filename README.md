@@ -272,6 +272,7 @@ se ejecuta la siguiente consulta
 ````sql
 CREATE DATABASE navi;
 ````
+Luego se debe de seleccionar la base de datos Utilizando algún cliente SQL (cuando se instala MariaDB se instala HeidiSQL), se debe de importar la base de datos
 
   
 Para crear el usuario en la base de datos, en caso de que no esté creado, desde un cliente SQL que esté conectado a la base de datos (por defecto
