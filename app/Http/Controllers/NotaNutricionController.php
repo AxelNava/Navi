@@ -94,6 +94,8 @@ class NotaNutricionController extends Controller
             'porcentaje_grasa_corporal' => ['required', 'decimal:0,2'],
             'masa_muscular' => ['required', 'decimal:0,2'],
             'masa_libre_grasa' => ['required', 'decimal:0,2'],
+            'rango_peso_saludable' => ['nullable'],
+            'indice_libre_grasa' => ['nullable'],
             'act' => ['required', 'decimal:0,2'],
             'circunferencia_cintura' => ['required', 'numeric', 'max:32767'],
             'circunferencia_cadera' => ['required', 'numeric', 'max:32767'],
@@ -183,7 +185,7 @@ class NotaNutricionController extends Controller
         $registrocitas->motivacion = $request->motivacion;
         $registrocitas->hidratacion = [
             'hidratacion' => $request->hidratacion,
-            'otros_hidratacion' => $request->otros_hidratacion ?? ''
+            'otros_hidratacion' => $request->otras_bebidas ?? ''
         ];
         $registrocitas->sintomas_generales = $request->sintomas_generales;
 
@@ -216,6 +218,10 @@ class NotaNutricionController extends Controller
         $composicioncorporal->imc = $request->imc;
         $composicioncorporal->pgc = $request->porcentaje_grasa_corporal;
         $composicioncorporal->rcc = $request->rcc;
+        $composicioncorporal->masa_libre_grasa = $request->masa_libre_grasa;
+        $composicioncorporal->indice_libre_grasa = $request->indice_libre_grasa;
+        $composicioncorporal->rango_peso_saludable = $request->rango_peso_saludable;
+
         $composicioncorporal->metabolismo_kcal_basal = $request->metabolismo_kcal_basal ?? 0;
         $composicioncorporal->save();
 
@@ -379,14 +385,7 @@ class NotaNutricionController extends Controller
     public function actualizar(Request $request, string $id)
     {
         $request->validate([
-            'nombre' => ['required'],
-            'edad' => ['required', 'integer', 'positive'],
-            'genero' => ['required', Rule::enum(Genero::class)],
-            'expediente' => [
-                'required',
-                'unique:App\Models\ApiDatosPaciente, expediente,' . $id
-            ],
-            'fecha_nacimiento' => ['required', 'date_format:Y-m-d'],
+            'edad' => ['required', 'integer'],
             'motivo_consulta' => ['required', 'max:500'],
             'sintoma_gastro' => ['required'],
             'apego_plan_anterior_barr_apego' => ['required', 'max:250'],
@@ -407,10 +406,12 @@ class NotaNutricionController extends Controller
             'porcentaje_grasa_corporal' => ['required', 'decimal:0,2'],
             'masa_muscular' => ['required', 'decimal:0,2'],
             'masa_libre_grasa' => ['required', 'decimal:0,2'],
+            'rango_peso_saludable' => ['nullable'],
+            'indice_libre_grasa' => ['nullable'],
             'act' => ['required', 'decimal:0,2'],
             'circunferencia_cintura' => ['required', 'numeric', 'max:32767'],
             'circunferencia_cadera' => ['required', 'numeric', 'max:32767'],
-            'hora' => ['required', 'date_format:H:i'],
+            'hora' => ['required', 'date_format:H:i:s'],
             'dinamometria' => ['nullable', 'decimal:0,2'],
             'interpretacion_dinamometrica' => ['nullable'],
             'pgc' => ['nullable', 'decimal:0,2'],
@@ -466,7 +467,10 @@ class NotaNutricionController extends Controller
         $registrocitas->otros_sintoma_gastro = $request->otros_sintoma_gastro ?? '';
         $registrocitas->apego_plan_anterior_barr_apego = $request->apego_plan_anterior_barr_apego;
         $registrocitas->motivacion = $request->motivacion;
-        $registrocitas->hidratacion = $request->hidratacion;
+        $registrocitas->hidratacion = [
+            'hidratacion' => $request->hidratacion,
+            'otros_hidratacion' => $request->otras_bebidas ?? ''
+        ];
         $registrocitas->sintomas_generales = $request->sintomas_generales;
         $registrocitas->clinicos = $request->dx_medicos;
         $registrocitas->dinamometria = [
@@ -502,11 +506,15 @@ class NotaNutricionController extends Controller
         $composicioncorporal = ApiComposicionCorporalDiagnosticoObesidad::where('id_consulta_paciente', $registrocitas->id_registro)->first();
         $composicioncorporal->peso = $request->peso;
         $composicioncorporal->masa_muscular = $request->masa_muscular;
-        $composicioncorporal->mas_grasa_corporal = $request->masa_grasa_corporal;
+        $composicioncorporal->mas_grasa_corporal = $request->mas_grasa_corporal;
         $composicioncorporal->act = $request->act;
         $composicioncorporal->imc = $request->imc;
         $composicioncorporal->pgc = $request->porcentaje_grasa_corporal;
         $composicioncorporal->rcc = $request->rcc;
+        $composicioncorporal->masa_libre_grasa = $request->masa_libre_grasa;
+        $composicioncorporal->indice_libre_grasa = $request->indice_masa_libre_grasa;
+        $composicioncorporal->rango_peso_saludable = $request->rango_peso_saludable;
+
         $composicioncorporal->metabolismo_kcal_basal = $request->metabolismo_kcal_basal ?? 0;
         $composicioncorporal->save();
 
@@ -524,38 +532,126 @@ class NotaNutricionController extends Controller
         $freq->azucares = $request->azucares;
         $freq->save();
 
-        if ($request->glucosa == null) {
-            return "se actualizaron los datos, menos bioquimicos";
+        if ($request->glucosa != null) {
+            $bioquimico = ApiBioquimico::where('id_consulta_paciente', $registrocitas->id_registro)->first();
+            if ($bioquimico == null) {
+                $bioquimico = new ApiBioquimico();
+                $bioquimico->id_consulta_paciente = $registrocitas->id_registro;
+            }
+            $bioquimico->hbAc1 = $request->hbAc1;
+            $bioquimico->TG = $request->TG;
+            $bioquimico->CT = $request->CT;
+            $bioquimico->HDL = $request->HDL;
+            $bioquimico->LDL = $request->LDL;
+            $bioquimico->AST_perc = $request->AST_perc;
+            $bioquimico->ALT = $request->ALT;
+            $bioquimico->TSH = $request->TSH;
+            $bioquimico->T3 = $request->T3;
+            $bioquimico->T4 = $request->T4;
+            $bioquimico->Hb = $request->Hb;
+            $bioquimico->hierro = $request->hierro;
+            $bioquimico->transferrina = $request->transferrina;
+            $bioquimico->t3_libre = $request->t3_libre;
+            $bioquimico->t4_libre = $request->t4_libre;
+            $bioquimico->hto = $request->hto;
+            $bioquimico->B12 = $request->B12;
+            $bioquimico->folatos = $request->folatos;
+            $bioquimico->PT = $request->PT;
+            $bioquimico->albumina = $request->albumina;
+            $bioquimico->Ca = $request->Ca;
+            $bioquimico->otros = $request->otros_bioquimicos;
+            $bioquimico->save();
         }
-        $bioquimico = ApiBioquimico::where('id_consulta_paciente', $registrocitas->id_registro)->first();
-        if ($bioquimico == null) {
-            $bioquimico = new ApiBioquimico();
-            $bioquimico->id_consulta_paciente = $registrocitas->id_registro;
-        }
-        $bioquimico->hbAc1 = $request->hbAc1;
-        $bioquimico->TG = $request->TG;
-        $bioquimico->CT = $request->CT;
-        $bioquimico->HDL = $request->HDL;
-        $bioquimico->LDL = $request->LDL;
-        $bioquimico->AST_perc = $request->AST_perc;
-        $bioquimico->ALT = $request->ALT;
-        $bioquimico->TSH = $request->TSH;
-        $bioquimico->T3 = $request->T3;
-        $bioquimico->T4 = $request->T4;
-        $bioquimico->Hb = $request->Hb;
-        $bioquimico->hierro = $request->hierro;
-        $bioquimico->transferrina = $request->transferrina;
-        $bioquimico->t3_libre = $request->t3_libre;
-        $bioquimico->t4_libre = $request->t4_libre;
-        $bioquimico->hto = $request->hto;
-        $bioquimico->B12 = $request->B12;
-        $bioquimico->folatos = $request->folatos;
-        $bioquimico->PT = $request->PT;
-        $bioquimico->albumina = $request->albumina;
-        $bioquimico->Ca = $request->Ca;
-        $bioquimico->otros = $request->otros_bioquimicos;
 
-        $bioquimico->save();
-        return response()->json(["se actualizaron los datos", "id_registro_consulta" => $controlcita->id_registro_consulta]);
+        $diagnostico = ApiResultadoDiagnostico::where('id_consulta_paciente', $registrocitas->id_registro)->first();
+        if ($diagnostico == null) {
+            $diagnostico = new ApiResultadoDiagnostico();
+            $diagnostico->id_consulta_paciente = $registrocitas->id_registro;
+        }
+        $diagnostico->reque_ener = $request->reque_ener;
+        $diagnostico->reque_proteina = $request->reque_proteina;
+        $diagnostico->reque_kg_dia = $request->reque_kg_dia;
+        $diagnostico->dx_nutricio = $request->dx_nutricio;
+        $diagnostico->save();
+
+        $datos = ApiDatosGeneralesDietum::where('id_consulta_paciente', $diagnostico->id_consulta_paciente)->first();
+        if ($datos == null) {
+            $datos = new ApiDatosGeneralesDietum();
+            $datos->id_consulta_paciente = $diagnostico->id_consulta_paciente;
+        }
+        $datos->objetivos_dieta = $request->objetivos_dieta;
+        $datos->tipo_dieta = $request->tipo_dieta;
+        $datos->kcal_dieta = $request->kcal_dieta;
+        $datos->prot_porcent_dieta = $request->prot_porcent_dieta;
+        $datos->prot_kg_dia_dieta = $request->prot_kg_dia_dieta;
+        $datos->lip_porcen_dieta = $request->lip_porcen_dieta;
+        $datos->lip_g_dieta = $request->lip_g_dieta;
+        $datos->hco_porcen_dieta = $request->hco_porcen_dieta;
+        $datos->hco_g_dieta = $request->hco_g_dieta;
+        $datos->suplementos = $request->suplementos;
+        $datos->metas_smart = $request->metas_smart;
+        $datos->param_meta = [
+            'peso' => $request->meta_peso,
+            'porcen_grasa' => $request->meta_grasa,
+            'musculo' => $request->meta_musculo,
+            'c_cintura' => $request->meta_cintura,
+            'horarios' => $request->meta_horario,
+            'm_habitos' => $request->meta_mejorar,
+            'selec_alimentos' => $request->meta_alimentos
+        ];
+        $datos->educacion = $request->educacion;
+        $datos->monitoreo = $request->monitoreo;
+
+        $datos->save();
+
+        $instrum = ApiDieteticosInstrumentoMedicion::where('id_consulta_paciente', $diagnostico->id_consulta_paciente)->first();
+        if ($instrum == null) {
+            $instrum = new ApiDieteticosInstrumentoMedicion();
+            $instrum->id_consulta_paciente = $diagnostico->id_consulta_paciente;
+        }
+        $instrum->tipo_instrumento = $request->instrumento;
+        $instrum->desayuno_hora = $request->desayuno_hora;
+        $instrum->colacion1 = $request->colacion1;
+        $instrum->comida_hora = $request->comida_hora;
+        $instrum->colacion2 = $request->colacion2;
+        $instrum->cena_hora = $request->cena_hora;
+        $instrum->colacion3 = $request->colacion3;
+        $instrum->grupo_total_eq = [
+            'verduras' => $request->verduras,
+            'frutas' => $request->frutas,
+            'cereales' => $request->cereales,
+            'leguminosas' => $request->leguminosas,
+            'carnes' => $request->carnes,
+            'leche' => $request->leche,
+            'grasa' => $request->grasa,
+            'azucar' => $request->azucar
+        ];
+        $instrum->total_kcal = $request->total_kcal;
+        $instrum->total_prot = [
+            'prot_porcent' => $request->total_prot,
+            'prot_g' => $request->prot_g
+        ];
+        $instrum->total_lip = [
+            'lip_porcent' => $request->total_lip,
+            'lip_g' => $request->lip_g
+        ];
+        $instrum->total_hco = [
+            'hco_porcent' => $request->total_hco,
+            'hco_g' => $request->hco_g
+        ];
+        $instrum->adecuacion_porcen_ener_kcal = $request->adecuacion_porcen_ener_kcal;
+        $instrum->adecuacion_porcen_ene = $request->adecuacion_porcen_ene;
+        $instrum->adecuacion_porcen_prot = $request->adecuacion_porcen_prot;
+        $instrum->adecuacion_porcen_lip = $request->adecuacion_porcen_lip;
+        $instrum->adecuacion_porcen_hco = $request->adecuacion_porcen_hco;
+        $instrum->aspectos_cualita_dieta_habitual = $request->aspectos_cualita_dieta_habitual;
+        $instrum->save();
+
+        $registrocitas->pendientes = $request->pendientes;
+        $registrocitas->nutri_elaborate_data = $request->datos_elaborador;
+        $registrocitas->nutri_who_approved_data = $request->datos_nutriologo;
+        $registrocitas->save();
+
+        return redirect()->route('modificar_registro_formulario', ['id_registro' => $registrocitas->id_registro])->with('success', 'Se han actualizado los datos');
     }
 }

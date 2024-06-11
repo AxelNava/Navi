@@ -268,8 +268,8 @@
                                     </div>
                                     <div class="cuarta-parte">
                                         <label for="otros">OTROS</label>
-                                        <input type="text" style="width:300px" name="otros"
-                                            value="{{ old('otros') }}">
+                                        <input type="text" style="width:300px" name="otros_sintoma_gastro"
+                                            value="{{ old('otros_sintoma_gastro') }}">
                                         <label for="apego_plan_anterior_barr_apego">APEGO A PLAN ANTERIOR</label>
                                         <input type="text" style="width:300px"
                                             name="apego_plan_anterior_barr_apego"
@@ -437,8 +437,8 @@
                                                     <input type="text" style="height: 30px"
                                                         name="rango_peso_saludable"
                                                         value="{{ old('rango_peso_saludable') }}">
-                                                    <input type="text" style="height: 30px" name="rcc"
-                                                        value="{{ old('rcc') }}">
+                                                    <input type="text" style="height: 30px" name="indice_libre_grasa"
+                                                        value="{{ old('indice_libre_grasa') }}">
                                                     <input type="text" style="height: 30px"
                                                         name="porcentaje_grasa_corporal"
                                                         value="{{ old('porcentaje_grasa_corporal') }}">

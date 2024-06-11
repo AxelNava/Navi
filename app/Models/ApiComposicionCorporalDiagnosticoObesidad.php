@@ -16,6 +16,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property float $peso
  * @property float $masa_muscular
  * @property float $mas_grasa_corporal
+ * @property float $masa_libre_grasa
+ * @property float $indice_libre_grasa
+ * @property string $rango_peso_saludable
  * @property float $act
  * @property float $imc
  * @property float $pgc
@@ -54,6 +57,9 @@ class ApiComposicionCorporalDiagnosticoObesidad extends Model
 		'act',
 		'imc',
 		'pgc',
+		'masa_libre_grasa',
+		'indice_libre_grasa',
+		'rango_peso_saludable',
 		'rcc',
 		'metabolismo_kcal_basal'
 	];

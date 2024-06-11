@@ -173,7 +173,7 @@
     </style>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Formulario de
+            Formulario de {{$data['paciente']->nombre}}
         </h2>
     </x-slot>
 
@@ -193,15 +193,14 @@
                                 </ul>
                             </div>
                         @endif
-                        <form action="{{ route('nota-nutricion_crear') }}" method="POST">
-                            @csrf
+                        <form action="{{ route('nota-nutricion_actualizar', $data['registro_consulta']['id_registro']) }}" method="POST">
+                            @csrf @method('PATCH')
                             <div class="primer-form">
 
                                 <div class="inputs-form">
                                     <div class="primera-parte">
-                                        <label for="nombre">NOMBRE</label>
-                                        <input type="text" name="nombre" id="nombre" style="width:300px"
-                                            value="{{ old('nombre', $data['paciente']->nombre) }}">
+                                        <label for="nombre"><strong>NOMBRE</strong></label>
+                                        <label for="">{{$data['paciente']->nombre}}</label>
                                         <label for="nombre">EDAD</label>
                                         <input type="number" name="edad" id="edad"
                                             value="{{ old('edad', $data['paciente']->edad) }}">
@@ -239,37 +238,38 @@
                                         {{-- revisar aqui --}}
                                         <label for="sintomas">SÍNTOMAS GASTROINTESTINALES:</label>
                                         <label for="bristol">BRISTOL:</label>
-                                        <input type="radio" value="bristol" name='sintoma_gastro'
-                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']) == 'bristol')>
+                                        
+                                        <input type="radio" value="Bristol" name='sintoma_gastro'
+                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']) == 'Bristol')>
                                         <label for="estreñimiento">ESTREÑIMIENTO:</label>
-                                        <input type="radio" value="estreñimiento" name='sintoma_gastro'
-                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']) == 'estreñimiento')>
+                                        <input type="radio" value="Estreñimiento" name='sintoma_gastro'
+                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']) == 'Estreñimiento')>
                                         <label for="diarrea">DIARREA:</label>
-                                        <input type="radio" value="diarrea" name='sintoma_gastro'
-                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']) == 'diarrea')>
+                                        <input type="radio" value="Diarrea" name='sintoma_gastro'
+                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']) == 'Diarrea')>
                                         <label for="reflujo">REFLUJO:</label>
-                                        <input type="radio" value="reflujo" name='sintoma_gastro'
-                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']) == 'reflujo')>
+                                        <input type="radio" value="Reflujo" name='sintoma_gastro'
+                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']) == 'Reflujo')>
                                         <label for="gastritis">GASTRITIS:</label>
-                                        <input type="radio" value="gastritis" name='sintoma_gastro'
+                                        <input type="radio" value="Gastritis" name='sintoma_gastro'
                                             @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']) == 'Gastritis')>
                                         <label for="saciedad">SACIEDAD:</label>
-                                        <input type="radio" value="saciedad" name='sintoma_gastro'
-                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']) == 'saciedad')>
+                                        <input type="radio" value="Saciedad" name='sintoma_gastro'
+                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']) == 'Saciedad')>
                                         <label for="temprana">TEMPRANA:</label>
-                                        <input type="radio" value="temprana" name='sintoma_gastro'
-                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']) == 'temprana')>
+                                        <input type="radio" value="Temprana" name='sintoma_gastro'
+                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']) == 'Temprana')>
                                         <label for="apetito">APETITO:</label>
-                                        <input type="radio" value="apetito" name='sintoma_gastro'
-                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']) == 'apetito')>
+                                        <input type="radio" value="Apetito" name='sintoma_gastro'
+                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']) == 'Apetito')>
                                         <label for="flatulencia">FLATULENCIA:</label>
-                                        <input type="radio" value="flatulencia" name='sintoma_gastro'
-                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']) == 'flatulencia')>
+                                        <input type="radio" value="Flatulencia" name='sintoma_gastro'
+                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']) == 'Flatulencia')>
                                     </div>
                                     <div class="cuarta-parte">
                                         <label for="otros">OTROS</label>
-                                        <input type="text" style="width:300px" name="otros"
-                                            value="{{ old('otros', $data['registro_consulta']['otros_sintoma_gastro']) }}">
+                                        <input type="text" style="width:300px" name="otros_sintoma_gastro"
+                                            value="{{ old('otros_sintoma_gastro', $data['registro_consulta']['otros_sintoma_gastro']) }}">
                                         <label for="apego_plan_anterior_barr_apego">APEGO A PLAN ANTERIOR</label>
                                         <input type="text" style="width:300px"
                                             name="apego_plan_anterior_barr_apego"
@@ -416,7 +416,7 @@
                                                         value="{{ old('mas_grasa_corporal', $data['control_citas']['masa_grasa_corporal']) }}">
                                                     <input type="text" style="height: 30px"
                                                         name="masa_libre_grasa"
-                                                        value="{{ old('masa_libre_grasa', $data['control_citas']['masa_libre_grasa'] ?? '') }}">
+                                                        value="{{ old('masa_libre_grasa', $data['composcion_corp']['masa_libre_grasa'] ?? '') }}">
                                                     <input type="text" style="height: 30px" name="act"
                                                         value="{{ old('act', $data['control_citas']['agua_corpolar']) }}">
                                                 </div>
@@ -437,10 +437,10 @@
                                                         value="{{ old('rcc', $data['composcion_corp']['rcc']) }}">
                                                     <input type="text" style="height: 30px"
                                                         name="rango_peso_saludable"
-                                                        value="{{ old('rango_peso_saludable', $data['control_citas']['rango_peso_saludable'] ?? '') }}">
+                                                        value="{{ old('rango_peso_saludable', $data['composcion_corp']['rango_peso_saludable'] ?? '') }}">
                                                     <input type="text" style="height: 30px"
                                                         name="indice_masa_libre_grasa"
-                                                        value="{{ old('indice_masa_libre_grasa', $data['control_citas']['masa_libre_grasa'] ?? '') }}">
+                                                        value="{{ old('indice_masa_libre_grasa', $data['composcion_corp']['indice_libre_grasa'] ?? '') }}">
                                                     <input type="text" style="height: 30px"
                                                         name="porcentaje_grasa_corporal"
                                                         value="{{ old('porcentaje_grasa_corporal', $data['composcion_corp']['pgc']) }}">
@@ -716,36 +716,36 @@
                                 <br>
                                 <label>Desayuno hora: </label>
                                 <input type="time" name="desayuno_hora"
-                                    value="{{ old('desayuno_hora', $data['instrumento']['desayuno_hora']) }}">
+                                    value="{{ old('desayuno_hora', $data['instrumento']['desayuno_hora'] ?? '') }}">
                                 <br>
                                 <label>
                                     Colación:
                                     <input type="text" name="colacion1"
-                                        value="{{ old('colacion1', $data['instrumento']['colacion1']) }}">
+                                        value="{{ old('colacion1', $data['instrumento']['colacion1'] ?? '') }}">
                                 </label>
                                 <br>
                                 <label>
                                     Comida hora:
                                     <input type="time" name="comida_hora"
-                                        value="{{ old('comida_hora', $data['instrumento']['comida_hora']) }}">
+                                        value="{{ old('comida_hora', $data['instrumento']['comida_hora'] ?? '') }}">
                                 </label>
                                 <br>
                                 <label>
                                     Colación:
                                     <input type="text" name="colacion2"
-                                        value="{{ old('colacion2', $data['instrumento']['colacion2']) }}">
+                                        value="{{ old('colacion2', $data['instrumento']['colacion2'] ?? '') }}">
                                 </label>
                                 <br>
                                 <label>
                                     Cena hora:
                                     <input type="time" name="cena_hora"
-                                        value="{{ old('cena_hora', $data['instrumento']['cena_hora']) }}">
+                                        value="{{ old('cena_hora', $data['instrumento']['cena_hora'] ?? '') }}">
                                 </label>
                                 <br>
                                 <label>
                                     Colación:
                                     <input type="text" name="colacion3"
-                                        value="{{ old('colacion3', $data['instrumento']['colacion3']) }}">
+                                        value="{{ old('colacion3', $data['instrumento']['colacion3'] ?? '') }}">
                                 </label>
                                 <br><br>
                                 <label>
@@ -789,123 +789,123 @@
                                 <label>
                                     % ADECUACIÓN:<br>
                                     Energia:<input type="text" name="adecuacion_porcen_ene"
-                                        value="{{ old('adecuacion_porcen_ene', $data['instrumento']['adecuacion_porcen_ene']) }}">
+                                        value="{{ old('adecuacion_porcen_ene', $data['instrumento']['adecuacion_porcen_ene'] ?? '') }}">
                                     Kcal:<input type="text" name="adecuacion_porcen_ener_kcal"
-                                        value="{{ old('adecuacion_porcen_ener_kcal', $data['instrumento']['adecuacion_porcen_ener_kcal']) }}">
+                                        value="{{ old('adecuacion_porcen_ener_kcal', $data['instrumento']['adecuacion_porcen_ener_kcal'] ?? '') }}">
                                     Prot:<input type="text" name="adecuacion_porcen_prot"
-                                        value="{{ old('adecuacion_porcen_prot', $data['instrumento']['adecuacion_porcen_prot']) }}">
+                                        value="{{ old('adecuacion_porcen_prot', $data['instrumento']['adecuacion_porcen_prot'] ?? '') }}">
                                     Lip:<input type="text" name="adecuacion_porcen_lip"
-                                        value="{{ old('adecuacion_porcen_lip', $data['instrumento']['adecuacion_porcen_lip']) }}">
+                                        value="{{ old('adecuacion_porcen_lip', $data['instrumento']['adecuacion_porcen_lip'] ?? '') }}">
                                     Hco:<input type="text" name="adecuacion_porcen_hco"
-                                        value="{{ old('adecuacion_porcen_hco', $data['instrumento']['adecuacion_porcen_hco']) }}">
+                                        value="{{ old('adecuacion_porcen_hco', $data['instrumento']['adecuacion_porcen_hco'] ?? '') }}">
                                     <br>
                                     Aspectos cualitativos de dieta habitual:<input type="text"
                                         name="aspectos_cualita_dieta_habitual"
-                                        value="{{ old('aspectos_cualita_dieta_habitual', $data['instrumento']['aspectos_cualita_dieta_habitual']) }}">
+                                        value="{{ old('aspectos_cualita_dieta_habitual', $data['instrumento']['aspectos_cualita_dieta_habitual'] ?? '') }}">
                                 </label>
                                 <br><br>
                                 <label>
                                     REQUERIMIENTOS:<br>
                                     Energia:<input type="text" name="reque_ener"
-                                        value="{{ old('reque_ener', $data['diagnostico']['reque_ener']) }}">
+                                        value="{{ old('reque_ener', $data['diagnostico']['reque_ener'] ?? '') }}">
                                     Proteina total:<input type="text" name="reque_proteina"
-                                        value="{{ old('reque_proteina', $data['diagnostico']['reque_proteina']) }}">(<input
+                                        value="{{ old('reque_proteina', $data['diagnostico']['reque_proteina'] ?? '') }}">(<input
                                         type="text" name="reque_kg_dia"
-                                        value="{{ old('reque_kg_dia', $data['diagnostico']['reque_kg_dia']) }}">)
+                                        value="{{ old('reque_kg_dia', $data['diagnostico']['reque_kg_dia'] ?? '') }}">)
                                 </label>
                                 <br><br>
                                 <label>
                                     DX:NUTRICIO:<br>
                                     <input type="text" name="dx_nutricio"
-                                        value="{{ old('dx_nutricio', $data['diagnostico']['dx_nutricio']) }}">
+                                        value="{{ old('dx_nutricio', $data['diagnostico']['dx_nutricio'] ?? '') }}">
                                 </label>
                                 <br>
                                 <label>
                                     OBJETIVOS:<br>
                                     <input type="text" name="objetivos_dieta"
-                                        value="{{ old('objetivos_dieta', $data['generales']['objetivos_dieta']) }}">
+                                        value="{{ old('objetivos_dieta', $data['generales']['objetivos_dieta'] ?? '') }}">
                                 </label>
                                 <br>
                                 <label>
                                     PLAN DE ALIMENTACIÓN:<br>
                                     Dieta <input type="text" name="tipo_dieta"
-                                        value="{{ old('tipo_dieta', $data['generales']['tipo_dieta']) }}"> de <input
-                                        type="text" name="kcal_dieta"
-                                        value="{{ old('kcal_dieta', $data['generales']['kcal_dieta']) }}">
+                                        value="{{ old('tipo_dieta', $data['generales']['tipo_dieta'] ?? '') }}"> de
+                                    <input type="text" name="kcal_dieta"
+                                        value="{{ old('kcal_dieta', $data['generales']['kcal_dieta'] ?? '') }}">
                                     Prot:<input type="text" name="prot_porcent_dieta"
-                                        value="{{ old('prot_porcent_dieta', $data['generales']['prot_porcent_dieta']) }}">(<input
+                                        value="{{ old('prot_porcent_dieta', $data['generales']['prot_porcent_dieta'] ?? '') }}">(<input
                                         type="text" name="prot_kg_dia_dieta"
-                                        value="{{ old('prot_kg_dia_dieta', $data['generales']['prot_kg_dia_dieta']) }}">)
+                                        value="{{ old('prot_kg_dia_dieta', $data['generales']['prot_kg_dia_dieta'] ?? '') }}">)
                                     Lip:<input type="text" name="lip_porcen_dieta"
-                                        value="{{ old('lip_porcen_dieta', $data['generales']['lip_porcen_dieta']) }}">(<input
+                                        value="{{ old('lip_porcen_dieta', $data['generales']['lip_porcen_dieta'] ?? '') }}">(<input
                                         type="text" name="lip_g_dieta"
-                                        value="{{ old('lip_g_dieta', $data['generales']['lip_g_dieta']) }}">)
+                                        value="{{ old('lip_g_dieta', $data['generales']['lip_g_dieta'] ?? '') }}">)
                                     Hco:<input type="text" name="hco_porcen_dieta"
-                                        value="{{ old('hco_porcen_dieta', $data['generales']['hco_porcen_dieta']) }}">(<input
+                                        value="{{ old('hco_porcen_dieta', $data['generales']['hco_porcen_dieta'] ?? '') }}">(<input
                                         type="text" name="hco_g_dieta"
-                                        value="{{ old('hco_g_dieta', $data['generales']['hco_g_dieta']) }}">)
+                                        value="{{ old('hco_g_dieta', $data['generales']['hco_g_dieta'] ?? '') }}">)
                                 </label>
                                 <br>
                                 <label>
                                     SUPLEMENTOS:<br>
                                     <input type="text" name="suplementos"
-                                        value="{{ old('suplementos', $data['generales']['suplementos']) }}">
+                                        value="{{ old('suplementos', $data['generales']['suplementos'] ?? '') }}">
                                 </label>
                                 <br>
                                 <label>
                                     METAS SMART:<br>
                                     <input type="text" name="metas_smart"
-                                        value="{{ old('metas_smart', $data['generales']['metas_smart']) }}">
+                                        value="{{ old('metas_smart', $data['generales']['metas_smart'] ?? '') }}">
                                 </label>
                                 <br>
                                 <label>
                                     PARAMETROS META:<br>
                                     Peso:<input type="text" name="meta_peso"
-                                        value="{{ old('meta_peso', $data['generales']['param_meta']['peso']) }}">
+                                        value="{{ old('meta_peso', $data['generales']['param_meta']['peso'] ?? '') }}">
                                     %Grasa:<input type="text" name="meta_grasa"
-                                        value="{{ old('meta_grasa', $data['generales']['param_meta']['porcen_grasa']) }}">
+                                        value="{{ old('meta_grasa', $data['generales']['param_meta']['porcen_grasa'] ?? '') }}">
                                     Músculo:<input type="text" name="meta_musculo"
-                                        value="{{ old('meta_musculo', $data['generales']['param_meta']['musculo']) }}">
+                                        value="{{ old('meta_musculo', $data['generales']['param_meta']['musculo'] ?? '') }}">
                                     C. Cintura:<input type="text" name="meta_cintura"
-                                        value="{{ old('meta_cintura', $data['generales']['param_meta']['c_cintura']) }}">
+                                        value="{{ old('meta_cintura', $data['generales']['param_meta']['c_cintura'] ?? '') }}">
                                     <br>
                                     Horarios:<input type="text" name="meta_horario"
-                                        value="{{ old('meta_horario', $data['generales']['param_meta']['horarios']) }}">
+                                        value="{{ old('meta_horario', $data['generales']['param_meta']['horarios'] ?? '') }}">
                                     Mejorar hábitos:<input type="text" name="meta_mejorar"
-                                        value="{{ old('meta_mejorar', $data['generales']['param_meta']['m_habitos']) }}">
+                                        value="{{ old('meta_mejorar', $data['generales']['param_meta']['m_habitos'] ?? '') }}">
                                     Selección de alimentos:<input type="text" name="meta_alimentos"
-                                        value="{{ old('meta_alimentos', $data['generales']['param_meta']['selec_alimentos']) }}">
+                                        value="{{ old('meta_alimentos', $data['generales']['param_meta']['selec_alimentos'] ?? '') }}">
                                 </label>
                                 <br>
                                 <label>
                                     EDUCACIÓN:<br>
                                     <input type="text" name="educacion"
-                                        value="{{ old('educacion', $data['generales']['educacion']) }}">
+                                        value="{{ old('educacion', $data['generales']['educacion'] ?? '') }}">
                                 </label>
                                 <br>
                                 <label>
                                     MONITOREO:<br>
                                     <input type="text" name="monitoreo"
-                                        value="{{ old('monitoreo', $data['generales']['monitoreo']) }}">
+                                        value="{{ old('monitoreo', $data['generales']['monitoreo'] ?? '') }}">
                                 </label>
                                 <br>
                                 <label>
                                     PENDIENTES:<br>
                                     <input type="text" name="pendientes"
-                                        value="{{ old('pendientes', $data['registro_consulta']['pendientes']) }}">
+                                        value="{{ old('pendientes', $data['registro_consulta']['pendientes'] ?? '') }}">
                                 </label>
                                 <br>
                                 <label>
                                     NOMBRE COMPLETO, FIRMA Y CÉDULA PROFESIONAL DE QUIEN ELABORÓ LA HISTORIA CLINICA
                                     NUTRICIA:<br>
                                     <input type="text" name="datos_elaborador"
-                                        value="{{ old('datos_elaborador', $data['registro_consulta']['nutri_elaborate_data']) }}">
+                                        value="{{ old('datos_elaborador', $data['registro_consulta']['nutri_elaborate_data'] ?? '') }}">
                                 </label>
                                 <br>
                                 <label>
                                     NOMBRE COMPLETO, FIRMA Y CÉDULA PROFESIONAL DE NUTRIÓLOG() RESPONSABLE:<br>
                                     <input type="text" name="datos_nutriologo"
-                                        value="{{ old('datos_nutriologo', $data['registro_consulta']['nutri_elaborate_data']) }}">
+                                        value="{{ old('datos_nutriologo', $data['registro_consulta']['nutri_elaborate_data'] ?? '') }}">
                                 </label>
 
                                 <button type="submit" class="agregar-alumno">Crear</button>
