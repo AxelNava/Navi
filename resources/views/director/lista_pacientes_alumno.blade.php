@@ -38,7 +38,7 @@
 			<div class="p-6 text-gray-900">
 				<h1 class="nutriologo-nombre"></h1>
 				<h1 class="nutriologo-pacientes"></h1>
-				<button type="button" style="display:none" id='trigger' data-idNutriologo="{{ $id_nutriologo }}"></button>                    <div id="pacientes">
+				<button type="button" style="display:none" id='trigger' data-idNutriologo="{{ $id_nutriologo }}" data-urlBase="{{ route('director-paciente-control-citas', '') }}"></button>                    <div id="pacientes">
 				<div class="pacientes">
 				</div>
 			</div>
@@ -53,24 +53,31 @@ document.addEventListener('DOMContentLoaded', () => {
 	let pacientesNutriologo = document.querySelector('.nutriologo-pacientes');
 	let pacientes = [];
 	let trigger = document.getElementById('trigger');
+	let urlBase = trigger.getAttribute('data-urlBase');
+	// la urlBase es director-paciente-control-citas
+
 	let pacientesContainer = document.querySelector('.pacientes');
 	trigger.addEventListener('click', () => {
 		fetch(`/director/lista_pacientes_alumno_data/${idNutriologo}`)
 			.then(response => response.json())
 			.then(data => {
+				console.log(data)
 				let datosPacientes = data['Datos de sus pacientes'];
 				nombreNutriologo.innerHTML = `ESTUDIANTE: ${data['Datos del alumno'].nombre}`;
 				pacientesNutriologo.innerHTML = `PACIENTES: ${data['Cantidad de pacientes del alumno']}`;
 				datosPacientes.map(paciente => {
-					let html = `
-						<div class="paciente">
-							<b style="font-size:20px;font-weight:900">${paciente.nombre}</b>
-							<p>Género: ${paciente.genero}</p>
-							<p>Edad:${paciente.edad}</p>
-						</div>
-					`;
-					pacientesContainer.innerHTML += html;
-				});
+    let html = `
+        <div class="paciente">
+            <b style="font-size:20px;font-weight:900">${paciente.nombre}</b>
+            <p>Género: ${paciente.genero}</p>
+            <p>Edad:${paciente.edad}</p>
+            <form action="${urlBase}/${paciente.persona_id}">
+                <button type="submit" class="agregar-alumno">Revisar datos paciente</button>
+            </form>
+        </div>
+    `;
+    pacientesContainer.innerHTML += html;
+});
 			});
 	});
 

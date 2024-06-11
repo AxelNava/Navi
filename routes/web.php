@@ -106,7 +106,10 @@ Route::middleware(['auth', 'role:director'])->group(function () {
 	// 	return view('director.lista_pacientes_alumno', ['id_nutriologo' => $id_nutriologo]);
 	// })->name('director-lista-pacientes-alumno');
 
-
+	//ir a la vista de datos del paciente en vista de director
+	Route::get('director/control-citas-paciente/{id}', [DatosPaciente_ControlCitas::class, 'showViewDirector'])->name('director-paciente-control-citas');
+	//traernos el json
+	Route::get('director/controlCitas/{id}', [DatosPaciente_ControlCitas::class, 'showDirector']);
 	//registrar alumno
 	Route::post('registrar-alumno', [AltaNutriologo::class, 'store'])->name('registrar.alumno');
 });
