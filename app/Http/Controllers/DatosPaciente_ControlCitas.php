@@ -112,7 +112,42 @@ class DatosPaciente_ControlCitas extends Controller
 	 */
 	public function edit(string $id)
 	{
-		//
+		if (is_numeric($id)) {
+			$data_paciente = ApiDatosPaciente::where('id_dato_paciente', $id)->count();
+			if ($data_paciente > 0) {
+				$data = DB::table('api_control_citas')
+					->leftJoin('api_datos_paciente', 'api_datos_paciente.id_dato_paciente', '=', 'api_control_citas.id_paciente')
+					->leftJoin('api_persona', 'api_datos_paciente.id_persona', 'api_persona.persona_id')
+					->where('id_dato_paciente', $id)
+					->select(
+						'id_cita',
+						'id_paciente',
+						'id_registro_consulta',
+						'peso',
+						'IMC',
+						'masa_grasa_corporal',
+						'porcentaje_grasa_corporal',
+						'masa_muscular_kg',
+						'agua_corpolar',
+						'circunferencia_cintura',
+						'circunferencia_cadera',
+						'fecha_cita',
+						'hora_cita',
+						'fecha_prox_cita',
+						'control_musculo',
+						'control_grasa',
+						'expediente',
+						'fecha_nacimiento',
+						'nombre',
+						'edad',
+						'genero'
+					)
+					->get();
+				return view('alumno.modificar_control_citas', compact('data'));
+			}
+			return view('alumno.modificar_control_citas', compact('data'));
+		}
+		return view('alumno.modificar_control_citas', compact('data'));
 	}
 
 	/**

@@ -47,6 +47,7 @@ Route::get('director/ListadoAlumnos/{id_nutriologo}', [ListadoPacientes_VistaDir
 	->name('listado_pacientes_Director');
 
 Route::get('controlCitas/{id}', [DatosPaciente_ControlCitas::class, 'show'])->name('control_citas');
+Route::get('controlCitas/editar/{id}', [DatosPaciente_ControlCitas::class, 'edit'])->name('editar_control_citas');
 Route::patch('controlCitas/actualizar/{id_cita}', [DatosPaciente_ControlCitas::class, 'update'])->name('control_citas_actualizar');
 
 Route::get('alumno/agregar-paciente', function () {
