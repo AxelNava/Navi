@@ -53,7 +53,7 @@ class ApiControlCita extends Model
 		'agua_corpolar' => 'float',
 		'circunferencia_cintura' => 'int',
 		'circunferencia_cadera' => 'int',
-		'fecha_cita' => 'datetime',
+		'fecha_cita' => 'datetime:Y-m-d',
 		'fecha_prox_cita' => 'datetime',
 		'control_musculo' => 'float',
 		'control_grasa' => 'float'

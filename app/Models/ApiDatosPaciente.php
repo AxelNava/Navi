@@ -33,7 +33,6 @@ class ApiDatosPaciente extends Model
 	protected $casts = [
 		'id_persona' => 'int',
 		'expediente' => 'int',
-		'fecha_nacimiento' => 'datetime'
 	];
 
 	protected $fillable = [

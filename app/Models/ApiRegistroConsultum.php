@@ -55,6 +55,7 @@ class ApiRegistroConsultum extends Model
 		'no_consulta_paciente' => 'int',
 		'id_paciente' => 'int',
 		'consulta_actual' => 'int',
+		'hidratacion' => 'array',
 		'dinamometria' => 'array'
 	];
 

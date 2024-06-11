@@ -34,7 +34,7 @@ class NotaNutricionController extends Controller
         $composicioncorporal = ApiComposicionCorporalDiagnosticoObesidad::where('id_consulta_paciente', $registrocitas->id_registro)->first();
         $bioquimico = ApiBioquimico::where('id_consulta_paciente', $registrocitas->id_registro)->first();
 
-
+        $freq = ApiDieteticosFrecuenciaSemanal::where('id_consulta_paciente', $registrocitas->id_registro)->first();
         $diagnostico = ApiResultadoDiagnostico::where('id_consulta_paciente', $registrocitas->id_registro)->first();
 
         $generales = ApiDatosGeneralesDietum::where('id_consulta_paciente', $registrocitas->id_registro)->first();
@@ -53,7 +53,8 @@ class NotaNutricionController extends Controller
                 'bioquimicos' => $bioquimico ?? new ApiBioquimico(),
                 'diagnostico' => $diagnostico,
                 'generales' => $generales,
-                'instrumento' => $instrumento
+                'instrumento' => $instrumento,
+                'frecuencia_semanal' => $freq
             ]
         ]);
     }
@@ -75,6 +76,8 @@ class NotaNutricionController extends Controller
             'sintoma_gastro' => ['required'],
             'apego_plan_anterior_barr_apego' => ['required', 'max:250'],
             'motivacion' => ['required'],
+            'hidratacion' => ['required'],
+            'otros_hidratacion' => ['nullable'],
             'sintomas_generales' => ['required', 'max:500'],
             'otros_sintoma_gastro' => ['nullable', 'max:255'],
             'pelo_unias' => ['required'],
@@ -178,7 +181,10 @@ class NotaNutricionController extends Controller
         $registrocitas->otros_sintoma_gastro = $request->otros_sintoma_gastro ?? '';
         $registrocitas->apego_plan_anterior_barr_apego = $request->apego_plan_anterior_barr_apego;
         $registrocitas->motivacion = $request->motivacion;
-        $registrocitas->hidratacion = $request->hidratacion;
+        $registrocitas->hidratacion = [
+            'hidratacion' => $request->hidratacion,
+            'otros_hidratacion' => $request->otros_hidratacion ?? ''
+        ];
         $registrocitas->sintomas_generales = $request->sintomas_generales;
 
         $registrocitas->clinicos = $request->dx_medicos;

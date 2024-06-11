@@ -47,9 +47,6 @@ class ApiDieteticosInstrumentoMedicion extends Model
 	protected $casts = [
 		'id_dietetico_instru' => 'int',
 		'id_consulta_paciente' => 'int',
-		'desayuno_hora' => 'datetime',
-		'comida_hora' => 'datetime',
-		'cena_hora' => 'datetime',
 		'total_kcal' => 'float',
 		'grupo_total_eq' => 'array',
 		'total_prot' => 'array',
