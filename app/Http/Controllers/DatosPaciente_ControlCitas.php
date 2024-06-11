@@ -125,19 +125,19 @@ class DatosPaciente_ControlCitas extends Controller
 			return response()->json(['data' => 'No se ha encontrado el paciente'], 200);
 		}
 		$fills_values = $request->validate([
-			'peso' => ['required', 'decimal:0,2'],
-			'IMC' => ['required', 'decimal:0,2'],
-			'masa_grasa_corporal' => ['required', 'decimal:0,2'],
-			'porcentaje_grasa_corporal' => ['required', 'decimal:0,2'],
-			'masa_muscular_kg' => ['required', 'decimal:0,2'],
-			'agua_corpolar' => ['required', 'decimal:0,2'],
-			'circunferencia_cintura' => ['required', 'numeric', 'max:32767'],
-			'circunferencia_cadera' => ['required', 'numeric', 'max:32767'],
-			'fecha_cita' => ['required', 'date_format:Y-m-d'],
-			'hora_cita' => ['required', 'date_format:H:i'],
-			'fecha_prox_cita' => ['required', 'date_format:Y-m-d'],
-			'control_musculo' => ['required', 'decimal:0,2'],
-			'control_grasa' => ['required', 'decimal:0,2'],
+			'peso.*' => ['required', 'decimal:0,2'],
+			'IMC.*' => ['required', 'decimal:0,2'],
+			'masa_grasa_corporal.*' => ['required', 'decimal:0,2'],
+			'porcentaje_grasa_corporal.*' => ['required', 'decimal:0,2'],
+			'masa_muscular_kg.*' => ['required', 'decimal:0,2'],
+			'agua_corpolar.*' => ['required', 'decimal:0,2'],
+			'circunferencia_cintura.*' => ['required', 'numeric', 'max:32767'],
+			'circunferencia_cadera.*' => ['required', 'numeric', 'max:32767'],
+			'fecha_cita.*' => ['required', 'date_format:Y-m-d'],
+			'hora_cita.*' => ['required', 'date_format:H:i'],
+			'fecha_prox_cita.*' => ['required', 'date_format:Y-m-d'],
+			'control_musculo.*' => ['required', 'decimal:0,2'],
+			'control_grasa.*' => ['required', 'decimal:0,2'],
 		]);
 
 		$result = $paciente->update($fills_values);

@@ -50,9 +50,8 @@ Seleccionar el path del sistema y luego en editar
 
 Luego de eso dar click en Nuevo y de ahí agregar la dirección en donde está PHP, ejemplo `C:\php\`
 
-También se tiene que renombrar el archivo de php.ini.production a php.ini, si quieres saltarte todos los pasos para configurar
-el archivo, se deja el archivo [php.ini](files_config/php.ini) para su descarga directa, si tiene mensajes de que tendrá
-algún tipo de daño, solo dar click en la opción de 'si'.
+Para ahorrarse el tiempo de configuración, se deja para descargar el archivo [php.ini](files_config/php.ini) ya listo para
+su uso, solo se debe de copiar y pegar dentro de la carpeta en donde se encuentra `/php/`
 
 ### Composer
 Se puede instalar de manera local como también de manera global, para instalarlo con windows, es seguir
@@ -126,7 +125,7 @@ Ejemplo de código
 Este último se puede colocar hasta el final del archivo
 
 Luego de configurar el host, se tiene que volver a configurar nginx, se tiene que agregar la configuración
-del servidor, este archivo de configuración se encuentra en la carpeta donde está nginx, en la carpeta conf y el archivo es nginx.conf.
+del servidor, este archivo de configuración se encuentra en la carpeta donde está nginx, en la carpeta conf y el archivo es nginx.conf. El siguiente ejemplo de configuración se puede copiar y pegar dentro de nginx.conf después del primer bloque server que se encuentra, o antes de que cierre la última llave `}`.
 Ejemplo de configuración
 ```sh
 server {
@@ -172,7 +171,8 @@ server {
 En el ejemplo de arriba es ejemplo de arriba, puede ser usado para copiar y pegar, solo se debe de cambiar el directorio raíz, la directiva `root` debe de tener 
 la dirección en donde se encuentra el proyecto, para este caso al final de la ruta debe de decir `Navi\\public`, ejemplo:
 
-`root C:\\AppServer\\Navi\\public;` el punto y coma debe de ir al final de la línea.
+`root C:\\AppServer\\Navi\\public;` tiene que ir con la doble diagonal invertida y el punto y coma debe de ir al final de la línea.
+
 
 Otro ejemplo de configuración se puede encontrar en la documentación de Laravel:
 [laravel.com/docs/11.x/deployment#nginx](https://laravel.com/docs/11.x/deployment#nginx)
@@ -288,7 +288,7 @@ CREATE DATABASE navi;
 Luego se debe de seleccionar la base de datos
 Utilizando algún cliente SQL (cuando se instala MariaDB se instala HeidiSQL),
 se debe de importar la estructura de la [base de datos](files_config/navi.sql)(descargar archivo). Para poder importar esta estructura
-se puede copiar todo el contenido del archivo y pegar dentro de la ventana de script de HeidiSQL y luego ejecutar todo el script.
+se puede copiar todo el contenido del archivo y pegar dentro de la ventana de script de HeidiSQL y luego ejecutar todo el script (dentro de HeidiSQL, tiene un botón en forma de triangulo, color verde, se puede pulsar ese para ejecutar todo el script).
 
 Para seleccionar la base de datos, se puede hacer dando doble click a la base de datos (si se usa el cliente) o ejecutando
 la sentencia `use navi;` desde la ventana del script.
@@ -323,7 +323,7 @@ el usuario y contraseña que se acaba de crear.
 
 ### En el proyecto
 Una vez que se haya instalado todo y se tenga la configuración correcta, ahora se tiene que instalar todas las dependencias, para esto
-se tiene que ejecutar los siguientes comando estando en la raíz del proyecto
+se tiene que ejecutar los siguientes comando estando dentro de la carpeta del proyecto y desde una terminal.
 
 ```sh
 composer install
@@ -333,6 +333,9 @@ php artisan db:seed
 php artisan optimize
 php artisan config:cache
 ```
+
+En caso de que haya un error con `composer install`, se debe borrar el archivo `composer.lock` del proyecto y dejar solamente
+`composer.json`, luego de eso ejecutar el comando `composer install`.
 
 Luego de esto, si todo está funcionando bien, puede abrir un navegador y escribir `navi.local` y debe de aparecer el menú de inicio
 de la aplicación, a continuación se deja un ejemplo:
