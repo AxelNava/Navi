@@ -35,7 +35,7 @@ class ComentariosDirector extends Controller
     {
         Log::info('id_paciente: ' . $id_paciente);
         $registros = ApiControlCita::where('id_paciente', $id_paciente)
-            ->select('id_registro')->distinct()->get();
+            ->select('id_registro_consulta')->distinct()->get();
         $comentarios = ApiComentarioDirector::whereIn('id_registro', $registros)->get();
         return response()->json(['data' => $comentarios]);
     }

@@ -37,6 +37,12 @@
       .fecha{
         color:rgb(51, 51, 246);
       }
+      .comentario{
+        border: 1px solid black;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 10px;
+      }
   </style>
   <x-slot name="header">
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -71,16 +77,10 @@
                 </table>
                 <br>
                 <br>
-                <button>Mostrar comentarios</button>
+                <button class="comentarios-btn">Mostrar comentarios</button>
                 <br>
                 <div class="comentarios">
-                  <div class="comentario">
-                    <div class="informacion">
-                      <h4>Nombre del nutriologo</h4>
-                      <p class="fecha">9 mayo, 2024</p>
-                      </div>
-                      <p>El paciente necesita mejorar su grasa corporal</p>
-                    </div>
+                  
                       
                 </div>
                       {{-- contenedor --}}
@@ -98,6 +98,8 @@
 
 <script>
   let id = {{$id}};
+  let mostrarComentariosBtn = document.querySelector('.comentarios-btn');
+  let comentarios = document.querySelector('.comentarios');
   let nombre = document.querySelector('.nombre');
   let triggerComentarios = document.getElementById('triggerComentarios');
   const url = `/director/controlCitas/${id}`;
@@ -106,7 +108,7 @@
   fetch(url)
   .then(response => response.json())
   .then(data => {
-    registroConsulta = data.data[0].id_registro_consulta;
+    registroConsulta = data.data[0].id_paciente;
       document.getElementById('id_registro').value = registroConsulta; 
       nombre.innerHTML = `Nombre: ${data.data[0].nombre}`;
       data.data.forEach(dato => {
@@ -131,21 +133,27 @@
     fetch(`/director/comentario/${registroConsulta}`)
     .then(response => response.json())
     .then(data => {
-      console.log(data);
-      let comentarios = document.querySelector('.comentarios');
+      mostrarComentariosBtn.innerHTML = `Mostrar comentarios (${data.data.length})`;
+      //limpia el contenedor antes de agregar los nuevos comentarios
       comentarios.innerHTML = '';
-      data.data.forEach(comentario => {
-        let div = document.createElement('div');
-        div.classList.add('comentario');
-        div.innerHTML = `
-          <div class="informacion">
-            <h4>${comentario.nombre}</h4>
-            <p class="fecha">${comentario.fecha}</p>
-          </div>
-          <p>${comentario.comentario}</p>
-        `;
-        comentarios.appendChild(div);
-      });
+      let html = '';
+      data.data.forEach(item => {
+          console.log(item.comentario);
+          html += `
+            <div class="comentario">
+              <div class="informacion">
+                <h4>COMENTARIO:</h4>
+              </div>
+              <p>${item.comentario}</p>
+            </div>
+          `;
+        });
+        comentarios.innerHTML = html;
     });
   });
+
+  setTimeout(() => {
+    triggerComentarios.click();
+  }, 500);
+
 </script>
