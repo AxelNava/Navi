@@ -42,6 +42,8 @@
                     <h1 class="nutriologo-pacientes"></h1>
                     <button type="button" style="display:none" id='trigger' data-idNutriologo="{{ $id_nutriologo }}"
                         data-urlBase="{{ route('director-paciente-control-citas', '') }}"></button>
+                    <input type="hidden" data-url-base-registro="{{ route('director-formularios-paciente', '') }}"
+                        id="input-url-formularios">
                     <div id="pacientes">
                         <div class="pacientes">
                         </div>
@@ -58,6 +60,8 @@
         let pacientes = [];
         let trigger = document.getElementById('trigger');
         let urlBase = trigger.getAttribute('data-urlBase');
+        const input_url_container = document.getElementById('input-url-formularios');
+        const url_base_formularios = input_url_container.getAttribute('data-url-base-registro');
         // la urlBase es director-paciente-control-citas
 
         let pacientesContainer = document.querySelector('.pacientes');
@@ -78,6 +82,9 @@
 								<p>Edad:${paciente.edad}</p>
 								<form action="${urlBase}/${paciente.persona_id}">
 									<button type="submit" class="agregar-alumno">Revisar datos paciente</button>
+								</form>
+                                <form action="${url_base_formularios}/${paciente.persona_id}">
+									<button type="submit" class="agregar-alumno">Revisar formularios</button>
 								</form>
 							</div>
 						`;

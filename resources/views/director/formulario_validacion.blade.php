@@ -184,7 +184,7 @@
                     <div class="formulario">
                         <b style="font-size: 20px">NOTA DE NUTRICIÓN</b>
                         <form
-                            action="{{ route('nota-nutricion_actualizar', $data['registro_consulta']['id_registro']) }}"
+                            action="{{ route('validar_registro', $data['registro_consulta']['id_registro']) }}"
                             method="POST">
                             @csrf @method('PATCH')
                             <div class="primer-form">
@@ -196,7 +196,7 @@
                                         <label for="nombre">EDAD</label>
                                         <label for="">{{ $data['paciente']->edad }}</label>
                                         <label for="nombre">HORA</label>
-                                        <label>{$data['control_citas']->hora_cita{}}</label>
+                                        <label>{{$data['control_citas']->hora_cita}}</label>
                                     </div>
                                     <div class="segunda-parte">
                                         <br>
@@ -282,28 +282,28 @@
                                         </div>
                                         <label for="estreñimiento">ESTREÑIMIENTO:</label>
                                         <input type="radio" value="estreñimiento" name='estreñimiento'
-                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']['estreñimiento'] ?? '') == 'estreñimiento') readonly>
+                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']['estreñimiento'] ?? '') == 'estreñimiento') disabled>
                                         <label for="diarrea">DIARREA:</label>
                                         <input type="radio" value="diarrea" name='diarrea'
-                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']['diarrea'] ?? '') == 'diarrea') readonly>
+                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']['diarrea'] ?? '') == 'diarrea') disabled>
                                         <label for="reflujo">REFLUJO:</label>
                                         <input type="radio" value="reflujo" name='reflujo'
-                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']['reflujo'] ?? '') == 'reflujo') readonly>
+                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']['reflujo'] ?? '') == 'reflujo') disabled>
                                         <label for="gastritis">GASTRITIS:</label>
                                         <input type="radio" value="gastritis" name='gastritis'
-                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']['gastritis'] ?? '') == 'gastritis') readonly>
+                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']['gastritis'] ?? '') == 'gastritis') disabled>
                                         <label for="saciedad">SACIEDAD:</label>
                                         <input type="radio" value="saciedad" name='saciedad'
-                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']['saciedad'] ?? '') == 'saciedad') readonly>
+                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']['saciedad'] ?? '') == 'saciedad') disabled>
                                         <label for="temprana">TEMPRANA:</label>
                                         <input type="radio" value="temprana" name='temprana'
-                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']['temprana'] ?? '') == 'temprana') readonly>
+                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']['temprana'] ?? '') == 'temprana') disabled>
                                         <label for="apetito">APETITO:</label>
                                         <input type="radio" value="apetito" name='apetito'
-                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']['apetito'] ?? '') == 'apetito') readonly>
+                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']['apetito'] ?? '') == 'apetito') disabled>
                                         <label for="flatulencia">FLATULENCIA:</label>
                                         <input type="radio" value="flatulencia" name='flatulencia'
-                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']['flatulencia'] ?? '') == 'flatulencia') readonly>
+                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']['flatulencia'] ?? '') == 'flatulencia') disabled>
                                     </div>
                                     <div class="cuarta-parte">
                                         <label for="otros">OTROS</label>
@@ -317,7 +317,7 @@
                                             <div class="motivacion-item">
                                                 <p>Extremadamente desmotivado</p>
                                                 <input type="radio" value="extramadamente_desmotivado"
-                                                    name="motivacion" @checked(old('motivacion', $data['registro_consulta']['motivacion']) == 'extramadamente_desmotivado') required readonly>
+                                                    name="motivacion" @checked(old('motivacion', $data['registro_consulta']['motivacion']) == 'extramadamente_desmotivado') required disabled>
                                             </div>
                                             <div class="motivacion-item">
                                                 <p>Muy desmotivado</p>
@@ -396,10 +396,10 @@
                                         <h2 style="font-size: 20px; font-weight:900">INTOLERANCIA A ALIMENTOS</h2>
                                         <label for="no">No</label>
                                         <input type="radio" id="intolerancia" value="no"
-                                            @checked(empty($data['explo_fisica']['intolerancia_alimentos'])) readonly>
+                                            @checked(empty($data['explo_fisica']['intolerancia_alimentos'])) disabled>
                                         <label for="si">Si</label>
                                         <input type="radio" id="intolerancia" value="yes"
-                                            @checked(!empty($data['explo_fisica']['intolerancia_alimentos'])) readonly>
+                                            @checked(!empty($data['explo_fisica']['intolerancia_alimentos'])) disabled>
                                         <label for="cuales">Cuales</label>
                                         <p>{{ $data['explo_fisica']['intolerancia_alimentos'] }}</p>
                                         <label for="actividad" style="font-size: 20px; font-weight:900">ACTIVIDAD
@@ -472,37 +472,37 @@
                                                         <label>Glucosa</label>
                                                         <input type="text" placeholder="mg/dl"
                                                             value="{{ old('glucosa', $data['bioquimicos']['glucosa']) }}"
-                                                            readonly>
+                                                            disabled>
                                                     </div>
                                                     <div class="inputs">
                                                         <label for="hbAc1">HbAc1</label>
                                                         <input type="text" placeholder="%"
                                                             value="{{ old('hbAc1', $data['bioquimicos']['hbAc1']) }}"
-                                                            readonly>
+                                                            disabled>
                                                     </div>
                                                     <div class="inputs">
                                                         <label for="TG">TG</label>
                                                         <input type="text" placeholder="mg/dl"
                                                             value="{{ old('TG', $data['bioquimicos']['TG']) }}"
-                                                            readonly>
+                                                            disabled>
                                                     </div>
                                                     <div class="inputs">
                                                         <label for="CT">CT</label>
                                                         <input type="text" placeholder="mg/dl"
                                                             value="{{ old('CT', $data['bioquimicos']['CT']) }}"
-                                                            readonly>
+                                                            disabled>
                                                     </div>
                                                     <div class="inputs">
                                                         <label for="HDL">HDL</label>
                                                         <input type="text" placeholder="mg/dl"
                                                             value="{{ old('HDL', $data['bioquimicos']['HDL']) }}"
-                                                            readonly>
+                                                            disabled>
                                                     </div>
                                                     <div class="inputs">
                                                         <label for="LDL">LDL</label>
                                                         <input type="text" placeholder="mg/dl"
                                                             value="{{ old('LDL', $data['bioquimicos']['LDL']) }}"
-                                                            readonly>
+                                                            disabled>
                                                     </div>
                                                 </div>
                                             </div>
@@ -512,43 +512,43 @@
                                                         <label for="AST_perc">%AST</label>
                                                         <input type="text" placeholder="UI/L"
                                                             value="{{ old('AST_perc', $data['bioquimicos']['AST_perc']) }}"
-                                                            readonly>
+                                                            disabled>
                                                     </div>
                                                     <div class="inputs">
                                                         <label for="ALT">ALT</label>
                                                         <input type="text" placeholder="UI/L"
                                                             value="{{ old('ALT', $data['bioquimicos']['ALT']) }}"
-                                                            readonly>
+                                                            disabled>
                                                     </div>
                                                     <div class="inputs">
                                                         <label for="TSH">TSH</label>
                                                         <input type="text" placeholder="UI/L"
                                                             value="{{ old('TSH', $data['bioquimicos']['TSH']) }}"
-                                                            readonly>
+                                                            disabled>
                                                     </div>
                                                     <div class="inputs">
                                                         <label for="T3">T3</label>
                                                         <input type="text" placeholder="UI/L"
                                                             value="{{ old('T3', $data['bioquimicos']['T3']) }}"
-                                                            readonly>
+                                                            disabled>
                                                     </div>
                                                     <div class="inputs">
                                                         <label for="T4">T4</label>
                                                         <input type="text" placeholder="UI/L"
                                                             value="{{ old('T4', $data['bioquimicos']['T4']) }}"
-                                                            readonly>
+                                                            disabled>
                                                     </div>
                                                     <div class="inputs">
                                                         <label for="Hb">Hb</label>
                                                         <input type="text" placeholder="UI/L"
                                                             value="{{ old('Hb', $data['bioquimicos']['Hb']) }}"
-                                                            readonly>
+                                                            disabled>
                                                     </div>
                                                     <div class="inputs">
                                                         <label for="Hierro">Hierro</label>
                                                         <input type="text" placeholder="UI/L"
                                                             value="{{ old('hierro', $data['bioquimicos']['hierro']) }}"
-                                                            readonly>
+                                                            disabled>
                                                     </div>
                                                 </div>
                                             </div>
@@ -558,49 +558,49 @@
                                                         <label for="transferrina">Transferrina</label>
                                                         <input type="text" placeholder="mg/dL"
                                                             value="{{ old('transferrina', $data['bioquimicos']['transferrina']) }}"
-                                                            readonly>
+                                                            disabled>
                                                     </div>
                                                     <div class="inputs">
                                                         <label for="ferritina">Ferritina</label>
                                                         <input type="text" placeholder="ng/mL"
                                                             value="{{ old('ferritina', $data['bioquimicos']['ferritina']) }}"
-                                                            readonly>
+                                                            disabled>
                                                     </div>
                                                     <div class="inputs">
                                                         <label for="t3_libre">T3Libre</label>
                                                         <input type="text" placeholder="pg/dL"
                                                             value="{{ old('t3_libre', $data['bioquimicos']['t3_libre']) }}"
-                                                            readonly>
+                                                            disabled>
                                                     </div>
                                                     <div class="inputs">
                                                         <label for="t4_libre">T4Libre</label>
                                                         <input type="text" placeholder="ng/dL"
                                                             value="{{ old('t4_libre', $data['bioquimicos']['t4_libre']) }}"
-                                                            readonly>
+                                                            disabled>
                                                     </div>
                                                     <div class="inputs">
                                                         <label for="hto">Hto</label>
                                                         <input type="text" placeholder="%"
                                                             value="{{ old('hto', $data['bioquimicos']['hto']) }}"
-                                                            readonly>
+                                                            disabled>
                                                     </div>
                                                     <div class="inputs">
                                                         <label for="B12">B12</label>
                                                         <input type="text" placeholder="pg/mL"
                                                             value="{{ old('B12', $data['bioquimicos']['B12']) }}"
-                                                            readonly>
+                                                            disabled>
                                                     </div>
                                                     <div class="inputs">
                                                         <label for="folatos">Folatos</label>
                                                         <input type="text" placeholder="ng/mL"
                                                             value="{{ old('folatos', $data['bioquimicos']['folatos']) }}"
-                                                            readonly>
+                                                            disabled>
                                                     </div>
                                                     <div class="inputs">
                                                         <label for="otros">Otros</label>
                                                         <input type="text" id="otros_bioquimicos"
                                                             value="{{ old('otros_bioquimicos', $data['bioquimicos']['otros']) }}"
-                                                            readonly>
+                                                            disabled>
                                                     </div>
                                                 </div>
                                             </div>
@@ -610,19 +610,19 @@
                                                         <label for="PT">PT</label>
                                                         <input type="text" placeholder="d/dL"
                                                             value="{{ old('PT', $data['bioquimicos']['PT']) }}"
-                                                            readonly>
+                                                            disabled>
                                                     </div>
                                                     <div class="inputs">
                                                         <label for="albumina">Albúmina</label>
                                                         <input type="text" placeholder="g/dL"
                                                             value="{{ old('albumina', $data['bioquimicos']['albumina']) }}"
-                                                            readonly>
+                                                            disabled>
                                                     </div>
                                                     <div class="inputs">
                                                         <label for="Ca">Ca</label>
                                                         <input type="text" placeholder="UI/L"
                                                             value="{{ old('Ca', $data['bioquimicos']['Ca']) }}"
-                                                            readonly>
+                                                            disabled>
                                                     </div>
                                                 </div>
                                             </div>
@@ -662,34 +662,34 @@
                                             <div class="dieteticos2">
                                                 <input type="text" style="width:70px"
                                                     value="{{ old('frutas', $data['frecuencia_semanal']['frutas']) }}"
-                                                    required readonly>
+                                                    required disabled>
                                                 <input type="text" style="width:70px"
                                                     value="{{ old('verduras', $data['frecuencia_semanal']['verduras']) }}"
-                                                    required readonly>
+                                                    required disabled>
                                                 <input type="text" style="width:70px"
                                                     value="{{ old('cereales_sg', $data['frecuencia_semanal']['cereales_s_g']) }}"
-                                                    required readonly>
+                                                    required disabled>
                                                 <input type="text" style="width:70px"
                                                     value="{{ old('cereales_cg', $data['frecuencia_semanal']['cereales_c_g']) }}"
-                                                    required readonly>
+                                                    required disabled>
                                                 <input type="text" style="width:70px"
                                                     value="{{ old('leguminosas', $data['frecuencia_semanal']['leguminosas']) }}"
-                                                    required readonly>
+                                                    required disabled>
                                                 <input type="text" style="width:70px"
                                                     value="{{ old('poa', $data['frecuencia_semanal']['poa']) }}"
-                                                    required readonly>
+                                                    required disabled>
                                                 <input type="text" style="width:70px"
                                                     value="{{ old('lacteos', $data['frecuencia_semanal']['lacteos']) }}"
-                                                    required readonly>
+                                                    required disabled>
                                                 <input type="text" style="width:70px"
                                                     value="{{ old('aceites_sp', $data['frecuencia_semanal']['aceites_s_p']) }}"
-                                                    required readonly>
+                                                    required disabled>
                                                 <input type="text" style="width:70px"
                                                     value="{{ old('aceites_cp', $data['frecuencia_semanal']['aceites_c_p']) }}"
-                                                    required readonly>
+                                                    required disabled>
                                                 <input type="text" style="width:70px"
                                                     value="{{ old('azucares', $data['frecuencia_semanal']['azucares']) }}"
-                                                    required readonly>
+                                                    required disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -706,7 +706,7 @@
                                 <h3>Dietéticos</h3>
                                 <label>Tipo de instrumentos:</label>
                                 <input type="radio" name="instrumento" id="hrs" value="Recorda 24/h"
-                                    @checked(old('instrumento', $data['instrumento']['tipo_instrumento'] ?? '') == 'Recorda 24/h') required readonly>24 hrs
+                                    @checked(old('instrumento', $data['instrumento']['tipo_instrumento'] ?? '') == 'Recorda 24/h') required disabled>24 hrs
                                 <input type="radio" name="instrumento" id="semi"
                                     value="Dieta habitual semicuantitativa"
                                     @checked(old('instrumento', $data['instrumento']['tipo_instrumento'] ?? '') == 'Dieta habitual semicuantitativa')>Semicuantitativa
@@ -745,69 +745,69 @@
                                     Total EQ: <br>
                                     Verduras:<input type="text"
                                         value="{{ old('', $data['instrumento']['grupo_total_eq']['verduras'] ?? '') }}"
-                                        readonly>
+                                        disabled>
                                     Frutas:<input type="text"
                                         value="{{ old('', $data['instrumento']['grupo_total_eq']['frutas'] ?? '') }}"
-                                        readonly>
+                                        disabled>
                                     Cereales:<input type="text"
                                         value="{{ old('', $data['instrumento']['grupo_total_eq']['cereales'] ?? '') }}"
-                                        readonly>
+                                        disabled>
                                     Leguminosas:<input type="text"
                                         value="{{ old('', $data['instrumento']['grupo_total_eq']['leguminosas'] ?? '') }}"
-                                        readonly>
+                                        disabled>
                                     Carnes:<input type="text"
                                         value="{{ old('', $data['instrumento']['grupo_total_eq']['carnes'] ?? '') }}"
-                                        readonly>
+                                        disabled>
                                     Leche:<input type="text"
                                         value="{{ old('', $data['instrumento']['grupo_total_eq']['leche'] ?? '') }}"
-                                        readonly>
+                                        disabled>
                                     Grasa:<input type="text"
                                         value="{{ old('', $data['instrumento']['grupo_total_eq']['grasa'] ?? '') }}"
-                                        readonly>
+                                        disabled>
                                     Azúcar:<input type="text"
                                         value="{{ old('', $data['instrumento']['grupo_total_eq']['azucar'] ?? '') }}"
-                                        readonly>
+                                        disabled>
                                 </label>
                                 <br><br>
                                 <label>
                                     TOTAL:<br>
                                     Kcal:<input type="text" name="total_kcal"
                                         value="{{ old('', $data['instrumento']['total_kcal'] ?? '') }}" required
-                                        readonly>
+                                        disabled>
                                     Prot:<input type="text" name="total_prot"
                                         value="{{ old('', $data['instrumento']['total_prot']['prot_porcent'] ?? '') }}"
-                                        required readonly>(<input type="text" name="prot_g"
+                                        required disabled>(<input type="text" name="prot_g"
                                         value="{{ old('', $data['instrumento']['total_prot']['prot_g'] ?? '') }}"
-                                        required readonly>)
+                                        required disabled>)
                                     Lip:<input type="text" name="total_lip"
                                         value="{{ old('', $data['instrumento']['total_lip']['lip_porcent'] ?? '') }}"
-                                        required readonly>(<input type="text" name="lip_g"
+                                        required disabled>(<input type="text" name="lip_g"
                                         value="{{ old('', $data['instrumento']['total_lip']['lip_g'] ?? '') }}"
-                                        required readonly>)
+                                        required disabled>)
                                     Hco:<input type="text" name="total_hco"
                                         value="{{ old('', $data['instrumento']['total_hco']['hco_porcent'] ?? '') }}"
-                                        required readonly>(<input type="text" name="hco_g"
+                                        required disabled>(<input type="text" name="hco_g"
                                         value="{{ old('', $data['instrumento']['total_hco']['hco_g'] ?? '') }}"
-                                        required readonly>)
+                                        required disabled>)
                                 </label>
                                 <br><br>
                                 <label>
                                     % ADECUACIÓN:<br>
                                     Energia:<input type="text" name="adecuacion_porcen_ene"
                                         value="{{ old('adecuacion_porcen_ene', $data['instrumento']['adecuacion_porcen_ene'] ?? '') }}"
-                                        required readonly>
+                                        required disabled>
                                     Kcal:<input type="text" name="adecuacion_porcen_ener_kcal"
                                         value="{{ old('adecuacion_porcen_ener_kcal', $data['instrumento']['adecuacion_porcen_ener_kcal'] ?? '') }}"
-                                        required readonly>
+                                        required disabled>
                                     Prot:<input type="text" name="adecuacion_porcen_prot"
                                         value="{{ old('adecuacion_porcen_prot', $data['instrumento']['adecuacion_porcen_prot'] ?? '') }}"
-                                        required readonly>
+                                        required disabled>
                                     Lip:<input type="text" name="adecuacion_porcen_lip"
                                         value="{{ old('adecuacion_porcen_lip', $data['instrumento']['adecuacion_porcen_lip'] ?? '') }}"
-                                        required readonly>
+                                        required disabled>
                                     Hco:<input type="text" name="adecuacion_porcen_hco"
                                         value="{{ old('adecuacion_porcen_hco', $data['instrumento']['adecuacion_porcen_hco'] ?? '') }}"
-                                        required readonly>
+                                        required disabled>
                                     <br>
                                     Aspectos cualitativos de dieta
                                     habitual:<label>{{ $data['instrumento']['aspectos_cualita_dieta_habitual'] }}</label>
@@ -837,25 +837,25 @@
                                     PLAN DE ALIMENTACIÓN:<br>
                                     Dieta <input type="text" name="tipo_dieta"
                                         value="{{ old('tipo_dieta', $data['generales']['tipo_dieta'] ?? '') }}"
-                                        readonly> de
+                                        disabled> de
                                     <input type="text" name="kcal_dieta"
                                         value="{{ old('kcal_dieta', $data['generales']['kcal_dieta'] ?? '') }}"
-                                        required readonly>
+                                        required disabled>
                                     Prot:<input type="text" name="prot_porcent_dieta"
                                         value="{{ old('prot_porcent_dieta', $data['generales']['prot_porcent_dieta'] ?? '') }}"
-                                        required readonly>(<input type="text" name="prot_kg_dia_dieta"
+                                        required disabled>(<input type="text" name="prot_kg_dia_dieta"
                                         value="{{ old('prot_kg_dia_dieta', $data['generales']['prot_kg_dia_dieta'] ?? '') }}"
-                                        required readonly>)
+                                        required disabled>)
                                     Lip:<input type="text" name="lip_porcen_dieta"
                                         value="{{ old('lip_porcen_dieta', $data['generales']['lip_porcen_dieta'] ?? '') }}"
-                                        required readonly>(<input type="text" name="lip_g_dieta"
+                                        required disabled>(<input type="text" name="lip_g_dieta"
                                         value="{{ old('lip_g_dieta', $data['generales']['lip_g_dieta'] ?? '') }}"
-                                        required readonly> )
+                                        required disabled> )
                                     Hco:<input type="text" name="hco_porcen_dieta"
                                         value="{{ old('hco_porcen_dieta', $data['generales']['hco_porcen_dieta'] ?? '') }}"
-                                        required readonly>(<input type="text" name="hco_g_dieta"
+                                        required disabled>(<input type="text" name="hco_g_dieta"
                                         value="{{ old('hco_g_dieta', $data['generales']['hco_g_dieta'] ?? '') }}"
-                                        required readonly>)
+                                        required disabled>)
                                 </label>
                                 <br>
                                 <label>
@@ -906,8 +906,8 @@
                                 <br>
                                 <label>
                                     NOMBRE COMPLETO, FIRMA Y CÉDULA PROFESIONAL DE NUTRIÓLOGO RESPONSABLE:<br>
-                                    <input type="text" name="datos_nutriologo"
-                                        value="{{ old('datos_nutriologo', $data['registro_consulta']['nutri_elaborate_data'] ?? '') }}"
+                                    <input type="text" name="datos_nutriologo_validador"
+                                        value="{{ old('datos_nutriologo_validador', $data['registro_consulta']['nutri_elaborate_data'] ?? '') }}"
                                         required>
                                 </label>
 

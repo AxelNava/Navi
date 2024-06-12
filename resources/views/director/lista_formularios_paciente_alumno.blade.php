@@ -23,6 +23,8 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <label>Total: <span id='num_registros'></span></label>
+                    <input type="hidden" id="route_get_formularios"
+                        base-url-route="{{ route('formulario_validation_paciente', '') }}">
                     <article class="forms mt-2" id="forms_container">
 
                     </article>
@@ -32,9 +34,10 @@
     </div>
 </x-app-layout>
 <script>
-    let id = {{ $id_paciente }};
+    let id = {{ $id_persona }};
     const forms_container = document.getElementById('forms_container');
-    const url = '{{ route('listado-registros-paciente-alumno', $id_paciente) }}' ;
+    const url = '{{ route('listado-registros-paciente-alumno', $id_persona) }}';
+    const base_url_formularios = document.getElementById('route_get_formularios').getAttribute('base-url-route');
 
     fetch(url)
         .then(response => response.json())
@@ -48,7 +51,7 @@
             data.data['registros'].forEach((dato, index) => {
                 const form = document.createElement('form');
                 form.method = 'get';
-                form.action = `http://navi.local/director/formulario_registro_paciente/${dato}`;
+                form.action = `${base_url_formularios}/${dato}`;
                 form.classList.add('flex');
                 form.classList.add('flex-col');
                 form.classList.add('max-width-form');

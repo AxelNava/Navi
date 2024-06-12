@@ -87,6 +87,9 @@ Route::get('dieta-paciente/crear', function () {
 });
 Route::post('dieta-paciente/crear', [DietaPaciente::class, 'crear'])->name('dieta-paciente_crear');
 
+
+//Obtener formulario de registro de paciente para validar
+
 //rutas para el director
 Route::middleware(['auth', 'role:director'])->group(function () {
 	//pagina de inicio del director
@@ -114,16 +117,21 @@ Route::middleware(['auth', 'role:director'])->group(function () {
 	// })->name('director-lista-pacientes-alumno');
 
 	//Consumir vista formularios de un paciente de un nutriologo
-	Route::get('director/lista-formularios-paciente-alumno/{id_paciente}', [ListadoRegistrosConsultaDePaciente::class, 'listar_formularios_paciente_director'])
+	Route::get('director/lista-formularios-paciente-alumno/{id_persona}', [ListadoRegistrosConsultaDePaciente::class, 'listar_formularios_paciente_director'])
 		->name('director-formularios-paciente');
 	//Obtener datos de los formularios de un paciente
-	Route::get('director/registros-paciente/{id_paciente}', [ListadoRegistrosConsultaDePaciente::class, 'listar_registros'])
+	Route::get('director/registros-paciente/{id_paciente}', [ListadoRegistrosConsultaDePaciente::class, 'listar_registros_with_persona'])
 		->name('listado-registros-paciente-alumno');
-	//Obtener formulario de registro de paciente para validar
-	Route::get('director/formulario_registro_paciente/{$id_registro}', [NotaNutricionController::class, 'formulario_validacion'])->name('formulario_validacion');
+
+	Route::get('director/formulario_registro_paciente/{id_registro}', [NotaNutricionController::class, 'form_validation'])
+		->name('formulario_validation_paciente');
+
+	Route::patch('director/validar_registro_paciente/{id_registro}', [NotaNutricionController::class, 'validar_registro_consulta'])
+	->name('validar_registro');
 
 	//agregar comentario
 	Route::post('director/comentario', [ComentariosDirector::class, 'store'])->name('agregar_comentario');
+	
 	//ir a la vista de datos del paciente en vista de director
 	Route::get('director/control-citas-paciente/{id}', [DatosPaciente_ControlCitas::class, 'showViewDirector'])->name('director-paciente-control-citas');
 	//traernos el json
@@ -133,5 +141,4 @@ Route::middleware(['auth', 'role:director'])->group(function () {
 });
 //ver comentarios, se pone aquí para que no esté en el middleware
 Route::get('director/comentario/{id_paciente}', [ComentariosDirector::class, 'show'])->name('ver_comentarios');
-
 require __DIR__ . '/auth.php';

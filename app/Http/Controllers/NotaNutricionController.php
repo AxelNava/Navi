@@ -998,11 +998,13 @@ class NotaNutricionController extends Controller
             'datospaciente' => $datospaciente
         ]);
     }
-    public function formulario_validacion(int $id_registro)
+    public function form_validation(int $id_registro)
     {
         $registrocitas = ApiRegistroConsultum::find($id_registro);
         if ($registrocitas == null)
-            return "No se encontró la cita";
+            return view('director.formulario_validacion', [
+                'data' => 'no se ha encontrado nada'
+            ]);
         $datospaciente = ApiDatosPaciente::find($registrocitas->id_paciente);
         $paciente = ApiPersona::find($datospaciente->id_persona);
         $controlcita = ApiControlCita::where('id_paciente', $registrocitas->id_paciente)->first();
@@ -1033,4 +1035,16 @@ class NotaNutricionController extends Controller
             ]
         ]);
     }
+    public function validar_registro_consulta(Request $request, int $id_registro)
+    {
+        $request->validate([
+            'datos_nutriologo_validador' => 'required'
+        ]);
+        $registro = ApiRegistroConsultum::findOrFail($id_registro);
+        $registro->nutri_who_approved_data = $request->datos_nutriologo_validador;
+        $registro->save();
+        return redirect()->route('formulario_validation_paciente', $id_registro)
+            ->with('success', 'Se ha registrado al paciente correctamente');
+    }
 }
+//ver comentarios
