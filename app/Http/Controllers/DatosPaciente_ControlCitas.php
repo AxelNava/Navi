@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\ApiDatosPaciente;
 use App\Models\ApiControlCita;
@@ -153,32 +154,52 @@ class DatosPaciente_ControlCitas extends Controller
 	/**
 	 * Update the specified resource in storage.
 	 */
-	public function update(Request $request, string $id_cita)
+	public function update(Request $request, string $id_paciente)
 	{
-		$paciente = ApiControlCita::findOrFail($id_cita);
-		if (!$paciente) {
-			return response()->json(['data' => 'No se ha encontrado el paciente'], 200);
-		}
-		$fills_values = $request->validate([
-			'peso.*' => ['required', 'decimal:0,2'],
-			'IMC.*' => ['required', 'decimal:0,2'],
-			'masa_grasa_corporal.*' => ['required', 'decimal:0,2'],
-			'porcentaje_grasa_corporal.*' => ['required', 'decimal:0,2'],
-			'masa_muscular_kg.*' => ['required', 'decimal:0,2'],
-			'agua_corpolar.*' => ['required', 'decimal:0,2'],
-			'circunferencia_cintura.*' => ['required', 'numeric', 'max:32767'],
-			'circunferencia_cadera.*' => ['required', 'numeric', 'max:32767'],
-			'fecha_cita.*' => ['required', 'date_format:Y-m-d'],
-			'hora_cita.*' => ['required', 'date_format:H:i'],
-			'fecha_prox_cita.*' => ['required', 'date_format:Y-m-d'],
-			'control_musculo.*' => ['required', 'decimal:0,2'],
-			'control_grasa.*' => ['required', 'decimal:0,2'],
-		]);
+		$iterator = $request->request->getIterator();
+		$array_copy = array_slice($iterator->getArrayCopy(), 2);
 
-		$result = $paciente->update($fills_values);
-		if ($result) {
-			return response()->json('Se han actualizado los datos');
+		$ids_registro = $array_copy['id_registro'];
+		foreach ($ids_registro as $index => $id_registro) {
+			$control_cita_registro = ApiControlCita::find($array_copy['id_cita'][$index]);
+			$control_cita_registro->fecha_cita = $array_copy['fecha_cita'][$index];
+			$control_cita_registro->peso = $array_copy['peso'][$index];
+			$control_cita_registro->IMC = $array_copy['IMC'][$index];
+			$control_cita_registro->masa_grasa_corporal = $array_copy['masa_grasa_corporal'][$index];
+			$control_cita_registro->porcentaje_grasa_corporal = $array_copy['porcentaje_grasa_corporal'][$index];
+			$control_cita_registro->masa_muscular_kg = $array_copy['masa_muscular_kg'][$index];
+			$control_cita_registro->agua_corpolar = $array_copy['agua_corpolar'][$index];
+			$control_cita_registro->circunferencia_cintura = $array_copy['circunferencia_cintura'][$index];
+			$control_cita_registro->circunferencia_cadera = $array_copy['circunferencia_cadera'][$index];
+			$control_cita_registro->fecha_prox_cita = $array_copy['fecha_prox_cita'][$index];
+			$control_cita_registro->update();
 		}
-		return response()->json('Ha habido un error, no se han actualizado los datos');
+		$ids_nuevas_citas = $array_copy['id_registro_to_create'] ?? [];
+		if (count($ids_nuevas_citas) > 0) {
+			$offset_array = count($ids_registro);
+			foreach ($ids_nuevas_citas as $index => $id_registro) {
+				$control_cita_registro = new ApiControlCita();
+				$control_cita_registro->id_registro_consulta = $id_registro;
+				$control_cita_registro->id_paciente = $id_paciente;
+				$control_cita_registro->fecha_cita = $array_copy['fecha_cita'][$index + $offset_array];
+				$control_cita_registro->hora_cita = Carbon::today();
+				$control_cita_registro->peso = $array_copy['peso'][$index + $offset_array];
+				$control_cita_registro->IMC = $array_copy['IMC'][$index + $offset_array];
+				$control_cita_registro->masa_grasa_corporal = $array_copy['masa_grasa_corporal'][$index + $offset_array];
+				$control_cita_registro->porcentaje_grasa_corporal = $array_copy['porcentaje_grasa_corporal'][$index + $offset_array];
+				$control_cita_registro->masa_muscular_kg = $array_copy['masa_muscular_kg'][$index + $offset_array];
+				$control_cita_registro->agua_corpolar = $array_copy['agua_corpolar'][$index + $offset_array];
+				$control_cita_registro->circunferencia_cintura = $array_copy['circunferencia_cintura'][$index + $offset_array];
+				$control_cita_registro->circunferencia_cadera = $array_copy['circunferencia_cadera'][$index + $offset_array];
+				$control_cita_registro->fecha_prox_cita = $array_copy['fecha_prox_cita'][$index + $offset_array];
+				$control_cita_registro->save();
+			}
+			return redirect()
+				->route('alumno-paciente-control-citas', $id_paciente)
+				->with('success', 'Se han modificado correctamente los registros de control de citas y agregado nuevos');
+		}
+		return redirect()
+			->route('alumno-paciente-control-citas', $id_paciente)
+			->with('success', 'Se ha modificado correctamente los datos del control de citas');
 	}
 }

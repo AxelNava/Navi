@@ -82,7 +82,6 @@
     fetch(url)
     .then(response => response.json())
     .then(data => {
-        console.log(data)
 				nombre.innerHTML = `Nombre: ${data.data[0].nombre}`;
         data.data.forEach(dato => {
             const tr = document.createElement('tr');
