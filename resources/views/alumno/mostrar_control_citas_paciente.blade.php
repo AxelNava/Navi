@@ -30,6 +30,12 @@
         table td {
             padding-inline: 1em;
         }
+        .comentario{
+        border: 1px solid black;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 10px;
+      }
     </style>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -41,7 +47,6 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <button class="trigger" style="display:block">t</button>
                     {{-- <h2>ID PACIENTE: {{$id}}</h2> --}}
 										<h2 class="nombre"></h2>
                     <br>
@@ -68,6 +73,12 @@
                     <form action="{{route('editar_control_citas', $id)}}">
                         <input type="submit" value="Editar datos" class="agregar-alumno">
                     </form>
+                    <button class="comentarios-btn" style="display:block">Mostrar comentarios</button>
+
+                    <div class="comentarios">
+                
+                    
+                    </div>
                 </div>
             </div>
         </div>
@@ -76,17 +87,17 @@
 
 <script>
     let id = {{$id}};
-		let nombre = document.querySelector('.nombre');
+	let nombre = document.querySelector('.nombre');
     const url = `/controlCitas/${id}`;
+    let comentarios = document.querySelector('.comentarios');
+    let mostrarComentariosBtn = document.querySelector('.comentarios-btn');
     const datos_control_citas = document.querySelector('.datos_control_citas');
-    let triggerBtn = document.querySelector('.trigger');
+    let comentariosBtn = document.querySelector('.comentarios-btn');
     let id_paciente;
     fetch(url)
     .then(response => response.json())
     .then(data => {
-        console.log(data)
         id_paciente = data.data[0].id_paciente;
-        console.log(id_paciente);
 				nombre.innerHTML = `Nombre: ${data.data[0].nombre}`;
         data.data.forEach(dato => {
             const tr = document.createElement('tr');
@@ -108,26 +119,29 @@
         });
         
         
-    triggerBtn.addEventListener('click', () => {
+    comentariosBtn.addEventListener('click', () => {
         fetch(`/director/comentario/${id_paciente}`)
     .then(response => response.json())
     .then(data => {
-    // mostrarComentariosBtn.innerHTML = `Mostrar comentarios (${data.data.length})`;
+    mostrarComentariosBtn.innerHTML = `Mostrar comentarios (${data.data.length})`;
     //limpia el contenedor antes de agregar los nuevos comentarios
     let html = '';
-    data.data.forEach(item => {
-        console.log(item.comentario);
-        // html += `
-        // <div class="comentario">
-        //     <div class="informacion">
-        //     <h4>COMENTARIO:</h4>
-        //     </div>
-        //     <p>${item.comentario}</p>
-        // </div>
-        // `;
+    data.data.reverse().forEach(item => {
+    console.log(item.comentario);
+    html += `
+    <div class="comentario">
+        <div class="informacion">
+        <h4>COMENTARIO:</h4>
+        </div>
+        <p>${item.comentario}</p>
+    </div>
+        `;
         });
-        // comentarios.innerHTML = html;
+        comentarios.innerHTML = html;
     });
     });
 
+    setTimeout(()=>{
+        comentariosBtn.click();
+    },500)
 </script>
