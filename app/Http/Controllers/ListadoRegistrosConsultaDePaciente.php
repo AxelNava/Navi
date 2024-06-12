@@ -28,4 +28,10 @@ class ListadoRegistrosConsultaDePaciente extends Controller
     {
         return view('alumno.listado_formularios_paciente', compact('id_paciente'));
     }
+
+    public function listar_formularios_paciente_director($id_paciente)
+    {
+        return view('director.lista_formularios_paciente_alumno', compact('id_paciente'));
+    }
+
 }

@@ -34,8 +34,8 @@
 <script>
     let id = {{ $id_paciente }};
     const forms_container = document.getElementById('forms_container');
-    // const url = `http://navi.local/alumno/registros-paciente/${id}`;
-    const url = '{{ route('listado-registros-paciente', $id_paciente) }}';
+    const url = '{{ route('listado-registros-paciente-alumno', $id_paciente) }}' ;
+
     fetch(url)
         .then(response => response.json())
         .then(data => {
@@ -48,7 +48,7 @@
             data.data['registros'].forEach((dato, index) => {
                 const form = document.createElement('form');
                 form.method = 'get';
-                form.action = `http://navi.local/alumno/modificar-registro/${dato}`;
+                form.action = `http://navi.local/director/formulario_registro_paciente/${dato}`;
                 form.classList.add('flex');
                 form.classList.add('flex-col');
                 form.classList.add('max-width-form');

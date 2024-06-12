@@ -998,4 +998,39 @@ class NotaNutricionController extends Controller
             'datospaciente' => $datospaciente
         ]);
     }
+    public function formulario_validacion(int $id_registro)
+    {
+        $registrocitas = ApiRegistroConsultum::find($id_registro);
+        if ($registrocitas == null)
+            return "No se encontró la cita";
+        $datospaciente = ApiDatosPaciente::find($registrocitas->id_paciente);
+        $paciente = ApiPersona::find($datospaciente->id_persona);
+        $controlcita = ApiControlCita::where('id_paciente', $registrocitas->id_paciente)->first();
+        $exploracionfisica = ApiExploFisica::where('id_consulta_paciente', $registrocitas->id_registro)->first();
+        $composicioncorporal = ApiComposicionCorporalDiagnosticoObesidad::where('id_consulta_paciente', $registrocitas->id_registro)->first();
+        $bioquimico = ApiBioquimico::where('id_consulta_paciente', $registrocitas->id_registro)->first();
+
+        $freq = ApiDieteticosFrecuenciaSemanal::where('id_consulta_paciente', $registrocitas->id_registro)->first();
+        $diagnostico = ApiResultadoDiagnostico::where('id_consulta_paciente', $registrocitas->id_registro)->first();
+
+        $generales = ApiDatosGeneralesDietum::where('id_consulta_paciente', $registrocitas->id_registro)->first();
+
+        $instrumento = ApiDieteticosInstrumentoMedicion::where('id_consulta_paciente', $registrocitas->id_registro)->first();
+
+        return view('director.formulario_validacion', [
+            'data' => [
+                'paciente' => $paciente,
+                'registro_consulta' => $registrocitas,
+                'datos_paciente' => $datospaciente,
+                'control_citas' => $controlcita,
+                'explo_fisica' => $exploracionfisica ?? new ApiExploFisica(),
+                'composcion_corp' => $composicioncorporal ?? new ApiComposicionCorporalDiagnosticoObesidad(),
+                'bioquimicos' => $bioquimico ?? new ApiBioquimico(),
+                'diagnostico' => $diagnostico,
+                'generales' => $generales,
+                'instrumento' => $instrumento,
+                'frecuencia_semanal' => $freq
+            ]
+        ]);
+    }
 }

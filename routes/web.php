@@ -31,7 +31,7 @@ Route::get("alumno/{id}/ListadoPacientes", [ListadoPacientes_VistaAlumno::class,
 
 Route::get('alumno/listado-registros-pacientes/{id_persona_nutriologo}', [ListadoPacientesRegistros::class, 'listar'])
 	->name('listado-pacientes');
-	
+
 Route::get('alumno/registros-paciente/{id_paciente}', [ListadoRegistrosConsultaDePaciente::class, 'listar_registros'])
 	->name('listado-registros-paciente');
 Route::get('alumno/ListadoRegistroPacientes/', function () {
@@ -112,6 +112,15 @@ Route::middleware(['auth', 'role:director'])->group(function () {
 	// Route::get('director/lista_pacientes_alumno/{id_nutriologo}', function ($id_nutriologo) {
 	// 	return view('director.lista_pacientes_alumno', ['id_nutriologo' => $id_nutriologo]);
 	// })->name('director-lista-pacientes-alumno');
+
+	//Consumir vista formularios de un paciente de un nutriologo
+	Route::get('director/lista-formularios-paciente-alumno/{id_paciente}', [ListadoRegistrosConsultaDePaciente::class, 'listar_formularios_paciente_director'])
+		->name('director-formularios-paciente');
+	//Obtener datos de los formularios de un paciente
+	Route::get('director/registros-paciente/{id_paciente}', [ListadoRegistrosConsultaDePaciente::class, 'listar_registros'])
+		->name('listado-registros-paciente-alumno');
+	//Obtener formulario de registro de paciente para validar
+	Route::get('director/formulario_registro_paciente/{$id_registro}',[NotaNutricionController::class,'formulario_validacion'])->name('formulario_validacion');
 
 	//agregar comentario
 	Route::post('director/comentario', [ComentariosDirector::class, 'store'])->name('agregar_comentario');
