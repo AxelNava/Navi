@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ApiComentarioDirector;
 use App\Models\ApiControlCita;
+use App\Models\ApiRegistroConsultum;
 use Illuminate\Support\Facades\Log;
 
 class ComentariosDirector extends Controller
@@ -14,15 +15,15 @@ class ComentariosDirector extends Controller
      */
     public function store(Request $request)
     {
-
-        // dd($request->all());
-        // $request->validate(
-        //     [
-        //         'id_registro' => ['required']
-        //     ]
-        // );
+        $request->validate(
+            [
+                'id_paciente' => ['required']
+            ]
+        );
+        $ultimo_id_registro = ApiRegistroConsultum::where('id_paciente', $request->id_paciente)->select('id_registro')
+            ->max('id_registro');
         $comentario = new ApiComentarioDirector();
-        $comentario->id_registro = $request->id_registro;
+        $comentario->id_registro = $ultimo_id_registro;
         $comentario->comentario = $request->comentario;
         $comentario->save();
         return back()->with('success', 'Se ha guardado el comentario');
@@ -48,6 +49,10 @@ class ComentariosDirector extends Controller
         $request->validate([
             'comentario' => 'required|accepted'
         ]);
+        $ultimo_id_registro = ApiRegistroConsultum::where('id_paciente', $id)
+            ->select('id_registro')
+            ->max('id_registro')->first();
+        dd($ultimo_id_registro);
         $comentario_director = new ApiComentarioDirector();
         $comentario_director->id = $id;
         $comentario_director->comentario = $request->comentario;

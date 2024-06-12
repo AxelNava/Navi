@@ -86,7 +86,7 @@
                       {{-- contenedor --}}
                       <form id="comentarioForm" action="{{route('agregar_comentario')}}" method="POST">
                         @csrf
-                        <input type="hidden" id="id_registro" name="id_registro">
+                        <input type="hidden" id="id_paciente" name="id_paciente">
                         <input type="text" id="comentario" name="comentario">
                         <input type="submit" value="Agregar comentario" class="agregar-alumno"/>
                       </form>
@@ -104,12 +104,12 @@
   let triggerComentarios = document.getElementById('triggerComentarios');
   const url = `/director/controlCitas/${id}`;
   const datos_control_citas = document.querySelector('.datos_control_citas');
-  let registroConsulta;
+  let id_paciente;
   fetch(url)
   .then(response => response.json())
   .then(data => {
-    registroConsulta = data.data[0].id_paciente;
-      document.getElementById('id_registro').value = registroConsulta; 
+    id_paciente = data.data[0].id_paciente;
+      document.getElementById('id_paciente').value = id_paciente; 
       nombre.innerHTML = `Nombre: ${data.data[0].nombre}`;
       data.data.forEach(dato => {
           const tr = document.createElement('tr');
@@ -130,7 +130,7 @@
   });
 
   triggerComentarios.addEventListener('click', () => {
-    fetch(`/director/comentario/${registroConsulta}`)
+    fetch(`/director/comentario/${id_paciente}`)
     .then(response => response.json())
     .then(data => {
       mostrarComentariosBtn.innerHTML = `Mostrar comentarios (${data.data.length})`;
