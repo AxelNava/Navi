@@ -173,7 +173,7 @@
     </style>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Formulario de {{$data['paciente']->nombre}}
+            Formulario de {{ $data['paciente']->nombre }}
         </h2>
     </x-slot>
 
@@ -193,14 +193,16 @@
                                 </ul>
                             </div>
                         @endif
-                        <form action="{{ route('nota-nutricion_actualizar', $data['registro_consulta']['id_registro']) }}" method="POST">
+                        <form
+                            action="{{ route('nota-nutricion_actualizar', $data['registro_consulta']['id_registro']) }}"
+                            method="POST">
                             @csrf @method('PATCH')
                             <div class="primer-form">
 
                                 <div class="inputs-form">
                                     <div class="primera-parte">
                                         <label for="nombre"><strong>NOMBRE</strong></label>
-                                        <label for="">{{$data['paciente']->nombre}}</label>
+                                        <label for="">{{ $data['paciente']->nombre }}</label>
                                         <label for="nombre">EDAD</label>
                                         <input type="number" name="edad" id="edad"
                                             value="{{ old('edad', $data['paciente']->edad) }}">
@@ -237,34 +239,89 @@
                                         <br>
                                         {{-- revisar aqui --}}
                                         <label for="sintomas">SÍNTOMAS GASTROINTESTINALES:</label>
-                                        <label for="bristol">BRISTOL:</label>
-                                        
-                                        <input type="radio" value="Bristol" name='sintoma_gastro'
-                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']) == 'Bristol')>
+                                        <div class="bristol-container">
+                                            <h2>Escala de Bristol</h2>
+                                            <div class="escala-1">
+                                                <input type="radio" id="bristol1" name="escala_bristol"
+                                                    value="Tipo 1" @checked(old('escala_bristol', $data['registro_consulta']['escala_bristol']) == 'Tipo 1')>
+                                                <label for="bristol1"><img src="{{ asset('/assets/escala-1.jpeg') }}"
+                                                        alt="" style="width:200px;height:100px">
+                                                </label>
+                                                <p>(1) Heces en bolas duras y separadas</p>
+                                            </div>
+                                            <div class="escala-1">
+                                                <input type="radio" id="bristol1" name="escala_bristol"
+                                                    value="Tipo 2" @checked(old('escala_bristol', $data['registro_consulta']['escala_bristol']) == 'Tipo 2')>
+                                                <label for="bristol1"><img src="{{ asset('/assets/escala-2.jpeg') }}"
+                                                        alt="" style="width:200px;height:100px">
+                                                </label>
+                                                <p>(2) Heces alargadas con relieves, formada por bolitas</p>
+                                            </div>
+                                            <div class="escala-1">
+                                                <input type="radio" id="bristol1" name="escala_bristol"
+                                                    value="Tipo 3" @checked(old('escala_bristol', $data['registro_consulta']['escala_bristol']) == 'Tipo 3')>
+                                                <label for="bristol1"><img src="{{ asset('/assets/escala-3.jpeg') }}"
+                                                        alt="" style="width:150px;height:100px">
+                                                </label>
+                                                <p>(3) Heces alargadas con grietas en la superficie</p>
+                                            </div>
+                                            <div class="escala-1">
+                                                <input type="radio" id="bristol1" name="escala_bristol"
+                                                    value="Tipo 4" @checked(old('escala_bristol', $data['registro_consulta']['escala_bristol']) == 'Tipo 4')>
+                                                <label for="bristol1"><img src="{{ asset('/assets/escala-4.jpeg') }}"
+                                                        alt="" style="width:150px;height:100px">
+                                                </label>
+                                                <p>(4) Heces alargadas, lisas y blandas</p>
+                                            </div>
+                                            <div class="escala-1">
+                                                <input type="radio" id="bristol1" name="escala_bristol"
+                                                    value="Tipo 5" @checked(old('escala_bristol', $data['registro_consulta']['escala_bristol']) == 'Tipo 5')>
+                                                <label for="bristol1"><img src="{{ asset('/assets/escala-5.jpeg') }}"
+                                                        alt="" style="width:150px;height:100px">
+                                                </label>
+                                                <p>(5) Heces blandas y trozos separados o con bordes definidos</p>
+                                            </div>
+                                            <div class="escala-1">
+                                                <input type="radio" id="bristol1" name="escala_bristol"
+                                                    value="Tipo 6" @checked(old('escala_bristol', $data['registro_consulta']['escala_bristol']) == 'Tipo 6')>
+                                                <label for="bristol1"><img src="{{ asset('/assets/escala-6.jpeg') }}"
+                                                        alt="" style="width:200px;height:100px">
+                                                </label>
+                                                <p>(6) Heces blandas y trozos separados o con bordes pegados</p>
+                                            </div>
+                                            <div class="escala-1">
+                                                <input type="radio" id="bristol1" name="escala_bristol"
+                                                    value="Tipo 7" @checked(old('escala_bristol', $data['registro_consulta']['escala_bristol']) == 'Tipo 7')>
+                                                <label for="bristol1"><img src="{{ asset('/assets/escala-7.jpeg') }}"
+                                                        alt="" style="width:200px;height:100px">
+                                                </label>
+                                                <p>(7) Heces líquidas sin trozos sólidos</p>
+                                            </div>
+                                        </div>
                                         <label for="estreñimiento">ESTREÑIMIENTO:</label>
-                                        <input type="radio" value="Estreñimiento" name='sintoma_gastro'
-                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']) == 'Estreñimiento')>
+                                        <input type="radio" value="estreñimiento" name='estreñimiento'
+                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']['estreñimiento']) == 'estreñimiento')>
                                         <label for="diarrea">DIARREA:</label>
-                                        <input type="radio" value="Diarrea" name='sintoma_gastro'
-                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']) == 'Diarrea')>
+                                        <input type="radio" value="diarrea" name='diarrea'
+                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']['diarrea']) == 'diarrea')>
                                         <label for="reflujo">REFLUJO:</label>
-                                        <input type="radio" value="Reflujo" name='sintoma_gastro'
-                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']) == 'Reflujo')>
+                                        <input type="radio" value="reflujo" name='reflujo'
+                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']['reflujo']) == 'reflujo')>
                                         <label for="gastritis">GASTRITIS:</label>
-                                        <input type="radio" value="Gastritis" name='sintoma_gastro'
-                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']) == 'Gastritis')>
+                                        <input type="radio" value="gastritis" name='gastritis'
+                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']['gastritis']) == 'gastritis')>
                                         <label for="saciedad">SACIEDAD:</label>
-                                        <input type="radio" value="Saciedad" name='sintoma_gastro'
-                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']) == 'Saciedad')>
+                                        <input type="radio" value="saciedad" name='saciedad'
+                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']['saciedad']) == 'saciedad')>
                                         <label for="temprana">TEMPRANA:</label>
-                                        <input type="radio" value="Temprana" name='sintoma_gastro'
-                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']) == 'Temprana')>
+                                        <input type="radio" value="temprana" name='temprana'
+                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']['temprana']) == 'temprana')>
                                         <label for="apetito">APETITO:</label>
-                                        <input type="radio" value="Apetito" name='sintoma_gastro'
-                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']) == 'Apetito')>
+                                        <input type="radio" value="apetito" name='apetito'
+                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']['apetito']) == 'apetito')>
                                         <label for="flatulencia">FLATULENCIA:</label>
-                                        <input type="radio" value="Flatulencia" name='sintoma_gastro'
-                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']) == 'Flatulencia')>
+                                        <input type="radio" value="flatulencia" name='flatulencia'
+                                            @checked(old('sintoma_gastro', $data['registro_consulta']['sintoma_gastro']['flatulencia']) == 'flatulencia')>
                                     </div>
                                     <div class="cuarta-parte">
                                         <label for="otros">OTROS</label>

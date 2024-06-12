@@ -56,7 +56,8 @@ class ApiRegistroConsultum extends Model
 		'id_paciente' => 'int',
 		'consulta_actual' => 'int',
 		'hidratacion' => 'array',
-		'dinamometria' => 'array'
+		'dinamometria' => 'array',
+		'sintoma_gastro' => 'array',
 	];
 
 	protected $fillable = [

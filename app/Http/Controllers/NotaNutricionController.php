@@ -73,7 +73,6 @@ class NotaNutricionController extends Controller
             ],
             'fecha_nacimiento' => ['required', 'date_format:Y-m-d'],
             'motivo_consulta' => ['required', 'max:500'],
-            'sintoma_gastro' => ['required'],
             'apego_plan_anterior_barr_apego' => ['required', 'max:250'],
             'motivacion' => ['required'],
             'hidratacion' => ['required'],
@@ -178,7 +177,17 @@ class NotaNutricionController extends Controller
         $registrocitas->no_consulta_paciente = $request->no_consulta_paciente;
         $registrocitas->id_paciente = $datospaciente->id_dato_paciente;
         $registrocitas->motivo_consulta = $request->motivo_consulta;
-        $registrocitas->sintoma_gastro = $request->sintoma_gastro;
+        $registrocitas->sintoma_gastro = [
+            'bristol' => $request->bristol,
+            'flatulencia' => $request->flatulencia,
+            'estreñimiento' => $request->estreñimiento,
+            'diarrea' => $request->diarrea,
+            'reflujo' => $request->reflujo,
+            'gastritis' => $request->gastritis,
+            'saciedad' => $request->saciedad,
+            'temprana' => $request->temprana,
+            'apetito' => $request->apetito
+        ];
         $registrocitas->escala_bristol = $request->escala_bristol;
         $registrocitas->otros_sintoma_gastro = $request->otros_sintoma_gastro ?? '';
         $registrocitas->apego_plan_anterior_barr_apego = $request->apego_plan_anterior_barr_apego;
@@ -379,7 +388,7 @@ class NotaNutricionController extends Controller
         //     $generales,
         //     $registro
         // ];
-        return view('alumno.inicio')->with('success', 'Se ha registrado al paciente correctamente');
+        return redirect()->route('alumno.inicio')->with('success', 'Se ha registrado al paciente correctamente');
     }
 
     public function actualizar(Request $request, string $id)
@@ -387,7 +396,6 @@ class NotaNutricionController extends Controller
         $request->validate([
             'edad' => ['required', 'integer'],
             'motivo_consulta' => ['required', 'max:500'],
-            'sintoma_gastro' => ['required'],
             'apego_plan_anterior_barr_apego' => ['required', 'max:250'],
             'motivacion' => ['required'],
             'sintomas_generales' => ['required', 'max:500'],
@@ -462,7 +470,17 @@ class NotaNutricionController extends Controller
         $paciente->save();
 
         $registrocitas->motivo_consulta = $request->motivo_consulta;
-        $registrocitas->sintoma_gastro = $request->sintoma_gastro;
+        $registrocitas->sintoma_gastro = [
+            'bristol' => $request->escala_bristol,
+            'flatulencia' => $request->flatulencia,
+            'estreñimiento' => $request->estreñimiento,
+            'diarrea' => $request->diarrea,
+            'reflujo' => $request->reflujo,
+            'gastritis' => $request->gastritis,
+            'saciedad' => $request->saciedad,
+            'temprana' => $request->temprana,
+            'apetito' => $request->apetito,
+        ];
         $registrocitas->escala_bristol = $request->escala_bristol;
         $registrocitas->otros_sintoma_gastro = $request->otros_sintoma_gastro ?? '';
         $registrocitas->apego_plan_anterior_barr_apego = $request->apego_plan_anterior_barr_apego;
@@ -490,6 +508,17 @@ class NotaNutricionController extends Controller
         $controlcita->circunferencia_cintura = $request->circunferencia_cintura;
         $controlcita->circunferencia_cadera = $request->circunferencia_cadera;
         $controlcita->hora_cita = Carbon::createFromTimeString($request->hora);
+        $registrocitas->sintomas_generales = [
+            'bristol' => $request->bristol,
+            'flatulencia' => $request->flatulencia,
+            'estreñimiento' => $request->estreñimiento,
+            'diarrea' => $request->diarrea,
+            'reflujo' => $request->reflujo,
+            'gastritis' => $request->gastritis,
+            'saciedad' => $request->saciedad,
+            'temprana' => $request->temprana,
+            'apetito' => $request->apetito,
+        ];
         $controlcita->save();
 
         $exploracionfisica = ApiExploFisica::where('id_consulta_paciente', $registrocitas->id_registro)->first();

@@ -29,22 +29,25 @@
             border-radius: 10px;
             padding: 20px;
         }
-				.bristol-container{
-					display: flex;
-					align-items: center;
-					flex-direction: column;
-					border: 1px solid black;
-					margin: 0px 0px 20px 10px;
-					width: 80%;
-					height: 900px;
-					gap:-10px;
-				}
-				.escala-1{
-					display: flex;
-					flex-direction: row !important;
-					justify-content: center;
-					align-items: center;
-				}
+
+        .bristol-container {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            border: 1px solid black;
+            margin: 0px 0px 20px 10px;
+            width: 80%;
+            height: 900px;
+            gap: -10px;
+        }
+
+        .escala-1 {
+            display: flex;
+            flex-direction: row !important;
+            justify-content: center;
+            align-items: center;
+        }
+
         .inputs-form {
             display: flex;
             flex-wrap: wrap;
@@ -114,14 +117,17 @@
             flex-direction: column;
             gap: 5px;
         }
-				.sintomas{
-					display:flex;
-					flex-wrap: wrap;
-				}
-				.sintomas label{
-					margin-left:50px;
-					margin-bottom:20px;
-				}
+
+        .sintomas {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .sintomas label {
+            margin-left: 50px;
+            margin-bottom: 20px;
+        }
+
         .mediciones {
             display: flex;
             flex-direction: column;
@@ -258,99 +264,109 @@
                                             style="width: 500px" value="{{ old('motivo_consulta') }}">
                                         <br>
                                         <br>
-																				<label for="sintomas">SÍNTOMAS GASTROINTESTINALES:</label>
-																				<br>
-																							{{-- <input type="radio" value="bristol" name='sintoma_gastro'
-																									@if(old('sintoma_gastro') == 'bristol') checked @endif> --}}
-																							<br>
-																									<div class="bristol-container">
-																										<h2>Escala de Bristol</h2>
-																										<div class="escala-1">
-																											<input type="radio" id="bristol1" name="escala-bristol" value="Tipo 1">
-																											<label for="bristol1"><img src="{{asset('/assets/escala-1.jpeg')}}" alt="" style="width:200px;height:100px">
-																											</label>
-																											<p>(1) Heces en bolas duras y separadas</p>
-																										</div>
-																										<div class="escala-1">
-																											<input type="radio" id="bristol1" name="escala-bristol" value="Tipo 2">
-																											<label for="bristol1"><img src="{{asset('/assets/escala-2.jpeg')}}" alt="" style="width:200px;height:100px">
-																											</label>
-																											<p>(2) Heces alargadas con relieves, formada por bolitas</p>
-																										</div>
-																										<div class="escala-1">
-																											<input type="radio" id="bristol1" name="escala-bristol" value="Tipo 3"> 
-																											<label for="bristol1"><img src="{{asset('/assets/escala-3.jpeg')}}" alt="" style="width:150px;height:100px">
-																											</label>
-																											<p>(3) Heces alargadas con grietas en la superficie</p>
-																										</div>
-																										<div class="escala-1">
-																											<input type="radio" id="bristol1" name="escala-bristol" value="Tipo 4"> 
-																											<label for="bristol1"><img src="{{asset('/assets/escala-4.jpeg')}}" alt="" style="width:150px;height:100px">
-																											</label>
-																											<p>(4) Heces alargadas, lisas y blandas</p>
-																										</div>
-																										<div class="escala-1">
-																											<input type="radio" id="bristol1" name="escala-bristol" value="Tipo 5"> 
-																											<label for="bristol1"><img src="{{asset('/assets/escala-5.jpeg')}}" alt="" style="width:150px;height:100px">
-																											</label>
-																											<p>(5) Heces blandas y trozos separados o con bordes definidos</p>
-																										</div>
-																										<div class="escala-1">
-																											<input type="radio" id="bristol1" name="escala-bristol" value="Tipo 6"> 
-																											<label for="bristol1"><img src="{{asset('/assets/escala-6.jpeg')}}" alt="" style="width:200px;height:100px">
-																											</label>
-																											<p>(6) Heces blandas y trozos separados o con bordes pegados</p>
-																										</div>
-																										<div class="escala-1">
-																											<input type="radio" id="bristol1" name="escala-bristol" value="Tipo 7"> 
-																											<label for="bristol1"><img src="{{asset('/assets/escala-7.jpeg')}}" alt="" style="width:200px;height:100px">
-																											</label>
-																											<p>(7) Heces líquidas sin trozos sólidos</p>
-																										</div>
-																									</div>
-																				</div>
+                                        <label for="sintomas">SÍNTOMAS GASTROINTESTINALES:</label>
+                                        <br>
+                                        {{-- <input type="radio" value="bristol" name='sintoma_gastro'
+																									@if (old('sintoma_gastro') == 'bristol') checked @endif> --}}
+                                        <br>
+                                        <div class="bristol-container">
+                                            <h2>Escala de Bristol</h2>
+                                            <div class="escala-1">
+                                                <input type="radio" id="bristol1" name="escala_bristol"
+                                                    value="Tipo 1">
+                                                <label for="bristol1"><img src="{{ asset('/assets/escala-1.jpeg') }}"
+                                                        alt="" style="width:200px;height:100px">
+                                                </label>
+                                                <p>(1) Heces en bolas duras y separadas</p>
+                                            </div>
+                                            <div class="escala-1">
+                                                <input type="radio" id="bristol1" name="escala_bristol"
+                                                    value="Tipo 2">
+                                                <label for="bristol1"><img src="{{ asset('/assets/escala-2.jpeg') }}"
+                                                        alt="" style="width:200px;height:100px">
+                                                </label>
+                                                <p>(2) Heces alargadas con relieves, formada por bolitas</p>
+                                            </div>
+                                            <div class="escala-1">
+                                                <input type="radio" id="bristol1" name="escala_bristol"
+                                                    value="Tipo 3">
+                                                <label for="bristol1"><img src="{{ asset('/assets/escala-3.jpeg') }}"
+                                                        alt="" style="width:150px;height:100px">
+                                                </label>
+                                                <p>(3) Heces alargadas con grietas en la superficie</p>
+                                            </div>
+                                            <div class="escala-1">
+                                                <input type="radio" id="bristol1" name="escala_bristol"
+                                                    value="Tipo 4">
+                                                <label for="bristol1"><img src="{{ asset('/assets/escala-4.jpeg') }}"
+                                                        alt="" style="width:150px;height:100px">
+                                                </label>
+                                                <p>(4) Heces alargadas, lisas y blandas</p>
+                                            </div>
+                                            <div class="escala-1">
+                                                <input type="radio" id="bristol1" name="escala_bristol"
+                                                    value="Tipo 5">
+                                                <label for="bristol1"><img src="{{ asset('/assets/escala-5.jpeg') }}"
+                                                        alt="" style="width:150px;height:100px">
+                                                </label>
+                                                <p>(5) Heces blandas y trozos separados o con bordes definidos</p>
+                                            </div>
+                                            <div class="escala-1">
+                                                <input type="radio" id="bristol1" name="escala_bristol"
+                                                    value="Tipo 6">
+                                                <label for="bristol1"><img src="{{ asset('/assets/escala-6.jpeg') }}"
+                                                        alt="" style="width:200px;height:100px">
+                                                </label>
+                                                <p>(6) Heces blandas y trozos separados o con bordes pegados</p>
+                                            </div>
+                                            <div class="escala-1">
+                                                <input type="radio" id="bristol1" name="escala_bristol"
+                                                    value="Tipo 7">
+                                                <label for="bristol1"><img src="{{ asset('/assets/escala-7.jpeg') }}"
+                                                        alt="" style="width:200px;height:100px">
+                                                </label>
+                                                <p>(7) Heces líquidas sin trozos sólidos</p>
+                                            </div>
+                                        </div>
                                     </div>
-																		
-																		<br>
-																		<br>
-																		<div class="sintomas">
-																			<label for="flatulencia">FLATULENCIA</label>
-																					<input type="radio" value="flatulencia" name='sintoma_gastro'
-																							@if(old('sintoma_gastro') == 'flatulencia') checked @endif>
+                                </div>
 
-																					<label for="estreñimiento">ESTREÑIMIENTO</label>
-																					<input type="radio" value="estreñimiento" name='sintoma_gastro'
-																							@if(old('sintoma_gastro') == 'estreñimiento') checked @endif>
+                                <br>
+                                <br>
+                                <div class="sintomas">
+                                    <label for="estreñimiento">ESTREÑIMIENTO</label>
+                                    <input type="radio" value="estreñimiento" name='estreñimiento'
+                                        @if (old('estreñimiento') == 'estreñimiento') checked @endif>
 
-																					<label for="diarrea">DIARREA</label>
-																					<input type="radio" value="diarrea" name='sintoma_gastro'
-																							@if(old('sintoma_gastro') == 'diarrea') checked @endif>
+                                    <label for="diarrea">DIARREA</label>
+                                    <input type="radio" value="diarrea" name='diarrea'
+                                        @if (old('diarrea') == 'diarrea') checked @endif>
 
-																					<label for="reflujo">REFLUJO</label>
-																					<input type="radio" value="reflujo" name='sintoma_gastro'
-																							@if(old('sintoma_gastro') == 'reflujo') checked @endif>
+                                    <label for="reflujo">REFLUJO</label>
+                                    <input type="radio" value="reflujo" name='reflujo'
+                                        @if (old('reflujo') == 'reflujo') checked @endif>
 
-																					<label for="gastritis">GASTRITIS</label>
-																					<input type="radio" value="gastritis" name='sintoma_gastro'
-																							@if(old('sintoma_gastro') == 'gastritis') checked @endif>
+                                    <label for="gastritis">GASTRITIS</label>
+                                    <input type="radio" value="gastritis" name='gastritis'
+                                        @if (old('gastritis') == 'gastritis') checked @endif>
 
-																					<label for="saciedad">SACIEDAD</label>
-																					<input type="radio" value="saciedad" name='sintoma_gastro'
-																							@if(old('sintoma_gastro') == 'saciedad') checked @endif>
+                                    <label for="saciedad">SACIEDAD</label>
+                                    <input type="radio" value="saciedad" name='saciedad'
+                                        @if (old('saciedad') == 'saciedad') checked @endif>
 
-																					<label for="temprana">TEMPRANA</label>
-																					<input type="radio" value="temprana" name='sintoma_gastro'
-																							@if(old('sintoma_gastro') == 'temprana') checked @endif>
+                                    <label for="temprana">TEMPRANA</label>
+                                    <input type="radio" value="temprana" name='temprana'
+                                        @if (old('temprana') == 'temprana') checked @endif>
 
-																					<label for="apetito">APETITO</label>
-																					<input type="radio" value="apetito" name='sintoma_gastro'
-																							@if(old('sintoma_gastro') == 'apetito') checked @endif>
+                                    <label for="apetito">APETITO</label>
+                                    <input type="radio" value="apetito" name='apetito'
+                                        @if (old('apetito') == 'apetito') checked @endif>
 
-																					<label for="flatulencia">FLATULENCIA</label>
-																					<input type="radio" value="flatulencia" name='sintoma_gastro'
-																							@if(old('sintoma_gastro') == 'flatulencia') checked @endif>
+                                    <label for="flatulencia">FLATULENCIA</label>
+                                    <input type="radio" value="flatulencia" name='flatulencia'
+                                        @if (old('flatulencia') == 'flatulencia') checked @endif>
 
-																					<br>
+                                    <br>
                                     <div class="cuarta-parte">
                                         <label for="otros">OTROS</label>
                                         <input type="text" style="width:300px" name="otros_sintoma_gastro"
@@ -522,7 +538,8 @@
                                                     <input type="text" style="height: 30px"
                                                         name="rango_peso_saludable"
                                                         value="{{ old('rango_peso_saludable') }}">
-                                                    <input type="text" style="height: 30px" name="indice_libre_grasa"
+                                                    <input type="text" style="height: 30px"
+                                                        name="indice_libre_grasa"
                                                         value="{{ old('indice_libre_grasa') }}">
                                                     <input type="text" style="height: 30px"
                                                         name="porcentaje_grasa_corporal"
