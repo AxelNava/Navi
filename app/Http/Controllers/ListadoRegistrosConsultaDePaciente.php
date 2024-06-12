@@ -6,7 +6,6 @@ use App\Models\ApiControlCita;
 use App\Models\ApiDatosPaciente;
 use App\Models\ApiPersona;
 use App\Models\ApiRegistroConsultum;
-use Illuminate\Support\Facades\DB;
 
 class ListadoRegistrosConsultaDePaciente extends Controller
 {
