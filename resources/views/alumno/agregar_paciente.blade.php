@@ -230,16 +230,16 @@
                                     <div class="primera-parte">
                                         <label for="nombre">NOMBRE</label>
                                         <input type="text" name="nombre" id="nombre" style="width:300px"
-                                            value="{{ old('nombre', '') }}">
+                                            value="{{ old('nombre', '') }}" required>
                                         <label for="nombre">EDAD</label>
-                                        <input type="number" name="edad" id="edad" value="{{ old('edad') }}">
+                                        <input type="number" name="edad" id="edad" value="{{ old('edad') }}" required>
                                         <label for="nombre">HORA</label>
-                                        <input type="time" name="hora" id="hora" value="{{ old('hora') }}">
+                                        <input type="time" name="hora" id="hora" value="{{ old('hora') }}" required>
                                     </div>
                                     <div class="segunda-parte">
                                         <br>
                                         <label for="genero">GÉNERO</label>
-                                        <select name="genero" id="genero">
+                                        <select name="genero" id="genero" required>
                                             <option value="M" @selected(old('genero') == 'M')>Masculino</option>
                                             <option value="F" @selected(old('genero') == 'F')>Femenino</option>
                                         </select>
@@ -249,19 +249,19 @@
                                             value="{{ ApiDatosPaciente::max('expediente') + 1 }}" readonly>
                                         <label for="fecha_nacimiento">FECHA DE NACIMIENTO</label>
                                         <input type="date" name="fecha_nacimiento" id="fecha_nacimiento"
-                                            value="{{ old('fecha_nacimiento') }}">
+                                            value="{{ old('fecha_nacimiento') }}" required>
                                         <br>
                                         <br>
                                         <label for="no_consulta_paciente">CONSULTA NO.</label>
                                         <input type="text" name="no_consulta_paciente" id="no_consulta_paciente"
-                                            value="{{ old('no_consulta_paciente') }}">
+                                            value="{{ old('no_consulta_paciente') }}" required>
                                     </div>
                                     <div class="tercera-parte">
                                         <br>
                                         <label for="motivo_consulta">MOTIVO DE CONSULTA:</label>
                                         <br>
                                         <input type="text" name="motivo_consulta" id="motivo_consulta"
-                                            style="width: 500px" value="{{ old('motivo_consulta') }}">
+                                            style="width: 500px" value="{{ old('motivo_consulta') }}" required>
                                         <br>
                                         <br>
                                         <label for="sintomas">SÍNTOMAS GASTROINTESTINALES:</label>
@@ -382,7 +382,7 @@
                                             <div class="motivacion-item">
                                                 <p>Extremadamente desmotivado</p>
                                                 <input type="radio" value="extramadamente_desmotivado"
-                                                    name="motivacion" @checked(old('motivacion') == 'extramadamente_desmotivado')>
+                                                    name="motivacion" @checked(old('motivacion') == 'extramadamente_desmotivado') required>
                                             </div>
                                             <div class="motivacion-item">
                                                 <p>Muy desmotivado</p>
@@ -436,7 +436,7 @@
                                         <article>
                                             <label for="agua">Agua simple (en mililitros)</label>
                                             <input type="number" name="hidratacion" id="agua"
-                                                style="width:100px;" value="{{ old('hidratacion') }}">
+                                                style="width:100px;" value="{{ old('hidratacion') }}" required>
                                             <div class="inputs">
                                                 <label for="otros_hidratacion">Otras bebidas</label><br>
                                                 <textarea name="otras_bebidas" id="otros_hidratacion" cols="30" rows="10">{{ old('otras_bebidas') }}</textarea>
@@ -449,19 +449,19 @@
                                             CENTRADA EN HALLAZGOS DE NUTRICIÓN</h2>
                                         <label for="pelo">Pelo y uñas</label>
                                         <input type="text" name="pelo_unias" id="pelo"
-                                            value="{{ old('pelo_unias') }}">
+                                            value="{{ old('pelo_unias') }}" required>
                                         <label for="piel">Piel</label>
                                         <input type="text" name="piel" id="piel"
-                                            value="{{ old('piel') }}">
+                                            value="{{ old('piel') }}" required>
                                         <label for="ojos">Ojos</label>
                                         <input type="text" name="ojos" id="ojos"
-                                            value="{{ old('ojos') }}">
+                                            value="{{ old('ojos') }}" required>
                                         <label for="musculo">Musculo</label>
                                         <input type="text" name="musculo" id="musculo"
-                                            value="{{ old('musculo') }}">
+                                            value="{{ old('musculo') }}" required>
                                         <label for="otros_explo_fisica">Otros</label>
                                         <input type="text" name="otros_explo_fisica" id="otros_explo_fisica"
-                                            value="{{ old('otros_explo_fisica') }}">
+                                            value="{{ old('otros_explo_fisica') }}" required>
                                         <h2 style="font-size: 20px; font-weight:900">INTOLERANCIA A ALIMENTOS</h2>
                                         <label for="no">No</label>
                                         <input type="radio" name="radio_into_aliment" id="intolerancia"
@@ -502,23 +502,23 @@
                                                     <input type="text" style="height: 30px" name="mediciones"
                                                         value="{{ old('mediciones') }}">
                                                     <input type="text" style="height: 30px" name="peso"
-                                                        value="{{ old('peso') }}">
+                                                        value="{{ old('peso') }}" required>
                                                     <input type="text" style="height: 30px"
                                                         name="circunferencia_cintura"
-                                                        value="{{ old('circunferencia_cintura') }}">
+                                                        value="{{ old('circunferencia_cintura') }}" required>
                                                     <input type="text" style="height: 30px"
                                                         name="circunferencia_cadera"
-                                                        value="{{ old('circunferencia_cadera') }}">
+                                                        value="{{ old('circunferencia_cadera') }}" required>
                                                     <input type="text" style="height: 30px" name="masa_muscular"
-                                                        value="{{ old('masa_muscular') }}">
+                                                        value="{{ old('masa_muscular') }}" required>
                                                     <input type="text" style="height: 30px"
                                                         name="mas_grasa_corporal"
-                                                        value="{{ old('mas_grasa_corporal') }}">
+                                                        value="{{ old('mas_grasa_corporal') }}" required>
                                                     <input type="text" style="height: 30px"
                                                         name="masa_libre_grasa"
-                                                        value="{{ old('masa_libre_grasa') }}">
+                                                        value="{{ old('masa_libre_grasa') }}" required>
                                                     <input type="text" style="height: 30px" name="act"
-                                                        value="{{ old('act') }}">
+                                                        value="{{ old('act') }}" required>
                                                 </div>
                                             </div>
                                             <div class="tabla-derecha">
@@ -532,18 +532,18 @@
                                                 </div>
                                                 <div class="valor">
                                                     <input type="text" style="height: 30px" name="imc"
-                                                        value="{{ old('imc') }}">
+                                                        value="{{ old('imc') }}" required>
                                                     <input type="text" style="height: 30px" name="rcc"
-                                                        value="{{ old('rcc') }}">
+                                                        value="{{ old('rcc') }}" required>
                                                     <input type="text" style="height: 30px"
                                                         name="rango_peso_saludable"
                                                         value="{{ old('rango_peso_saludable') }}">
                                                     <input type="text" style="height: 30px"
                                                         name="indice_libre_grasa"
-                                                        value="{{ old('indice_libre_grasa') }}">
+                                                        value="{{ old('indice_libre_grasa') }}" required>
                                                     <input type="text" style="height: 30px"
                                                         name="porcentaje_grasa_corporal"
-                                                        value="{{ old('porcentaje_grasa_corporal') }}">
+                                                        value="{{ old('porcentaje_grasa_corporal') }}" required>
                                                     <input type="text" style="height: 30px"
                                                         name="otros_antropometricos"
                                                         value="{{ old('otros_antropometricos') }}">
@@ -738,25 +738,25 @@
                                             </div>
                                             <div class="dieteticos2">
                                                 <input type="text" name="frutas" id=""
-                                                    style="width:70px" value="{{ old('frutas') }}">
+                                                    style="width:70px" value="{{ old('frutas') }}" required>
                                                 <input type="text" name="verduras" id=""
-                                                    style="width:70px" value="{{ old('verduras') }}">
+                                                    style="width:70px" value="{{ old('verduras') }}" required>
                                                 <input type="text" name="cereales_sg" id=""
-                                                    style="width:70px" value="{{ old('cereales_sg') }}">
+                                                    style="width:70px" value="{{ old('cereales_sg') }}" required>
                                                 <input type="text" name="cereales_cg" id=""
-                                                    style="width:70px" value="{{ old('cereales_cg') }}">
+                                                    style="width:70px" value="{{ old('cereales_cg') }}" required>
                                                 <input type="text" name="leguminosas" id=""
-                                                    style="width:70px" value="{{ old('leguminosas') }}">
+                                                    style="width:70px" value="{{ old('leguminosas') }}" required>
                                                 <input type="text" name="poa" id=""
-                                                    style="width:70px" value="{{ old('poa') }}">
+                                                    style="width:70px" value="{{ old('poa') }}" required>
                                                 <input type="text" name="lacteos" id=""
-                                                    style="width:70px" value="{{ old('lacteos') }}">
+                                                    style="width:70px" value="{{ old('lacteos') }}" required>
                                                 <input type="text" name="aceites_sp" id=""
-                                                    style="width:70px" value="{{ old('aceites_sp') }}">
+                                                    style="width:70px" value="{{ old('aceites_sp') }}" required>
                                                 <input type="text" name="aceites_cp" id=""
-                                                    style="width:70px" value="{{ old('aceites_cp') }}">
+                                                    style="width:70px" value="{{ old('aceites_cp') }}" required>
                                                 <input type="text" name="azucares" id=""
-                                                    style="width:70px" value="{{ old('azucares') }}">
+                                                    style="width:70px" value="{{ old('azucares') }}" required>
                                             </div>
                                         </div>
                                     </div>
@@ -772,149 +772,170 @@
                             <div class="segundo-form">
                                 <h3>Dietéticos</h3>
                                 <label>Tipo de instrumentos:</label>
-                                <input type="radio" name="instrumento" id="hrs" value="Recorda 24/h">24 hrs
+                                <input type="radio" name="instrumento" id="hrs" value="Recorda 24/h"
+                                    @checked(old('instrumento') == 'Recorda 24/h') required>24 hrs
                                 <input type="radio" name="instrumento" id="semi"
-                                    value="Dieta habitual semicuantitativa">Semicuantitativa
-                                <input type="radio" name="instrumento" id="diario"
-                                    value="Diario de alimentos">Diario
+                                    value="Dieta habitual semicuantitativa"
+                                    @checked(old('instrumento') == 'Dieta habitual semicuantitativa')>Semicuantitativa
+                                <input type="radio" name="instrumento" id="diario" value="Diario de alimentos"
+                                    @checked(old('instrumento') == 'Diario de alimentos')>Diario
                                 <br>
                                 <label>Desayuno hora: </label>
-                                <input type="time" name="desayuno_hora">
+                                <input type="time" name="desayuno_hora" value="{{ old('desayuno_hora') }}" required>
                                 <br>
                                 <label>
                                     Colación:
-                                    <input type="text" name="colacion1">
+                                    <input type="text" name="colacion1" value="{{ old('colacion1') }}" required>
                                 </label>
                                 <br>
                                 <label>
                                     Comida hora:
-                                    <input type="time" name="comida_hora">
+                                    <input type="time" name="comida_hora" value="{{ old('comida_hora') }}" required>
                                 </label>
                                 <br>
                                 <label>
                                     Colación:
-                                    <input type="text" name="colacion2">
+                                    <input type="text" name="colacion2" value="{{ old('colacion2') }}" required>
                                 </label>
                                 <br>
                                 <label>
                                     Cena hora:
-                                    <input type="time" name="cena_hora">
+                                    <input type="time" name="cena_hora" value="{{ old('cena_hora') }}" required>
                                 </label>
                                 <br>
                                 <label>
                                     Colación:
-                                    <input type="text" name="colacion3">
+                                    <input type="text" name="colacion3" value="{{ old('colacion3') }}" required>
                                 </label>
                                 <br><br>
                                 <label>
                                     Total EQ: <br>
-                                    Verduras:<input type="text" name="verduras">
-                                    Frutas:<input type="text" name="frutas">
-                                    Cereales:<input type="text" name="cereales">
-                                    Leguminosas:<input type="text" name="leguminosas">
-                                    Carnes:<input type="text" name="carnes">
-                                    Leche:<input type="text" name="leche">
-                                    Grasa:<input type="text" name="grasa">
-                                    Azúcar:<input type="text" name="azucar">
+                                    Verduras:<input type="text" name="verduras" value="{{ old('verduras') }}" required>
+                                    Frutas:<input type="text" name="frutas" value="{{ old('frutas') }}" required>
+                                    Cereales:<input type="text" name="cereales" value="{{ old('cereales') }}" required>
+                                    Leguminosas:<input type="text" name="leguminosas"
+                                        value="{{ old('leguminosas') }}" required>
+                                    Carnes:<input type="text" name="carnes" value="{{ old('carnes') }}" required>
+                                    Leche:<input type="text" name="leche" value="{{ old('leche') }}" required>
+                                    Grasa:<input type="text" name="grasa" value="{{ old('grasa') }}" required>
+                                    Azúcar:<input type="text" name="azucar" value="{{ old('azucar') }}" required>
                                 </label>
                                 <br><br>
                                 <label>
                                     TOTAL:<br>
-                                    Kcal:<input type="text" name="total_kcal">
-                                    Prot:<input type="text" name="total_prot">(<input type="text"
-                                        name="prot_g">)
-                                    Lip:<input type="text" name="total_lip">(<input type="text"
-                                        name="lip_g">)
-                                    Hco:<input type="text" name="total_hco">(<input type="text"
-                                        name="hco_g">)
+                                    Kcal:<input type="text" name="total_kcal" value="{{ old('total_kcal') }}">
+                                    Prot:<input type="text" name="total_prot"
+                                        value="{{ old('total_prot') }}">(<input type="text" name="prot_g"
+                                        value="{{ old('prot_g') }}">)
+                                    Lip:<input type="text" name="total_lip"
+                                        value="{{ old('total_lip') }}">(<input type="text" name="lip_g"
+                                        value="{{ old('lip_g') }}">)
+                                    Hco:<input type="text" name="total_hco"
+                                        value="{{ old('total_hco') }}">(<input type="text" name="hco_g"
+                                        value="{{ old('hco_g') }}">)
                                 </label>
                                 <br><br>
                                 <label>
                                     % ADECUACIÓN:<br>
-                                    Energia:<input type="text" name="adecuacion_porcen_ene">
-                                    Kcal:<input type="text" name="adecuacion_porcen_ener_kcal">
-                                    Prot:<input type="text" name="adecuacion_porcen_prot">
-                                    Lip:<input type="text" name="adecuacion_porcen_lip">
-                                    Hco:<input type="text" name="adecuacion_porcen_hco"><br>
+                                    Energia:<input type="text" name="adecuacion_porcen_ene"
+                                        value="{{ old('adecuacion_porcen_ene') }}" required>
+                                    Kcal:<input type="text" name="adecuacion_porcen_ener_kcal"
+                                        value="{{ old('adecuacion_porcen_ener_kcal') }}" required>
+                                    Prot:<input type="text" name="adecuacion_porcen_prot"
+                                        value="{{ old('adecuacion_porcen_prot') }}" required>
+                                    Lip:<input type="text" name="adecuacion_porcen_lip"
+                                        value="{{ old('adecuacion_porcen_lip') }}" required>
+                                    Hco:<input type="text" name="adecuacion_porcen_hco"
+                                        value="{{ old('adecuacion_porcen_hco') }}" required><br>
                                     Aspectos cualitativos de dieta habitual:<input type="text"
-                                        name="aspectos_cualita_dieta_habitual">
+                                        name="aspectos_cualita_dieta_habitual"
+                                        value="{{ old('aspectos_cualita_dieta_habitual') }}">
                                 </label>
                                 <br><br>
                                 <label>
                                     REQUERIMIENTOS:<br>
-                                    Energia:<input type="text" name="reque_ener">
-                                    Proteina total:<input type="text" name="reque_proteina">(<input type="text"
-                                        name="reque_kg_dia">)
+                                    Energia:<input type="text" name="reque_ener" value="{{ old('reque_ener') }}">
+                                    Proteina total:<input type="text" name="reque_proteina"
+                                        value="{{ old('reque_proteina') }}">(<input type="text"
+                                        name="reque_kg_dia" value="{{ old('reque_kg_dia') }}">)
                                 </label>
                                 <br><br>
                                 <label>
                                     DX:NUTRICIO:<br>
-                                    <input type="text" name="dx_nutricio">
+                                    <input type="text" name="dx_nutricio" value="{{ old('dx_nutricio') }}" required>
                                 </label>
                                 <br>
                                 <label>
                                     OBJETIVOS:<br>
-                                    <input type="text" name="objetivos_dieta">
+                                    <input type="text" name="objetivos_dieta"
+                                        value="{{ old('objetivos_dieta') }}" required>
                                 </label>
                                 <br>
                                 <label>
                                     PLAN DE ALIMENTACIÓN:<br>
                                     Dieta <input type="text" name="tipo_dieta"> de <input type="text"
-                                        name="kcal_dieta">
-                                    Prot:<input type="text" name="prot_porcent_dieta">(<input type="text"
-                                        name="prot_kg_dia_dieta">)
-                                    Lip:<input type="text" name="lip_porcen_dieta">(<input type="text"
-                                        name="lip_g_dieta">)
-                                    Hco:<input type="text" name="hco_porcen_dieta">(<input type="text"
-                                        name="hco_g_dieta">)
+                                        name="kcal_dieta" value="{{ old('kcal_dieta') }}" required>
+                                    Prot:<input type="text" name="prot_porcent_dieta" required>(<input type="text"
+                                        name="prot_kg_dia_dieta" value="{{ old('prot_kg_dia_dieta') }}" required>)
+                                    Lip:<input type="text" name="lip_porcen_dieta" required>(<input type="text"
+                                        name="lip_g_dieta" value="{{ old('lip_g_dieta') }}" required>)
+                                    Hco:<input type="text" name="hco_porcen_dieta" required>(<input type="text"
+                                        name="hco_g_dieta" value="{{ old('hco_g_dieta') }}" required>)
                                 </label>
                                 <br>
                                 <label>
                                     SUPLEMENTOS:<br>
-                                    <input type="text" name="suplementos">
+                                    <input type="text" name="suplementos" value="{{ old('suplementos') }}">
                                 </label>
                                 <br>
                                 <label>
                                     METAS SMART:<br>
-                                    <input type="text" name="metas_smart">
+                                    <input type="text" name="metas_smart" value="{{ old('metas_smart') }}" required>
                                 </label>
                                 <br>
                                 <label>
                                     PARAMETROS META:<br>
-                                    Peso:<input type="text" name="meta_peso">
-                                    %Grasa:<input type="text" name="meta_grasa">
-                                    Músculo:<input type="text" name="meta_musculo">
-                                    C. Cintura:<input type="text" name="meta_cintura">
+                                    Peso:<input type="text" name="meta_peso" value="{{ old('meta_peso') }}">
+                                    %Grasa:<input type="text" name="meta_grasa" value="{{ old('meta_grasa') }}">
+                                    Músculo:<input type="text" name="meta_musculo"
+                                        value="{{ old('meta_musculo') }}">
+                                    C. Cintura:<input type="text" name="meta_cintura"
+                                        value="{{ old('meta_cintura') }}">
                                     <br>
-                                    Horarios:<input type="text" name="meta_horario">
-                                    Mejorar hábitos:<input type="text" name="meta_mejorar">
-                                    Selección de alimentos:<input type="text" name="meta_alimentos">
+                                    Horarios:<input type="text" name="meta_horario"
+                                        value="{{ old('meta_horario') }}">
+                                    Mejorar hábitos:<input type="text" name="meta_mejorar"
+                                        value="{{ old('meta_mejorar') }}">
+                                    Selección de alimentos:<input type="text" name="meta_alimentos"
+                                        value="{{ old('meta_alimentos') }}">
                                 </label>
                                 <br>
                                 <label>
                                     EDUCACIÓN:<br>
-                                    <input type="text" name="educacion">
+                                    <input type="text" name="educacion" value="{{ old('educacion') }}" required>
                                 </label>
                                 <br>
                                 <label>
                                     MONITOREO:<br>
-                                    <input type="text" name="monitoreo">
+                                    <input type="text" name="monitoreo" value="{{ old('monitoreo') }}">
                                 </label>
                                 <br>
                                 <label>
                                     PENDIENTES:<br>
-                                    <input type="text" name="pendientes">
+                                    <input type="text" name="pendientes" value="{{ old('pendientes') }}">
                                 </label>
                                 <br>
                                 <label>
                                     NOMBRE COMPLETO, FIRMA Y CÉDULA PROFESIONAL DE QUIEN ELABORÓ LA HISTORIA CLINICA
                                     NUTRICIA:<br>
-                                    <input type="text" name="datos_elaborador">
+                                    <input type="text" name="datos_elaborador"
+                                        value="{{ old('datos_elaborador') }}">
                                 </label>
                                 <br>
                                 <label>
                                     NOMBRE COMPLETO, FIRMA Y CÉDULA PROFESIONAL DE NUTRIÓLOG() RESPONSABLE:<br>
-                                    <input type="text" name="datos_nutriologo">
+                                    <input type="text" name="datos_nutriologo"
+                                        value="{{ old('datos_nutriologo') }}">
                                 </label>
 
                                 <button type="submit" class="agregar-alumno">Crear</button>

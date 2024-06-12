@@ -56,6 +56,9 @@
                                 <form action="{{ route('listado_formularios', $data['Datos_paciente'][$id]) }}">
                                     <button type="submit" class="agregar-alumno">Ver formularios paciente</button>
                                 </form>
+                                <form action="{{ route('registrar-consulta-paciente', $data['Datos_paciente'][$id]) }}">
+                                    <button type="submit" class="agregar-alumno">Agregar nueva consulta</button>
+                                </form>
                             </div>
                         @endforeach
                     </div>

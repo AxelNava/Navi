@@ -23,7 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property float $agua_corpolar
  * @property int $circunferencia_cintura
  * @property int $circunferencia_cadera
- * @property Carbon $fecha_cita
+ * @property string $fecha_cita
  * @property Carbon $hora_cita
  * @property Carbon $fecha_prox_cita
  * @property float $control_musculo
@@ -53,7 +53,6 @@ class ApiControlCita extends Model
 		'agua_corpolar' => 'float',
 		'circunferencia_cintura' => 'int',
 		'circunferencia_cadera' => 'int',
-		'fecha_cita' => 'datetime:Y-m-d',
 		'control_musculo' => 'float',
 		'control_grasa' => 'float'
 	];

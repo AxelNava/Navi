@@ -28,8 +28,10 @@ Route::get('director/inicio', function () {
 
 Route::get("alumno/{id}/ListadoPacientes", [ListadoPacientes_VistaAlumno::class, 'enlistar'])
 	->name('listado_pacientes_Alumnos');
+
 Route::get('alumno/listado-registros-pacientes/{id_persona_nutriologo}', [ListadoPacientesRegistros::class, 'listar'])
 	->name('listado-pacientes');
+	
 Route::get('alumno/registros-paciente/{id_paciente}', [ListadoRegistrosConsultaDePaciente::class, 'listar_registros'])
 	->name('listado-registros-paciente');
 Route::get('alumno/ListadoRegistroPacientes/', function () {
@@ -54,6 +56,8 @@ Route::get('alumno/agregar-paciente', function () {
 	return view('alumno.agregar_paciente');
 });
 
+Route::get('alumno/agregar-consulta-paciente/{id_paciente}', [NotaNutricionController::class, 'get_base_paciente'])->name('registrar-consulta-paciente');
+
 Route::get('alumno/modificar-registro/{id_registro}', [NotaNutricionController::class, 'buscar'])->name('modificar_registro_formulario');
 
 Route::get('alumno/inicio', [ListadoPacientes_VistaAlumno::class, 'enlistar'])->name('alumno.inicio');
@@ -74,6 +78,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/nota-nutricion/buscar/{id}', [NotaNutricionController::class, 'buscar'])->name('nota-nutricion_buscar');
 //crear dieta
 Route::post('/nota-nutricion/crear', [NotaNutricionController::class, 'crear'])->name('nota-nutricion_crear');
+Route::post('/nota-nutricion/crear-consulta-paciente/{id_paciente}', [NotaNutricionController::class, 'create_new_registro_formulario'])->name('nota-nutricion_crear_nueva_consulta_paciente');
 Route::patch('/nota-nutricion/actualizar/{id}', [NotaNutricionController::class, 'actualizar'])->name('nota-nutricion_actualizar');
 
 Route::get('dieta-paciente/buscar/{id}', [DietaPaciente::class, 'buscar'])->name('dieta-paciente_buscar');

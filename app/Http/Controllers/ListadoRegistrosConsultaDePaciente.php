@@ -2,23 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ApiControlCita;
+use App\Models\ApiDatosPaciente;
+use App\Models\ApiPersona;
+use App\Models\ApiRegistroConsultum;
 use Illuminate\Support\Facades\DB;
 
 class ListadoRegistrosConsultaDePaciente extends Controller
 {
     public function listar_registros($id_paciente)
     {
-        $ids_registros = DB::table('api_control_citas')
-            ->leftJoin('api_datos_paciente', 'api_datos_paciente.id_dato_paciente', '=', 'api_control_citas.id_paciente')
-            ->leftJoin('api_persona', 'api_datos_paciente.id_persona', '=', 'api_persona.persona_id')
-            ->where('api_control_citas.id_paciente', $id_paciente)
-            ->select(
-                DB::raw(
-                    'DISTINCT api_control_citas.id_registro_consulta,api_control_citas.fecha_cita ,api_persona.nombre,api_persona.edad,api_persona.genero'
-                )
-            )->get();
-
-        return response()->json(['data' => $ids_registros]);
+        $ids_registros = ApiRegistroConsultum::where('id_paciente', $id_paciente)->pluck('id_registro');
+        $info_paciente = ApiDatosPaciente::find($id_paciente);
+        $persona = ApiPersona::find($info_paciente->id_persona);
+        $fechas_citas = ApiControlCita::whereIn('id_registro_consulta', $ids_registros)->pluck('fecha_cita');
+        return response()->json([
+            'data' => [
+                'registros' => $ids_registros,
+                'fechas_citas' => $fechas_citas,
+                'info_paciente' => $info_paciente,
+                'persona' => $persona
+            ]
+        ]);
     }
     public function listar_formularios_paciente($id_paciente)
     {

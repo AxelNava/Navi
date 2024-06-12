@@ -39,23 +39,22 @@
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            console.log(data)
             const titulo = document.getElementById('titulo_historial');
-            titulo.innerHTML = `Historial de registros del paciente: ${data.data[0].nombre}`;
+            titulo.innerHTML = `Historial de registros del paciente: ${data.data['persona'].nombre}`;
             const num_registros = document.getElementById('num_registros');
-            num_registros.innerHTML = `${data.data.length}`;
+            num_registros.innerHTML = `${data.data['registros'].length}`;
             const forms = document.createDocumentFragment();
             let counter = 1;
-            data.data.forEach(dato => {
+            data.data['registros'].forEach((dato,index) => {
                 const form = document.createElement('form');
                 form.method = 'get';
-                form.action = `http://navi.local/alumno/modificar-registro/${dato.id_registro_consulta}`;
+                form.action = `http://navi.local/alumno/modificar-registro/${dato}`;
                 form.classList.add('flex');
                 form.classList.add('flex-col');
                 form.classList.add('max-width-form');
                 form.innerHTML = `
                     <label for="">Número de registro: ${counter}</label>
-                    <label for="">Fecha de registro: ${dato.fecha_cita}</label>
+                    <label for="">Fecha de registro: ${data.data['fechas_citas'][index]}</label>
                     <x-button-submit class="button_blue mt-1">Revisar formulario</x-button-submit>
                 `;
                 counter++;
