@@ -41,6 +41,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
+                    <button class="trigger" style="display:block">t</button>
                     {{-- <h2>ID PACIENTE: {{$id}}</h2> --}}
 										<h2 class="nombre"></h2>
                     <br>
@@ -78,10 +79,14 @@
 		let nombre = document.querySelector('.nombre');
     const url = `/controlCitas/${id}`;
     const datos_control_citas = document.querySelector('.datos_control_citas');
-
+    let triggerBtn = document.querySelector('.trigger');
+    let id_paciente;
     fetch(url)
     .then(response => response.json())
     .then(data => {
+        console.log(data)
+        id_paciente = data.data[0].id_paciente;
+        console.log(id_paciente);
 				nombre.innerHTML = `Nombre: ${data.data[0].nombre}`;
         data.data.forEach(dato => {
             const tr = document.createElement('tr');
@@ -100,5 +105,29 @@
             `;
             datos_control_citas.appendChild(tr);
         });
+        });
+        
+        
+    triggerBtn.addEventListener('click', () => {
+        fetch(`/director/comentario/${id_paciente}`)
+    .then(response => response.json())
+    .then(data => {
+    // mostrarComentariosBtn.innerHTML = `Mostrar comentarios (${data.data.length})`;
+    //limpia el contenedor antes de agregar los nuevos comentarios
+    let html = '';
+    data.data.forEach(item => {
+        console.log(item.comentario);
+        // html += `
+        // <div class="comentario">
+        //     <div class="informacion">
+        //     <h4>COMENTARIO:</h4>
+        //     </div>
+        //     <p>${item.comentario}</p>
+        // </div>
+        // `;
+        });
+        // comentarios.innerHTML = html;
     });
+    });
+
 </script>
