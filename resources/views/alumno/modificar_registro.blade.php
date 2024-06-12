@@ -205,10 +205,10 @@
                                         <label for="">{{ $data['paciente']->nombre }}</label>
                                         <label for="nombre">EDAD</label>
                                         <input type="number" name="edad" id="edad"
-                                            value="{{ old('edad', $data['paciente']->edad) }}">
+                                            value="{{ old('edad', $data['paciente']->edad) }}" required>
                                         <label for="nombre">HORA</label>
                                         <input type="time" name="hora" id="hora"
-                                            value="{{ old('hora', $data['control_citas']->hora_cita) }}">
+                                            value="{{ old('hora', $data['control_citas']->hora_cita) }}" required>
                                     </div>
                                     <div class="segunda-parte">
                                         <br>
@@ -223,7 +223,8 @@
                                         <br>
                                         <label for="no_consulta_paciente">CONSULTA NO.</label>
                                         <input type="text" name="no_consulta_paciente" id="no_consulta_paciente"
-                                            value="{{ old('no_consulta_paciente', $data['registro_consulta']['no_consulta_paciente']) }}">
+                                            value="{{ old('no_consulta_paciente', $data['registro_consulta']['no_consulta_paciente']) }}"
+                                            required>
                                     </div>
                                     <div class="tercera-parte">
                                         <br>
@@ -231,7 +232,8 @@
                                         <br>
                                         <input type="text" name="motivo_consulta" id="motivo_consulta"
                                             style="width: 500px"
-                                            value="{{ old('motivo_consulta', $data['registro_consulta']['motivo_consulta']) }}">
+                                            value="{{ old('motivo_consulta', $data['registro_consulta']['motivo_consulta']) }}"
+                                            required>
                                         <br>
                                         <br>
                                         {{-- revisar aqui --}}
@@ -240,7 +242,7 @@
                                             <h2>Escala de Bristol</h2>
                                             <div class="escala-1">
                                                 <input type="radio" id="bristol1" name="escala_bristol"
-                                                    value="Tipo 1" @checked(old('escala_bristol', $data['registro_consulta']['escala_bristol']) == 'Tipo 1')>
+                                                    value="Tipo 1" @checked(old('escala_bristol', $data['registro_consulta']['escala_bristol']) == 'Tipo 1') required>
                                                 <label for="bristol1"><img src="{{ asset('/assets/escala-1.jpeg') }}"
                                                         alt="" style="width:200px;height:100px">
                                                 </label>
@@ -327,7 +329,8 @@
                                         <label for="apego_plan_anterior_barr_apego">APEGO A PLAN ANTERIOR</label>
                                         <input type="text" style="width:300px"
                                             name="apego_plan_anterior_barr_apego"
-                                            value="{{ old('apego_plan_anterior_barr_apego', $data['registro_consulta']['apego_plan_anterior_barr_apego']) }}">
+                                            value="{{ old('apego_plan_anterior_barr_apego', $data['registro_consulta']['apego_plan_anterior_barr_apego']) }}"
+                                            required>
                                         <label for="motivacion">MOTIVACIÓN En una escala, ¿qué tan motivado se siente
                                             de
                                             mejorar sus hábitos de alimentación?</label>
@@ -335,7 +338,7 @@
                                             <div class="motivacion-item">
                                                 <p>Extremadamente desmotivado</p>
                                                 <input type="radio" value="extramadamente_desmotivado"
-                                                    name="motivacion" @checked(old('motivacion', $data['registro_consulta']['motivacion']) == 'extramadamente_desmotivado')>
+                                                    name="motivacion" @checked(old('motivacion', $data['registro_consulta']['motivacion']) == 'extramadamente_desmotivado') required>
                                             </div>
                                             <div class="motivacion-item">
                                                 <p>Muy desmotivado</p>
@@ -390,7 +393,8 @@
                                             <label for="agua">Agua simple (en mililitros)</label>
                                             <input type="number" name="hidratacion" id="agua"
                                                 style="width:100px;"
-                                                value="{{ old('hidratacion', $data['registro_consulta']['hidratacion']['hidratacion'] ?? '') }}">
+                                                value="{{ old('hidratacion', $data['registro_consulta']['hidratacion']['hidratacion'] ?? '') }}"
+                                                required>
                                             <div class="inputs">
                                                 <label for="otros_hidratacion">Otras bebidas</label><br>
                                                 <textarea name="otras_bebidas" id="otros_hidratacion" cols="30" rows="10">{{ old('otras_bebidas', $data['registro_consulta']['hidratacion']['otros_hidratacion'] ?? '') }}</textarea>
@@ -398,21 +402,23 @@
                                         </article>
                                         <label for="sintomas_generales">Síntomas generales</label>
                                         <input type="text" name="sintomas_generales" id=""
-                                            value="{{ old('sintomas_generales', $data['registro_consulta']['sintomas_generales']) }}">
+                                            value="{{ old('sintomas_generales', $data['registro_consulta']['sintomas_generales']) }}"
+                                            required>
                                         <h2 style="font-size:20px;font-weight:900;margin: 10px 0px;">EXPLORACIÓN FÍSICA
                                             CENTRADA EN HALLAZGOS DE NUTRICIÓN</h2>
                                         <label for="pelo">Pelo y uñas</label>
                                         <input type="text" name="pelo_unias" id="pelo"
-                                            value="{{ old('pelo_unias', $data['explo_fisica']['pelo_unias']) }}">
+                                            value="{{ old('pelo_unias', $data['explo_fisica']['pelo_unias']) }}"
+                                            required>
                                         <label for="piel">Piel</label>
                                         <input type="text" name="piel" id="piel"
-                                            value="{{ old('piel', $data['explo_fisica']['piel']) }}">
+                                            value="{{ old('piel', $data['explo_fisica']['piel']) }}" required>
                                         <label for="ojos">Ojos</label>
                                         <input type="text" name="ojos" id="ojos"
-                                            value="{{ old('ojos', $data['explo_fisica']['ojos']) }}">
+                                            value="{{ old('ojos', $data['explo_fisica']['ojos']) }}" required>
                                         <label for="musculo">Musculo</label>
                                         <input type="text" name="musculo" id="musculo"
-                                            value="{{ old('musculo', $data['explo_fisica']['musculo']) }}">
+                                            value="{{ old('musculo', $data['explo_fisica']['musculo']) }}" required>
                                         <label for="otros_explo_fisica">Otros</label>
                                         <input type="text" name="otros_explo_fisica" id="otros_explo_fisica"
                                             value="{{ old('otros_explo_fisica', $data['explo_fisica']['otros']) }}">
@@ -425,18 +431,20 @@
                                             value="yes" @checked(!empty(old('radio_into_aliment', $data['explo_fisica']['intolerancia_alimentos'])))>
                                         <label for="cuales">Cuales</label>
                                         <input type="text" name="intolerancia_alimentos" id="cuales"
-                                            value="{{ old('cuales', $data['explo_fisica']['intolerancia_alimentos']) }}">
+                                            value="{{ old('intolerancia_alimentos', $data['explo_fisica']['intolerancia_alimentos']) }}">
                                         <label for="actividad" style="font-size: 20px; font-weight:900">ACTIVIDAD
                                             FÍSICA
                                             ACTUAL (frecuencia/intensidad/tiempo)</label>
                                         <input type="text" name="actividad_fis_actual" id="actividad"
-                                            value="{{ old('actividad_fis_actual', $data['explo_fisica']['intolerancia_alimentos']) }}">
+                                            value="{{ old('actividad_fis_actual', $data['explo_fisica']['intolerancia_alimentos']) }}"
+                                            required>
                                         <label for="cambios_pos_estilo_vida"
                                             style="font-size: 20px; font-weight:900">CAMBIOS POSITIVOS EN EL ESTILO DE
                                             VIDA</label>
                                         <input type="text" name="cambios_pos_estilo_vida"
                                             id="cambios_pos_estilo_vida"
-                                            value="{{ old('cambios_pos_estilo_vida', $data['explo_fisica']['cambios_pos_estilo_vida']) }}">
+                                            value="{{ old('cambios_pos_estilo_vida', $data['explo_fisica']['cambios_pos_estilo_vida']) }}"
+                                            required>
                                         {{-- TABLA DE ANTROPOMÉTRICOS --}}
                                         <h2 style="font-size:20px;font-weight:900;margin: 10px 0px;">ANTROPOMÉTRICOS
                                         </h2>
@@ -456,23 +464,30 @@
                                                     <input type="text" style="height: 30px" id=""
                                                         disabled>
                                                     <input type="text" style="height: 30px" name="peso"
-                                                        value="{{ old('peso', $data['control_citas']['peso']) }}">
+                                                        value="{{ old('peso', $data['control_citas']['peso']) }}"
+                                                        required>
                                                     <input type="text" style="height: 30px"
                                                         name="circunferencia_cintura"
-                                                        value="{{ old('circunferencia_cintura', $data['control_citas']['circunferencia_cintura']) }}">
+                                                        value="{{ old('circunferencia_cintura', $data['control_citas']['circunferencia_cintura']) }}"
+                                                        required>
                                                     <input type="text" style="height: 30px"
                                                         name="circunferencia_cadera"
-                                                        value="{{ old('circunferencia_cadera', $data['control_citas']['circunferencia_cadera']) }}">
+                                                        value="{{ old('circunferencia_cadera', $data['control_citas']['circunferencia_cadera']) }}"
+                                                        required>
                                                     <input type="text" style="height: 30px" name="masa_muscular"
-                                                        value="{{ old('masa_muscular', $data['control_citas']['masa_muscular_kg']) }}">
+                                                        value="{{ old('masa_muscular', $data['control_citas']['masa_muscular_kg']) }}"
+                                                        required>
                                                     <input type="text" style="height: 30px"
                                                         name="mas_grasa_corporal"
-                                                        value="{{ old('mas_grasa_corporal', $data['control_citas']['masa_grasa_corporal']) }}">
+                                                        value="{{ old('mas_grasa_corporal', $data['control_citas']['masa_grasa_corporal']) }}"
+                                                        required>
                                                     <input type="text" style="height: 30px"
                                                         name="masa_libre_grasa"
-                                                        value="{{ old('masa_libre_grasa', $data['composcion_corp']['masa_libre_grasa'] ?? '') }}">
+                                                        value="{{ old('masa_libre_grasa', $data['composcion_corp']['masa_libre_grasa'] ?? '') }}"
+                                                        required>
                                                     <input type="text" style="height: 30px" name="act"
-                                                        value="{{ old('act', $data['control_citas']['agua_corpolar']) }}">
+                                                        value="{{ old('act', $data['control_citas']['agua_corpolar']) }}"
+                                                        required>
                                                 </div>
                                             </div>
                                             <div class="tabla-derecha">
@@ -486,21 +501,27 @@
                                                 </div>
                                                 <div class="valor">
                                                     <input type="text" style="height: 30px" name="imc"
-                                                        value="{{ old('imc', $data['control_citas']['IMC']) }}">
+                                                        value="{{ old('imc', $data['control_citas']['IMC']) }}"
+                                                        required>
                                                     <input type="text" style="height: 30px" name="rcc"
-                                                        value="{{ old('rcc', $data['composcion_corp']['rcc']) }}">
+                                                        value="{{ old('rcc', $data['composcion_corp']['rcc']) }}"
+                                                        required>
                                                     <input type="text" style="height: 30px"
                                                         name="rango_peso_saludable"
-                                                        value="{{ old('rango_peso_saludable', $data['composcion_corp']['rango_peso_saludable'] ?? '') }}">
+                                                        value="{{ old('rango_peso_saludable', $data['composcion_corp']['rango_peso_saludable'] ?? '') }}"
+                                                        required>
                                                     <input type="text" style="height: 30px"
                                                         name="indice_masa_libre_grasa"
-                                                        value="{{ old('indice_masa_libre_grasa', $data['composcion_corp']['indice_libre_grasa'] ?? '') }}">
+                                                        value="{{ old('indice_masa_libre_grasa', $data['composcion_corp']['indice_libre_grasa'] ?? '') }}"
+                                                        required>
                                                     <input type="text" style="height: 30px"
                                                         name="porcentaje_grasa_corporal"
-                                                        value="{{ old('porcentaje_grasa_corporal', $data['composcion_corp']['pgc']) }}">
+                                                        value="{{ old('porcentaje_grasa_corporal', $data['composcion_corp']['pgc']) }}"
+                                                        required>
                                                     <input type="text" style="height: 30px"
                                                         name="otros_antropometricos"
-                                                        value="{{ old('otros_antropometricos', $data['composcion_corp']['otros'] ?? '') }}">
+                                                        value="{{ old('otros_antropometricos', $data['composcion_corp']['otros'] ?? '') }}"
+                                                        required>
                                                 </div>
                                             </div>
                                         </div>
@@ -682,7 +703,8 @@
                                         <h2 style="font-size:20px;font-weight:900;margin: 10px 0px;">CLÍNICOS</h2>
                                         <label for="dx_medicos">DX MEDICOS</label>
                                         <input type="text" name="dx_medicos" id="dx_medicos"
-                                            value="{{ old('dx_medicos', $data['registro_consulta']['clinicos']) }}">
+                                            value="{{ old('dx_medicos', $data['registro_consulta']['clinicos']) }}"
+                                            required>
                                         <label for="dinamometria">DINAMOMETRÍA (fuerza de agarre)</label>
                                         <input type="text" name="dinamometria" id="dinamometria" placeholder="KG"
                                             value="{{ old('dinamometria', $data['registro_consulta']['dinamometria']['dinamometria'] ?? '') }}">
@@ -717,34 +739,44 @@
                                             <div class="dieteticos2">
                                                 <input type="text" name="frutas" id=""
                                                     style="width:70px"
-                                                    value="{{ old('frutas', $data['frecuencia_semanal']['frutas']) }}">
+                                                    value="{{ old('frutas', $data['frecuencia_semanal']['frutas']) }}"
+                                                    required>
                                                 <input type="text" name="verduras" id=""
                                                     style="width:70px"
-                                                    value="{{ old('verduras', $data['frecuencia_semanal']['verduras']) }}">
+                                                    value="{{ old('verduras', $data['frecuencia_semanal']['verduras']) }}"
+                                                    required>
                                                 <input type="text" name="cereales_sg" id=""
                                                     style="width:70px"
-                                                    value="{{ old('cereales_sg', $data['frecuencia_semanal']['cereales_s_g']) }}">
+                                                    value="{{ old('cereales_sg', $data['frecuencia_semanal']['cereales_s_g']) }}"
+                                                    required>
                                                 <input type="text" name="cereales_cg" id=""
                                                     style="width:70px"
-                                                    value="{{ old('cereales_cg', $data['frecuencia_semanal']['cereales_c_g']) }}">
+                                                    value="{{ old('cereales_cg', $data['frecuencia_semanal']['cereales_c_g']) }}"
+                                                    required>
                                                 <input type="text" name="leguminosas" id=""
                                                     style="width:70px"
-                                                    value="{{ old('leguminosas', $data['frecuencia_semanal']['leguminosas']) }}">
+                                                    value="{{ old('leguminosas', $data['frecuencia_semanal']['leguminosas']) }}"
+                                                    required>
                                                 <input type="text" name="poa" id=""
                                                     style="width:70px"
-                                                    value="{{ old('poa', $data['frecuencia_semanal']['poa']) }}">
+                                                    value="{{ old('poa', $data['frecuencia_semanal']['poa']) }}"
+                                                    required>
                                                 <input type="text" name="lacteos" id=""
                                                     style="width:70px"
-                                                    value="{{ old('lacteos', $data['frecuencia_semanal']['lacteos']) }}">
+                                                    value="{{ old('lacteos', $data['frecuencia_semanal']['lacteos']) }}"
+                                                    required>
                                                 <input type="text" name="aceites_sp" id=""
                                                     style="width:70px"
-                                                    value="{{ old('aceites_sp', $data['frecuencia_semanal']['aceites_s_p']) }}">
+                                                    value="{{ old('aceites_sp', $data['frecuencia_semanal']['aceites_s_p']) }}"
+                                                    required>
                                                 <input type="text" name="aceites_cp" id=""
                                                     style="width:70px"
-                                                    value="{{ old('aceites_cp', $data['frecuencia_semanal']['aceites_c_p']) }}">
+                                                    value="{{ old('aceites_cp', $data['frecuencia_semanal']['aceites_c_p']) }}"
+                                                    required>
                                                 <input type="text" name="azucares" id=""
                                                     style="width:70px"
-                                                    value="{{ old('azucares', $data['frecuencia_semanal']['azucares']) }}">
+                                                    value="{{ old('azucares', $data['frecuencia_semanal']['azucares']) }}"
+                                                    required>
                                             </div>
                                         </div>
                                     </div>
@@ -761,7 +793,7 @@
                                 <h3>Dietéticos</h3>
                                 <label>Tipo de instrumentos:</label>
                                 <input type="radio" name="instrumento" id="hrs" value="Recorda 24/h"
-                                    @checked(old('instrumento', $data['instrumento']['tipo_instrumento'] ?? '') == 'Recorda 24/h')>24 hrs
+                                    @checked(old('instrumento', $data['instrumento']['tipo_instrumento'] ?? '') == 'Recorda 24/h') required>24 hrs
                                 <input type="radio" name="instrumento" id="semi"
                                     value="Dieta habitual semicuantitativa"
                                     @checked(old('instrumento', $data['instrumento']['tipo_instrumento'] ?? '') == 'Dieta habitual semicuantitativa')>Semicuantitativa
@@ -770,36 +802,42 @@
                                 <br>
                                 <label>Desayuno hora: </label>
                                 <input type="time" name="desayuno_hora"
-                                    value="{{ old('desayuno_hora', $data['instrumento']['desayuno_hora'] ?? '') }}">
+                                    value="{{ old('desayuno_hora', $data['instrumento']['desayuno_hora'] ?? '') }}"
+                                    required>
                                 <br>
                                 <label>
                                     Colación:
                                     <input type="text" name="colacion1"
-                                        value="{{ old('colacion1', $data['instrumento']['colacion1'] ?? '') }}">
+                                        value="{{ old('colacion1', $data['instrumento']['colacion1'] ?? '') }}"
+                                        required>
                                 </label>
                                 <br>
                                 <label>
                                     Comida hora:
                                     <input type="time" name="comida_hora"
-                                        value="{{ old('comida_hora', $data['instrumento']['comida_hora'] ?? '') }}">
+                                        value="{{ old('comida_hora', $data['instrumento']['comida_hora'] ?? '') }}"
+                                        required>
                                 </label>
                                 <br>
                                 <label>
                                     Colación:
                                     <input type="text" name="colacion2"
-                                        value="{{ old('colacion2', $data['instrumento']['colacion2'] ?? '') }}">
+                                        value="{{ old('colacion2', $data['instrumento']['colacion2'] ?? '') }}"
+                                        required>
                                 </label>
                                 <br>
                                 <label>
                                     Cena hora:
                                     <input type="time" name="cena_hora"
-                                        value="{{ old('cena_hora', $data['instrumento']['cena_hora'] ?? '') }}">
+                                        value="{{ old('cena_hora', $data['instrumento']['cena_hora'] ?? '') }}"
+                                        required>
                                 </label>
                                 <br>
                                 <label>
                                     Colación:
                                     <input type="text" name="colacion3"
-                                        value="{{ old('colacion3', $data['instrumento']['colacion3'] ?? '') }}">
+                                        value="{{ old('colacion3', $data['instrumento']['colacion3'] ?? '') }}"
+                                        required>
                                 </label>
                                 <br><br>
                                 <label>
@@ -825,53 +863,65 @@
                                 <label>
                                     TOTAL:<br>
                                     Kcal:<input type="text" name="total_kcal"
-                                        value="{{ old('', $data['instrumento']['total_kcal'] ?? '') }}">
+                                        value="{{ old('', $data['instrumento']['total_kcal'] ?? '') }}" required>
                                     Prot:<input type="text" name="total_prot"
-                                        value="{{ old('', $data['instrumento']['total_prot']['prot_porcent'] ?? '') }}">(<input
-                                        type="text" name="prot_g"
-                                        value="{{ old('', $data['instrumento']['total_prot']['prot_g'] ?? '') }}">)
+                                        value="{{ old('', $data['instrumento']['total_prot']['prot_porcent'] ?? '') }}"
+                                        required>(<input type="text" name="prot_g"
+                                        value="{{ old('', $data['instrumento']['total_prot']['prot_g'] ?? '') }}"
+                                        required>)
                                     Lip:<input type="text" name="total_lip"
-                                        value="{{ old('', $data['instrumento']['total_lip']['lip_porcent'] ?? '') }}">(<input
-                                        type="text" name="lip_g"
-                                        value="{{ old('', $data['instrumento']['total_lip']['lip_g'] ?? '') }}">)
+                                        value="{{ old('', $data['instrumento']['total_lip']['lip_porcent'] ?? '') }}"
+                                        required>(<input type="text" name="lip_g"
+                                        value="{{ old('', $data['instrumento']['total_lip']['lip_g'] ?? '') }}"
+                                        required>)
                                     Hco:<input type="text" name="total_hco"
-                                        value="{{ old('', $data['instrumento']['total_hco']['hco_porcent'] ?? '') }}">(<input
-                                        type="text" name="hco_g"
-                                        value="{{ old('', $data['instrumento']['total_hco']['hco_g'] ?? '') }}">)
+                                        value="{{ old('', $data['instrumento']['total_hco']['hco_porcent'] ?? '') }}"
+                                        required>(<input type="text" name="hco_g"
+                                        value="{{ old('', $data['instrumento']['total_hco']['hco_g'] ?? '') }}"
+                                        required>)
                                 </label>
                                 <br><br>
                                 <label>
                                     % ADECUACIÓN:<br>
                                     Energia:<input type="text" name="adecuacion_porcen_ene"
-                                        value="{{ old('adecuacion_porcen_ene', $data['instrumento']['adecuacion_porcen_ene'] ?? '') }}">
+                                        value="{{ old('adecuacion_porcen_ene', $data['instrumento']['adecuacion_porcen_ene'] ?? '') }}"
+                                        required>
                                     Kcal:<input type="text" name="adecuacion_porcen_ener_kcal"
-                                        value="{{ old('adecuacion_porcen_ener_kcal', $data['instrumento']['adecuacion_porcen_ener_kcal'] ?? '') }}">
+                                        value="{{ old('adecuacion_porcen_ener_kcal', $data['instrumento']['adecuacion_porcen_ener_kcal'] ?? '') }}"
+                                        required>
                                     Prot:<input type="text" name="adecuacion_porcen_prot"
-                                        value="{{ old('adecuacion_porcen_prot', $data['instrumento']['adecuacion_porcen_prot'] ?? '') }}">
+                                        value="{{ old('adecuacion_porcen_prot', $data['instrumento']['adecuacion_porcen_prot'] ?? '') }}"
+                                        required>
                                     Lip:<input type="text" name="adecuacion_porcen_lip"
-                                        value="{{ old('adecuacion_porcen_lip', $data['instrumento']['adecuacion_porcen_lip'] ?? '') }}">
+                                        value="{{ old('adecuacion_porcen_lip', $data['instrumento']['adecuacion_porcen_lip'] ?? '') }}"
+                                        required>
                                     Hco:<input type="text" name="adecuacion_porcen_hco"
-                                        value="{{ old('adecuacion_porcen_hco', $data['instrumento']['adecuacion_porcen_hco'] ?? '') }}">
+                                        value="{{ old('adecuacion_porcen_hco', $data['instrumento']['adecuacion_porcen_hco'] ?? '') }}"
+                                        required>
                                     <br>
                                     Aspectos cualitativos de dieta habitual:<input type="text"
                                         name="aspectos_cualita_dieta_habitual"
-                                        value="{{ old('aspectos_cualita_dieta_habitual', $data['instrumento']['aspectos_cualita_dieta_habitual'] ?? '') }}">
+                                        value="{{ old('aspectos_cualita_dieta_habitual', $data['instrumento']['aspectos_cualita_dieta_habitual'] ?? '') }}"
+                                        required>
                                 </label>
                                 <br><br>
                                 <label>
                                     REQUERIMIENTOS:<br>
                                     Energia:<input type="text" name="reque_ener"
-                                        value="{{ old('reque_ener', $data['diagnostico']['reque_ener'] ?? '') }}">
+                                        value="{{ old('reque_ener', $data['diagnostico']['reque_ener'] ?? '') }}"
+                                        required>
                                     Proteina total:<input type="text" name="reque_proteina"
-                                        value="{{ old('reque_proteina', $data['diagnostico']['reque_proteina'] ?? '') }}">(<input
-                                        type="text" name="reque_kg_dia"
-                                        value="{{ old('reque_kg_dia', $data['diagnostico']['reque_kg_dia'] ?? '') }}">)
+                                        value="{{ old('reque_proteina', $data['diagnostico']['reque_proteina'] ?? '') }}"
+                                        required>(<input type="text" name="reque_kg_dia"
+                                        value="{{ old('reque_kg_dia', $data['diagnostico']['reque_kg_dia'] ?? '') }}"
+                                        required>)
                                 </label>
                                 <br><br>
                                 <label>
                                     DX:NUTRICIO:<br>
                                     <input type="text" name="dx_nutricio"
-                                        value="{{ old('dx_nutricio', $data['diagnostico']['dx_nutricio'] ?? '') }}">
+                                        value="{{ old('dx_nutricio', $data['diagnostico']['dx_nutricio'] ?? '') }}"
+                                        required>
                                 </label>
                                 <br>
                                 <label>
@@ -885,19 +935,23 @@
                                     Dieta <input type="text" name="tipo_dieta"
                                         value="{{ old('tipo_dieta', $data['generales']['tipo_dieta'] ?? '') }}"> de
                                     <input type="text" name="kcal_dieta"
-                                        value="{{ old('kcal_dieta', $data['generales']['kcal_dieta'] ?? '') }}">
+                                        value="{{ old('kcal_dieta', $data['generales']['kcal_dieta'] ?? '') }}"
+                                        required>
                                     Prot:<input type="text" name="prot_porcent_dieta"
-                                        value="{{ old('prot_porcent_dieta', $data['generales']['prot_porcent_dieta'] ?? '') }}">(<input
-                                        type="text" name="prot_kg_dia_dieta"
-                                        value="{{ old('prot_kg_dia_dieta', $data['generales']['prot_kg_dia_dieta'] ?? '') }}">)
+                                        value="{{ old('prot_porcent_dieta', $data['generales']['prot_porcent_dieta'] ?? '') }}"
+                                        required>(<input type="text" name="prot_kg_dia_dieta"
+                                        value="{{ old('prot_kg_dia_dieta', $data['generales']['prot_kg_dia_dieta'] ?? '') }}"
+                                        required>)
                                     Lip:<input type="text" name="lip_porcen_dieta"
-                                        value="{{ old('lip_porcen_dieta', $data['generales']['lip_porcen_dieta'] ?? '') }}">(<input
-                                        type="text" name="lip_g_dieta"
-                                        value="{{ old('lip_g_dieta', $data['generales']['lip_g_dieta'] ?? '') }}">)
+                                        value="{{ old('lip_porcen_dieta', $data['generales']['lip_porcen_dieta'] ?? '') }}"
+                                        required>(<input type="text" name="lip_g_dieta"
+                                        value="{{ old('lip_g_dieta', $data['generales']['lip_g_dieta'] ?? '') }}"
+                                        required>)
                                     Hco:<input type="text" name="hco_porcen_dieta"
-                                        value="{{ old('hco_porcen_dieta', $data['generales']['hco_porcen_dieta'] ?? '') }}">(<input
-                                        type="text" name="hco_g_dieta"
-                                        value="{{ old('hco_g_dieta', $data['generales']['hco_g_dieta'] ?? '') }}">)
+                                        value="{{ old('hco_porcen_dieta', $data['generales']['hco_porcen_dieta'] ?? '') }}"
+                                        required>(<input type="text" name="hco_g_dieta"
+                                        value="{{ old('hco_g_dieta', $data['generales']['hco_g_dieta'] ?? '') }}"
+                                        required>)
                                 </label>
                                 <br>
                                 <label>
@@ -909,7 +963,8 @@
                                 <label>
                                     METAS SMART:<br>
                                     <input type="text" name="metas_smart"
-                                        value="{{ old('metas_smart', $data['generales']['metas_smart'] ?? '') }}">
+                                        value="{{ old('metas_smart', $data['generales']['metas_smart'] ?? '') }}"
+                                        required>
                                 </label>
                                 <br>
                                 <label>
@@ -953,13 +1008,15 @@
                                     NOMBRE COMPLETO, FIRMA Y CÉDULA PROFESIONAL DE QUIEN ELABORÓ LA HISTORIA CLINICA
                                     NUTRICIA:<br>
                                     <input type="text" name="datos_elaborador"
-                                        value="{{ old('datos_elaborador', $data['registro_consulta']['nutri_elaborate_data'] ?? '') }}">
+                                        value="{{ old('datos_elaborador', $data['registro_consulta']['nutri_elaborate_data'] ?? '') }}"
+                                        required>
                                 </label>
                                 <br>
                                 <label>
-                                    NOMBRE COMPLETO, FIRMA Y CÉDULA PROFESIONAL DE NUTRIÓLOG() RESPONSABLE:<br>
+                                    NOMBRE COMPLETO, FIRMA Y CÉDULA PROFESIONAL DE NUTRIÓLOGO RESPONSABLE:<br>
                                     <input type="text" name="datos_nutriologo"
-                                        value="{{ old('datos_nutriologo', $data['registro_consulta']['nutri_elaborate_data'] ?? '') }}">
+                                        value="{{ old('datos_nutriologo', $data['registro_consulta']['nutri_elaborate_data'] ?? '') }}"
+                                        required>
                                 </label>
 
                                 <button type="submit" class="agregar-alumno">Crear</button>
@@ -981,6 +1038,7 @@
     segundoForm.style.display = 'none';
 
     btnPrueba.addEventListener('click', () => {
+        if (!validate_fills_form()) return;
         primerForm.style.display = 'none';
         segundoForm.style.display = 'block';
         window.scrollTo(0, 0);
@@ -992,4 +1050,19 @@
         window.scrollTo(0, 0);
 
     })
+    const elements_first_form = document.querySelectorAll(
+        '.primer-form input[required], .primer-form textarea[required], .primer-form select[required]');
+
+    function validate_fills_form() {
+        const num_elements = elements_first_form.length;
+        for (let i = 0; i < num_elements; i++) {
+            const element = elements_first_form[i];
+            const is_valid = element.reportValidity();
+            element.setAttribute('aria-invalid', !is_valid);
+            if (!is_valid) {
+                return false;
+            }
+        }
+        return true;
+    }
 </script>

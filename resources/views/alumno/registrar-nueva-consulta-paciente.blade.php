@@ -222,7 +222,9 @@
                                 </ul>
                             </div>
                         @endif
-                        <form action="{{ route('nota-nutricion_crear_nueva_consulta_paciente', $datospaciente->id_dato_paciente) }}" method="POST">
+                        <form
+                            action="{{ route('nota-nutricion_crear_nueva_consulta_paciente', $datospaciente->id_dato_paciente) }}"
+                            method="POST">
                             @csrf
                             <div class="primer-form">
                                 <div class="inputs-form">
@@ -239,8 +241,12 @@
                                     <div class="segunda-parte">
                                         <br>
                                         <label for="genero">GÉNERO</label>
-                                        <label for="">@if ($paciente->genero->value == 'M') Masculino
-                                            @else Femenino @endif
+                                        <label for="">
+                                            @if ($paciente->genero->value == 'M')
+                                                Masculino
+                                            @else
+                                                Femenino
+                                            @endif
                                         </label>
 
                                         <label for="expediente">NO. EXPEDIENTE</label>
@@ -273,7 +279,7 @@
                                             <h2>Escala de Bristol</h2>
                                             <div class="escala-1">
                                                 <input type="radio" id="bristol1" name="escala_bristol"
-                                                    value="Tipo 1">
+                                                    value="Tipo 1" required>
                                                 <label for="bristol1"><img src="{{ asset('/assets/escala-1.jpeg') }}"
                                                         alt="" style="width:200px;height:100px">
                                                 </label>
@@ -374,7 +380,7 @@
                                         <label for="apego_plan_anterior_barr_apego">APEGO A PLAN ANTERIOR</label>
                                         <input type="text" style="width:300px"
                                             name="apego_plan_anterior_barr_apego"
-                                            value="{{ old('apego_plan_anterior_barr_apego') }}">
+                                            value="{{ old('apego_plan_anterior_barr_apego') }}" required>
                                         <label for="motivacion">MOTIVACIÓN En una escala, ¿qué tan motivado se siente
                                             de
                                             mejorar sus hábitos de alimentación?</label>
@@ -465,24 +471,24 @@
                                         <h2 style="font-size: 20px; font-weight:900">INTOLERANCIA A ALIMENTOS</h2>
                                         <label for="no">No</label>
                                         <input type="radio" name="radio_into_aliment" id="intolerancia"
-                                            value="no">
+                                            value="no" @checked(old('radio_into_aliment') == 'no')>
                                         <label for="si">Si</label>
                                         <input type="radio" name="radio_into_aliment" id="intolerancia"
-                                            value="yes">
+                                            value="yes" @checked(old('radio_into_aliment') == 'yes')>
                                         <label for="cuales">Cuales</label>
                                         <input type="text" name="intolerancia_alimentos" id="cuales"
-                                            value="{{ old('cuales') }}">
+                                            value="@if (old('radio_into_alimentos') == 'yes') {{ old('intolerancia_alimentos') }} @endif">
                                         <label for="actividad" style="font-size: 20px; font-weight:900">ACTIVIDAD
                                             FÍSICA
                                             ACTUAL (frecuencia/intensidad/tiempo)</label>
                                         <input type="text" name="actividad_fis_actual" id="actividad"
-                                            value="{{ old('actividad_fis_actual') }}">
+                                            value="{{ old('actividad_fis_actual') }}" required>
                                         <label for="cambios_pos_estilo_vida"
                                             style="font-size: 20px; font-weight:900">CAMBIOS POSITIVOS EN EL ESTILO DE
                                             VIDA</label>
                                         <input type="text" name="cambios_pos_estilo_vida"
-                                            id="cambios_pos_estilo_vida"
-                                            value="{{ old('cambios_pos_estilo_vida') }}">
+                                            id="cambios_pos_estilo_vida" value="{{ old('cambios_pos_estilo_vida') }}"
+                                            required>
                                         {{-- TABLA DE ANTROPOMÉTRICOS --}}
                                         <h2 style="font-size:20px;font-weight:900;margin: 10px 0px;">ANTROPOMÉTRICOS
                                         </h2>
@@ -537,7 +543,7 @@
                                                         value="{{ old('rcc') }}" required>
                                                     <input type="text" style="height: 30px"
                                                         name="rango_peso_saludable"
-                                                        value="{{ old('rango_peso_saludable') }}">
+                                                        value="{{ old('rango_peso_saludable') }}" required>
                                                     <input type="text" style="height: 30px"
                                                         name="indice_libre_grasa"
                                                         value="{{ old('indice_libre_grasa') }}" required>
@@ -704,7 +710,7 @@
                                         <h2 style="font-size:20px;font-weight:900;margin: 10px 0px;">CLÍNICOS</h2>
                                         <label for="dx_medicos">DX MEDICOS</label>
                                         <input type="text" name="dx_medicos" id="dx_medicos"
-                                            value="{{ old('dx_medicos') }}">
+                                            value="{{ old('dx_medicos') }}" required>
                                         <label for="dinamometria">DINAMOMETRÍA (fuerza de agarre)</label>
                                         <input type="text" name="dinamometria" id="dinamometria" placeholder="KG"
                                             value="{{ old('dinamometria') }}">
@@ -761,7 +767,8 @@
                                         </div>
                                     </div>
                                     {{-- <button type="submit" class="btn-guardar">Guardar datos</button> --}}
-                                    <button class="prueba btn-guardar" type="button">Continuar formulario</button>
+                                    <button class="prueba btn-guardar" id="acabar_primer_formulario"
+                                        type="button">Continuar formulario</button>
                                 </div>
 
                             </div>
@@ -812,25 +819,21 @@
                                 <br><br>
                                 <label>
                                     Total EQ: <br>
-                                    Verduras:<input type="text" name="verduras" value="{{ old('verduras') }}"
-                                        required>
-                                    Frutas:<input type="text" name="frutas" value="{{ old('frutas') }}"
-                                        required>
-                                    Cereales:<input type="text" name="cereales" value="{{ old('cereales') }}"
-                                        required>
+                                    Verduras:<input type="text" name="verduras" value="{{ old('verduras') }}">
+                                    Frutas:<input type="text" name="frutas" value="{{ old('frutas') }}">
+                                    Cereales:<input type="text" name="cereales" value="{{ old('cereales') }}">
                                     Leguminosas:<input type="text" name="leguminosas"
-                                        value="{{ old('leguminosas') }}" required>
-                                    Carnes:<input type="text" name="carnes" value="{{ old('carnes') }}"
-                                        required>
-                                    Leche:<input type="text" name="leche" value="{{ old('leche') }}" required>
-                                    Grasa:<input type="text" name="grasa" value="{{ old('grasa') }}" required>
-                                    Azúcar:<input type="text" name="azucar" value="{{ old('azucar') }}"
-                                        required>
+                                        value="{{ old('leguminosas') }}">
+                                    Carnes:<input type="text" name="carnes" value="{{ old('carnes') }}">
+                                    Leche:<input type="text" name="leche" value="{{ old('leche') }}">
+                                    Grasa:<input type="text" name="grasa" value="{{ old('grasa') }}">
+                                    Azúcar:<input type="text" name="azucar" value="{{ old('azucar') }}">
                                 </label>
                                 <br><br>
                                 <label>
                                     TOTAL:<br>
-                                    Kcal:<input type="text" name="total_kcal" value="{{ old('total_kcal') }}">
+                                    Kcal:<input type="text" name="total_kcal" value="{{ old('total_kcal') }}"
+                                        required>
                                     Prot:<input type="text" name="total_prot"
                                         value="{{ old('total_prot') }}">(<input type="text" name="prot_g"
                                         value="{{ old('prot_g') }}">)
@@ -856,15 +859,16 @@
                                         value="{{ old('adecuacion_porcen_hco') }}" required><br>
                                     Aspectos cualitativos de dieta habitual:<input type="text"
                                         name="aspectos_cualita_dieta_habitual"
-                                        value="{{ old('aspectos_cualita_dieta_habitual') }}">
+                                        value="{{ old('aspectos_cualita_dieta_habitual') }}" required>
                                 </label>
                                 <br><br>
                                 <label>
                                     REQUERIMIENTOS:<br>
-                                    Energia:<input type="text" name="reque_ener" value="{{ old('reque_ener') }}">
+                                    Energia:<input type="text" name="reque_ener" value="{{ old('reque_ener') }}"
+                                        required>
                                     Proteina total:<input type="text" name="reque_proteina"
                                         value="{{ old('reque_proteina') }}">(<input type="text"
-                                        name="reque_kg_dia" value="{{ old('reque_kg_dia') }}">)
+                                        name="reque_kg_dia" value="{{ old('reque_kg_dia') }}" required>)
                                 </label>
                                 <br><br>
                                 <label>
@@ -876,20 +880,27 @@
                                 <label>
                                     OBJETIVOS:<br>
                                     <input type="text" name="objetivos_dieta"
-                                        value="{{ old('objetivos_dieta') }}" required>
+                                        value="{{ old('objetivos_dieta') }}">
                                 </label>
                                 <br>
                                 <label>
                                     PLAN DE ALIMENTACIÓN:<br>
-                                    Dieta <input type="text" name="tipo_dieta"> de <input type="text"
-                                        name="kcal_dieta" value="{{ old('kcal_dieta') }}" required>
-                                    Prot:<input type="text" name="prot_porcent_dieta" required>(<input
-                                        type="text" name="prot_kg_dia_dieta"
+                                    Dieta <input type="text" name="tipo_dieta" value="{{ old('tipo_dieta') }}"
+                                        required> de
+                                    <input type="text" name="kcal_dieta" value="{{ old('kcal_dieta') }}"
+                                        required>
+                                    Prot:<input type="text" name="prot_porcent_dieta"
+                                        value="{{ old('prot_porcent_dieta') }}" required>(
+                                    <input type="text" name="prot_kg_dia_dieta"
                                         value="{{ old('prot_kg_dia_dieta') }}" required>)
-                                    Lip:<input type="text" name="lip_porcen_dieta" required>(<input type="text"
-                                        name="lip_g_dieta" value="{{ old('lip_g_dieta') }}" required>)
-                                    Hco:<input type="text" name="hco_porcen_dieta" required>(<input type="text"
-                                        name="hco_g_dieta" value="{{ old('hco_g_dieta') }}" required>)
+                                    Lip:<input type="text" name="lip_porcen_dieta"
+                                        value="{{ old('lip_porcen_dieta') }}" required>(
+                                    <input type="text" name="lip_g_dieta" value="{{ old('lip_g_dieta') }}"
+                                        required>)
+                                    Hco:<input type="text" name="hco_porcen_dieta"
+                                        value="{{ old('hco_porcen_dieta') }}" required>(
+                                    <input type="text" name="hco_g_dieta" value="{{ old('hco_g_dieta') }}"
+                                        required>)
                                 </label>
                                 <br>
                                 <label>
@@ -922,7 +933,7 @@
                                 <br>
                                 <label>
                                     EDUCACIÓN:<br>
-                                    <input type="text" name="educacion" value="{{ old('educacion') }}" required>
+                                    <input type="text" name="educacion" value="{{ old('educacion') }}">
                                 </label>
                                 <br>
                                 <label>
@@ -939,13 +950,13 @@
                                     NOMBRE COMPLETO, FIRMA Y CÉDULA PROFESIONAL DE QUIEN ELABORÓ LA HISTORIA CLINICA
                                     NUTRICIA:<br>
                                     <input type="text" name="datos_elaborador"
-                                        value="{{ old('datos_elaborador') }}">
+                                        value="{{ old('datos_elaborador') }}" required>
                                 </label>
                                 <br>
                                 <label>
                                     NOMBRE COMPLETO, FIRMA Y CÉDULA PROFESIONAL DE NUTRIÓLOG() RESPONSABLE:<br>
                                     <input type="text" name="datos_nutriologo"
-                                        value="{{ old('datos_nutriologo') }}">
+                                        value="{{ old('datos_nutriologo') }}" required>
                                 </label>
 
                                 <button type="submit" class="agregar-alumno">Crear</button>
@@ -967,6 +978,7 @@
     segundoForm.style.display = 'none';
 
     btnPrueba.addEventListener('click', () => {
+        if (!validate_fills_form()) return;
         primerForm.style.display = 'none';
         segundoForm.style.display = 'block';
         window.scrollTo(0, 0);
@@ -978,4 +990,19 @@
         window.scrollTo(0, 0);
 
     })
+    const elements_first_form = document.querySelectorAll(
+        '.primer-form input[required], .primer-form textarea[required], .primer-form select[required]');
+
+    function validate_fills_form() {
+        const num_elements = elements_first_form.length;
+        for (let i = 0; i < num_elements; i++) {
+            const element = elements_first_form[i];
+            const is_valid = element.reportValidity();
+            element.setAttribute('aria-invalid', !is_valid);
+            if (!is_valid) {
+                return false;
+            }
+        }
+        return true;
+    }
 </script>
