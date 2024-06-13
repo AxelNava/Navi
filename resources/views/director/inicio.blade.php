@@ -129,6 +129,10 @@
             margin: 10% auto;
         }
 
+        .button1 {
+            border: solid 2px black;
+        }
+
         .modalmask:target .rotate {
             transform: rotate(360deg) scale(1, 1);
             -webkit-transform: rotate(360deg) scale(1, 1);
@@ -187,10 +191,12 @@
                             {{ session('success') }}
                         </div>
                     @endif
-                    <a href="#modal3"><button type="submit" class="agregar-alumno" href="">Agregar
-                            alumno</button></a>
+                    <a href="#modal3"><x-button-submit>Agregar
+                            alumno</x-button-submit></a>
                     <ul>
                     </ul>
+                    <input type="hidden" data-url-base-registro="{{ route('director-status-alumno', '') }}"
+                        id="input-url-formulario-desactivar">
                     <b class="contador-alumnos"></b>
                     {{-- renderizado de alumnos con javascript --}}
                     <div id="alumnos">
@@ -251,6 +257,8 @@
         let trigger = document.getElementById('trigger');
         let nutriologos = [];
         let form = trigger.form;
+        const input_url = document.getElementById('input-url-formulario-desactivar');
+        const url_base = input_url.getAttribute('data-url-base-registro');
         trigger, addEventListener('click', () => {
             fetch('/director/ListadoAlumnos')
                 .then(response => response.json())
@@ -260,15 +268,18 @@
                     nutriologos = data['Nutriologos'];
                     nutriologos.forEach(nutriologo => {
                         let html = `
-        <div id="alumno">
-            <h2>Nombre: ${nutriologo['Nutriologo']['nombre']}</h2>
-            <h2>Grado y grupo: ${nutriologo['Datos del alumno']}</h2>
-            <h2>ID: ${nutriologo['ID Nutriologo']}</h2>
-            <form action="/director/lista_pacientes_alumno/${nutriologo['ID Nutriologo']}">
-                <input type="submit" value="Ver pacientes" class="ver-pacientes">
-            </form>
-        </div>
-    `;
+                            <div id="alumno">
+                                <h2>Nombre: ${nutriologo['Nutriologo']['nombre']}</h2>
+                                <h2>Grado y grupo: ${nutriologo['Datos del alumno']}</h2>
+                                <h2>ID: ${nutriologo['ID Nutriologo']}</h2>
+                                <form action="/director/lista_pacientes_alumno/${nutriologo['ID Nutriologo']}">
+                                    <x-button-blue-sky>Ver pacientes</x-button-blue-sky>
+                                </form>
+                                <form action="${url_base}/${nutriologo['ID Nutriologo']}">
+                                        <button type="submit" class="button1">Desactivar/Activar alumno</button>
+                                </form>
+                            </div>
+                        `;
                         alumnosContainer.innerHTML += html;
                     });
                     let contadorData = data['Total de alumnos'];

@@ -30,7 +30,7 @@
     </style>
     <x-slot name="header">
         <h2 class="font-lato-bold text-xl text-gray-800 leading-tight">
-            Status del alumno
+            Status del {{$nombre_alumno}}
         </h2>
     </x-slot>
 
@@ -38,12 +38,13 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <form action="" method="POST">
+                    <form action="{{route('actualizar-status-alumno', $id)}}" method="POST">
                         @csrf
                         @method('PATCH')
+                        <input type="hidden" name="id_nutriologo" value="{{$id}}">
                         <select name="status_alumno" id="">
-                            <option value="activo">Activo</option>
-                            <option value="inactivo">Inactivo</option>
+                            <option value="activo" @selected($alumno->status_alumno == 'activo')>Activo</option>
+                            <option value="inactivo" @selected($alumno->status_alumno == 'inactivo')>Inactivo</option>
                         </select>
                         <button type="submit" class="agregar-alumno">Modificar status del alumno</button>
                     </form>

@@ -20,11 +20,16 @@
             /* border: #618ef2 1px solid; */
         }
 
+        .button1 {
+            border: solid 2px black;
+        }
+
         .paciente {
+            background-color: #f0f0f0;
             width: 30%;
             margin: 10px;
             padding: 10px;
-            border: #618ef2 1px solid;
+            border: var(--green-lines) 2px solid;
             border-radius: 10px;
         }
     </style>
@@ -82,24 +87,23 @@
                         `PACIENTES: ${data['Cantidad de pacientes del alumno']}`;
                     datosPacientes.map(paciente => {
                         let html = `
-				<div class="paciente">
-						<b style="font-size:20px;font-weight:900">${paciente.nombre}</b>
-						<p>Sexo: ${paciente.genero}</p>
-						<p>Edad:${paciente.edad}</p>
-						<form action="${urlBase}/${paciente.persona_id}">
-								<button type="submit" class="agregar-alumno">Revisar datos paciente</button>
-						</form>
-						<form action="${url_base_formularios}/${paciente.persona_id}">
-								<button type="submit" class="agregar-alumno">Revisar formularios</button>
-						</form>
-						<form action="{{ route('reasignar_paciente') }}">
-								<input type="hidden" name="id_paciente" value="${paciente.persona_id}">
-								<input type="hidden" name="id_alumno" value="${data['Datos del alumno'].persona_id}">
-								<button style="background:rgb(240, 240, 44);padding:10px;border-radius:10px;margin-bottom:20px" type="submit">Reasignar nutriólogo</button>
-						</form>
-
-				</div>
-		`;
+                        <div class="paciente">
+                                <b style="font-size:20px;font-weight:900">${paciente.nombre}</b>
+                                <p>Sexo: ${paciente.genero}</p>
+                                <p>Edad:${paciente.edad}</p>
+                                <form action="${urlBase}/${paciente.persona_id}">
+                                        <x-button-submit>Revisar datos paciente</x-button-submit>
+                                </form>
+                                <form action="${url_base_formularios}/${paciente.persona_id}">
+                                        <button type="submit" class="button1">Revisar formularios</button>
+                                </form>
+                                <form action="{{ route('reasignar_paciente') }}">
+                                        <input type="hidden" name="id_paciente" value="${paciente.persona_id}">
+                                        <input type="hidden" name="id_alumno" value="${data['Datos del alumno'].persona_id}">
+                                        <x-button-blue-sky class="agregar-alumno">Reasignar nutriólogo</x-button-blue-sky>
+                                </form>
+                        </div>
+                        `;
                         pacientesContainer.innerHTML += html;
                     });
                 });

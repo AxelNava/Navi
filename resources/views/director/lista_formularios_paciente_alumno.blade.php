@@ -11,6 +11,13 @@
         .max-width-form {
             max-width: 12rem;
         }
+        .form-container{
+            border: solid 2px var(--green-lines);
+            padding: 0.5rem;
+            margin: 0.5rem 0.5rem;
+            border-radius: 15px;
+            gap: 0.5rem;
+        }
     </style>
     <x-slot name="header">
         <h2 class="font-lato-bold text-xl text-gray-800 leading-tight">
@@ -25,7 +32,7 @@
                     <label>Total: <span id='num_registros'></span></label>
                     <input type="hidden" id="route_get_formularios"
                         base-url-route="{{ route('formulario_validation_paciente', '') }}">
-                    <article class="forms mt-2" id="forms_container">
+                    <article class="forms mt-2 flex flex-row" id="forms_container">
 
                     </article>
                 </div>
@@ -55,8 +62,10 @@
                 form.classList.add('flex');
                 form.classList.add('flex-col');
                 form.classList.add('max-width-form');
+                form.classList.add('bg-gray-50');
+                form.classList.add('form-container');
                 form.innerHTML = `
-                    <label for="">Número de registro: ${counter}</label>
+                <label for="">Número de registro: ${counter}</label>
                     <label for="">Fecha de registro: ${data.data['fechas_citas'][index]}</label>
                     <x-button-submit class="button_blue mt-1">Revisar formulario</x-button-submit>
                 `;

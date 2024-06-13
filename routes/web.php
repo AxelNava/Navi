@@ -13,6 +13,7 @@ use App\Http\Controllers\DietaPaciente;
 use App\Http\Controllers\ListadoPacientesRegistros;
 use App\Http\Controllers\ListadoRegistrosConsultaDePaciente;
 use App\Http\Controllers\ComentariosDirector;
+use App\Http\Controllers\StatusAlumno;
 
 Route::get('/', function () {
 	return view('welcome');
@@ -132,6 +133,8 @@ Route::middleware(['auth', 'role:director'])->group(function () {
 
 	//ir a la vista de reasignar paciente
 	Route::get('director/reasignar-paciente', [ReasignarPacienteController::class, 'reasignarPaciente'])->name('reasignar_paciente');
+	//Reasignar paciente
+	Route::patch('director/reasignar-paciente-update/{id_paciente}',[ReasignarPacienteController::class,'actualizarReasignar'])->name('reasignar-paciente-update');
 	//agregar comentario
 	Route::post('director/comentario', [ComentariosDirector::class, 'store'])->name('agregar_comentario');
 
@@ -141,6 +144,13 @@ Route::middleware(['auth', 'role:director'])->group(function () {
 	Route::get('director/controlCitas/{id}', [DatosPaciente_ControlCitas::class, 'showDirector']);
 	//registrar alumno
 	Route::post('registrar-alumno', [AltaNutriologo::class, 'store'])->name('registrar.alumno');
+
+	//Ir a la vista cambiar status del alumno
+	Route::get('director/status-alumno/{id_nutriologo}', [StatusAlumno::class, 'edit'])->name('director-status-alumno');
+	//Obtener el status del alumno
+	Route::get('director/status-alumno-json/{id_nutriologo}', [StatusAlumno::class, 'get_status'])->name('director-get-status-alumno');
+	//Actualizar el status del alumno
+	Route::patch('director/status-alumno/{id}', [StatusAlumno::class, 'update'])->name('actualizar-status-alumno');
 });
 //ver comentarios, se pone aquí para que no esté en el middleware
 Route::get('director/comentario/{id_paciente}', [ComentariosDirector::class, 'show'])->name('ver_comentarios');
