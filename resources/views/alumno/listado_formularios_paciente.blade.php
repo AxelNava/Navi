@@ -23,6 +23,8 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <label>Total: <span id='num_registros'></span></label>
+                    <input type="hidden" id="input_base_url"
+                        base-url-form="{{ route('modificar_registro_formulario', '') }}">
                     <article class="forms mt-2" id="forms_container">
 
                     </article>
@@ -44,11 +46,14 @@
             const num_registros = document.getElementById('num_registros');
             num_registros.innerHTML = `${data.data['registros'].length}`;
             const forms = document.createDocumentFragment();
+            const input_url = document.getElementById('input_base_url');
+            const base_url = input_url.getAttribute('base-url-form');
+
             let counter = 1;
             data.data['registros'].forEach((dato, index) => {
                 const form = document.createElement('form');
                 form.method = 'get';
-                form.action = `http://navi.local/alumno/modificar-registro/${dato}`;
+                form.action = `${base_url}/${dato}`;
                 form.classList.add('flex');
                 form.classList.add('flex-col');
                 form.classList.add('max-width-form');

@@ -37,7 +37,7 @@ class DietaPaciente extends Controller
         ]);
         $instrumento = new ApiDieteticosInstrumentoMedicion();
         $instrumento->id_consulta_paciente = $req->id_registro;
-        $instrumento->tipo_instrumento = $req->tipo_instrumento; 
+        $instrumento->tipo_instrumento = $req->instrumento; 
         $instrumento->desayuno_hora = $req->desayuno_hora;
         $instrumento->colacion1 = $req->colacion1;
         $instrumento->comida_hora = $req->comida_hora;
@@ -167,7 +167,7 @@ class DietaPaciente extends Controller
 
 
         $instrum = ApiDieteticosInstrumentoMedicion::where('id_consulta_paciente', $diagnostico->id_consulta_paciente)->first();
-        $instrum->tipo_instrumento = $req->tipo_instrumento;
+        $instrum->instrumento = $req->instrumento;
         $instrum->desayuno_hora = $req->desayuno_hora;
         $instrum->colacion1 = $req->colacion1;
         $instrum->comida_hora = $req->comida_hora;

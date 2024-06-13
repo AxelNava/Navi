@@ -138,7 +138,7 @@ class NotaNutricionController extends Controller
             'otros_bioquimicos' => ['nullable'],
             'clinicos' => ['nullable'],
             'medicamentos_suplementos' => ['nullable'],
-            'tipo_instrument' => 'required',
+            'instrumento' => 'required',
             'desayuno_hora' => 'required',
             'colacion1' => 'required',
             'comida_hora' => 'required',
@@ -310,7 +310,7 @@ class NotaNutricionController extends Controller
         // dieta paciente
         $instrumento = new ApiDieteticosInstrumentoMedicion();
         $instrumento->id_consulta_paciente = $id_registro;
-        $instrumento->tipo_instrumento = $request->tipo_instrumento;
+        $instrumento->tipo_instrumento = $request->instrumento;
         $instrumento->desayuno_hora = $request->desayuno_hora;
         $instrumento->colacion1 = $request->colacion1;
         $instrumento->comida_hora = $request->comida_hora;
@@ -464,7 +464,7 @@ class NotaNutricionController extends Controller
             'otros_bioquimicos' => ['nullable'],
             'clinicos' => ['nullable'],
             'medicamentos_suplementos' => ['nullable'],
-            'tipo_instrument' => 'required',
+            'instrumento' => 'required',
             'desayuno_hora' => 'required',
             'colacion1' => 'required',
             'comida_hora' => 'required',
@@ -904,7 +904,7 @@ class NotaNutricionController extends Controller
         // dieta paciente
         $instrumento = new ApiDieteticosInstrumentoMedicion();
         $instrumento->id_consulta_paciente = $id_registro;
-        $instrumento->tipo_instrumento = $request->tipo_instrumento;
+        $instrumento->tipo_instrumento = $request->instrumento;
         $instrumento->desayuno_hora = $request->desayuno_hora;
         $instrumento->colacion1 = $request->colacion1;
         $instrumento->comida_hora = $request->comida_hora;
