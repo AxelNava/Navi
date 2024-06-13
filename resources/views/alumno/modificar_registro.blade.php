@@ -1228,7 +1228,7 @@
                                 <label>
                                     NOMBRE COMPLETO, FIRMA Y CÉDULA PROFESIONAL DE NUTRIÓLOGO RESPONSABLE:<br>
                                     <input type="text" name="datos_nutriologo"
-                                        value="{{ old('datos_nutriologo', $data['registro_consulta']['nutri_elaborate_data'] ?? '') }}"
+                                        value="{{ old('datos_nutriologo', $data['registro_consulta']['nutri_who_approved_data'] ?? '') }}"
                                         required>
                                 </label>
                                 <div class="grid grid-cols-2 place-content-between mt-2">
