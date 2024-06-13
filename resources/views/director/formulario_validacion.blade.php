@@ -23,7 +23,7 @@
         .regresar {
             border: none;
             border-radius: 15px;
-            color: white;
+            color: black;
             padding: 6px;
             text-align: center;
             text-decoration: none;
@@ -105,7 +105,17 @@
         .grid-auto-column-template {
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         }
-
+        .regresar {
+            border: none;
+            border-radius: 15px;
+            color: white;
+            padding: 6px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+        }
         .motivaciones {
             display: flex;
             border-radius: 10px;
