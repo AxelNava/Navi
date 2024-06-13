@@ -252,45 +252,45 @@
 
                                 <div class="inputs-form">
                                     <div class="primera-parte">
-                                        <label for="nombre" style="font-weight:900">NOMBRE</label>
+                                        <label for="nombre" style="font-weight:900">NOMBRE<label style="color:red">*</label></label>
                                         <input type="text" name="nombre" id="nombre" style="width:300px"
                                             value="{{ old('nombre', '') }}" required>
-                                        <label for="nombre" style="font-weight:900">EDAD</label>
+                                        <label for="nombre" style="font-weight:900">EDAD<label style="color:red">*</label></label>
                                         <input type="number" name="edad" id="edad" value="{{ old('edad') }}"
                                             required>
-                                        <label for="nombre" style="font-weight:900">HORA</label>
+                                        <label for="nombre" style="font-weight:900">HORA<label style="color:red">*</label></label>
                                         <input type="time" name="hora" id="hora" value="{{ old('hora') }}"
                                             required style="border-radius:15px">
                                     </div>
                                     <div class="segunda-parte">
                                         <br>
-                                        <label for="genero" style="font-weight:900">GÉNERO</label>
+                                        <label for="genero" style="font-weight:900">GÉNERO<label style="color:red">*</label></label>
                                         <select name="genero" id="genero" required style="border-radius:15px;margin-right:15px;">
                                             <option value="M" @selected(old('genero') == 'M')>Masculino</option>
                                             <option value="F" @selected(old('genero') == 'F')>Femenino</option>
                                         </select>
 
-                                        <label for="expediente" style="font-weight:900">NO. EXPEDIENTE</label>
+                                        <label for="expediente" style="font-weight:900">NO. EXPEDIENTE<label style="color:red">*</label></label>
                                         <input type="text" name="expediente" id="expediente"
                                             value="{{ ApiDatosPaciente::max('expediente') + 1 }}" readonly style="width: 100px;margin-right:15px">
-                                        <label for="fecha_nacimiento" style="font-weight:900">FECHA DE NACIMIENTO</label>
+                                        <label for="fecha_nacimiento" style="font-weight:900">FECHA DE NACIMIENTO<label style="color:red">*</label></label>
                                         <input type="date" name="fecha_nacimiento" id="fecha_nacimiento"
                                             value="{{ old('fecha_nacimiento') }}" required style="border-radius:15px; width:150px" >
                                         <br>
                                         <br>
-                                        <label for="no_consulta_paciente" style="font-weight:900">CONSULTA NO.</label>
+                                        <label for="no_consulta_paciente" style="font-weight:900">CONSULTA NO.<label style="color:red">*</label></label>
                                         <input type="text" name="no_consulta_paciente" id="no_consulta_paciente"
                                             value="{{ old('no_consulta_paciente') }}" required>
                                     </div>
                                     <div class="tercera-parte">
                                         <br>
-                                        <label for="motivo_consulta" style="font-weight:900">MOTIVO DE CONSULTA:</label>
+                                        <label for="motivo_consulta" style="font-weight:900">MOTIVO DE CONSULTA:<label style="color:red">*</label></label>
                                         <br>
                                         <input type="text" name="motivo_consulta" id="motivo_consulta"
                                             style="width: 500px" value="{{ old('motivo_consulta') }}" required>
                                         <br>
                                         <br>
-                                        <label for="sintomas" style="font-weight:900">SÍNTOMAS GASTROINTESTINALES:</label>
+                                        <label for="sintomas" style="font-weight:900">SÍNTOMAS GASTROINTESTINALES:<label style="color:red">*</label></label>
                                         <br>
                                         {{-- <input type="radio" value="bristol" name='sintoma_gastro'
 																									@if (old('sintoma_gastro') == 'bristol') checked @endif> --}}
@@ -398,13 +398,13 @@
                                         <input type="text" style="width:300px;margin-left:10px" name="otros_sintoma_gastro"
                                             value="{{ old('otros_sintoma_gastro') }}" style="margin-top: 50px">
 																						<br>
-                                        <label for="apego_plan_anterior_barr_apego" >APEGO A PLAN ANTERIOR</label>
+                                        <label for="apego_plan_anterior_barr_apego" >APEGO A PLAN ANTERIOR<label style="color:red">*</label></label>
                                         <input type="text" style="width:150px;margin-top:20px; margin-left:10px"
                                             name="apego_plan_anterior_barr_apego"
                                             value="{{ old('apego_plan_anterior_barr_apego') }}" required>
 																						<br>
 																						<br>
-                                        <p for="motivacion" style="font-weight:900">MOTIVACIÓN</p>
+                                        <p for="motivacion" style="font-weight:900">MOTIVACIÓN<label style="color:red">*</label></p>
 																				<p> En una escala, ¿qué tan motivado se siente
 																					de mejorar sus hábitos de alimentación?</p>
                                         <div class="motivaciones">
@@ -461,35 +461,35 @@
                                         </div>
                                     </div>
                                     <div class="quinta-parte">
-                                        <h2 style="font-size:20px;font-weight:900;margin: 10px 0px;">HIDRATACIÓN</h2>
+                                        <h2 style="font-size:20px;font-weight:900;margin: 10px 0px;">HIDRATACIÓN<label style="color:red">*</label></h2>
 																			</article>
-																			<p>Agua simple (en mililitros)</p>
+																			<p>Agua simple (en mililitros)<label style="color:red">*</label></p>
                                             <input type="number" name="hidratacion" id="agua"
                                                 style="width:100px;height:30px;margin-top:10px" value="{{ old('hidratacion') }}" required>
 																								<br>
                                                 <p for="otros_hidratacion">Otras bebidas</p>
                                                 <textarea style="border-radius: 10px" name="otras_bebidas" id="otros_hidratacion" cols="50" rows="5">{{ old('otras_bebidas') }}</textarea>
-                                        <p for="sintomas_generales">Síntomas generales</p>
+                                        <p for="sintomas_generales">Síntomas generales<label style="color:red">*</label></p>
                                         <input type="text" name="sintomas_generales" id=""
                                             value="{{ old('sintomas_generales') }}">
                                         <h2 style="font-size:20px;font-weight:900;margin: 10px 0px;">EXPLORACIÓN FÍSICA
                                             CENTRADA EN HALLAZGOS DE NUTRICIÓN</h2>
-                                        <p for="pelo" style="margin-bottom: 20px;">Pelo y uñas</p>
+                                        <p for="pelo" style="margin-bottom: 20px;">Pelo y uñas<label style="color:red">*</label></p>
                                         <input type="text" name="pelo_unias" id="pelo"
                                             value="{{ old('pelo_unias') }}" required>
-                                        <p for="piel" style="margin: 5px;" >Piel</p>
+                                        <p for="piel" style="margin: 5px;" >Piel<label style="color:red">*</label></p>
                                         <input type="text" name="piel" id="piel"
                                             value="{{ old('piel') }}" required>
-                                        <p for="ojos" style="margin: 5px;">Ojos</p>
+                                        <p for="ojos" style="margin: 5px;">Ojos<label style="color:red">*</label></p>
                                         <input type="text" name="ojos" id="ojos"
                                             value="{{ old('ojos') }}" required>
-                                        <p for="musculo" style="margin: 5px;">Musculo</p>
+                                        <p for="musculo" style="margin: 5px;">Musculo<label style="color:red">*</label></p>
                                         <input type="text" name="musculo" id="musculo"
                                             value="{{ old('musculo') }}" required>
-                                        <p for="otros_explo_fisica" style="margin: 5px;">Otros</p>
+                                        <p for="otros_explo_fisica" style="margin: 5px;">Otros<label style="color:red">*</label></p>
                                         <input type="text" name="otros_explo_fisica" id="otros_explo_fisica"
                                             value="{{ old('otros_explo_fisica') }}" required>
-                                        <h2 style="font-size: 20px; font-weight:900">INTOLERANCIA A ALIMENTOS</h2>
+                                        <h2 style="font-size: 20px; font-weight:900">INTOLERANCIA A ALIMENTOS<label style="color:red">*</label></h2>
                                         <div style="display:flex;gap:10px;">
 																					<p for="no">No</p>
 																					<input type="radio" name="radio_into_aliment" id="intolerancia"
@@ -503,17 +503,17 @@
                                             value="@if (old('radio_into_alimentos') == 'yes') {{ old('intolerancia_alimentos') }} @endif">
                                         <label for="actividad" style="font-size: 20px; font-weight:900">ACTIVIDAD
                                             FÍSICA
-                                            ACTUAL (frecuencia/intensidad/tiempo)</label>
+                                            ACTUAL (frecuencia/intensidad/tiempo)<label style="color:red">*</label></label>
                                         <input type="text" name="actividad_fis_actual" id="actividad"
                                             value="{{ old('actividad_fis_actual') }}" required>
                                         <label for="cambios_pos_estilo_vida"
                                             style="font-size: 20px; font-weight:900">CAMBIOS POSITIVOS EN EL ESTILO DE
-                                            VIDA</label>
+                                            VIDA<label style="color:red">*</label></label>
                                         <input type="text" name="cambios_pos_estilo_vida"
                                             id="cambios_pos_estilo_vida" value="{{ old('cambios_pos_estilo_vida') }}"
                                             required>
                                         {{-- TABLA DE ANTROPOMÉTRICOS --}}
-                                        <h2 style="font-size:20px;font-weight:900;margin: 10px 0px;">ANTROPOMÉTRICOS
+                                        <h2 style="font-size:20px;font-weight:900;margin: 10px 0px;">ANTROPOMÉTRICOS<label style="color:red">*</label>
                                         </h2>
                                         <div class="tabla">
                                             <div class="tabla-izquierda">
@@ -582,7 +582,7 @@
                                     </div>
                                     {{-- tabla de bioquimicos --}}
                                     <div class="sexta-parte">
-                                        <h2 style="font-size:20px;font-weight:900;margin: 10px 0px;">BIOQUÍMICOS</h2>
+                                        <h2 style="font-size:20px;font-weight:900;margin: 10px 0px;">BIOQUÍMICOS<label style="color:red">*</label></h2>
                                         <div class="tabla-bioquimicos">
                                             <div class="tabla-uno">
                                                 <div class="bioquimico-formulario1">
@@ -723,28 +723,28 @@
                                     </div>
                                     {{-- septima parte - clinicos, medicamentos  y tabla dieteticos --}}
                                     <div class="septima-parte">
-                                        <h2 style="font-size:20px;font-weight:900;margin: 10px 0px;">CLÍNICOS</h2>
-                                        <label for="dx_medicos">DX MEDICOS</label>
+                                        <h2 style="font-size:20px;font-weight:900;margin: 10px 0px;">CLÍNICOS<label style="color:red">*</label></h2>
+                                        <label for="dx_medicos">DX MEDICOS<label style="color:red">*</label></label>
                                         <input type="text" name="dx_medicos" id="dx_medicos"
                                             value="{{ old('dx_medicos') }}" required>
-                                        <label for="dinamometria">DINAMOMETRÍA (fuerza de agarre)</label>
+                                        <label for="dinamometria">DINAMOMETRÍA (fuerza de agarre)<label style="color:red">*</label></label>
                                         <input type="text" name="dinamometria" id="dinamometria" placeholder="KG"
                                             value="{{ old('dinamometria') }}">
                                         <br>
                                         <br>
-                                        <label for="interpretacion_dinamometrica">INTERPRETACIÓN DINAMOMETRICA</label>
+                                        <label for="interpretacion_dinamometrica">INTERPRETACIÓN DINAMOMETRICA<label style="color:red">*</label></label>
                                         <input type="text" name="interpretacion_dinamometrica"
                                             id="interpretacion_dinamometrica"
                                             value="{{ old('interpretacion_dinamometrica') }}">
                                         <h2 style="font-size:20px;font-weight:900;margin: 10px 0px;">
-                                            MEDICAMENTOS/SUPLEMENTOS</h2>
+                                            MEDICAMENTOS/SUPLEMENTOS<label style="color:red">*</label></h2>
                                         <input type="text" name="medicamentos_suplementos"
                                             id="medicamentos_suplementos" style="width:650px;"
                                             value="{{ old('medicamentos_suplementos') }}">
                                         <h2 style="font-size:20px;font-weight:900;margin: 10px 0px;">DIETÉTICOS:
                                             FRECUENCIA
                                             DE CONSUMO DE ALIMENTOS, ¿Cuántas veces por semana consume los siguientes
-                                            alimentos?</h2>
+                                            alimentos?<label style="color:red">*</label></h2>
                                         <div class="tabla-dieteticos">
                                             <div class="dieteticos1">
                                                 <h2 style="background:rgb(194, 194, 194);padding:3px">Frutas</h2>
@@ -805,39 +805,39 @@
                                 <br>
                                 <label>Desayuno hora: </label>
                                 <input type="time" name="desayuno_hora" value="{{ old('desayuno_hora') }}"
-                                    required>
+                                    required style="border-radius:20px;margin:10px 0px">
                                 <br>
                                 <label>
                                     Colación:
-                                    <input type="text" name="colacion1" value="{{ old('colacion1') }}" required>
+                                    <input type="text" name="colacion1" value="{{ old('colacion1') }}" required  style="border-radius:20px;margin:10px 0px;width:500px ">
                                 </label>
                                 <br>
                                 <label>
                                     Comida hora:
                                     <input type="time" name="comida_hora" value="{{ old('comida_hora') }}"
-                                        required>
+                                        required  style="border-radius:20px;margin:10px 0px">
                                 </label>
                                 <br>
                                 <label>
                                     Colación:
-                                    <input type="text" name="colacion2" value="{{ old('colacion2') }}" required>
+                                    <input type="text" name="colacion2" value="{{ old('colacion2') }}" required  style="border-radius:20px;margin:10px 0px;width:500px" > 
                                 </label>
                                 <br>
                                 <label>
                                     Cena hora:
-                                    <input type="time" name="cena_hora" value="{{ old('cena_hora') }}" required>
+                                    <input type="time" name="cena_hora" value="{{ old('cena_hora') }}" required  style="border-radius:20px;margin:10px 0px">
                                 </label>
                                 <br>
                                 <label>
                                     Colación:
-                                    <input type="text" name="colacion3" value="{{ old('colacion3') }}" required>
+                                    <input type="text" name="colacion3" value="{{ old('colacion3') }}" required  style="border-radius:20px;margin:10px 0px;width:500px">  
                                 </label>
                                 <br><br>
                                 <label>
                                     Total EQ: <br>
-                                    Verduras:<input type="text" name="verduras" value="{{ old('verduras') }}">
-                                    Frutas:<input type="text" name="frutas" value="{{ old('frutas') }}">
-                                    Cereales:<input type="text" name="cereales" value="{{ old('cereales') }}">
+                                    Verduras:<input type="text" name="verduras" value="{{ old('verduras') }}" style="margin:10px 0px ">
+                                    Frutas:<input type="text" name="frutas" value="{{ old('frutas') }}" style="margin:10px 0px ">
+                                    Cereales:<input type="text" name="cereales" value="{{ old('cereales') }}" >
                                     Leguminosas:<input type="text" name="leguminosas"
                                         value="{{ old('leguminosas') }}">
                                     Carnes:<input type="text" name="carnes" value="{{ old('carnes') }}">
