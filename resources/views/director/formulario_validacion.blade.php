@@ -20,14 +20,47 @@
             cursor: pointer;
         }
 
+        .regresar {
+            border: none;
+            border-radius: 15px;
+            color: white;
+            padding: 6px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
         .formulario {
+            border: 3px solid green;
             display: flex;
             flex-wrap: wrap;
             gap: 25px;
             flex-direction: column;
-            border: 1px solid rgb(0, 0, 0);
             border-radius: 10px;
             padding: 20px;
+        }
+
+        .bristol-container {
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            -webkit-box-shadow: -8px 14px 20px 11px rgba(0, 0, 0, 0.14);
+            -moz-box-shadow: -8px 14px 20px 11px rgba(0, 0, 0, 0.14);
+            box-shadow: -8px 14px 20px 11px rgba(0, 0, 0, 0.14);
+            margin: 0px 0px 70px 70px;
+            width: 80%;
+            height: 900px;
+            gap: -10px;
+        }
+
+        .escala-1 {
+            display: flex;
+            flex-direction: row !important;
+            justify-content: center;
+            align-items: center;
         }
 
         .inputs-form {
@@ -45,19 +78,52 @@
             border-radius: 15px;
         }
 
+        input[type=time] {
+            border-radius: 20px;
+            margin: 10px 0px;
+        }
+
+        .special_input_table {
+            border: unset;
+            border-radius: unset;
+            margin: unset;
+            width: 100%;
+            height: 100%;
+        }
+
+        .special_input_table input {
+            border-radius: unset;
+        }
+
+        .table-body-spcial-input td {
+            border: solid 1px #333;
+            border-collapse: collapse;
+            width: 10em;
+            height: 2.3em;
+        }
+
+        .grid-auto-column-template {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+
         .motivaciones {
             display: flex;
-            border: black solid 1px;
             border-radius: 10px;
             justify-content: center;
             align-items: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+            gap: 5px;
         }
 
         .motivaciones .motivacion-item {
             display: flex;
             flex-direction: column;
-            border: 1px black solid;
-            border-left: none;
+            border-radius: 50px;
+            border-radius: 10px;
+            /* border:1px solid black; */
+            box-shadow: 30px 16px 39px -16px rgba(42, 42, 41, 0.19);
+            /* border-left: none; */
             justify-content: center;
             align-items: center;
             padding: 10px;
@@ -71,7 +137,6 @@
         .tabla {
             flex-wrap: wrap;
             display: flex;
-            border: 1px solid #000;
             border-radius: 10px;
             /* Ajusta este valor para cambiar cuán redondeados son los bordos */
             overflow: hidden;
@@ -98,6 +163,16 @@
             display: flex;
             flex-direction: column;
             gap: 5px;
+        }
+
+        .sintomas {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .sintomas label {
+            margin-left: 20px;
+            margin-bottom: 20px;
         }
 
         .mediciones {
@@ -135,6 +210,11 @@
             gap: 10px;
         }
 
+        .bioquimico-formulario2,
+        .tabla-dos {
+            border-right: none;
+        }
+
         .tabla-bioquimicos .inputs {
             display: flex;
             gap: 10px;
@@ -159,7 +239,6 @@
         }
 
         .btn-guardar {
-            background-color: blue;
             padding: 30px;
             color: white;
             border-radius: 10px;
@@ -183,8 +262,7 @@
                 <div class="p-6 text-gray-900">
                     <div class="formulario">
                         <b style="font-size: 20px">NOTA DE NUTRICIÓN</b>
-                        <form
-                            action="{{ route('validar_registro', $data['registro_consulta']['id_registro']) }}"
+                        <form action="{{ route('validar_registro', $data['registro_consulta']['id_registro']) }}"
                             method="POST">
                             @csrf @method('PATCH')
                             <div class="primer-form">
@@ -196,7 +274,7 @@
                                         <label for="nombre">EDAD</label>
                                         <label for="">{{ $data['paciente']->edad }}</label>
                                         <label for="nombre">HORA</label>
-                                        <label>{{$data['control_citas']->hora_cita}}</label>
+                                        <label>{{ $data['control_citas']->hora_cita }}</label>
                                     </div>
                                     <div class="segunda-parte">
                                         <br>
@@ -694,7 +772,7 @@
                                         </div>
                                     </div>
                                     {{-- <button type="submit" class="btn-guardar">Guardar datos</button> --}}
-                                    <button class="prueba btn-guardar" type="button">Continuar formulario</button>
+                                    <x-button-submit class="prueba btn-guardar" type="button">Continuar formulario</x-button-submit>
                                 </div>
 
                             </div>
@@ -713,190 +791,321 @@
                                 <input type="radio" name="instrumento" id="diario" value="Diario de alimentos"
                                     @checked(old('instrumento', $data['instrumento']['tipo_instrumento'] ?? '') == 'Diario de alimentos')>Diario
                                 <br>
-                                <label>Desayuno hora: </label>
-                                <label>{{ $data['instrumento']['desayuno_hora'] }}</label>
                                 <br>
-                                <label>
-                                    Colación:
-                                    <label>{{ $data['instrumento']['colacion1'] }}</label>
-                                </label>
-                                <br>
-                                <label>
-                                    Comida hora:
-                                    <label>{{ $data['instrumento']['comida_hora'] }}</label>
-                                </label>
-                                <br>
-                                <label>
-                                    Colación:
-                                    <label>{{ $data['instrumento']['colacion2'] }}</label>
-                                </label>
-                                <br>
-                                <label>
-                                    Cena hora:
-                                    <label>{{ $data['instrumento']['cena_hora'] }}</label>
-                                </label>
-                                <br>
-                                <label>
-                                    Colación:
-                                    <label>{{ $data['instrumento']['colacion3'] }}</label>
-                                </label>
+                                <section class="grid grid-cols-4 gap-2">
+                                   <div>
+                                    <label>Desayuno hora: </label>
+                                    <label>{{ $data['instrumento']['desayuno_hora'] }}</label>
+                                   </div>
+                                    
+                                    <label>
+                                        Colación:
+                                        <label>{{ $data['instrumento']['colacion1'] }}</label>
+                                    </label>
+                                    
+                                    <label>
+                                        Comida hora:
+                                        <label>{{ $data['instrumento']['comida_hora'] }}</label>
+                                    </label>
+                                    
+                                    <label>
+                                        Colación:
+                                        <label>{{ $data['instrumento']['colacion2'] }}</label>
+                                    </label>
+                                    
+                                    <label>
+                                        Cena hora:
+                                        <label>{{ $data['instrumento']['cena_hora'] }}</label>
+                                    </label>
+                                    
+                                    <label>
+                                        Colación:
+                                        <label>{{ $data['instrumento']['colacion3'] }}</label>
+                                    </label>
+                                </section>
                                 <br><br>
-                                <label>
-                                    Total EQ: <br>
-                                    Verduras:<input type="text"
-                                        value="{{ old('', $data['instrumento']['grupo_total_eq']['verduras'] ?? '') }}"
-                                        disabled>
-                                    Frutas:<input type="text"
-                                        value="{{ old('', $data['instrumento']['grupo_total_eq']['frutas'] ?? '') }}"
-                                        disabled>
-                                    Cereales:<input type="text"
-                                        value="{{ old('', $data['instrumento']['grupo_total_eq']['cereales'] ?? '') }}"
-                                        disabled>
-                                    Leguminosas:<input type="text"
-                                        value="{{ old('', $data['instrumento']['grupo_total_eq']['leguminosas'] ?? '') }}"
-                                        disabled>
-                                    Carnes:<input type="text"
-                                        value="{{ old('', $data['instrumento']['grupo_total_eq']['carnes'] ?? '') }}"
-                                        disabled>
-                                    Leche:<input type="text"
-                                        value="{{ old('', $data['instrumento']['grupo_total_eq']['leche'] ?? '') }}"
-                                        disabled>
-                                    Grasa:<input type="text"
-                                        value="{{ old('', $data['instrumento']['grupo_total_eq']['grasa'] ?? '') }}"
-                                        disabled>
-                                    Azúcar:<input type="text"
-                                        value="{{ old('', $data['instrumento']['grupo_total_eq']['azucar'] ?? '') }}"
-                                        disabled>
-                                </label>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>GRUPO</th>
+                                            <th>VERDURAS</th>
+                                            <th>FRUTAS</th>
+                                            <th>CERELAES</th>
+                                            <th>LEGUMINOSAS</th>
+                                            <th>CARNES</th>
+                                            <th>LECHE</th>
+                                            <th>GRASA</th>
+                                            <th>AZÚCAR</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-body-spcial-input">
+                                        <tr>
+                                            <td>TOTAL EQ</td>
+                                            <td>
+                                                <input type="text" name="verduras" class="special_input_table"
+                                                    value="{{ $data['instrumento']['grupo_total_eq']['verduras'] ?? '' }}"
+                                                    disabled>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="frutas" class="special_input_table"
+                                                    value="{{ $data['instrumento']['grupo_total_eq']['frutas'] ?? '' }}"
+                                                    disabled>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="cereales" class="special_input_table"
+                                                    value="{{ $data['instrumento']['grupo_total_eq']['cereales'] ?? '' }}"
+                                                    disabled>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="leguminosas" class="special_input_table"
+                                                    value="{{ $data['instrumento']['grupo_total_eq']['leguminosas'] ?? '' }}"
+                                                    disabled>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="carnes" class="special_input_table"
+                                                    value="{{ $data['instrumento']['grupo_total_eq']['carnes'] ?? '' }}"
+                                                    disabled>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="leche" class="special_input_table"
+                                                    value="{{ $data['instrumento']['grupo_total_eq']['leche'] ?? '' }}"
+                                                    disabled>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="grasa" class="special_input_table"
+                                                    value="{{ $data['instrumento']['grupo_total_eq']['grasa'] ?? '' }}"
+                                                    disabled>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="azucar" class="special_input_table"
+                                                    value="{{ $data['instrumento']['grupo_total_eq']['azucar'] ?? '' }}"
+                                                    disabled>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                                 <br><br>
-                                <label>
-                                    TOTAL:<br>
-                                    Kcal:<input type="text" name="total_kcal"
-                                        value="{{ old('', $data['instrumento']['total_kcal'] ?? '') }}" required
-                                        disabled>
-                                    Prot:<input type="text" name="total_prot"
-                                        value="{{ old('', $data['instrumento']['total_prot']['prot_porcent'] ?? '') }}"
-                                        required disabled>(<input type="text" name="prot_g"
-                                        value="{{ old('', $data['instrumento']['total_prot']['prot_g'] ?? '') }}"
-                                        required disabled>)
-                                    Lip:<input type="text" name="total_lip"
-                                        value="{{ old('', $data['instrumento']['total_lip']['lip_porcent'] ?? '') }}"
-                                        required disabled>(<input type="text" name="lip_g"
-                                        value="{{ old('', $data['instrumento']['total_lip']['lip_g'] ?? '') }}"
-                                        required disabled>)
-                                    Hco:<input type="text" name="total_hco"
-                                        value="{{ old('', $data['instrumento']['total_hco']['hco_porcent'] ?? '') }}"
-                                        required disabled>(<input type="text" name="hco_g"
-                                        value="{{ old('', $data['instrumento']['total_hco']['hco_g'] ?? '') }}"
-                                        required disabled>)
-                                </label>
+                                <section>
+                                    <h2><strong>TOTAL:</strong></h2><br>
+                                    <div class="grid grid-cols-3 gap-y-8">
+                                        <div>
+                                            Kcal:<label style="color:red;">*</label><input type="text"
+                                                name="total_kcal"
+                                                value="{{ $data['instrumento']['total_kcal'] ?? '' }}" disabled
+                                                required style="margin-right:20px;margin-left:10px;">
+                                        </div>
+                                        <div style="margin-left:20px">
+                                            Prot:<label style="color:red;margin-right:20px;">*</label><input
+                                                type="text" name="total_prot" class="w-20"
+                                                value="{{ $data['instrumento']['total_prot']['prot_porcent'] ?? '' }}"
+                                                disabled placeholder="%">
+                                            (<input type="text" class="w-20" name="prot_g"
+                                                value="{{ $data['instrumento']['total_prot']['prot_g'] ?? '' }}"
+                                                disabled placeholder="g" style="width:60px;">)
+                                        </div>
+
+                                        <div style="margin-left:20px">
+                                            Lip:<label style="color:red;">*</label><input type="text"
+                                                name="total_lip" class="w-20"
+                                                value="{{ $data['instrumento']['total_lip']['lip_porcent'] ?? '' }}"
+                                                disabled placeholder="%" style="margin-left:20px;">
+                                            (<input type="text" name="lip_g" class="w-20"
+                                                value="{{ $data['instrumento']['total_lip']['lip_g'] ?? '' }}"
+                                                disabled placeholder="g" style="width:60px">)
+                                        </div>
+                                        <div>
+                                            Hco:<label style="color:red;">*</label><input type="text"
+                                                name="total_hco" class="w-20"
+                                                value="{{ $data['instrumento']['total_hco']['hco_porcent'] ?? '' }}"
+                                                disabled style="margin-top:20px;" placeholder="%">
+                                            (<input type="text" name="hco_g" class="w-20"
+                                                value="{{ $data['instrumento']['total_hco']['hco_g'] ?? '' }}"
+                                                disabled placeholder="g">)
+                                        </div>
+                                    </div>
+                                </section>
                                 <br><br>
-                                <label>
-                                    % ADECUACIÓN:<br>
-                                    Energia:<input type="text" name="adecuacion_porcen_ene"
-                                        value="{{ old('adecuacion_porcen_ene', $data['instrumento']['adecuacion_porcen_ene'] ?? '') }}"
-                                        required disabled>
-                                    Kcal:<input type="text" name="adecuacion_porcen_ener_kcal"
-                                        value="{{ old('adecuacion_porcen_ener_kcal', $data['instrumento']['adecuacion_porcen_ener_kcal'] ?? '') }}"
-                                        required disabled>
-                                    Prot:<input type="text" name="adecuacion_porcen_prot"
-                                        value="{{ old('adecuacion_porcen_prot', $data['instrumento']['adecuacion_porcen_prot'] ?? '') }}"
-                                        required disabled>
-                                    Lip:<input type="text" name="adecuacion_porcen_lip"
-                                        value="{{ old('adecuacion_porcen_lip', $data['instrumento']['adecuacion_porcen_lip'] ?? '') }}"
-                                        required disabled>
-                                    Hco:<input type="text" name="adecuacion_porcen_hco"
-                                        value="{{ old('adecuacion_porcen_hco', $data['instrumento']['adecuacion_porcen_hco'] ?? '') }}"
-                                        required disabled>
+                                <section>
+                                    <h2><strong>% ADECUACIÓN:</strong></h2>
+                                    <div style="display:flex;flex-wrap:wrap;gap:10px;">
+                                        <div>
+                                            Energia:<label style="color:red;margin-right:10px">*</label><input
+                                                type="text" name="adecuacion_porcen_ene" class="w-48"
+                                                value="{{ $data['instrumento']['adecuacion_porcen_ene'] ?? '' }}"
+                                                required disabled>
+                                        </div>
+                                        <div>
+                                            Kcal:<label style="color:red;margin-right:10px">*</label><input
+                                                type="text" name="adecuacion_porcen_ener_kcal" class="w-48"
+                                                value="{{ $data['instrumento']['adecuacion_porcen_ener_kcal'] ?? '' }}"
+                                                required placeholder="%" disabled>
+                                        </div>
+                                        <div>
+                                            Prot:<label style="color:red;margin-right:10px">*</label><input
+                                                type="text" name="adecuacion_porcen_prot" class="w-48"
+                                                value="{{ $data['instrumento']['adecuacion_porcen_prot'] ?? '' }}"
+                                                required placeholder="%" disabled>
+                                        </div>
+                                        <div>
+                                            Lip:<label style="color:red;margin-right:10px">*</label><input
+                                                value="{{ $data['instrumento']['adecuacion_porcen_lip'] ?? '' }}"
+                                                class="w-48" value="{{ old('adecuacion_porcen_lip') }}" required
+                                                placeholder="%" disabled>
+                                        </div>
+                                        <div>
+                                            Hco:<label style="color:red;margin-right:10px">*</label><input
+                                                type="text" name="adecuacion_porcen_hco" class="w-48"
+                                                value="{{ $data['instrumento']['adecuacion_porcen_hco'] ?? '' }}"
+                                                required placeholder="%" disabled><br>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p style="margin-top:20px">Aspectos cualitativos de dieta habitual:</p>
+                                        <textarea name="aspectos_cualita_dieta_habitual" id="" cols="30" rows="10" required disabled>{{ $data['instrumento']['aspectos_cualita_dieta_habitual'] }}</textarea>
+                                    </div>
+                                </section>
+                                <br><br>
+                                <section>
+                                    <h2><strong>REQUERIMIENTOS:</strong></h2>
                                     <br>
-                                    Aspectos cualitativos de dieta
-                                    habitual:<label>{{ $data['instrumento']['aspectos_cualita_dieta_habitual'] }}</label>
-                                </label>
+                                    <div class="grid grid-cols-2">
+                                        <div>
+                                            ENERGIA:<label style="color:red;margin-right:10px">*</label><input
+                                                type="text" name="reque_ener" style="width: 70%"
+                                                value="{{ $data['diagnostico']['reque_ener'] ?? '' }}" required
+                                                disabled>
+                                        </div>
+                                        <div>
+                                            PROTEINA TOTAL:<label style="color:red;margin-right:10px">*</label><input
+                                                type="text" name="reque_proteina" class="w-48"
+                                                value="{{ old('reque_proteina', $data['diagnostico']['reque_proteina'] ?? '') }}"
+                                                disabled>
+                                            (<input type="text" name="reque_kg_dia" class="w-48"
+                                                value="{{ $data['diagnostico']['reque_kg_dia'] ?? '' }}" required
+                                                disabled>)
+                                        </div>
+                                    </div>
+                                </section>
                                 <br><br>
                                 <label>
-                                    REQUERIMIENTOS:<br>
-                                    Energia:<label>{{ $data['diagnostico']['reque_ener'] }}</label>
-                                    Proteina total:<input type="text" name="reque_proteina"
-                                        value="{{ old('reque_proteina', $data['diagnostico']['reque_proteina'] ?? '') }}"
-                                        required>(<input type="text" name="reque_kg_dia"
-                                        value="{{ old('reque_kg_dia', $data['diagnostico']['reque_kg_dia'] ?? '') }}"
-                                        required>)
-                                </label>
-                                <br><br>
-                                <label>
-                                    DX:NUTRICIO:<br>
-                                    <label>{{ $data['diagnostico']['dx_nutricio'] }}</label>
+                                    <strong>DX:NUTRICIO:</strong><br>
+                                    <p>{{ $data['diagnostico']['dx_nutricio'] }}</p>
                                 </label>
                                 <br>
                                 <label>
                                     OBJETIVOS:<br>
-                                    <label>{{ $data['generales']['objetivos_dieta'] }}</label>
+                                    <p>{{ $data['generales']['objetivos_dieta'] }}</p>
+                                </label>
+                                <br>
+                                <section>
+                                    <h2><strong>PLAN DE ALIMENTACIÓN:<label
+                                                style="color:red;margin-right:10px">*</label></strong></h2><br>
+                                    <div style="display:flex;flex-wrap:wrap">
+                                        Dieta <input type="text" name="tipo_dieta" class="w-52"
+                                            value="{{ $data['generales']['tipo_dieta'] ?? '' }}" required
+                                            style="margin-right:15px;margin-left:15px" disabled> de
+                                        <input type="text" name="kcal_dieta"
+                                            value="{{ $data['generales']['kcal_dieta'] ?? '' }}" class="w-20"
+                                            required style="margin-right:35px; margin-left:15px" placeholder="Kcal"
+                                            disabled>
+                                        Prot:<input type="text" name="prot_porcent_dieta" class="w-28"
+                                            value="{{ $data['generales']['prot_porcent_dieta'] ?? '' }}" required
+                                            style="width:80px;margin-left:10px" placeholder="%" disabled>(
+                                        <input type="text" name="prot_kg_dia_dieta" class="w-28"
+                                            value="{{ $data['generales']['prot_kg_dia_dieta'] ?? '' }}" required
+                                            disabled>)
+                                        <div style="margin-right:30px">
+
+                                        </div>
+                                        Lip:<input type="text" name="lip_porcen_dieta" class="w-28"
+                                            value="{{ $data['generales']['lip_porcen_dieta'] ?? '' }}" required
+                                            style="width:80px" placeholder="%" disabled>(
+                                        <input type="text" name="lip_g_dieta"
+                                            value="{{ $data['generales']['lip_g_dieta'] ?? '' }}" class="w-28"
+                                            required style="width:70px" placeholder="g" disabled>)
+
+                                    </div>
+                                    <div style="margin-top:20px"></div>
+                                    Hco:<input type="text" name="hco_porcen_dieta" class="w-28"
+                                        value="{{ $data['generales']['hco_porcen_dieta'] ?? '' }}" required
+                                        placeholder="%" style="width:70px" disabled>(
+                                    <input type="text" name="hco_g_dieta"
+                                        value="{{ $data['generales']['hco_g_dieta'] ?? '' }}" class="w-28"
+                                        required placeholder="g"style="width:70px" disabled>)
+                                </section>
+                                <br>
+                                <label>
+                                    <strong>SUPLEMENTOS:</strong><br>
+                                    <p>{{ $data['generales']['suplementos'] }}</p>
                                 </label>
                                 <br>
                                 <label>
-                                    PLAN DE ALIMENTACIÓN:<br>
-                                    Dieta <input type="text" name="tipo_dieta"
-                                        value="{{ old('tipo_dieta', $data['generales']['tipo_dieta'] ?? '') }}"
-                                        disabled> de
-                                    <input type="text" name="kcal_dieta"
-                                        value="{{ old('kcal_dieta', $data['generales']['kcal_dieta'] ?? '') }}"
-                                        required disabled>
-                                    Prot:<input type="text" name="prot_porcent_dieta"
-                                        value="{{ old('prot_porcent_dieta', $data['generales']['prot_porcent_dieta'] ?? '') }}"
-                                        required disabled>(<input type="text" name="prot_kg_dia_dieta"
-                                        value="{{ old('prot_kg_dia_dieta', $data['generales']['prot_kg_dia_dieta'] ?? '') }}"
-                                        required disabled>)
-                                    Lip:<input type="text" name="lip_porcen_dieta"
-                                        value="{{ old('lip_porcen_dieta', $data['generales']['lip_porcen_dieta'] ?? '') }}"
-                                        required disabled>(<input type="text" name="lip_g_dieta"
-                                        value="{{ old('lip_g_dieta', $data['generales']['lip_g_dieta'] ?? '') }}"
-                                        required disabled> )
-                                    Hco:<input type="text" name="hco_porcen_dieta"
-                                        value="{{ old('hco_porcen_dieta', $data['generales']['hco_porcen_dieta'] ?? '') }}"
-                                        required disabled>(<input type="text" name="hco_g_dieta"
-                                        value="{{ old('hco_g_dieta', $data['generales']['hco_g_dieta'] ?? '') }}"
-                                        required disabled>)
+                                    <strong>METAS SMART:</strong><br>
+                                    <p>{{ $data['generales']['metas_smart'] }}</p>
                                 </label>
                                 <br>
-                                <label>
-                                    SUPLEMENTOS:<br>
-                                    <label>{{ $data['generales']['suplementos'] }}</label>
-                                </label>
+                                <section>
+                                    <strong>PARAMETROS META:</strong><br>
+                                    <div class="grid grid-cols-4 gap-2">
+                                        <div>
+                                            Peso:<p>{{ $data['generales']['param_meta']['peso'] ?? '' }}</p>
+                                        </div>
+                                        <div>
+                                            %Grasa:<p>{{ $data['generales']['param_meta']['porcen_grasa'] ?? '' }}</p>
+                                        </div>
+                                        <div>
+                                            Músculo:<p>{{ $data['generales']['param_meta']['musculo'] ?? '' }}</p>
+                                        </div>
+                                        <div>
+                                            C. Cintura:<p>{{ $data['generales']['param_meta']['c_cintura'] ?? '' }}
+                                            </p>
+                                        </div>
+                                        <div>
+                                            Horarios:<p>{{ $data['generales']['param_meta']['horarios'] ?? '' }}</p>
+                                        </div>
+                                        <div>
+                                            Mejorar
+                                            hábitos:<p>{{ $data['generales']['param_meta']['m_habitos'] ?? '' }}</p>
+                                        </div>
+                                        <div>
+                                            Selección de
+                                            alimentos:<p>
+                                                {{ $data['generales']['param_meta']['selec_alimentos'] ?? '' }}
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                </section>
                                 <br>
                                 <label>
-                                    METAS SMART:<br>
-                                    <label>{{ $data['generales']['metas_smart'] }}</label>
-                                </label>
-                                <br>
-                                <label>
-                                    PARAMETROS META:<br>
-                                    Peso:<label>{{ $data['generales']['param_meta']['peso'] ?? '' }}</label>
-                                    %Grasa:<label>{{ $data['generales']['param_meta']['porcen_grasa'] ?? '' }}</label>
-                                    Músculo:<label>{{ $data['generales']['param_meta']['musculo'] ?? '' }}</label>
-                                    C.
-                                    Cintura:<label>{{ $data['generales']['param_meta']['c_cintura'] ?? '' }}</label>
-                                    <br>
-                                    Horarios:<label>{{ $data['generales']['param_meta']['horarios'] ?? '' }}</label>
-                                    Mejorar
-                                    hábitos:<label>{{ $data['generales']['param_meta']['m_habitos'] ?? '' }}</label>
-                                    Selección de
-                                    alimentos:<label>{{ $data['generales']['param_meta']['selec_alimentos'] ?? '' }}</label>
-                                </label>
-                                <br>
-                                <label>
-                                    EDUCACIÓN:<br>
+                                    <strong>EDUCACIÓN:</strong><br>
                                     <label>{{ $data['generales']['educacion'] }}</label>
                                 </label>
                                 <br>
                                 <label>
-                                    MONITOREO:<br>
+                                    <strong>MONITOREO:</strong><br>
                                     <label>{{ $data['generales']['monitoreo'] }}</label>
                                 </label>
                                 <br>
                                 <label>
-                                    PENDIENTES:<br>
+                                    <strong>PENDIENTES:</strong><br>
                                     <label>{{ $data['registro_consulta']['pendientes'] }}</label>
                                 </label>
+                                <br>
+                                <br>
+                                <hr>
+                                <hr>
+                                <hr>
+                                <hr>
+                                <hr>
+                                <hr>
+                                <hr>
+                                <hr>
+                                <hr>
+                                <hr>
+                                <hr>
+                                <hr>
+                                <hr>
                                 <br>
                                 <label>
                                     NOMBRE COMPLETO, FIRMA Y CÉDULA PROFESIONAL DE QUIEN ELABORÓ LA HISTORIA CLINICA
@@ -907,11 +1116,11 @@
                                 <label>
                                     NOMBRE COMPLETO, FIRMA Y CÉDULA PROFESIONAL DE NUTRIÓLOGO RESPONSABLE:<br>
                                     <input type="text" name="datos_nutriologo_validador"
-                                        value="{{ old('datos_nutriologo_validador', $data['registro_consulta']['nutri_elaborate_data'] ?? '') }}"
+                                        value="{{ $data['registro_consulta']['nutri_who_approved_data'] ?? '' }}"
                                         required>
                                 </label>
 
-                                <button type="submit" class="agregar-alumno">Crear</button>
+                                <button type="submit" class="agregar-alumno">Modificar y aprobar</button>
                                 <button class="regresar" type="button">Regresar formulario</button>
                         </form>
                     </div>
