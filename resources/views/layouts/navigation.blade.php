@@ -55,7 +55,7 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
-                <span class="mr-5 text-lg">Hola {{ Auth::user()->nombre }}</span>
+                <span class="mr-5 text-lg" style="margin-right:10px;">Hola {{ Auth::user()->nombre }} </span>
                 <x-dropdown align="right" width="48">
                     
                     <x-slot name="trigger">
@@ -75,7 +75,7 @@
 
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
+                            {{ __('Ver mi perfil') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->
@@ -85,7 +85,7 @@
                             <x-dropdown-link :href="route('logout')"
                                 onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{ __('Abandonar') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>

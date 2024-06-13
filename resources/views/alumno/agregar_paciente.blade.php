@@ -775,7 +775,7 @@
                                     </div>
                                     {{-- septima parte - clinicos, medicamentos  y tabla dieteticos --}}
                                     <div class="septima-parte">
-                                        <h2 style="font-size:20px;font-weight:900;margin: 10px 0px;">CLÍNICOS<label
+                                        <h2 style="font-size:20px;font-weight:900;margin: 30px 0px 10px 0px;">CLÍNICOS<label
                                                 style="color:red">*</label></h2>
                                         <label for="dx_medicos">DX MEDICOS<label style="color:red">*</label></label>
                                         <input type="text" name="dx_medicos" id="dx_medicos"
@@ -848,46 +848,49 @@
                             {{-- <form action="{{route('dieta-paciente_crear')}}" method="POST" class="segundo-form"> --}}
                             {{-- <input type="hidden" name="id_registro" value="{{$id_registro}}"> --}}
                             <div class="segundo-form">
-                                <h3>Dietéticos</h3>
+                                <h3>Dietéticos<label style="color:red">*</label></h3>
                                 <label>Tipo de instrumentos:</label>
+                                <label for="hrs" style="margin:10px">24 hrs</label>
                                 <input type="radio" name="instrumento" id="hrs" value="Recorda 24/h"
-                                    @checked(old('instrumento') == 'Recorda 24/h') required>24 hrs
+                                    @checked(old('instrumento') == 'Recorda 24/h') required>
+                                <label for="semi" style="margin:10px">Semicuantitativa</label>
                                 <input type="radio" name="instrumento" id="semi"
                                     value="Dieta habitual semicuantitativa"
-                                    @checked(old('instrumento') == 'Dieta habitual semicuantitativa')>Semicuantitativa
+                                    @checked(old('instrumento') == 'Dieta habitual semicuantitativa')>
+                                <label for="diario" style="margin:10px">Diario</label>
                                 <input type="radio" name="instrumento" id="diario" value="Diario de alimentos"
-                                    @checked(old('instrumento') == 'Diario de alimentos')>Diario
+                                    @checked(old('instrumento') == 'Diario de alimentos')>
                                 <br>
-                                <label>Desayuno hora: </label>
+                                <label>Desayuno hora:<label style="color:red">*</label> </label>
                                 <input type="time" name="desayuno_hora" value="{{ old('desayuno_hora') }}"
                                     required style="border-radius:20px;margin:10px 0px">
                                 <br>
                                 <label>
-                                    Colación:
+                                    Colación:<label style="color:red">*</label>
                                     <input type="text" name="colacion1" value="{{ old('colacion1') }}" required
                                         style="border-radius:20px;margin:10px 0px;width:500px ">
                                 </label>
                                 <br>
                                 <label>
-                                    Comida hora:
+                                    Comida hora:<label style="color:red">*</label>
                                     <input type="time" name="comida_hora" value="{{ old('comida_hora') }}"
                                         required style="border-radius:20px;margin:10px 0px">
                                 </label>
                                 <br>
                                 <label>
-                                    Colación:
+                                    Colación:<label style="color:red">*</label>
                                     <input type="text" name="colacion2" value="{{ old('colacion2') }}" required
                                         style="border-radius:20px;margin:10px 0px;width:500px">
                                 </label>
                                 <br>
                                 <label>
-                                    Cena hora:
+                                    Cena hora:<label style="color:red">*</label>
                                     <input type="time" name="cena_hora" value="{{ old('cena_hora') }}" required
                                         style="border-radius:20px;margin:10px 0px">
                                 </label>
                                 <br>
                                 <label>
-                                    Colación:
+                                    Colación:<label style="color:red">*</label>
                                     <input type="text" name="colacion3" value="{{ old('colacion3') }}" required
                                         style="border-radius:20px;margin:10px 0px;width:500px">
                                 </label>
@@ -934,61 +937,63 @@
                                 <section>
                                     <h2><strong>TOTAL:</strong></h2><br>
                                     <div class="grid grid-cols-3 gap-y-8">
-                                        <div>
-                                            Kcal:<input type="text" name="total_kcal"
-                                                value="{{ old('total_kcal') }}" required>
-                                        </div>
-                                        <div>
-                                            Prot:<input type="text" name="total_prot" class="w-20"
-                                                value="{{ old('total_prot') }}">
+                                        <div style="display:flex;flex-wrap:wrap">
+                                            Kcal:<label style="color:red;">*</label><input type="text" name="total_kcal"
+                                                value="{{ old('total_kcal') }}" required style="margin-right:20px;margin-left:10px;">
+                                                <div style="margin-left:20px">
+
+                                                </div>
+                                                Prot:<label style="color:red;margin-right:20px;">*</label><input type="text" name="total_prot" class="w-20"
+                                                value="{{ old('total_prot') }}" placeholder="%">
                                             (<input type="text" class="w-20" name="prot_g"
-                                                value="{{ old('prot_g') }}">)
-                                        </div>
-                                        <div>
-                                            Lip:<input type="text" name="total_lip" class="w-20"
-                                                value="{{ old('total_lip') }}">
+                                                value="{{ old('prot_g') }}" placeholder="g" style="width:60px;">)
+                                            <div style="margin-left:20px">
+
+                                            </div>
+                                                Lip:<label style="color:red;">*</label><input type="text" name="total_lip" class="w-20"
+                                                value="{{ old('total_lip') }}" placeholder="%" style="margin-left:20px;">
                                             (<input type="text" name="lip_g" class="w-20"
-                                                value="{{ old('lip_g') }}">)
+                                                value="{{ old('lip_g') }}" placeholder="g" style="width:60px">)
                                         </div>
                                         <div>
-                                            Hco:<input type="text" name="total_hco" class="w-20"
-                                                value="{{ old('total_hco') }}">
+                                            Hco:<label style="color:red;">*</label><input type="text" name="total_hco" class="w-20"
+                                                value="{{ old('total_hco') }}" style="margin-top:20px;" placeholder="%">
                                             (<input type="text" name="hco_g" class="w-20"
-                                                value="{{ old('hco_g') }}">)
+                                                value="{{ old('hco_g') }}" placeholder="g">)
                                         </div>
                                     </div>
                                 </section>
                                 <br><br>
                                 <section>
                                     <h2><strong>% ADECUACIÓN:</strong></h2>
-                                    <div class="grid gap-x-4 gap-y-8 grid-auto-column-template">
+                                    <div style="display:flex;flex-wrap:wrap;gap:10px;">
                                         <div>
-                                            Energia:<input type="text" name="adecuacion_porcen_ene" class="w-48"
+                                            Energia:<label style="color:red;margin-right:10px">*</label><input type="text" name="adecuacion_porcen_ene" class="w-48"
                                                 value="{{ old('adecuacion_porcen_ene') }}" required>
                                         </div>
                                         <div>
-                                            Kcal:<input type="text" name="adecuacion_porcen_ener_kcal"
+                                            Kcal:<label style="color:red;margin-right:10px">*</label><input type="text" name="adecuacion_porcen_ener_kcal"
                                                 class="w-48" value="{{ old('adecuacion_porcen_ener_kcal') }}"
-                                                required>
+                                                required placeholder="%">
                                         </div>
                                         <div>
-                                            Prot:<input type="text" name="adecuacion_porcen_prot" class="w-48"
-                                                value="{{ old('adecuacion_porcen_prot') }}" required>
+                                            Prot:<label style="color:red;margin-right:10px">*</label><input type="text" name="adecuacion_porcen_prot" class="w-48"
+                                                value="{{ old('adecuacion_porcen_prot') }}" required placeholder="%">
                                         </div>
                                         <div>
-                                            Lip:<input type="text" name="adecuacion_porcen_lip" class="w-48"
-                                                value="{{ old('adecuacion_porcen_lip') }}" required>
+                                            Lip:<label style="color:red;margin-right:10px">*</label><input type="text" name="adecuacion_porcen_lip" class="w-48"
+                                                value="{{ old('adecuacion_porcen_lip') }}" required placeholder="%">
                                         </div>
                                         <div>
-                                            Hco:<input type="text" name="adecuacion_porcen_hco" class="w-48"
-                                                value="{{ old('adecuacion_porcen_hco') }}" required><br>
+                                            Hco:<label style="color:red;margin-right:10px">*</label><input type="text" name="adecuacion_porcen_hco" class="w-48"
+                                                value="{{ old('adecuacion_porcen_hco') }}" required placeholder="%"><br>
                                         </div>
-                                        <div>
-                                            Aspectos cualitativos de dieta habitual:
-                                            <textarea name="aspectos_cualita_dieta_habitual" id="" cols="30" rows="10"
-                                                value="{{ old('aspectos_cualita_dieta_habitual') }}" required></textarea>
                                         </div>
-                                    </div>
+                                            <div>
+                                                <p style="margin-top:20px">Aspectos cualitativos de dieta habitual:</p>
+                                                <textarea name="aspectos_cualita_dieta_habitual" id="" cols="30" rows="10"
+                                                    value="{{ old('aspectos_cualita_dieta_habitual') }}" required></textarea>
+                                            </div>
                                 </section>
                                 <br><br>
                                 <section>
@@ -996,11 +1001,11 @@
                                     <br>
                                     <div class="grid grid-cols-2">
                                         <div>
-                                            ENERGIA:<input type="text" name="reque_ener" style="width: 70%"
+                                            ENERGIA:<label style="color:red;margin-right:10px">*</label><input type="text" name="reque_ener" style="width: 70%"
                                                 value="{{ old('reque_ener') }}" required>
                                         </div>
                                         <div>
-                                            PROTEINA TOTAL:<input type="text" name="reque_proteina" class="w-48"
+                                            PROTEINA TOTAL:<label style="color:red;margin-right:10px">*</label><input type="text" name="reque_proteina" class="w-48"
                                                 value="{{ old('reque_proteina') }}">
                                             (<input type="text" name="reque_kg_dia" class="w-48"
                                                 value="{{ old('reque_kg_dia') }}" required>)
@@ -1009,74 +1014,71 @@
                                 </section>
                                 <br><br>
                                 <label>
-                                    <strong>DX: NUTRICIO:</strong><br>
+                                    <strong>DX: NUTRICION:<label style="color:red;margin-right:10px">*</label></strong><br>
                                     <textarea name="dx_nutricio" class="w-full" rows="5" required>{{ old('dx_nutricio') }}</textarea>
                                 </label>
                                 <br>
                                 <label>
-                                    <strong>OBJETIVOS:</strong><br>
+                                    <strong>OBJETIVOS:<label style="color:red;margin-right:10px">*</label></strong><br>
                                     <textarea name="objetivos_dieta" class="w-full" rows="5" required>{{ old('objetivos_dieta') }}</textarea>
                                 </label>
                                 <br>
                                 <section>
-                                    <h2><strong>PLAN DE ALIMENTACIÓN:</strong></h2><br>
-                                    <div class="grid grid-cols-3 gap-y-2 gap-x-2">
-                                        <div>
+                                    <h2><strong>PLAN DE ALIMENTACIÓN:<label style="color:red;margin-right:10px">*</label></strong></h2><br>
+                                    <div style="display:flex;flex-wrap:wrap">
                                             Dieta <input type="text" name="tipo_dieta" class="w-52"
-                                                value="{{ old('tipo_dieta') }}" required> de
+                                                value="{{ old('tipo_dieta') }}" required style="margin-right:15px;margin-left:15px"> de
                                             <input type="text" name="kcal_dieta" value="{{ old('kcal_dieta') }}"
-                                                class="w-20" required>
-                                        </div>
-                                        <div>
+                                                class="w-20" required style="margin-right:35px; margin-left:15px" placeholder="Kcal">
                                             Prot:<input type="text" name="prot_porcent_dieta" class="w-28"
-                                                value="{{ old('prot_porcent_dieta') }}" required>(
+                                                value="{{ old('prot_porcent_dieta') }}" required style="width:80px;margin-left:10px" placeholder="%">(
                                             <input type="text" name="prot_kg_dia_dieta" class="w-28"
                                                 value="{{ old('prot_kg_dia_dieta') }}" required>)
-                                        </div>
-                                        <div>
+                                                <div style="margin-right:30px">
+
+                                                </div>
                                             Lip:<input type="text" name="lip_porcen_dieta" class="w-28"
-                                                value="{{ old('lip_porcen_dieta') }}" required>(
+                                                value="{{ old('lip_porcen_dieta') }}" required style="width:80px" placeholder="%">(
                                             <input type="text" name="lip_g_dieta"
-                                                value="{{ old('lip_g_dieta') }}" class="w-28" required>)
-                                        </div>
-                                        <div>
-                                            Hco:<input type="text" name="hco_porcen_dieta" class="w-28"
-                                                value="{{ old('hco_porcen_dieta') }}" required>(
+                                                value="{{ old('lip_g_dieta') }}" class="w-28" required style="width:70px" placeholder="g">)
+                                            
+                                                </div>
+                                                <div style="margin-top:20px"></div>
+                                                Hco:<input type="text" name="hco_porcen_dieta" class="w-28"
+                                        value="{{ old('hco_porcen_dieta') }}" required placeholder="%" style="width:70px">(
                                             <input type="text" name="hco_g_dieta"
-                                                value="{{ old('hco_g_dieta') }}" class="w-28" required>)
-                                        </div>
-                                    </div>
+                                        value="{{ old('hco_g_dieta') }}" class="w-28" required placeholder="g"style="width:70px">)
                                 </section>
                                 <br>
                                 <label>
-                                    <strong>SUPLEMENTOS:</strong><br>
+                                    <strong>SUPLEMENTOS:<label style="color:red;margin-right:10px">*</label></strong><br>
                                     <textarea name="suplementos" class="w-full" rows="5">{{ old('suplementos') }}</textarea>
 
                                 </label>
                                 <br>
                                 <label>
-                                    <strong>METAS SMART:</strong><br>
+                                    <strong>METAS SMART:<label style="color:red;margin-right:10px">*</label></strong><br>
                                     <textarea name="metas_smart" class="w-full" rows="5">{{ old('metas_smart') }}</textarea>
                                 </label>
                                 <br>
                                 <label>
-                                    <strong>PARAMETROS META:</strong><br>
-                                    <div class="grid grid-cols-4">
+                                    <strong>PARAMETROS META: <label style="color:red;margin-right:10px">*</label></strong><br>
+                                    <div style="display: flex;flex-wrap:wrap;gap:20px;">
                                         <section>
-                                            Peso:<input type="text" name="meta_peso" class="w-28"
-                                                value="{{ old('meta_peso') }}">
+                                            Peso:<label style="color:red;margin-right:10px">*</label><input type="text" name="meta_peso" class="w-28"
+                                                value="{{ old('meta_peso') }}" style="width:100px">
                                         </section>
                                         <section>
-                                            %Grasa:<input type="text" name="meta_grasa" class="w-28"
-                                                value="{{ old('meta_grasa') }}">
+                                            %Grasa:<label style="color:red;margin-right:10px">*</label><input type="text" name="meta_grasa" class="w-28"
+                                                value="{{ old('meta_grasa') }}" style="width:100px">
                                         </section>
                                         <section>
-                                            Músculo:<input type="text" name="meta_musculo" class="w-28"
-                                                value="{{ old('meta_musculo') }}">
+                                            Músculo:<label style="color:red;margin-right:10px">*</label><input type="text" name="meta_musculo" class="w-28"
+                                                value="{{ old('meta_musculo') }}" style="width:100px">
                                         </section>
                                         <section>
-                                            C. Cintura:<input type="text" name="meta_cintura" class="w-28"
-                                                value="{{ old('meta_cintura') }}">
+                                            C. Cintura:<label style="color:red;margin-right:10px">*</label><input type="text" name="meta_cintura" class="w-28"
+                                                value="{{ old('meta_cintura') }}" style="width:100px">
                                         </section>
                                     </div>
                                     <br>
@@ -1144,7 +1146,7 @@
     let btnPrueba = document.querySelector('.prueba');
     let btnRegresar = document.querySelector('.regresar');
 
-    segundoForm.style.display = 'none';
+    segundoForm.style.display = 'block';
 
     btnPrueba.addEventListener('click', () => {
         if (!validate_fills_form()) return;
