@@ -1049,8 +1049,7 @@
                                     </div>
                                     <div>
                                         <p style="margin-top:20px">Aspectos cualitativos de dieta habitual:</p>
-                                        <textarea name="aspectos_cualita_dieta_habitual" id="" cols="30" rows="10"
-                                            value="{{ old('aspectos_cualita_dieta_habitual') }}" required></textarea>
+                                        <textarea name="aspectos_cualita_dieta_habitual" id="" cols="30" rows="10" required>{{ old('aspectos_cualita_dieta_habitual', $data['instrumento']['aspectos_cualita_dieta_habitual']) }}</textarea>
                                     </div>
                                 </section>
                                 <br><br>
