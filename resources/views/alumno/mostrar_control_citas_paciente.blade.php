@@ -25,6 +25,21 @@
         table td {
             border: 1px solid black;
         }
+        table th:first-child{
+            border-top-left-radius: 7px 9px
+        }
+        table th:last-child{
+            border-top-right-radius: 7px 9px;
+        }
+        table>tbody>tr:last-child>td:first-child{
+            border-bottom-left-radius: 7px 9px;
+        }
+        table>tbody>tr:last-child>td:last-child{
+            border-bottom-right-radius: 7px 9px;
+        }
+        table>tbody>tr{
+            background-color: #f0f0f0;
+        }
 
         table th,
         table td {
@@ -51,18 +66,20 @@
 										<h2 class="nombre"></h2>
                     <br>
                     <table>
-                        <tr>
-                            <th class='header_title'>Fecha Paciente</th>
-                            <th class='header_title'>Peso</th>
-                            <th class='header_title'>IMC</th>
-                            <th class='header_title'>Masa grasa corporal (kg)</th>
-                            <th class='header_title'>% grasa corporal</th>
-                            <th class='header_title'>Masa muscular (kg)</th>
-                            <th class='header_title'>Agua corporal</th>
-                            <th class='header_title'>Circunferencia de cintura</th>
-                            <th class='header_title'>Circunferencia de cadera</th>
-                            <th class='header_title'>Fecha próxima cita</th>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th class='header_title'>Fecha Paciente</th>
+                                <th class='header_title'>Peso</th>
+                                <th class='header_title'>IMC</th>
+                                <th class='header_title'>Masa grasa corporal (kg)</th>
+                                <th class='header_title'>% grasa corporal</th>
+                                <th class='header_title'>Masa muscular (kg)</th>
+                                <th class='header_title'>Agua corporal</th>
+                                <th class='header_title'>Circunferencia de cintura</th>
+                                <th class='header_title'>Circunferencia de cadera</th>
+                                <th class='header_title'>Fecha próxima cita</th>
+                            </tr>
+                        </thead>
                         <tbody class="datos_control_citas">
                             
                         </tbody>

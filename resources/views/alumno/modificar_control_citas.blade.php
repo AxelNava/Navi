@@ -21,6 +21,9 @@
             border: unset;
             width: 100%;
         }
+        .button1 {
+            border: solid 2px black;
+        }
     </style>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -38,18 +41,20 @@
                         @csrf
                         @method('PATCH')
                         <table>
-                            <tr>
-                                <th class='header_title'>Fecha Paciente</th>
-                                <th class='header_title'>Peso</th>
-                                <th class='header_title'>IMC</th>
-                                <th class='header_title'>Masa grasa corporal (kg)</th>
-                                <th class='header_title'>% grasa corporal</th>
-                                <th class='header_title'>Masa muscular (kg)</th>
-                                <th class='header_title'>Agua corporal</th>
-                                <th class='header_title'>Circunferencia de cintura</th>
-                                <th class='header_title'>Circunferencia de cadera</th>
-                                <th class='header_title'>Fecha próxima cita</th>
-                            </tr>
+                            <thead>
+                                <tr>
+                                    <th class='header_title'>Fecha Paciente</th>
+                                    <th class='header_title'>Peso</th>
+                                    <th class='header_title'>IMC</th>
+                                    <th class='header_title'>Masa grasa corporal (kg)</th>
+                                    <th class='header_title'>% grasa corporal</th>
+                                    <th class='header_title'>Masa muscular (kg)</th>
+                                    <th class='header_title'>Agua corporal</th>
+                                    <th class='header_title'>Circunferencia de cintura</th>
+                                    <th class='header_title'>Circunferencia de cadera</th>
+                                    <th class='header_title'>Fecha próxima cita</th>
+                                </tr>
+                            </thead>
                             <tbody class="datos_control_citas" id='control_citas_body'>
                                 @foreach ($data as $rows)
                                 
@@ -98,9 +103,9 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <input type="submit" value="Guardar datos modificados" class="agregar-alumno" />
+                        <x-button-green>Guardar datos modificados</x-button-green>
                     </form>
-                    <button id="cita_button">Añadir nueva cita</button>
+                    <button id="cita_button" class="button1" type="submit">Añadir nueva cita</button>
                 </div>
             </div>
         </div>
