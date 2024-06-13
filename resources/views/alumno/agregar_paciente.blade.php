@@ -34,6 +34,7 @@
 				}
 
         .formulario {
+					border:3px solid green;
             display: flex;
             flex-wrap: wrap;
             gap: 25px;
@@ -93,6 +94,8 @@
             flex-direction: column;
 						border-radius: 50px;
 						border-radius: 10px;
+						/* border:1px solid black; */
+						box-shadow: 30px 16px 39px -16px rgba(42, 42, 41, 0.19);
             /* border-left: none; */
             justify-content: center;
             align-items: center;
@@ -396,7 +399,7 @@
                                             value="{{ old('otros_sintoma_gastro') }}" style="margin-top: 50px">
 																						<br>
                                         <label for="apego_plan_anterior_barr_apego" >APEGO A PLAN ANTERIOR</label>
-                                        <input type="text" style="width:300px;margin-top:20px; margin-left:10px"
+                                        <input type="text" style="width:150px;margin-top:20px; margin-left:10px"
                                             name="apego_plan_anterior_barr_apego"
                                             value="{{ old('apego_plan_anterior_barr_apego') }}" required>
 																						<br>
@@ -487,14 +490,16 @@
                                         <input type="text" name="otros_explo_fisica" id="otros_explo_fisica"
                                             value="{{ old('otros_explo_fisica') }}" required>
                                         <h2 style="font-size: 20px; font-weight:900">INTOLERANCIA A ALIMENTOS</h2>
-                                        <p for="no">No</p>
-                                        <input type="radio" name="radio_into_aliment" id="intolerancia"
-                                            value="no" @checked(old('radio_into_aliment') == 'no')>
-                                        <p for="si">Si</p>
-                                        <input type="radio" name="radio_into_aliment" id="intolerancia"
-                                            value="yes" @checked(old('radio_into_aliment') == 'yes')>
+                                        <div style="display:flex;gap:10px;">
+																					<p for="no">No</p>
+																					<input type="radio" name="radio_into_aliment" id="intolerancia"
+																							value="no" @checked(old('radio_into_aliment') == 'no')>
+																					<p for="si">Si</p>
+																					<input type="radio" name="radio_into_aliment" id="intolerancia"
+																							value="yes" @checked(old('radio_into_aliment') == 'yes')>
+																				</div>
                                         <p for="cuales">Cuales</p>
-                                        <input type="text" name="intolerancia_alimentos" id="cuales"
+                                        <input style="margin-bottom: 20px" type="text" name="intolerancia_alimentos" id="cuales"
                                             value="@if (old('radio_into_alimentos') == 'yes') {{ old('intolerancia_alimentos') }} @endif">
                                         <label for="actividad" style="font-size: 20px; font-weight:900">ACTIVIDAD
                                             FÍSICA
