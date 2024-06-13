@@ -91,7 +91,7 @@
         .motivaciones .motivacion-item {
             display: flex;
             flex-direction: column;
-            border: 1px black solid;
+						border-radius: 50px;
 						border-radius: 10px;
             /* border-left: none; */
             justify-content: center;
@@ -107,7 +107,6 @@
         .tabla {
             flex-wrap: wrap;
             display: flex;
-            border: 1px solid #000;
             border-radius: 10px;
             /* Ajusta este valor para cambiar cuán redondeados son los bordos */
             overflow: hidden;
@@ -180,6 +179,9 @@
             flex-direction: column;
             gap: 10px;
         }
+				.bioquimico-formulario2, .tabla-dos{
+					border-right: none;
+				}
 
         .tabla-bioquimicos .inputs {
             display: flex;
@@ -301,49 +303,49 @@
                                                 <p>(1) Heces en bolas duras y separadas</p>
                                             </div>
                                             <div class="escala-1">
-                                                <input type="radio" id="bristol1" name="escala_bristol"
+                                                <input type="radio" id="bristol2" name="escala_bristol"
                                                     value="Tipo 2">
-                                                <label for="bristol1"><img src="{{ asset('/assets/escala-2.jpeg') }}"
+                                                <label for="bristol2"><img src="{{ asset('/assets/escala-2.jpeg') }}"
                                                         alt="" style="width:200px;height:100px">
                                                 </label>
                                                 <p>(2) Heces alargadas con relieves, formada por bolitas</p>
                                             </div>
                                             <div class="escala-1">
-                                                <input type="radio" id="bristol1" name="escala_bristol"
+                                                <input type="radio" id="bristol3" name="escala_bristol"
                                                     value="Tipo 3">
-                                                <label for="bristol1"><img src="{{ asset('/assets/escala-3.jpeg') }}"
+                                                <label for="bristol3"><img src="{{ asset('/assets/escala-3.jpeg') }}"
                                                         alt="" style="width:150px;height:100px">
                                                 </label>
                                                 <p>(3) Heces alargadas con grietas en la superficie</p>
                                             </div>
                                             <div class="escala-1">
-                                                <input type="radio" id="bristol1" name="escala_bristol"
+                                                <input type="radio" id="bristol4" name="escala_bristol"
                                                     value="Tipo 4">
-                                                <label for="bristol1"><img src="{{ asset('/assets/escala-4.jpeg') }}"
+                                                <label for="bristol4"><img src="{{ asset('/assets/escala-4.jpeg') }}"
                                                         alt="" style="width:150px;height:100px">
                                                 </label>
                                                 <p>(4) Heces alargadas, lisas y blandas</p>
                                             </div>
                                             <div class="escala-1">
-                                                <input type="radio" id="bristol1" name="escala_bristol"
+                                                <input type="radio" id="bristol5" name="escala_bristol"
                                                     value="Tipo 5">
-                                                <label for="bristol1"><img src="{{ asset('/assets/escala-5.jpeg') }}"
+                                                <label for="bristol5"><img src="{{ asset('/assets/escala-5.jpeg') }}"
                                                         alt="" style="width:150px;height:100px">
                                                 </label>
                                                 <p>(5) Heces blandas y trozos separados o con bordes definidos</p>
                                             </div>
                                             <div class="escala-1">
-                                                <input type="radio" id="bristol1" name="escala_bristol"
+                                                <input type="radio" id="bristol6" name="escala_bristol"
                                                     value="Tipo 6">
-                                                <label for="bristol1"><img src="{{ asset('/assets/escala-6.jpeg') }}"
+                                                <label for="bristol6"><img src="{{ asset('/assets/escala-6.jpeg') }}"
                                                         alt="" style="width:200px;height:100px">
                                                 </label>
                                                 <p>(6) Heces blandas y trozos separados o con bordes pegados</p>
                                             </div>
                                             <div class="escala-1">
-                                                <input type="radio" id="bristol1" name="escala_bristol"
+                                                <input type="radio" id="bristol7" name="escala_bristol"
                                                     value="Tipo 7">
-                                                <label for="bristol1"><img src="{{ asset('/assets/escala-7.jpeg') }}"
+                                                <label for="bristol7"><img src="{{ asset('/assets/escala-7.jpeg') }}"
                                                         alt="" style="width:200px;height:100px">
                                                 </label>
                                                 <p>(7) Heces líquidas sin trozos sólidos</p>
@@ -460,7 +462,7 @@
 																			</article>
 																			<p>Agua simple (en mililitros)</p>
                                             <input type="number" name="hidratacion" id="agua"
-                                                style="width:100px;" value="{{ old('hidratacion') }}" required>
+                                                style="width:100px;height:30px;margin-top:10px" value="{{ old('hidratacion') }}" required>
 																								<br>
                                                 <p for="otros_hidratacion">Otras bebidas</p>
                                                 <textarea style="border-radius: 10px" name="otras_bebidas" id="otros_hidratacion" cols="50" rows="5">{{ old('otras_bebidas') }}</textarea>
@@ -469,19 +471,19 @@
                                             value="{{ old('sintomas_generales') }}">
                                         <h2 style="font-size:20px;font-weight:900;margin: 10px 0px;">EXPLORACIÓN FÍSICA
                                             CENTRADA EN HALLAZGOS DE NUTRICIÓN</h2>
-                                        <p for="pelo">Pelo y uñas</p>
+                                        <p for="pelo" style="margin-bottom: 20px;">Pelo y uñas</p>
                                         <input type="text" name="pelo_unias" id="pelo"
                                             value="{{ old('pelo_unias') }}" required>
-                                        <p for="piel">Piel</p>
+                                        <p for="piel" style="margin: 5px;" >Piel</p>
                                         <input type="text" name="piel" id="piel"
                                             value="{{ old('piel') }}" required>
-                                        <p for="ojos">Ojos</p>
+                                        <p for="ojos" style="margin: 5px;">Ojos</p>
                                         <input type="text" name="ojos" id="ojos"
                                             value="{{ old('ojos') }}" required>
-                                        <p for="musculo">Musculo</p>
+                                        <p for="musculo" style="margin: 5px;">Musculo</p>
                                         <input type="text" name="musculo" id="musculo"
                                             value="{{ old('musculo') }}" required>
-                                        <p for="otros_explo_fisica">Otros</p>
+                                        <p for="otros_explo_fisica" style="margin: 5px;">Otros</p>
                                         <input type="text" name="otros_explo_fisica" id="otros_explo_fisica"
                                             value="{{ old('otros_explo_fisica') }}" required>
                                         <h2 style="font-size: 20px; font-weight:900">INTOLERANCIA A ALIMENTOS</h2>
@@ -579,12 +581,12 @@
                                         <div class="tabla-bioquimicos">
                                             <div class="tabla-uno">
                                                 <div class="bioquimico-formulario1">
-                                                    <div class="inputs">
+                                                    {{-- <div class="inputs">
                                                         <p>BIOQUIMICOS:</p>
                                                         <input type="radio" name="" id="">
                                                         <input type="radio" name="" id="">
                                                         <input type="radio" name="" id="">
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="inputs">
                                                         <label>Glucosa</label>
                                                         <input type="text" name="glucosa" id=""
@@ -615,49 +617,46 @@
                                                         <input type="text" name="LDL" id="LDL"
                                                             placeholder="mg/dl">
                                                     </div>
+																										<div class="inputs">
+																											<label for="AST_perc">%AST</label>
+																											<input type="text" name="AST_perc" id="AST_perc"
+																													placeholder="UI/L">
+																									</div>
+																									<div class="inputs">
+																											<label for="ALT">ALT</label>
+																											<input type="text" name="ALT" id="ALT"
+																													placeholder="UI/L">
+																									</div>
+																									<div class="inputs">
+																											<label for="TSH">TSH</label>
+																											<input type="text" name="TSH" id="TSH"
+																													placeholder="UI/L">
+																									</div>
+																									<div class="inputs">
+																											<label for="T3">T3</label>
+																											<input type="text" name="T3" id="T3"
+																													placeholder="UI/L">
+																									</div>
+																									<div class="inputs">
+																											<label for="T4">T4</label>
+																											<input type="text" name="T4" id="T4"
+																													placeholder="UI/L">
+																									</div>
+																									<div class="inputs">
+																											<label for="Hb">Hb</label>
+																											<input type="text" name="Hb" id="Hb"
+																													placeholder="UI/L">
+																									</div>
+																									<div class="inputs">
+																											<label for="Hierro">Hierro</label>
+																											<input type="text" name="hierro" id="Hierro"
+																													placeholder="UI/L">
+																									</div>
                                                 </div>
                                             </div>
+
                                             <div class="tabla-dos">
                                                 <div class="bioquimico-formulario2">
-                                                    <div class="inputs">
-                                                        <label for="AST_perc">%AST</label>
-                                                        <input type="text" name="AST_perc" id="AST_perc"
-                                                            placeholder="UI/L">
-                                                    </div>
-                                                    <div class="inputs">
-                                                        <label for="ALT">ALT</label>
-                                                        <input type="text" name="ALT" id="ALT"
-                                                            placeholder="UI/L">
-                                                    </div>
-                                                    <div class="inputs">
-                                                        <label for="TSH">TSH</label>
-                                                        <input type="text" name="TSH" id="TSH"
-                                                            placeholder="UI/L">
-                                                    </div>
-                                                    <div class="inputs">
-                                                        <label for="T3">T3</label>
-                                                        <input type="text" name="T3" id="T3"
-                                                            placeholder="UI/L">
-                                                    </div>
-                                                    <div class="inputs">
-                                                        <label for="T4">T4</label>
-                                                        <input type="text" name="T4" id="T4"
-                                                            placeholder="UI/L">
-                                                    </div>
-                                                    <div class="inputs">
-                                                        <label for="Hb">Hb</label>
-                                                        <input type="text" name="Hb" id="Hb"
-                                                            placeholder="UI/L">
-                                                    </div>
-                                                    <div class="inputs">
-                                                        <label for="Hierro">Hierro</label>
-                                                        <input type="text" name="hierro" id="Hierro"
-                                                            placeholder="UI/L">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="tabla-tres">
-                                                <div class="bioquimico-formulario3">
                                                     <div class="inputs">
                                                         <label for="transferrina">Transferrina</label>
                                                         <input type="text" name="transferrina" id="transferrina"
@@ -693,29 +692,25 @@
                                                         <input type="text" name="folatos" id="folatos"
                                                             placeholder="ng/mL">
                                                     </div>
+																										<div class="inputs">
+																											<label for="PT">PT</label>
+																											<input type="text" name="PT" id="PT"
+																													placeholder="d/dL">
+																									</div>
+																									<div class="inputs">
+																											<label for="albumina">Albúmina</label>
+																											<input type="text" name="albumina" id="albumina"
+																													placeholder="g/dL">
+																									</div>
+																									<div class="inputs">
+																											<label for="Ca">Ca</label>
+																											<input type="text" name="Ca" id="Ca"
+																													placeholder="UI/L">
+																									</div>
                                                     <div class="inputs">
                                                         <label for="otros">Otros</label>
                                                         <input type="text" name="otros_bioquimicos"
                                                             id="otros_bioquimicos">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="tabla-cuatro">
-                                                <div class="bioquimico-formulario4">
-                                                    <div class="inputs">
-                                                        <label for="PT">PT</label>
-                                                        <input type="text" name="PT" id="PT"
-                                                            placeholder="d/dL">
-                                                    </div>
-                                                    <div class="inputs">
-                                                        <label for="albumina">Albúmina</label>
-                                                        <input type="text" name="albumina" id="albumina"
-                                                            placeholder="g/dL">
-                                                    </div>
-                                                    <div class="inputs">
-                                                        <label for="Ca">Ca</label>
-                                                        <input type="text" name="Ca" id="Ca"
-                                                            placeholder="UI/L">
                                                     </div>
                                                 </div>
                                             </div>
