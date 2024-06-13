@@ -19,26 +19,41 @@
             margin: 4px 2px;
             cursor: pointer;
         }
+				.regresar{
+					background-color: #f2ae61;
+            border: none;
+            border-radius: 15px;
+            color: white;
+            padding: 6px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+				}
 
         .formulario {
             display: flex;
             flex-wrap: wrap;
             gap: 25px;
             flex-direction: column;
-            border: 1px solid rgb(0, 0, 0);
             border-radius: 10px;
             padding: 20px;
         }
 
         .bristol-container {
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-            border: 1px solid black;
-            margin: 0px 0px 20px 10px;
-            width: 80%;
-            height: 900px;
-            gap: -10px;
+					border-radius: 20px;
+					display: flex;
+					align-items: center;
+					flex-direction: column;
+					-webkit-box-shadow: -8px 14px 20px 11px rgba(0,0,0,0.14);
+					-moz-box-shadow: -8px 14px 20px 11px rgba(0,0,0,0.14);
+					box-shadow: -8px 14px 20px 11px rgba(0,0,0,0.14);
+					margin: 0px 0px 70px 70px;
+					width: 80%;
+					height: 900px;
+					gap: -10px;
         }
 
         .escala-1 {
@@ -65,17 +80,20 @@
 
         .motivaciones {
             display: flex;
-            border: black solid 1px;
             border-radius: 10px;
             justify-content: center;
             align-items: center;
+						margin-top: 30px;
+						flex-wrap: wrap;
+						gap:5px;
         }
 
         .motivaciones .motivacion-item {
             display: flex;
             flex-direction: column;
             border: 1px black solid;
-            border-left: none;
+						border-radius: 10px;
+            /* border-left: none; */
             justify-content: center;
             align-items: center;
             padding: 10px;
@@ -124,7 +142,7 @@
         }
 
         .sintomas label {
-            margin-left: 50px;
+            margin-left: 20px;
             margin-bottom: 20px;
         }
 
@@ -209,7 +227,8 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <h2>Bienvenido {{ Auth::user()->nombre }}</h2>
+                    <h2>Bienvenid@ {{ Auth::user()->nombre }}</h2>
+										<br>
                     <div class="formulario">
                         <b style="font-size: 20px">NOTA DE NUTRICIÓN</b>
 
@@ -228,51 +247,51 @@
 
                                 <div class="inputs-form">
                                     <div class="primera-parte">
-                                        <label for="nombre">NOMBRE</label>
+                                        <label for="nombre" style="font-weight:900">NOMBRE</label>
                                         <input type="text" name="nombre" id="nombre" style="width:300px"
                                             value="{{ old('nombre', '') }}" required>
-                                        <label for="nombre">EDAD</label>
+                                        <label for="nombre" style="font-weight:900">EDAD</label>
                                         <input type="number" name="edad" id="edad" value="{{ old('edad') }}"
                                             required>
-                                        <label for="nombre">HORA</label>
+                                        <label for="nombre" style="font-weight:900">HORA</label>
                                         <input type="time" name="hora" id="hora" value="{{ old('hora') }}"
-                                            required>
+                                            required style="border-radius:15px">
                                     </div>
                                     <div class="segunda-parte">
                                         <br>
-                                        <label for="genero">GÉNERO</label>
-                                        <select name="genero" id="genero" required>
+                                        <label for="genero" style="font-weight:900">GÉNERO</label>
+                                        <select name="genero" id="genero" required style="border-radius:15px;margin-right:15px;">
                                             <option value="M" @selected(old('genero') == 'M')>Masculino</option>
                                             <option value="F" @selected(old('genero') == 'F')>Femenino</option>
                                         </select>
 
-                                        <label for="expediente">NO. EXPEDIENTE</label>
+                                        <label for="expediente" style="font-weight:900">NO. EXPEDIENTE</label>
                                         <input type="text" name="expediente" id="expediente"
-                                            value="{{ ApiDatosPaciente::max('expediente') + 1 }}" readonly>
-                                        <label for="fecha_nacimiento">FECHA DE NACIMIENTO</label>
+                                            value="{{ ApiDatosPaciente::max('expediente') + 1 }}" readonly style="width: 100px;margin-right:15px">
+                                        <label for="fecha_nacimiento" style="font-weight:900">FECHA DE NACIMIENTO</label>
                                         <input type="date" name="fecha_nacimiento" id="fecha_nacimiento"
-                                            value="{{ old('fecha_nacimiento') }}" required>
+                                            value="{{ old('fecha_nacimiento') }}" required style="border-radius:15px; width:150px" >
                                         <br>
                                         <br>
-                                        <label for="no_consulta_paciente">CONSULTA NO.</label>
+                                        <label for="no_consulta_paciente" style="font-weight:900">CONSULTA NO.</label>
                                         <input type="text" name="no_consulta_paciente" id="no_consulta_paciente"
                                             value="{{ old('no_consulta_paciente') }}" required>
                                     </div>
                                     <div class="tercera-parte">
                                         <br>
-                                        <label for="motivo_consulta">MOTIVO DE CONSULTA:</label>
+                                        <label for="motivo_consulta" style="font-weight:900">MOTIVO DE CONSULTA:</label>
                                         <br>
                                         <input type="text" name="motivo_consulta" id="motivo_consulta"
                                             style="width: 500px" value="{{ old('motivo_consulta') }}" required>
                                         <br>
                                         <br>
-                                        <label for="sintomas">SÍNTOMAS GASTROINTESTINALES:</label>
+                                        <label for="sintomas" style="font-weight:900">SÍNTOMAS GASTROINTESTINALES:</label>
                                         <br>
                                         {{-- <input type="radio" value="bristol" name='sintoma_gastro'
 																									@if (old('sintoma_gastro') == 'bristol') checked @endif> --}}
                                         <br>
                                         <div class="bristol-container">
-                                            <h2>Escala de Bristol</h2>
+                                            <h2 style="font-weight:900;margin-top:30px;">Escala de Bristol</h2>
                                             <div class="escala-1">
                                                 <input type="radio" id="bristol1" name="escala_bristol"
                                                     value="Tipo 1" required>
@@ -336,50 +355,53 @@
                                 <br>
                                 <br>
                                 <div class="sintomas">
-                                    <label for="estreñimiento">ESTREÑIMIENTO</label>
+                                    <label for="estreñimiento" style="margin-right:10px;">ESTREÑIMIENTO</label>
                                     <input type="radio" value="estreñimiento" name='estreñimiento'
                                         @if (old('estreñimiento') == 'estreñimiento') checked @endif>
 
-                                    <label for="diarrea">DIARREA</label>
+                                    <label for="diarrea" style="margin-right:10px;">DIARREA</label>
                                     <input type="radio" value="diarrea" name='diarrea'
                                         @if (old('diarrea') == 'diarrea') checked @endif>
 
-                                    <label for="reflujo">REFLUJO</label>
+                                    <label for="reflujo"style="margin-right:10px;">REFLUJO</label>
                                     <input type="radio" value="reflujo" name='reflujo'
                                         @if (old('reflujo') == 'reflujo') checked @endif>
 
-                                    <label for="gastritis">GASTRITIS</label>
+                                    <label for="gastritis" style="margin-right:10px;">GASTRITIS</label>
                                     <input type="radio" value="gastritis" name='gastritis'
                                         @if (old('gastritis') == 'gastritis') checked @endif>
 
-                                    <label for="saciedad">SACIEDAD</label>
+                                    <label for="saciedad"style="margin-right:10px;">SACIEDAD</label>
                                     <input type="radio" value="saciedad" name='saciedad'
                                         @if (old('saciedad') == 'saciedad') checked @endif>
 
-                                    <label for="temprana">TEMPRANA</label>
+                                    <label for="temprana"style="margin-right:10px;">TEMPRANA</label>
                                     <input type="radio" value="temprana" name='temprana'
                                         @if (old('temprana') == 'temprana') checked @endif>
 
-                                    <label for="apetito">APETITO</label>
+                                    <label for="apetito" style="margin-right:10px;">APETITO</label>
                                     <input type="radio" value="apetito" name='apetito'
                                         @if (old('apetito') == 'apetito') checked @endif>
 
-                                    <label for="flatulencia">FLATULENCIA</label>
+                                    <label for="flatulencia" style="margin-right:10px;">FLATULENCIA</label>
                                     <input type="radio" value="flatulencia" name='flatulencia'
                                         @if (old('flatulencia') == 'flatulencia') checked @endif>
 
                                     <br>
                                     <div class="cuarta-parte">
                                         <label for="otros">OTROS</label>
-                                        <input type="text" style="width:300px" name="otros_sintoma_gastro"
-                                            value="{{ old('otros_sintoma_gastro') }}">
-                                        <label for="apego_plan_anterior_barr_apego">APEGO A PLAN ANTERIOR</label>
-                                        <input type="text" style="width:300px"
+                                        <input type="text" style="width:300px;margin-left:10px" name="otros_sintoma_gastro"
+                                            value="{{ old('otros_sintoma_gastro') }}" style="margin-top: 50px">
+																						<br>
+                                        <label for="apego_plan_anterior_barr_apego" >APEGO A PLAN ANTERIOR</label>
+                                        <input type="text" style="width:300px;margin-top:20px; margin-left:10px"
                                             name="apego_plan_anterior_barr_apego"
                                             value="{{ old('apego_plan_anterior_barr_apego') }}" required>
-                                        <label for="motivacion">MOTIVACIÓN En una escala, ¿qué tan motivado se siente
-                                            de
-                                            mejorar sus hábitos de alimentación?</label>
+																						<br>
+																						<br>
+                                        <p for="motivacion" style="font-weight:900">MOTIVACIÓN</p>
+																				<p> En una escala, ¿qué tan motivado se siente
+																					de mejorar sus hábitos de alimentación?</p>
                                         <div class="motivaciones">
                                             <div class="motivacion-item">
                                                 <p>Extremadamente desmotivado</p>
@@ -435,43 +457,41 @@
                                     </div>
                                     <div class="quinta-parte">
                                         <h2 style="font-size:20px;font-weight:900;margin: 10px 0px;">HIDRATACIÓN</h2>
-                                        <article>
-                                            <label for="agua">Agua simple (en mililitros)</label>
+																			</article>
+																			<p>Agua simple (en mililitros)</p>
                                             <input type="number" name="hidratacion" id="agua"
                                                 style="width:100px;" value="{{ old('hidratacion') }}" required>
-                                            <div class="inputs">
-                                                <label for="otros_hidratacion">Otras bebidas</label><br>
-                                                <textarea name="otras_bebidas" id="otros_hidratacion" cols="30" rows="10">{{ old('otras_bebidas') }}</textarea>
-                                            </div>
-                                        </article>
-                                        <label for="sintomas_generales">Síntomas generales</label>
+																								<br>
+                                                <p for="otros_hidratacion">Otras bebidas</p>
+                                                <textarea style="border-radius: 10px" name="otras_bebidas" id="otros_hidratacion" cols="50" rows="5">{{ old('otras_bebidas') }}</textarea>
+                                        <p for="sintomas_generales">Síntomas generales</p>
                                         <input type="text" name="sintomas_generales" id=""
                                             value="{{ old('sintomas_generales') }}">
                                         <h2 style="font-size:20px;font-weight:900;margin: 10px 0px;">EXPLORACIÓN FÍSICA
                                             CENTRADA EN HALLAZGOS DE NUTRICIÓN</h2>
-                                        <label for="pelo">Pelo y uñas</label>
+                                        <p for="pelo">Pelo y uñas</p>
                                         <input type="text" name="pelo_unias" id="pelo"
                                             value="{{ old('pelo_unias') }}" required>
-                                        <label for="piel">Piel</label>
+                                        <p for="piel">Piel</p>
                                         <input type="text" name="piel" id="piel"
                                             value="{{ old('piel') }}" required>
-                                        <label for="ojos">Ojos</label>
+                                        <p for="ojos">Ojos</p>
                                         <input type="text" name="ojos" id="ojos"
                                             value="{{ old('ojos') }}" required>
-                                        <label for="musculo">Musculo</label>
+                                        <p for="musculo">Musculo</p>
                                         <input type="text" name="musculo" id="musculo"
                                             value="{{ old('musculo') }}" required>
-                                        <label for="otros_explo_fisica">Otros</label>
+                                        <p for="otros_explo_fisica">Otros</p>
                                         <input type="text" name="otros_explo_fisica" id="otros_explo_fisica"
                                             value="{{ old('otros_explo_fisica') }}" required>
                                         <h2 style="font-size: 20px; font-weight:900">INTOLERANCIA A ALIMENTOS</h2>
-                                        <label for="no">No</label>
+                                        <p for="no">No</p>
                                         <input type="radio" name="radio_into_aliment" id="intolerancia"
                                             value="no" @checked(old('radio_into_aliment') == 'no')>
-                                        <label for="si">Si</label>
+                                        <p for="si">Si</p>
                                         <input type="radio" name="radio_into_aliment" id="intolerancia"
                                             value="yes" @checked(old('radio_into_aliment') == 'yes')>
-                                        <label for="cuales">Cuales</label>
+                                        <p for="cuales">Cuales</p>
                                         <input type="text" name="intolerancia_alimentos" id="cuales"
                                             value="@if (old('radio_into_alimentos') == 'yes') {{ old('intolerancia_alimentos') }} @endif">
                                         <label for="actividad" style="font-size: 20px; font-weight:900">ACTIVIDAD

@@ -84,7 +84,7 @@ datosPacientes.map(paciente => {
 		let html = `
 				<div class="paciente">
 						<b style="font-size:20px;font-weight:900">${paciente.nombre}</b>
-						<p>Género: ${paciente.genero}</p>
+						<p>Sexo: ${paciente.genero}</p>
 						<p>Edad:${paciente.edad}</p>
 						<form action="${urlBase}/${paciente.persona_id}">
 								<button type="submit" class="agregar-alumno">Revisar datos paciente</button>
