@@ -14,6 +14,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id_nutriologo
  * @property int $id_persona
  * @property string $datos_alumno
+ * @property string $status_alumno
+ * 
  * 
  * @property ApiPersona $api_persona
  *
@@ -31,7 +33,8 @@ class ApiDatosNutriologo extends Model
 
 	protected $fillable = [
 		'id_persona',
-		'datos_alumno'
+		'datos_alumno',
+		'status_alumno'
 	];
 
 	public function api_persona()

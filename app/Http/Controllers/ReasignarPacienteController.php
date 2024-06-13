@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ApiDatosNutriologo;
 use Illuminate\Http\Request;
 
 class ReasignarPacienteController extends Controller
@@ -10,7 +11,9 @@ class ReasignarPacienteController extends Controller
     {
         $id_alumno = $request->id_alumno;
         $id_paciente = $request->id_paciente;
-        return view('director.reasignar_paciente', compact('id_alumno', 'id_paciente'));
+        //Nutriologo activos
+        $nutriologos = ApiDatosNutriologo::where('status_alumno','activo')->all();
+        return view('director.reasignar_paciente', compact('id_alumno', 'id_paciente', 'nutriologos'));
     }
 
     public function actualizarReasignar()
