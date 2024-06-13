@@ -20,22 +20,37 @@
             cursor: pointer;
         }
 
+        .regresar {
+            border: none;
+            border-radius: 15px;
+            color: white;
+            padding: 6px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
         .formulario {
+            border: 3px solid green;
             display: flex;
             flex-wrap: wrap;
             gap: 25px;
             flex-direction: column;
-            border: 1px solid rgb(0, 0, 0);
             border-radius: 10px;
             padding: 20px;
         }
 
         .bristol-container {
+            border-radius: 20px;
             display: flex;
             align-items: center;
             flex-direction: column;
-            border: 1px solid black;
-            margin: 0px 0px 20px 10px;
+            -webkit-box-shadow: -8px 14px 20px 11px rgba(0, 0, 0, 0.14);
+            -moz-box-shadow: -8px 14px 20px 11px rgba(0, 0, 0, 0.14);
+            box-shadow: -8px 14px 20px 11px rgba(0, 0, 0, 0.14);
+            margin: 0px 0px 70px 70px;
             width: 80%;
             height: 900px;
             gap: -10px;
@@ -63,19 +78,52 @@
             border-radius: 15px;
         }
 
+        input[type=time] {
+            border-radius: 20px;
+            margin: 10px 0px;
+        }
+
+        .special_input_table {
+            border: unset;
+            border-radius: unset;
+            margin: unset;
+            width: 100%;
+            height: 100%;
+        }
+
+        .special_input_table input {
+            border-radius: unset;
+        }
+
+        .table-body-spcial-input td {
+            border: solid 1px #333;
+            border-collapse: collapse;
+            width: 10em;
+            height: 2.3em;
+        }
+
+        .grid-auto-column-template {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+
         .motivaciones {
             display: flex;
-            border: black solid 1px;
             border-radius: 10px;
             justify-content: center;
             align-items: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+            gap: 5px;
         }
 
         .motivaciones .motivacion-item {
             display: flex;
             flex-direction: column;
-            border: 1px black solid;
-            border-left: none;
+            border-radius: 50px;
+            border-radius: 10px;
+            /* border:1px solid black; */
+            box-shadow: 30px 16px 39px -16px rgba(42, 42, 41, 0.19);
+            /* border-left: none; */
             justify-content: center;
             align-items: center;
             padding: 10px;
@@ -89,7 +137,6 @@
         .tabla {
             flex-wrap: wrap;
             display: flex;
-            border: 1px solid #000;
             border-radius: 10px;
             /* Ajusta este valor para cambiar cuán redondeados son los bordos */
             overflow: hidden;
@@ -124,7 +171,7 @@
         }
 
         .sintomas label {
-            margin-left: 50px;
+            margin-left: 20px;
             margin-bottom: 20px;
         }
 
@@ -163,6 +210,11 @@
             gap: 10px;
         }
 
+        .bioquimico-formulario2,
+        .tabla-dos {
+            border-right: none;
+        }
+
         .tabla-bioquimicos .inputs {
             display: flex;
             gap: 10px;
@@ -187,7 +239,6 @@
         }
 
         .btn-guardar {
-            background-color: blue;
             padding: 30px;
             color: white;
             border-radius: 10px;
@@ -767,7 +818,7 @@
                                         </div>
                                     </div>
                                     {{-- <button type="submit" class="btn-guardar">Guardar datos</button> --}}
-                                    <button class="prueba btn-guardar" id="acabar_primer_formulario"
+                                    <button class="prueba font-inter-regular button-blue-strength btn-guardar" id="acabar_primer_formulario"
                                         type="button">Continuar formulario</button>
                                 </div>
 
@@ -817,118 +868,231 @@
                                     <input type="text" name="colacion3" value="{{ old('colacion3') }}" required>
                                 </label>
                                 <br><br>
-                                <label>
-                                    Total EQ: <br>
-                                    Verduras:<input type="text" name="verduras" value="{{ old('verduras') }}">
-                                    Frutas:<input type="text" name="frutas" value="{{ old('frutas') }}">
-                                    Cereales:<input type="text" name="cereales" value="{{ old('cereales') }}">
-                                    Leguminosas:<input type="text" name="leguminosas"
-                                        value="{{ old('leguminosas') }}">
-                                    Carnes:<input type="text" name="carnes" value="{{ old('carnes') }}">
-                                    Leche:<input type="text" name="leche" value="{{ old('leche') }}">
-                                    Grasa:<input type="text" name="grasa" value="{{ old('grasa') }}">
-                                    Azúcar:<input type="text" name="azucar" value="{{ old('azucar') }}">
-                                </label>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>GRUPO</th>
+                                            <th>VERDURAS</th>
+                                            <th>FRUTAS</th>
+                                            <th>CERELAES</th>
+                                            <th>LEGUMINOSAS</th>
+                                            <th>CARNES</th>
+                                            <th>LECHE</th>
+                                            <th>GRASA</th>
+                                            <th>AZÚCAR</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-body-spcial-input">
+                                        <tr>
+                                            <td>TOTAL EQ</td>
+                                            <td><input class="special_input_table" type="text" name="verduras"
+                                                    value="{{ old('verduras') }}" style="border-radius:0">
+                                            </td>
+                                            <td><input class="special_input_table" type="text" name="frutas"
+                                                    value="{{ old('frutas') }}" style="border-radius:0">
+                                            </td>
+                                            <td><input class="special_input_table" type="text" name="cereales"
+                                                    value="{{ old('cereales') }}" style="border-radius:0"></td>
+                                            <td><input class="special_input_table" type="text" name="leguminosas"
+                                                    value="{{ old('leguminosas') }}" style="border-radius:0"></td>
+                                            <td><input class="special_input_table" type="text" name="carnes"
+                                                    value="{{ old('carnes') }}" style="border-radius:0"></td>
+                                            <td><input class="special_input_table" type="text" name="leche"
+                                                    value="{{ old('leche') }}" style="border-radius:0"></td>
+                                            <td><input class="special_input_table" type="text" name="grasa"
+                                                    value="{{ old('grasa') }}" style="border-radius:0"></td>
+                                            <td><input class="special_input_table" type="text" name="azucar"
+                                                    value="{{ old('azucar') }}" style="border-radius:0"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                                 <br><br>
-                                <label>
-                                    TOTAL:<br>
-                                    Kcal:<input type="text" name="total_kcal" value="{{ old('total_kcal') }}"
-                                        required>
-                                    Prot:<input type="text" name="total_prot"
-                                        value="{{ old('total_prot') }}">(<input type="text" name="prot_g"
-                                        value="{{ old('prot_g') }}">)
-                                    Lip:<input type="text" name="total_lip"
-                                        value="{{ old('total_lip') }}">(<input type="text" name="lip_g"
-                                        value="{{ old('lip_g') }}">)
-                                    Hco:<input type="text" name="total_hco"
-                                        value="{{ old('total_hco') }}">(<input type="text" name="hco_g"
-                                        value="{{ old('hco_g') }}">)
-                                </label>
+                                <section>
+                                    <h2><strong>TOTAL:</strong></h2><br>
+                                    <div class="grid grid-cols-3 gap-y-8">
+                                        <div>
+                                            Kcal:<label style="color:red;">*</label><input type="text"
+                                            name="total_kcal" value="{{ old('total_kcal') }}" required
+                                            style="margin-right:20px;margin-left:10px;">
+                                        </div>
+                                        <div style="margin-left:20px">
+                                            Prot:<label style="color:red;margin-right:20px;">*</label><input
+                                            type="text" name="total_prot" class="w-20"
+                                            value="{{ old('total_prot') }}" placeholder="%">
+                                        (<input type="text" class="w-20" name="prot_g"
+                                            value="{{ old('prot_g') }}" placeholder="g" style="width:60px;">)
+                                        </div>
+                                      
+                                        <div style="margin-left:20px">
+                                            Lip:<label style="color:red;">*</label><input type="text"
+                                            name="total_lip" class="w-20" value="{{ old('total_lip') }}"
+                                            placeholder="%" style="margin-left:20px;">
+                                        (<input type="text" name="lip_g" class="w-20"
+                                            value="{{ old('lip_g') }}" placeholder="g" style="width:60px">)
+                                        </div>
+                                        <div>
+                                            Hco:<label style="color:red;">*</label><input type="text"
+                                                name="total_hco" class="w-20" value="{{ old('total_hco') }}"
+                                                style="margin-top:20px;" placeholder="%">
+                                            (<input type="text" name="hco_g" class="w-20"
+                                                value="{{ old('hco_g') }}" placeholder="g">)
+                                        </div>
+                                    </div>
+                                </section>
                                 <br><br>
-                                <label>
-                                    % ADECUACIÓN:<br>
-                                    Energia:<input type="text" name="adecuacion_porcen_ene"
-                                        value="{{ old('adecuacion_porcen_ene') }}" required>
-                                    Kcal:<input type="text" name="adecuacion_porcen_ener_kcal"
-                                        value="{{ old('adecuacion_porcen_ener_kcal') }}" required>
-                                    Prot:<input type="text" name="adecuacion_porcen_prot"
-                                        value="{{ old('adecuacion_porcen_prot') }}" required>
-                                    Lip:<input type="text" name="adecuacion_porcen_lip"
-                                        value="{{ old('adecuacion_porcen_lip') }}" required>
-                                    Hco:<input type="text" name="adecuacion_porcen_hco"
-                                        value="{{ old('adecuacion_porcen_hco') }}" required><br>
-                                    Aspectos cualitativos de dieta habitual:<input type="text"
-                                        name="aspectos_cualita_dieta_habitual"
-                                        value="{{ old('aspectos_cualita_dieta_habitual') }}" required>
-                                </label>
+                                <section>
+                                    <h2><strong>% ADECUACIÓN:</strong></h2>
+                                    <div style="display:flex;flex-wrap:wrap;gap:10px;">
+                                        <div>
+                                            Energia:<label style="color:red;margin-right:10px">*</label><input
+                                                type="text" name="adecuacion_porcen_ene" class="w-48"
+                                                value="{{ old('adecuacion_porcen_ene') }}" required>
+                                        </div>
+                                        <div>
+                                            Kcal:<label style="color:red;margin-right:10px">*</label><input
+                                                type="text" name="adecuacion_porcen_ener_kcal" class="w-48"
+                                                value="{{ old('adecuacion_porcen_ener_kcal') }}" required
+                                                placeholder="%">
+                                        </div>
+                                        <div>
+                                            Prot:<label style="color:red;margin-right:10px">*</label><input
+                                                type="text" name="adecuacion_porcen_prot" class="w-48"
+                                                value="{{ old('adecuacion_porcen_prot') }}" required placeholder="%">
+                                        </div>
+                                        <div>
+                                            Lip:<label style="color:red;margin-right:10px">*</label><input
+                                                type="text" name="adecuacion_porcen_lip" class="w-48"
+                                                value="{{ old('adecuacion_porcen_lip') }}" required placeholder="%">
+                                        </div>
+                                        <div>
+                                            Hco:<label style="color:red;margin-right:10px">*</label><input
+                                                type="text" name="adecuacion_porcen_hco" class="w-48"
+                                                value="{{ old('adecuacion_porcen_hco') }}" required
+                                                placeholder="%"><br>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p style="margin-top:20px">Aspectos cualitativos de dieta habitual:</p>
+                                        <textarea name="aspectos_cualita_dieta_habitual" id="" cols="30" rows="10"
+                                            value="{{ old('aspectos_cualita_dieta_habitual') }}" required></textarea>
+                                    </div>
+                                </section>
                                 <br><br>
-                                <label>
-                                    REQUERIMIENTOS:<br>
-                                    Energia:<input type="text" name="reque_ener" value="{{ old('reque_ener') }}"
-                                        required>
-                                    Proteina total:<input type="text" name="reque_proteina"
-                                        value="{{ old('reque_proteina') }}">(<input type="text"
-                                        name="reque_kg_dia" value="{{ old('reque_kg_dia') }}" required>)
-                                </label>
-                                <br><br>
-                                <label>
-                                    DX:NUTRICIO:<br>
-                                    <input type="text" name="dx_nutricio" value="{{ old('dx_nutricio') }}"
-                                        required>
-                                </label>
-                                <br>
-                                <label>
-                                    OBJETIVOS:<br>
-                                    <input type="text" name="objetivos_dieta"
-                                        value="{{ old('objetivos_dieta') }}">
-                                </label>
-                                <br>
-                                <label>
-                                    PLAN DE ALIMENTACIÓN:<br>
-                                    Dieta <input type="text" name="tipo_dieta" value="{{ old('tipo_dieta') }}"
-                                        required> de
-                                    <input type="text" name="kcal_dieta" value="{{ old('kcal_dieta') }}"
-                                        required>
-                                    Prot:<input type="text" name="prot_porcent_dieta"
-                                        value="{{ old('prot_porcent_dieta') }}" required>(
-                                    <input type="text" name="prot_kg_dia_dieta"
-                                        value="{{ old('prot_kg_dia_dieta') }}" required>)
-                                    Lip:<input type="text" name="lip_porcen_dieta"
-                                        value="{{ old('lip_porcen_dieta') }}" required>(
-                                    <input type="text" name="lip_g_dieta" value="{{ old('lip_g_dieta') }}"
-                                        required>)
-                                    Hco:<input type="text" name="hco_porcen_dieta"
-                                        value="{{ old('hco_porcen_dieta') }}" required>(
-                                    <input type="text" name="hco_g_dieta" value="{{ old('hco_g_dieta') }}"
-                                        required>)
-                                </label>
-                                <br>
-                                <label>
-                                    SUPLEMENTOS:<br>
-                                    <input type="text" name="suplementos" value="{{ old('suplementos') }}">
-                                </label>
-                                <br>
-                                <label>
-                                    METAS SMART:<br>
-                                    <input type="text" name="metas_smart" value="{{ old('metas_smart') }}"
-                                        required>
-                                </label>
-                                <br>
-                                <label>
-                                    PARAMETROS META:<br>
-                                    Peso:<input type="text" name="meta_peso" value="{{ old('meta_peso') }}">
-                                    %Grasa:<input type="text" name="meta_grasa" value="{{ old('meta_grasa') }}">
-                                    Músculo:<input type="text" name="meta_musculo"
-                                        value="{{ old('meta_musculo') }}">
-                                    C. Cintura:<input type="text" name="meta_cintura"
-                                        value="{{ old('meta_cintura') }}">
+                                <section>
+                                    <h2><strong>REQUERIMIENTOS:</strong></h2>
                                     <br>
-                                    Horarios:<input type="text" name="meta_horario"
-                                        value="{{ old('meta_horario') }}">
-                                    Mejorar hábitos:<input type="text" name="meta_mejorar"
-                                        value="{{ old('meta_mejorar') }}">
-                                    Selección de alimentos:<input type="text" name="meta_alimentos"
-                                        value="{{ old('meta_alimentos') }}">
+                                    <div class="grid grid-cols-2">
+                                        <div>
+                                            ENERGIA:<label style="color:red;margin-right:10px">*</label><input
+                                                type="text" name="reque_ener" style="width: 70%"
+                                                value="{{ old('reque_ener') }}" required>
+                                        </div>
+                                        <div>
+                                            PROTEINA TOTAL:<label style="color:red;margin-right:10px">*</label><input
+                                                type="text" name="reque_proteina" class="w-48"
+                                                value="{{ old('reque_proteina') }}">
+                                            (<input type="text" name="reque_kg_dia" class="w-48"
+                                                value="{{ old('reque_kg_dia') }}" required>)
+                                        </div>
+                                    </div>
+                                </section>
+                                <br><br>
+                                <label>
+                                    <strong>DX: NUTRICION:<label
+                                            style="color:red;margin-right:10px">*</label></strong><br>
+                                    <textarea name="dx_nutricio" class="w-full" rows="5" required>{{ old('dx_nutricio') }}</textarea>
+                                </label>
+                                <br>
+                                <label>
+                                    <strong>OBJETIVOS:<label style="color:red;margin-right:10px">*</label></strong><br>
+                                    <textarea name="objetivos_dieta" class="w-full" rows="5" required>{{ old('objetivos_dieta') }}</textarea>
+                                </label>
+                                <br>
+                                <section>
+                                    <h2><strong>PLAN DE ALIMENTACIÓN:<label
+                                                style="color:red;margin-right:10px">*</label></strong></h2><br>
+                                    <div style="display:flex;flex-wrap:wrap">
+                                        Dieta <input type="text" name="tipo_dieta" class="w-52"
+                                            value="{{ old('tipo_dieta') }}" required
+                                            style="margin-right:15px;margin-left:15px"> de
+                                        <input type="text" name="kcal_dieta" value="{{ old('kcal_dieta') }}"
+                                            class="w-20" required style="margin-right:35px; margin-left:15px"
+                                            placeholder="Kcal">
+                                        Prot:<input type="text" name="prot_porcent_dieta" class="w-28"
+                                            value="{{ old('prot_porcent_dieta') }}" required
+                                            style="width:80px;margin-left:10px" placeholder="%">(
+                                        <input type="text" name="prot_kg_dia_dieta" class="w-28"
+                                            value="{{ old('prot_kg_dia_dieta') }}" required>)
+                                        <div style="margin-right:30px">
+
+                                        </div>
+                                        Lip:<input type="text" name="lip_porcen_dieta" class="w-28"
+                                            value="{{ old('lip_porcen_dieta') }}" required style="width:80px"
+                                            placeholder="%">(
+                                        <input type="text" name="lip_g_dieta" value="{{ old('lip_g_dieta') }}"
+                                            class="w-28" required style="width:70px" placeholder="g">)
+
+                                    </div>
+                                    <div style="margin-top:20px"></div>
+                                    Hco:<input type="text" name="hco_porcen_dieta" class="w-28"
+                                        value="{{ old('hco_porcen_dieta') }}" required placeholder="%"
+                                        style="width:70px">(
+                                    <input type="text" name="hco_g_dieta" value="{{ old('hco_g_dieta') }}"
+                                        class="w-28" required placeholder="g"style="width:70px">)
+                                </section>
+                                <br>
+                                <label>
+                                    <strong>SUPLEMENTOS:<label
+                                            style="color:red;margin-right:10px">*</label></strong><br>
+                                    <textarea name="suplementos" class="w-full" rows="5">{{ old('suplementos') }}</textarea>
+                                </label>
+                                <br>
+                                <label>
+                                    <strong>METAS SMART:<label
+                                            style="color:red;margin-right:10px">*</label></strong><br>
+                                    <textarea name="metas_smart" class="w-full" rows="5">{{ old('metas_smart') }}</textarea>
+                                </label>
+                                <br>
+                                <label>
+                                    <strong>PARAMETROS META: <label
+                                            style="color:red;margin-right:10px">*</label></strong><br>
+                                    <div style="display: flex;flex-wrap:wrap;gap:20px;">
+                                        <section>
+                                            Peso:<label style="color:red;margin-right:10px">*</label><input
+                                                type="text" name="meta_peso" class="w-28"
+                                                value="{{ old('meta_peso') }}" style="width:100px">
+                                        </section>
+                                        <section>
+                                            %Grasa:<label style="color:red;margin-right:10px">*</label><input
+                                                type="text" name="meta_grasa" class="w-28"
+                                                value="{{ old('meta_grasa') }}" style="width:100px">
+                                        </section>
+                                        <section>
+                                            Músculo:<label style="color:red;margin-right:10px">*</label><input
+                                                type="text" name="meta_musculo" class="w-28"
+                                                value="{{ old('meta_musculo') }}" style="width:100px">
+                                        </section>
+                                        <section>
+                                            C. Cintura:<label style="color:red;margin-right:10px">*</label><input
+                                                type="text" name="meta_cintura" class="w-28"
+                                                value="{{ old('meta_cintura') }}" style="width:100px">
+                                        </section>
+                                    </div>
+                                    <br>
+                                    <div style="display:flex;gap:20px;">
+                                        <section>
+                                            <h2>Horarios:</h2><input type="text" name="meta_horario"
+                                                value="{{ old('meta_horario') }}">
+                                        </section>
+                                        <section>
+                                            <h2>Mejorar hábitos:</h2><input type="text" name="meta_mejorar"
+                                                value="{{ old('meta_mejorar') }}">
+                                        </section>
+                                        <section>
+                                            <h2>Selección de alimentos:</h2><input type="text"
+                                                name="meta_alimentos" value="{{ old('meta_alimentos') }}">
+                                        </section>
+                                    </div>
                                 </label>
                                 <br>
                                 <label>
@@ -946,6 +1110,21 @@
                                     <input type="text" name="pendientes" value="{{ old('pendientes') }}">
                                 </label>
                                 <br>
+                                <br>
+                                <hr>
+                                <hr>
+                                <hr>
+                                <hr>
+                                <hr>
+                                <hr>
+                                <hr>
+                                <hr>
+                                <hr>
+                                <hr>
+                                <hr>
+                                <hr>
+                                <hr>
+                                <br>
                                 <label>
                                     NOMBRE COMPLETO, FIRMA Y CÉDULA PROFESIONAL DE QUIEN ELABORÓ LA HISTORIA CLINICA
                                     NUTRICIA:<br>
@@ -959,8 +1138,11 @@
                                         value="{{ old('datos_nutriologo') }}" required>
                                 </label>
 
-                                <button type="submit" class="agregar-alumno">Crear</button>
-                                <button class="regresar" type="button">Regresar formulario</button>
+                                <div class="grid grid-cols-2 place-content-between mt-2">
+                                    <x-button-submit type="submit" class="w-32">Crear</x-button-submit>
+                                    <x-button-blue-sky class="regresar w-32 ml-auto" type="button">Regresar
+                                        formulario</x-button-blue-sky>
+                                </div>
                         </form>
                     </div>
                 </div>
