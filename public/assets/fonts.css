@@ -37,3 +37,15 @@
 .font-lato-bold {
     font-family: 'Lato-Bold';
 }
+
+.font-calibri-regular {
+    font-family: 'Calibri', 'Lato-Regular';
+    font-style: normal;
+    font-weight: normal;
+}
+
+.font-cambria-regular {
+    font-family: 'Cambria', 'Inter-Regular';
+    font-style: normal;
+    font-weight: normal;
+}

@@ -1047,4 +1047,3 @@ class NotaNutricionController extends Controller
             ->with('success', 'Se ha registrado al paciente correctamente');
     }
 }
-//ver comentarios
