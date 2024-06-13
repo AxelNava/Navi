@@ -65,23 +65,23 @@
         // la urlBase es director-paciente-control-citas
 
         let pacientesContainer = document.querySelector('.pacientes');
-let pacienteId;
-let nutriologoId;
-trigger.addEventListener('click', () => {
-    fetch(`/director/lista_pacientes_alumno_data/${idNutriologo}`)
-        .then(response => response.json())
-        .then(data => {
-            // console.log(data)
-            data['Datos de sus pacientes'].forEach(paciente => {
-console.log(paciente.persona_id);
-});
+        let pacienteId;
+        let nutriologoId;
+        trigger.addEventListener('click', () => {
+            fetch(`/director/lista_pacientes_alumno_data/${idNutriologo}`)
+                .then(response => response.json())
+                .then(data => {
+                    // console.log(data)
+                    data['Datos de sus pacientes'].forEach(paciente => {
+                        console.log(paciente.persona_id);
+                    });
 
-let datosPacientes = data['Datos de sus pacientes'];
-nombreNutriologo.innerHTML = `ESTUDIANTE: ${data['Datos del alumno'].nombre}`;
-pacientesNutriologo.innerHTML =
-		`PACIENTES: ${data['Cantidad de pacientes del alumno']}`;
-datosPacientes.map(paciente => {
-		let html = `
+                    let datosPacientes = data['Datos de sus pacientes'];
+                    nombreNutriologo.innerHTML = `ESTUDIANTE: ${data['Datos del alumno'].nombre}`;
+                    pacientesNutriologo.innerHTML =
+                        `PACIENTES: ${data['Cantidad de pacientes del alumno']}`;
+                    datosPacientes.map(paciente => {
+                        let html = `
 				<div class="paciente">
 						<b style="font-size:20px;font-weight:900">${paciente.nombre}</b>
 						<p>Sexo: ${paciente.genero}</p>
@@ -92,7 +92,7 @@ datosPacientes.map(paciente => {
 						<form action="${url_base_formularios}/${paciente.persona_id}">
 								<button type="submit" class="agregar-alumno">Revisar formularios</button>
 						</form>
-						<form action="{{route('reasignar_paciente')}}">
+						<form action="{{ route('reasignar_paciente') }}">
 								<input type="hidden" name="id_paciente" value="${paciente.persona_id}">
 								<input type="hidden" name="id_alumno" value="${data['Datos del alumno'].persona_id}">
 								<button style="background:rgb(240, 240, 44);padding:10px;border-radius:10px;margin-bottom:20px" type="submit">Reasignar nutriólogo</button>
@@ -100,10 +100,10 @@ datosPacientes.map(paciente => {
 
 				</div>
 		`;
-		pacientesContainer.innerHTML += html;
-				});
-		});
-});
+                        pacientesContainer.innerHTML += html;
+                    });
+                });
+        });
 
         // Simulate a click on the trigger button
         trigger.click();

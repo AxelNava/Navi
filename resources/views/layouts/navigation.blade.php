@@ -1,8 +1,16 @@
 <nav x-data="{ open: false }" class='navigation'>
     <style>
         .navigation {
-            background-color: #618ef2 !important;
+            background-color: var(--blue-strong) !important;
             color: white;
+        }
+
+        .line-green {
+            border-top-width: 0;
+            margin: unset;
+            padding: unset;
+            background-color: var(--green-lines);
+            height: 0.5em;
         }
     </style>
     <!-- Primary Navigation Menu -->
@@ -47,12 +55,13 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
+                <span class="mr-5 text-lg">Hola {{ Auth::user()->nombre }}</span>
                 <x-dropdown align="right" width="48">
+                    
                     <x-slot name="trigger">
                         <button
                             class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
-
+                            <span class="w-5"><img src="/assets/icons/person-crop-circle-svgrepo-com.svg" alt=""></span>
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20">
@@ -132,4 +141,5 @@
             </div>
         </div>
     </div>
+    <hr class="line-green">
 </nav>

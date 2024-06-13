@@ -13,7 +13,7 @@
         }
     </style>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-lato-bold text-xl text-gray-800 leading-tight">
             <span id="titulo_historial"></span>
         </h2>
     </x-slot>
