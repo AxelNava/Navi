@@ -12,7 +12,9 @@ class ReasignarPacienteController extends Controller
         $id_alumno = $request->id_alumno;
         $id_paciente = $request->id_paciente;
         //Nutriologo activos
-        $nutriologos = ApiDatosNutriologo::where('status_alumno','activo')->all();
+        $nutriologos = ApiDatosNutriologo::where('status_alumno','activo')
+        ->leftJoin('api_persona','id_persona','=','persona_id')
+        ->get();
         return view('director.reasignar_paciente', compact('id_alumno', 'id_paciente', 'nutriologos'));
     }
 
