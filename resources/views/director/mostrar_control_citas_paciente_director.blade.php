@@ -88,7 +88,7 @@
                       <form id="comentarioForm" action="{{route('agregar_comentario')}}" method="POST">
                         @csrf
                         <input type="hidden" id="id_paciente" name="id_paciente">
-                        <input type="text" id="comentario" name="comentario">
+                        <input type="text" id="comentario" name="comentario" required>
                         <input type="submit" value="Agregar comentario" class="agregar-alumno"/>
                       </form>
               </div>
