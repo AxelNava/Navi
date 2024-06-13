@@ -1082,7 +1082,7 @@
                                         </section>
                                     </div>
                                     <br>
-                                    <div class="grid grid-cols-3">
+                                    <div style="display:flex;gap:20px;">
                                         <section>
                                             <h2>Horarios:</h2><input type="text" name="meta_horario"
                                                 value="{{ old('meta_horario') }}">
@@ -1113,6 +1113,21 @@
                                     <input type="text" name="pendientes" value="{{ old('pendientes') }}">
                                 </label>
                                 <br>
+                                <br>
+                                <hr>
+                                <hr>
+                                <hr>
+                                <hr>
+                                <hr>
+                                <hr>
+                                <hr>
+                                <hr>
+                                <hr>
+                                <hr>
+                                <hr>
+                                <hr>
+                                <hr>
+                                <br>
                                 <label>
                                     <strong>NOMBRE COMPLETO, FIRMA Y CÉDULA PROFESIONAL DE QUIEN ELABORÓ LA HISTORIA
                                         CLINICA
@@ -1122,7 +1137,7 @@
                                 </label>
                                 <br>
                                 <label>
-                                    <strong>NOMBRE COMPLETO, FIRMA Y CÉDULA PROFESIONAL DE NUTRIÓLOG()
+                                    <strong>NOMBRE COMPLETO, FIRMA Y CÉDULA PROFESIONAL DE NUTRIÓLOG@
                                         RESPONSABLE:</strong><br>
                                     <input type="text" name="datos_nutriologo"
                                         value="{{ old('datos_nutriologo') }}" required>
