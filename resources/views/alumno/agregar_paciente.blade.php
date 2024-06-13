@@ -280,11 +280,11 @@
                                                 style="color:red">*</label></label>
                                         <input type="text" name="nombre" id="nombre" style="width:300px"
                                             value="{{ old('nombre', '') }}" required>
-                                        <label for="nombre" style="font-weight:900">EDAD<label
+                                        <label for="edad" style="font-weight:900">EDAD<label
                                                 style="color:red">*</label></label>
                                         <input type="number" name="edad" id="edad" value="{{ old('edad') }}"
                                             required>
-                                        <label for="nombre" style="font-weight:900">HORA<label
+                                        <label for="hora" style="font-weight:900">HORA<label
                                                 style="color:red">*</label></label>
                                         <input type="time" name="hora" id="hora" value="{{ old('hora') }}"
                                             required style="border-radius:15px">
@@ -546,7 +546,7 @@
                                             <input type="radio" name="radio_into_aliment" id="intolerancia"
                                                 value="yes" @checked(old('radio_into_aliment') == 'yes')>
                                         </div>
-                                        <p for="cuales">Cuales</p>
+                                        <p for="cuales">¿Cuáles?</p>
                                         <input style="margin-bottom: 20px" type="text"
                                             name="intolerancia_alimentos" id="cuales"
                                             value="@if (old('radio_into_alimentos') == 'yes') {{ old('intolerancia_alimentos') }} @endif">

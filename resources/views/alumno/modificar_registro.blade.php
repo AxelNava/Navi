@@ -283,32 +283,32 @@
                                     <div class="primera-parte">
                                         <label for="nombre"><strong>NOMBRE</strong></label>
                                         <label for="">{{ $data['paciente']->nombre }}</label>
-                                        <label for="nombre">EDAD</label>
+                                        <label for="edad" style="font-weight: 900">EDAD</label>
                                         <input type="number" name="edad" id="edad"
                                             value="{{ old('edad', $data['paciente']->edad) }}" required>
-                                        <label for="nombre">HORA</label>
+                                        <label for="hora" style="font-weight: 900">HORA</label>
                                         <input type="time" name="hora" id="hora"
                                             value="{{ old('hora', $data['control_citas']->hora_cita) }}" required>
                                     </div>
                                     <div class="segunda-parte">
                                         <br>
-                                        <label for="genero">GÉNERO</label>
+                                        <label for="genero" style="font-weight: 900">GÉNERO</label>
                                         <label for="">{{ $data['paciente']['genero'] }}</label>
 
-                                        <label for="expediente">NO. EXPEDIENTE</label>
+                                        <label for="expediente" style="font-weight: 900">NO. EXPEDIENTE</label>
                                         <label for="">{{ $data['datos_paciente']['expediente'] }}</label>
-                                        <label for="fecha_nacimiento">FECHA DE NACIMIENTO</label>
+                                        <label for="fecha_nacimiento" style="font-weight: 900">FECHA DE NACIMIENTO</label>
                                         <label for="">{{ $data['datos_paciente']['fecha_nacimiento'] }}</label>
                                         <br>
                                         <br>
-                                        <label for="no_consulta_paciente">CONSULTA NO.</label>
+                                        <label for="no_consulta_paciente" style="font-weight: 900">CONSULTA NO.</label>
                                         <input type="text" name="no_consulta_paciente" id="no_consulta_paciente"
                                             value="{{ old('no_consulta_paciente', $data['registro_consulta']['no_consulta_paciente']) }}"
                                             required>
                                     </div>
                                     <div class="tercera-parte">
                                         <br>
-                                        <label for="motivo_consulta">MOTIVO DE CONSULTA:</label>
+                                        <label for="motivo_consulta" style="font-weight: 900">MOTIVO DE CONSULTA:</label>
                                         <br>
                                         <input type="text" name="motivo_consulta" id="motivo_consulta"
                                             style="width: 500px"
@@ -317,9 +317,9 @@
                                         <br>
                                         <br>
                                         {{-- revisar aqui --}}
-                                        <label for="sintomas">SÍNTOMAS GASTROINTESTINALES:</label>
+                                        <label for="sintomas" style="font-weight: 900">SÍNTOMAS GASTROINTESTINALES:</label>
                                         <div class="bristol-container">
-                                            <h2>Escala de Bristol</h2>
+                                            <h2 style="font-weight:900;margin-top:30px;">Escala de Bristol</h2>
                                             <div class="escala-1">
                                                 <input type="radio" id="bristol1" name="escala_bristol"
                                                     value="Tipo 1" @checked(old('escala_bristol', $data['registro_consulta']['escala_bristol']) == 'Tipo 1') required>
@@ -411,9 +411,11 @@
                                             name="apego_plan_anterior_barr_apego"
                                             value="{{ old('apego_plan_anterior_barr_apego', $data['registro_consulta']['apego_plan_anterior_barr_apego']) }}"
                                             required>
-                                        <label for="motivacion">MOTIVACIÓN En una escala, ¿qué tan motivado se siente
-                                            de
-                                            mejorar sus hábitos de alimentación?</label>
+                                            <br>
+                                            <br>
+                                            <p for="motivacion" style="font-weight:900">MOTIVACIÓN</p>
+                                        <p> En una escala, ¿qué tan motivado se siente
+                                            de mejorar sus hábitos de alimentación?</p>
                                         <div class="motivaciones">
                                             <div class="motivacion-item">
                                                 <p>Extremadamente desmotivado</p>
@@ -503,13 +505,16 @@
                                         <input type="text" name="otros_explo_fisica" id="otros_explo_fisica"
                                             value="{{ old('otros_explo_fisica', $data['explo_fisica']['otros']) }}">
                                         <h2 style="font-size: 20px; font-weight:900">INTOLERANCIA A ALIMENTOS</h2>
-                                        <label for="no">No</label>
-                                        <input type="radio" name="radio_into_aliment" id="intolerancia"
-                                            value="no" @checked(empty(old('radio_into_aliment', $data['explo_fisica']['intolerancia_alimentos'])))>
-                                        <label for="si">Si</label>
-                                        <input type="radio" name="radio_into_aliment" id="intolerancia"
-                                            value="yes" @checked(!empty(old('radio_into_aliment', $data['explo_fisica']['intolerancia_alimentos'])))>
-                                        <label for="cuales">Cuales</label>
+                                        <div style="display:flex;gap:10px;">
+                                            <p for="no">No</p>
+                                            <input type="radio" name="radio_into_aliment" id="intolerancia"
+                                                value="no" @checked(empty(old('radio_into_aliment', $data['explo_fisica']['intolerancia_alimentos'])))>
+                                            
+                                                <p for="si">Si</p>
+                                            <input type="radio" name="radio_into_aliment" id="intolerancia"
+                                                value="yes" @checked(!empty(old('radio_into_aliment', $data['explo_fisica']['intolerancia_alimentos'])))>
+                                                </div>
+                                            <p for="cuales">¿Cuáles?</p>
                                         <input type="text" name="intolerancia_alimentos" id="cuales"
                                             value="{{ old('intolerancia_alimentos', $data['explo_fisica']['intolerancia_alimentos']) }}">
                                         <label for="actividad" style="font-size: 20px; font-weight:900">ACTIVIDAD
@@ -612,12 +617,12 @@
                                         <div class="tabla-bioquimicos">
                                             <div class="tabla-uno">
                                                 <div class="bioquimico-formulario1">
-                                                    <div class="inputs">
+                                                    {{-- <div class="inputs">
                                                         <p>BIOQUIMICOS:</p>
                                                         <input type="radio" name="" id="">
                                                         <input type="radio" name="" id="">
                                                         <input type="radio" name="" id="">
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="inputs">
                                                         <label>Glucosa</label>
                                                         <input type="text" name="glucosa" id=""
@@ -654,10 +659,6 @@
                                                             placeholder="mg/dl"
                                                             value="{{ old('LDL', $data['bioquimicos']['LDL']) }}">
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="tabla-dos">
-                                                <div class="bioquimico-formulario2">
                                                     <div class="inputs">
                                                         <label for="AST_perc">%AST</label>
                                                         <input type="text" name="AST_perc" id="AST_perc"
@@ -702,7 +703,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="tabla-tres">
+
+                                            <div class="tabla-dos">
                                                 <div class="bioquimico-formulario3">
                                                     <div class="inputs">
                                                         <label for="transferrina">Transferrina</label>
@@ -747,16 +749,6 @@
                                                             value="{{ old('folatos', $data['bioquimicos']['folatos']) }}">
                                                     </div>
                                                     <div class="inputs">
-                                                        <label for="otros">Otros</label>
-                                                        <input type="text" name="otros_bioquimicos"
-                                                            id="otros_bioquimicos"
-                                                            value="{{ old('otros_bioquimicos', $data['bioquimicos']['otros']) }}">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="tabla-cuatro">
-                                                <div class="bioquimico-formulario4">
-                                                    <div class="inputs">
                                                         <label for="PT">PT</label>
                                                         <input type="text" name="PT" id="PT"
                                                             placeholder="d/dL"
@@ -773,6 +765,12 @@
                                                         <input type="text" name="Ca" id="Ca"
                                                             placeholder="UI/L"
                                                             value="{{ old('Ca', $data['bioquimicos']['Ca']) }}">
+                                                    </div>
+                                                    <div class="inputs">
+                                                        <label for="otros">Otros</label>
+                                                        <input type="text" name="otros_bioquimicos"
+                                                            id="otros_bioquimicos"
+                                                            value="{{ old('otros_bioquimicos', $data['bioquimicos']['otros']) }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -872,13 +870,18 @@
                             <div class="segundo-form">
                                 <h3>Dietéticos</h3>
                                 <label>Tipo de instrumentos:</label>
+                                <label for="hrs" style="margin:10px">24 hrs</label>
+
                                 <input type="radio" name="instrumento" id="hrs" value="Recorda 24/h"
-                                    @checked(old('instrumento', $data['instrumento']['tipo_instrumento'] ?? '') == 'Recorda 24/h') required>24 hrs
-                                <input type="radio" name="instrumento" id="semi"
+                                    @checked(old('instrumento', $data['instrumento']['tipo_instrumento'] ?? '') == 'Recorda 24/h') required>
+                                    <label for="semi" style="margin:10px">Semicuantitativa</label>
+                                
+                                    <input type="radio" name="instrumento" id="semi"
                                     value="Dieta habitual semicuantitativa"
-                                    @checked(old('instrumento', $data['instrumento']['tipo_instrumento'] ?? '') == 'Dieta habitual semicuantitativa')>Semicuantitativa
-                                <input type="radio" name="instrumento" id="diario" value="Diario de alimentos"
-                                    @checked(old('instrumento', $data['instrumento']['tipo_instrumento'] ?? '') == 'Diario de alimentos')>Diario
+                                    @checked(old('instrumento', $data['instrumento']['tipo_instrumento'] ?? '') == 'Dieta habitual semicuantitativa')>
+                                    <label for="diario" style="margin:10px">Diario</label>
+                                    <input type="radio" name="instrumento" id="diario" value="Diario de alimentos"
+                                    @checked(old('instrumento', $data['instrumento']['tipo_instrumento'] ?? '') == 'Diario de alimentos')>
                                 <br>
                                 <label>Desayuno hora: </label>
                                 <input type="time" name="desayuno_hora"
@@ -889,7 +892,7 @@
                                     Colación:
                                     <input type="text" name="colacion1"
                                         value="{{ old('colacion1', $data['instrumento']['colacion1'] ?? '') }}"
-                                        required>
+                                        required style="border-radius:20px;margin:10px 0px;width:500px">
                                 </label>
                                 <br>
                                 <label>
@@ -903,7 +906,7 @@
                                     Colación:
                                     <input type="text" name="colacion2"
                                         value="{{ old('colacion2', $data['instrumento']['colacion2'] ?? '') }}"
-                                        required>
+                                        required style="border-radius:20px;margin:10px 0px;width:500px">
                                 </label>
                                 <br>
                                 <label>
@@ -917,7 +920,7 @@
                                     Colación:
                                     <input type="text" name="colacion3"
                                         value="{{ old('colacion3', $data['instrumento']['colacion3'] ?? '') }}"
-                                        required>
+                                        required style="border-radius:20px;margin:10px 0px;width:500px">
                                 </label>
                                 <br><br>
                                 <table>
@@ -976,13 +979,13 @@
                                 <section>
                                     <h2><strong>TOTAL:</strong></h2><br>
                                     <div class="grid grid-cols-3 gap-y-8">
-                                        <div>
+                                        <div style="margin-bottom:15px">
                                             Kcal:<label style="color:red;">*</label><input type="text"
                                                 name="total_kcal"
                                                 value="{{ old('total_kcal', $data['instrumento']['total_kcal'] ?? '') }}"
                                                 required style="margin-right:20px;margin-left:10px;">
                                         </div>
-                                        <div style="margin-left:20px">
+                                        <div style=" margin-bottom:15px">
                                             Prot:<label style="color:red;margin-right:20px;">*</label><input
                                                 type="text" name="total_prot" class="w-20"
                                                 value="{{ old('total_prot', $data['instrumento']['total_prot']['prot_porcent'] ?? '') }}"
@@ -992,14 +995,14 @@
                                                 placeholder="g" style="width:60px;">)
                                         </div>
 
-                                        <div style="margin-left:20px">
+                                        <div style="margin-left:20px margin-bottom:15px">
                                             Lip:<label style="color:red;">*</label><input type="text"
                                                 name="total_lip" class="w-20"
                                                 value="{{ old('total_lip', $data['instrumento']['total_lip']['lip_porcent'] ?? '') }}"
                                                 placeholder="%" style="margin-left:20px;">
                                             (<input type="text" name="lip_g" class="w-20"
                                                 value="{{ old('lip_g', $data['instrumento']['total_lip']['lip_g'] ?? '') }}"
-                                                placeholder="g" style="width:60px">)
+                                                placeholder="g" style="width:60px;border-radius:20px">)
                                         </div>
                                         <div>
                                             Hco:<label style="color:red;">*</label><input type="text"
@@ -1036,7 +1039,7 @@
                                         </div>
                                         <div>
                                             Lip:<label style="color:red;margin-right:10px">*</label><input
-                                                value="{{ old('adecuacion_porcen_lip', $data['instrumento']['adecuacion_porcen_lip'] ?? '') }}"
+                                                name="adecuacion_porcen_lip" value="{{ old('adecuacion_porcen_lip', $data['instrumento']['adecuacion_porcen_lip'] ?? '') }}"
                                                 class="w-48" value="{{ old('adecuacion_porcen_lip') }}" required
                                                 placeholder="%">
                                         </div>
