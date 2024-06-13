@@ -20,14 +20,47 @@
             cursor: pointer;
         }
 
+        .regresar {
+            border: none;
+            border-radius: 15px;
+            color: white;
+            padding: 6px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
         .formulario {
+            border: 3px solid green;
             display: flex;
             flex-wrap: wrap;
             gap: 25px;
             flex-direction: column;
-            border: 1px solid rgb(0, 0, 0);
             border-radius: 10px;
             padding: 20px;
+        }
+
+        .bristol-container {
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            -webkit-box-shadow: -8px 14px 20px 11px rgba(0, 0, 0, 0.14);
+            -moz-box-shadow: -8px 14px 20px 11px rgba(0, 0, 0, 0.14);
+            box-shadow: -8px 14px 20px 11px rgba(0, 0, 0, 0.14);
+            margin: 0px 0px 70px 70px;
+            width: 80%;
+            height: 900px;
+            gap: -10px;
+        }
+
+        .escala-1 {
+            display: flex;
+            flex-direction: row !important;
+            justify-content: center;
+            align-items: center;
         }
 
         .inputs-form {
@@ -45,19 +78,47 @@
             border-radius: 15px;
         }
 
+        .special_input_table {
+            border: unset;
+            border-radius: unset;
+            margin: unset;
+            width: 100%;
+            height: 100%;
+        }
+
+        .special_input_table input {
+            border-radius: unset;
+        }
+
+        .table-body-spcial-input td {
+            border: solid 1px #333;
+            border-collapse: collapse;
+            width: 10em;
+            height: 2.3em;
+        }
+
+        .grid-auto-column-template {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+
         .motivaciones {
             display: flex;
-            border: black solid 1px;
             border-radius: 10px;
             justify-content: center;
             align-items: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+            gap: 5px;
         }
 
         .motivaciones .motivacion-item {
             display: flex;
             flex-direction: column;
-            border: 1px black solid;
-            border-left: none;
+            border-radius: 50px;
+            border-radius: 10px;
+            /* border:1px solid black; */
+            box-shadow: 30px 16px 39px -16px rgba(42, 42, 41, 0.19);
+            /* border-left: none; */
             justify-content: center;
             align-items: center;
             padding: 10px;
@@ -71,7 +132,6 @@
         .tabla {
             flex-wrap: wrap;
             display: flex;
-            border: 1px solid #000;
             border-radius: 10px;
             /* Ajusta este valor para cambiar cuán redondeados son los bordos */
             overflow: hidden;
@@ -98,6 +158,16 @@
             display: flex;
             flex-direction: column;
             gap: 5px;
+        }
+
+        .sintomas {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .sintomas label {
+            margin-left: 20px;
+            margin-bottom: 20px;
         }
 
         .mediciones {
@@ -133,6 +203,11 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
+        }
+
+        .bioquimico-formulario2,
+        .tabla-dos {
+            border-right: none;
         }
 
         .tabla-bioquimicos .inputs {
@@ -840,25 +915,58 @@
                                         required>
                                 </label>
                                 <br><br>
-                                <label>
-                                    Total EQ: <br>
-                                    Verduras:<input type="text" name="verduras"
-                                        value="{{ old('', $data['instrumento']['grupo_total_eq']['verduras'] ?? '') }}">
-                                    Frutas:<input type="text" name="frutas"
-                                        value="{{ old('', $data['instrumento']['grupo_total_eq']['frutas'] ?? '') }}">
-                                    Cereales:<input type="text" name="cereales"
-                                        value="{{ old('', $data['instrumento']['grupo_total_eq']['cereales'] ?? '') }}">
-                                    Leguminosas:<input type="text" name="leguminosas"
-                                        value="{{ old('', $data['instrumento']['grupo_total_eq']['leguminosas'] ?? '') }}">
-                                    Carnes:<input type="text" name="carnes"
-                                        value="{{ old('', $data['instrumento']['grupo_total_eq']['carnes'] ?? '') }}">
-                                    Leche:<input type="text" name="leche"
-                                        value="{{ old('', $data['instrumento']['grupo_total_eq']['leche'] ?? '') }}">
-                                    Grasa:<input type="text" name="grasa"
-                                        value="{{ old('', $data['instrumento']['grupo_total_eq']['grasa'] ?? '') }}">
-                                    Azúcar:<input type="text" name="azucar"
-                                        value="{{ old('', $data['instrumento']['grupo_total_eq']['azucar'] ?? '') }}">
-                                </label>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>GRUPO</th>
+                                            <th>VERDURAS</th>
+                                            <th>FRUTAS</th>
+                                            <th>CERELAES</th>
+                                            <th>LEGUMINOSAS</th>
+                                            <th>CARNES</th>
+                                            <th>LECHE</th>
+                                            <th>GRASA</th>
+                                            <th>AZÚCAR</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-body-spcial-input">
+                                        <tr>
+                                            <td>TOTAL EQ</td>
+                                            <td>
+                                                <input type="text" name="verduras"
+                                                    value="{{ old('', $data['instrumento']['grupo_total_eq']['verduras'] ?? '') }}">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="frutas"
+                                                    value="{{ old('', $data['instrumento']['grupo_total_eq']['frutas'] ?? '') }}">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="cereales"
+                                                    value="{{ old('', $data['instrumento']['grupo_total_eq']['cereales'] ?? '') }}">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="leguminosas"
+                                                    value="{{ old('', $data['instrumento']['grupo_total_eq']['leguminosas'] ?? '') }}">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="carnes"
+                                                    value="{{ old('', $data['instrumento']['grupo_total_eq']['carnes'] ?? '') }}">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="leche"
+                                                    value="{{ old('', $data['instrumento']['grupo_total_eq']['leche'] ?? '') }}">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="grasa"
+                                                    value="{{ old('', $data['instrumento']['grupo_total_eq']['grasa'] ?? '') }}">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="azucar"
+                                                    value="{{ old('', $data['instrumento']['grupo_total_eq']['azucar'] ?? '') }}">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                                 <br><br>
                                 <label>
                                     TOTAL:<br>
