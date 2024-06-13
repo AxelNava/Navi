@@ -55,8 +55,9 @@
           <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
               <div class="p-6 text-gray-900">
                 {{-- <h2>ID PACIENTE: {{$id}}</h2> --}}
-                <h2 class="nombre"></h2>
-                <button style="display: block" id="triggerComentarios">Prueba btn</button>
+                <br>
+                <h2 class="nombre" style="font-weight: 900;text-transform:uppercase"></h2>
+                <button style="display: block" id="triggerComentarios"></button>
                 <br>
                 <table>
                     <tr>
@@ -137,7 +138,7 @@
       //limpia el contenedor antes de agregar los nuevos comentarios
       comentarios.innerHTML = '';
       let html = '';
-      data.data.forEach(item => {
+      data.data.reverse().forEach(item => {
           console.log(item.comentario);
           html += `
             <div class="comentario">

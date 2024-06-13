@@ -67,9 +67,9 @@
                             
                         </tbody>
                     </table>
-                    <form action="">
+                    {{-- <form action="">
                         <input type="submit" value="Crear dieta" class="agregar-alumno"/>
-                    </form>
+                    </form> --}}
                     <form action="{{route('editar_control_citas', $id)}}">
                         <input type="submit" value="Editar datos" class="agregar-alumno">
                     </form>

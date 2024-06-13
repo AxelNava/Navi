@@ -7,6 +7,7 @@ use App\Http\Controllers\ListadoPacientes_VistaDirector;
 use App\Http\Controllers\ListadoAlumnos_VistaDirector;
 use App\Http\Controllers\NotaNutricionController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReasignarPacienteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DietaPaciente;
 use App\Http\Controllers\ListadoPacientesRegistros;
@@ -127,11 +128,13 @@ Route::middleware(['auth', 'role:director'])->group(function () {
 		->name('formulario_validation_paciente');
 
 	Route::patch('director/validar_registro_paciente/{id_registro}', [NotaNutricionController::class, 'validar_registro_consulta'])
-	->name('validar_registro');
+		->name('validar_registro');
 
+	//ir a la vista de reasignar paciente
+	Route::get('director/reasignar-paciente', [ReasignarPacienteController::class, 'reasignarPaciente'])->name('reasignar_paciente');
 	//agregar comentario
 	Route::post('director/comentario', [ComentariosDirector::class, 'store'])->name('agregar_comentario');
-	
+
 	//ir a la vista de datos del paciente en vista de director
 	Route::get('director/control-citas-paciente/{id}', [DatosPaciente_ControlCitas::class, 'showViewDirector'])->name('director-paciente-control-citas');
 	//traernos el json
