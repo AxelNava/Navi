@@ -4,13 +4,14 @@
  * Created by Reliese Model.
  */
 
-namespace App\Models;
+namespace App\Models\Backup;
 
+use App\Models\Backup\ApiRegistroConsultum;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ApiBioquimico
- * 
+ *
  * @property int $id_bioquimico
  * @property int $id_consulta_paciente
  * @property int $glucosa
@@ -36,7 +37,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property float $albumina
  * @property float $Ca
  * @property string $otros
- * 
+ *
  * @property ApiRegistroConsultum $api_registro_consultum
  *
  * @package App\Models

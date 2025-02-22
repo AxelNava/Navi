@@ -4,14 +4,24 @@
  * Created by Reliese Model.
  */
 
-namespace App\Models;
+namespace App\Models\Backup;
 
+use App\Models\Backup\ApiBioquimico;
+use App\Models\Backup\ApiComposicionCorporalDiagnosticoObesidad;
+use App\Models\Backup\ApiControlCita;
+use App\Models\Backup\ApiDatosGeneralesDietum;
+use App\Models\Backup\ApiDatosPaciente;
+use App\Models\Backup\ApiDieteticosFrecuenciaSemanal;
+use App\Models\Backup\ApiDieteticosInstrumentoMedicion;
+use App\Models\Backup\ApiExploFisica;
+use App\Models\Backup\ApiMasaMagraGrasaSegmental;
+use App\Models\Backup\ApiResultadoDiagnostico;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ApiRegistroConsultum
- * 
+ *
  * @property int $id_registro
  * @property int $no_consulta_paciente
  * @property int $id_paciente
@@ -29,7 +39,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $pendientes
  * @property string|null $nutri_elaborate_data
  * @property string|null $nutri_who_approved_data
- * 
+ *
  * @property ApiDatosPaciente $api_datos_paciente
  * @property Collection|ApiBioquimico[] $api_bioquimicos
  * @property Collection|ApiComposicionCorporalDiagnosticoObesidad[] $api_composicion_corporal_diagnostico_obesidads

@@ -4,14 +4,16 @@
  * Created by Reliese Model.
  */
 
-namespace App\Models;
+namespace App\Models\Backup;
 
+use App\Models\Backup\ApiDatosPaciente;
+use App\Models\Backup\ApiRegistroConsultum;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ApiControlCita
- * 
+ *
  * @property int $id_cita
  * @property int $id_paciente
  * @property int $id_registro_consulta
@@ -28,7 +30,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon $fecha_prox_cita
  * @property float $control_musculo
  * @property float $control_grasa
- * 
+ *
  * @property ApiDatosPaciente $api_datos_paciente
  * @property ApiRegistroConsultum $api_registro_consultum
  *

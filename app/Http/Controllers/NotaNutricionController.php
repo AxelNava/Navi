@@ -3,20 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\enums\Genero;
-use App\Models\ApiBioquimico;
-use App\Models\ApiComposicionCorporalDiagnosticoObesidad;
-use App\Models\ApiControlCita;
-use App\Models\ApiDatosNutriologo;
-use App\Models\ApiDatosPaciente;
-use App\Models\ApiDieteticosFrecuenciaSemanal;
-use App\Models\ApiExploFisica;
-use App\Models\ApiNutriologoPaciente;
-use App\Models\ApiPersona;
-use App\Models\ApiRegistroConsultum;
-use App\Models\ApiDieteticosInstrumentoMedicion;
+use App\Models\Backup\ApiBioquimico;
+use App\Models\Backup\ApiComposicionCorporalDiagnosticoObesidad;
+use App\Models\Backup\ApiControlCita;
+use App\Models\Backup\ApiDatosNutriologo;
+use App\Models\Backup\ApiDatosPaciente;
+use App\Models\Backup\ApiDieteticosFrecuenciaSemanal;
+use App\Models\Backup\ApiExploFisica;
+use App\Models\Backup\ApiNutriologoPaciente;
+use App\Models\Backup\ApiPersona;
+use App\Models\Backup\ApiRegistroConsultum;
+use App\Models\Backup\ApiDieteticosInstrumentoMedicion;
 use Carbon\Carbon;
-use App\Models\ApiDatosGeneralesDietum;
-use App\Models\ApiResultadoDiagnostico;
+use App\Models\Backup\ApiDatosGeneralesDietum;
+use App\Models\Backup\ApiResultadoDiagnostico;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 

@@ -4,20 +4,22 @@
  * Created by Reliese Model.
  */
 
-namespace App\Models;
+namespace App\Models\Backup;
 
 use App\enums\Genero as EnumsGenero;
+use App\Models\Backup\ApiDatosNutriologo;
+use App\Models\Backup\ApiDatosPaciente;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ApiPersona
- * 
+ *
  * @property int $persona_id
  * @property string $nombre
  * @property int $edad
  * @property string $genero
- * 
+ *
  * @property Collection|ApiDatosNutriologo[] $api_datos_nutriologos
  * @property Collection|ApiDatosPaciente[] $api_datos_pacientes
  *

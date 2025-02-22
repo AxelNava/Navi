@@ -4,13 +4,13 @@
  * Created by Reliese Model.
  */
 
-namespace App\Models;
+namespace App\Models\Backup;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ApiReferenciasDiagnosticoObesidad
- * 
+ *
  * @property int $id_referencia_obe
  * @property float $valor_normal_inicio
  * @property float $valor_normal_final

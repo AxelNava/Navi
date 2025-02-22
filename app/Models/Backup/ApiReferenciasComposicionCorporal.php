@@ -4,13 +4,13 @@
  * Created by Reliese Model.
  */
 
-namespace App\Models;
+namespace App\Models\Backup;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ApiReferenciasComposicionCorporal
- * 
+ *
  * @property int $id_ref_corp
  * @property string $nivel_composicion
  * @property float $valor_normal_inicio

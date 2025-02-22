@@ -4,13 +4,14 @@
  * Created by Reliese Model.
  */
 
-namespace App\Models;
+namespace App\Models\Backup;
 
+use App\Models\Backup\ApiRegistroConsultum;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ApiDieteticosFrecuenciaSemanal
- * 
+ *
  * @property int $id_dietetico
  * @property int $id_consulta_paciente
  * @property int $frutas
@@ -23,7 +24,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $aceites_s_p
  * @property int $aceites_c_p
  * @property int $azucares
- * 
+ *
  * @property ApiRegistroConsultum $api_registro_consultum
  *
  * @package App\Models

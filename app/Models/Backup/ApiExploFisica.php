@@ -4,13 +4,14 @@
  * Created by Reliese Model.
  */
 
-namespace App\Models;
+namespace App\Models\Backup;
 
+use App\Models\Backup\ApiRegistroConsultum;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ApiExploFisica
- * 
+ *
  * @property int $id_explo
  * @property int $id_consulta_paciente
  * @property string|null $pelo_unias
@@ -21,7 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $intolerancia_alimentos
  * @property string $actividad_fis_actual
  * @property string|null $cambios_pos_estilo_vida
- * 
+ *
  * @property ApiRegistroConsultum $api_registro_consultum
  *
  * @package App\Models

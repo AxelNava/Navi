@@ -1,4 +1,4 @@
-@use('App\Models\ApiPersona')
+@use('App\Models\Backup\ApiPersona')
 <x-app-layout>
     <style>
         .agregar-alumno {

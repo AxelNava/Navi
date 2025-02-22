@@ -3,23 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\ApiRegistroConsultum; //Aqui se busca el id del paciente
-use App\Models\ApiDieteticosInstrumentoMedicion; //Tipo de instrumento - Aspectos cualitativos
-use App\Models\ApiResultadoDiagnostico; //Requerimientos, DX Nutricion
-use App\Models\ApiDatosGeneralesDietum; //Objetivo - Monitoreo
+use App\Models\Backup\ApiRegistroConsultum; //Aqui se busca el id del paciente
+use App\Models\Backup\ApiDieteticosInstrumentoMedicion; //Tipo de instrumento - Aspectos cualitativos
+use App\Models\Backup\ApiResultadoDiagnostico; //Requerimientos, DX Nutricion
+use App\Models\Backup\ApiDatosGeneralesDietum; //Objetivo - Monitoreo
 
 class DietaPaciente extends Controller
-{   
+{
     public function buscar($id_registro){
         $dietaid = ApiRegistroConsultum::find($id_registro); //Buscamos que el ID de registro exista
         if ($dietaid == null) return "No se encontró la dieta."; //Si no existe, retorna un error
-        
+
         $diagnostico = ApiResultadoDiagnostico::where('id_consulta_paciente', $id_registro)->get();
         if ($diagnostico->isEmpty()) return "No se encontró el diagnostico."; //Si no existe, retorna un error
-        
+
         $generales = ApiDatosGeneralesDietum::where('id_consulta_paciente', $id_registro)->get();
         if ($generales->isEmpty()) return "No se encontraron datos generales."; //Si no existe, retorna un error
-        
+
         $instrumento = ApiDieteticosInstrumentoMedicion::where('id_consulta_paciente', $id_registro)->get();
         if ($instrumento->isEmpty()) return "No se encontraron datos del instrumento."; //Si no existe, retorna un error
 
@@ -37,7 +37,7 @@ class DietaPaciente extends Controller
         ]);
         $instrumento = new ApiDieteticosInstrumentoMedicion();
         $instrumento->id_consulta_paciente = $req->id_registro;
-        $instrumento->tipo_instrumento = $req->instrumento; 
+        $instrumento->tipo_instrumento = $req->instrumento;
         $instrumento->desayuno_hora = $req->desayuno_hora;
         $instrumento->colacion1 = $req->colacion1;
         $instrumento->comida_hora = $req->comida_hora;

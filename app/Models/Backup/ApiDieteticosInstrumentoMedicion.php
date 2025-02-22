@@ -4,14 +4,15 @@
  * Created by Reliese Model.
  */
 
-namespace App\Models;
+namespace App\Models\Backup;
 
+use App\Models\Backup\ApiRegistroConsultum;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ApiDieteticosInstrumentoMedicion
- * 
+ *
  * @property int $id_dietetico_instru
  * @property int $id_consulta_paciente
  * @property string|null $tipo_instrumento
@@ -32,7 +33,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property float $adecuacion_porcen_lip
  * @property float $adecuacion_porcen_hco
  * @property string $aspectos_cualita_dieta_habitual
- * 
+ *
  * @property ApiRegistroConsultum $api_registro_consultum
  *
  * @package App\Models

@@ -4,13 +4,14 @@
  * Created by Reliese Model.
  */
 
-namespace App\Models;
+namespace App\Models\Backup;
 
+use App\Models\Backup\ApiRegistroConsultum;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ApiComposicionCorporalDiagnosticoObesidad
- * 
+ *
  * @property int $id_comp_corp
  * @property int $id_consulta_paciente
  * @property float $peso
@@ -24,7 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property float $pgc
  * @property float $rcc
  * @property int $metabolismo_kcal_basal
- * 
+ *
  * @property ApiRegistroConsultum $api_registro_consultum
  *
  * @package App\Models

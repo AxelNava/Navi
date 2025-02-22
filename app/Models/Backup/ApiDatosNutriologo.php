@@ -4,19 +4,21 @@
  * Created by Reliese Model.
  */
 
-namespace App\Models;
+namespace App\Models\Backup;
 
+use App\Models\Backup\ApiNutriologoPaciente;
+use App\Models\Backup\ApiPersona;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ApiDatosNutriologo
- * 
+ *
  * @property int $id_nutriologo
  * @property int $id_persona
  * @property string $datos_alumno
  * @property string $status_alumno
- * 
- * 
+ *
+ *
  * @property ApiPersona $api_persona
  *
  * @package App\Models

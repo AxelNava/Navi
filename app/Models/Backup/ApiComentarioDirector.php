@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Backup;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ApiRegistroConsultum
- * 
+ *
  * @property int $id
  * @property int $comentario
  * @property int $id_registro

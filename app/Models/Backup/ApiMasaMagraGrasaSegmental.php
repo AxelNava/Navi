@@ -4,13 +4,14 @@
  * Created by Reliese Model.
  */
 
-namespace App\Models;
+namespace App\Models\Backup;
 
+use App\Models\Backup\ApiRegistroConsultum;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ApiMasaMagraGrasaSegmental
- * 
+ *
  * @property float $id_masa
  * @property int $id_registro
  * @property float $brazo_derecho
@@ -38,7 +39,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property float $pierna_grasa_izquierda_porcen
  * @property float $pierna_grasa_izquierda_valor
  * @property string $pierna_grasa_izquierda_evaluacion
- * 
+ *
  * @property ApiRegistroConsultum $api_registro_consultum
  *
  * @package App\Models

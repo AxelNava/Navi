@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ApiControlCita;
-use App\Models\ApiDatosPaciente;
-use App\Models\ApiPersona;
-use App\Models\ApiRegistroConsultum;
+use App\Models\Backup\ApiControlCita;
+use App\Models\Backup\ApiDatosPaciente;
+use App\Models\Backup\ApiPersona;
+use App\Models\Backup\ApiRegistroConsultum;
 
 class ListadoRegistrosConsultaDePaciente extends Controller
 {

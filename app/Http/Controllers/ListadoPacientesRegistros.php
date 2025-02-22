@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ApiDatosNutriologo;
-use App\Models\ApiDatosPaciente;
-use App\Models\ApiNutriologoPaciente;
-use App\Models\ApiPersona;
+use App\Models\Backup\ApiDatosNutriologo;
+use App\Models\Backup\ApiDatosPaciente;
+use App\Models\Backup\ApiNutriologoPaciente;
+use App\Models\Backup\ApiPersona;
 
 class ListadoPacientesRegistros extends Controller
 {

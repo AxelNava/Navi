@@ -4,13 +4,14 @@
  * Created by Reliese Model.
  */
 
-namespace App\Models;
+namespace App\Models\Backup;
 
+use App\Models\Backup\ApiRegistroConsultum;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ApiDatosGeneralesDietum
- * 
+ *
  * @property int $id_dieta
  * @property int $id_consulta_paciente
  * @property string|null $objetivos_dieta
@@ -27,7 +28,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $param_meta
  * @property string|null $educacion
  * @property string|null $monitoreo
- * 
+ *
  * @property ApiRegistroConsultum $api_registro_consultum
  *
  * @package App\Models

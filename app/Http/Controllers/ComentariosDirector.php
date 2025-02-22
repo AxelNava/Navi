@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\ApiComentarioDirector;
-use App\Models\ApiControlCita;
-use App\Models\ApiRegistroConsultum;
+use App\Models\Backup\ApiComentarioDirector;
+use App\Models\Backup\ApiControlCita;
+use App\Models\Backup\ApiRegistroConsultum;
 use Illuminate\Support\Facades\Log;
 
 class ComentariosDirector extends Controller

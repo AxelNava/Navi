@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ApiDatosNutriologo;
-use App\Models\ApiPersona;
+use App\Models\Backup\ApiDatosNutriologo;
+use App\Models\Backup\ApiPersona;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -45,11 +45,11 @@ class AltaNutriologo extends Controller
         $person->edad = $request->edad;
         $person->genero = $request->sexo;
         $person->save();
-        
+
         $nutriologo->datos_alumno = '""';
         $nutriologo->id_persona = $person->persona_id;
         $nutriologo->save();
-       
+
 
 		$user = User::create([
 			'nombre' => $request->nombre,

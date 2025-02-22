@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Models\ApiDatosPaciente;
-use App\Models\ApiControlCita;
+use App\Models\Backup\ApiDatosPaciente;
+use App\Models\Backup\ApiControlCita;
 use Illuminate\Support\Facades\DB;
 
 class DatosPaciente_ControlCitas extends Controller
