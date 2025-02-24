@@ -1,0 +1,50 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Ramsey\Collection\Collection;
+
+
+/**
+ * Class ApiDatosNutriologo
+ *
+ * @property int $id_nutriologo
+ * @property int $id_persona
+ * @property string $datos_alumno
+ * @property string $status_alumno
+ *
+ *
+ * @property ApiPersona $api_persona
+ * @property Collection|ApiDatosPaciente[] $apiDatosPacientes
+ *
+ * @package App\Models
+ */
+final class ApiDatosNutriologo extends Model
+{
+    protected $table = 'api_datos_nutriologo';
+    protected $primaryKey = 'id_nutriologo';
+    public $timestamps = false;
+
+    protected $casts = [
+        'id_persona' => 'int'
+    ];
+
+    protected $fillable = [
+        'id_persona',
+        'datos_alumno',
+        'status_alumno'
+    ];
+
+    public function api_persona(): BelongsTo
+    {
+        return $this->belongsTo(ApiPersona::class, 'id_persona');
+    }
+
+    public function api_nutriologo_paciente(): HasMany
+    {
+        return $this->hasMany(ApiNutriologoPaciente::class, 'id_nutriologo');
+    }
+}
