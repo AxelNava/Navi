@@ -11,9 +11,14 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
+            $table->collation('utf8mb4_spanish_ci');
             $table->id();
             $table->string('nombre');
             $table->string('apellido')->nullable();
+
+            $table->bigInteger('persona_id')->unsigned()->nullable(false);
+            $table->foreign('persona_id')->references('persona_id')->on('api_personas')
+                ->onDelete('cascade');
 
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

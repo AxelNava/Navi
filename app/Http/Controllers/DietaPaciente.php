@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ApiRegistroConsulta;
 use Illuminate\Http\Request;
 use App\Models\Backup\ApiRegistroConsultum; //Aqui se busca el id del paciente
 use App\Models\Backup\ApiDieteticosInstrumentoMedicion; //Tipo de instrumento - Aspectos cualitativos
 use App\Models\Backup\ApiResultadoDiagnostico; //Requerimientos, DX Nutricion
 use App\Models\Backup\ApiDatosGeneralesDietum; //Objetivo - Monitoreo
 
-class DietaPaciente extends Controller
+final class DietaPaciente extends Controller
 {
     public function buscar($id_registro){
-        $dietaid = ApiRegistroConsultum::find($id_registro); //Buscamos que el ID de registro exista
-        if ($dietaid == null) return "No se encontró la dieta."; //Si no existe, retorna un error
+
+        $dieta_id = ApiRegistroConsultum::find($id_registro); //Buscamos que el ID de registro exista
+        if ($dieta_id == null) return "No se encontró la dieta."; //Si no existe, retorna un error
 
         $diagnostico = ApiResultadoDiagnostico::where('id_consulta_paciente', $id_registro)->get();
         if ($diagnostico->isEmpty()) return "No se encontró el diagnostico."; //Si no existe, retorna un error

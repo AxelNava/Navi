@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Backup;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id_registro
  */
 
-class ApiComentarioDirector extends Model
+final class ApiComentarioDirector extends Model
 {
 	use HasFactory;
 	public $timestamps = false;

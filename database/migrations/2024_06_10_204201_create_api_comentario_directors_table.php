@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('api_comentarios_director', function (Blueprint $table) {
             $table->id();
             $table->tinyText('comentario');
-            $table->integer('id_registro');
-            $table->foreign('id_registro')->references('id_registro')->on('api_registro_consulta');
+            $table->bigInteger('id_registro')->unsigned()->nullable(false);
+            $table->foreign('id_registro')->references('id_registro')->on('api_registro_consultas');
         });
     }
 

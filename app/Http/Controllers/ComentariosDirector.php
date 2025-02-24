@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Backup\ApiComentarioDirector;
+use App\Models\ApiComentarioDirector;
 use App\Models\Backup\ApiControlCita;
 use App\Models\Backup\ApiRegistroConsultum;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class ComentariosDirector extends Controller

@@ -8,7 +8,15 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+/**
+ * Class ApiPersona
+ * @property string $nombre
+ * @property string $apellido
+ * @property int $persona_id
+ * @property string $email
+ * @property string $password
+ */
+final class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasRoles;
 

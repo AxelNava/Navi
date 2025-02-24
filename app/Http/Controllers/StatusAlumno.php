@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Backup\ApiDatosNutriologo;
 use App\Models\Backup\ApiPersona;
 
-class StatusAlumno extends Controller
+final class StatusAlumno extends Controller
 {
-    public function get_status(int $id_nutriologo)
+    public function get_status(int $id_nutriologo): \Illuminate\Http\JsonResponse
     {
         $alumno = ApiDatosNutriologo::where('id_nutriologo', $id_nutriologo)->first();
         $nombre_alumno = ApiPersona::where('persona_id', $alumno->id_persona)->first()->nombre;
