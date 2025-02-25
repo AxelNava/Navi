@@ -24,7 +24,7 @@ use Ramsey\Collection\Collection;
  */
 final class ApiDatosNutriologo extends Model
 {
-    protected $table = 'api_datos_nutriologo';
+    protected $table = 'api_datos_nutriologos';
     protected $primaryKey = 'id_nutriologo';
     public $timestamps = false;
 

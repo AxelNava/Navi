@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\ApiComentarioDirector;
-use App\Models\Backup\ApiControlCita;
-use App\Models\Backup\ApiRegistroConsultum;
+use App\Models\ApiControlCitas;
+use App\Models\ApiRegistroConsulta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -20,7 +20,7 @@ class ComentariosDirector extends Controller
                 'id_paciente' => ['required']
             ]
         );
-        $ultimo_id_registro = ApiRegistroConsultum::where('id_paciente', $request->id_paciente)->select('id_registro')
+        $ultimo_id_registro = ApiRegistroConsulta::where('id_paciente', $request->id_paciente)->select('id_registro')
             ->max('id_registro');
         $comentario = new ApiComentarioDirector();
         $comentario->id_registro = $ultimo_id_registro;
@@ -35,7 +35,7 @@ class ComentariosDirector extends Controller
     public function show(string $id_paciente)
     {
         Log::info('id_paciente: ' . $id_paciente);
-        $registros = ApiControlCita::where('id_paciente', $id_paciente)
+        $registros = ApiControlCitas::where('id_paciente', $id_paciente)
             ->select('id_registro_consulta')->distinct()->get();
         $comentarios = ApiComentarioDirector::whereIn('id_registro', $registros)->get();
         return response()->json(['data' => $comentarios]);
@@ -49,10 +49,9 @@ class ComentariosDirector extends Controller
         $request->validate([
             'comentario' => 'required|accepted'
         ]);
-        $ultimo_id_registro = ApiRegistroConsultum::where('id_paciente', $id)
+        $ultimo_id_registro = ApiRegistroConsulta::where('id_paciente', $id)
             ->select('id_registro')
             ->max('id_registro')->first();
-        dd($ultimo_id_registro);
         $comentario_director = new ApiComentarioDirector();
         $comentario_director->id = $id;
         $comentario_director->comentario = $request->comentario;

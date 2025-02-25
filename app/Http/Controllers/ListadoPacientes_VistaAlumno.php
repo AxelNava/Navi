@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Backup\ApiDatosNutriologo;
-use App\Models\Backup\ApiDatosPaciente;
-use App\Models\Backup\ApiNutriologoPaciente;
-use App\Models\Backup\ApiPersona;
+use App\Models\ApiDatosNutriologo;
+use App\Models\ApiDatosPaciente;
+use App\Models\ApiNutriologoPaciente;
+use App\Models\ApiPersona;
 
-class ListadoPacientes_VistaAlumno extends Controller
+final class ListadoPacientes_VistaAlumno extends Controller
 {
     public function enlistar()
     {

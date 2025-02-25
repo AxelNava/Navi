@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Backup\ApiDatosNutriologo;
-use App\Models\Backup\ApiPersona;
+use App\Models\ApiDatosNutriologo;
+use App\Models\ApiPersona;
 
 final class StatusAlumno extends Controller
 {
